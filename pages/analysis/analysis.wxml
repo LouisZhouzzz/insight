@@ -1,0 +1,58 @@
+<!--pages/analysis/analysis.wxml-->
+<view >
+<text class="log-list">
+异常总数：
+</text>
+<view class>
+</view>
+
+<button class="logli">
+异常历史
+</button>
+<text class="loglis">
+总分数：
+</text>
+</view>
+
+<view>
+<view class="line" style='background-color:black'></view>
+<text class='yichang'>
+异常信息：
+</text>
+
+<view wx:for="{{list}}">
+  <view bindtap='onTapGroup' data-index="{{index}}">
+    {{item.groupName}}
+  </view>
+  <view class="{{item.flag?'is-none':''}}">
+    <block wx:for="{{item.friends}}">
+      <view>
+        --- {{item}}
+      </view>
+    </block>
+  </view>
+</view>
+
+</view>
+
+<view>
+<view class="line_2" style='background-color:black'></view>
+
+<text >
+总览：
+</text>
+<icon type="info" class='icon1'/>
+</view>
+
+<view class="line_3"  style='background-color:black'></view>
+
+<view class='container'>
+<button class="baojing">
+报警
+</button>
+
+<button class="jiankong">
+监控
+</button>
+
+</view>

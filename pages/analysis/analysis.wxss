@@ -1,0 +1,87 @@
+/* pages/analysis/analysis.wxss */
+.log-list {
+  left: 10px;
+top: 80px;
+width: 91px;
+height: 40px;
+line-height: 26px;
+color: rgba(16, 16, 16, 1);
+font-size: 18px;
+text-align: center;
+font-family: Arial;
+}
+.loglis {
+left: 183px;
+top: 10px;
+width: 73px;
+height: 40px;
+line-height: 20px;
+color: rgba(16, 16, 16, 1);
+font-size: 18px;
+text-align: center;
+font-family: Arial;
+
+}
+.logli {
+left: -120px;
+top: 10px;
+width: 80px;
+height: 30px;
+border-radius: 4px;
+color: rgba(16, 16, 16, 1);
+font-size: 12px;
+font-family: Microsoft Yahei;
+border: 1px solid rgba(187, 187, 187, 1);
+  }
+
+.line {
+   background-color: blue;
+   height: 2rpx;
+   width: 100%;
+}
+.yichang{
+  left: 10px;
+top: 190px;
+width: 71px;
+height: 30px;
+line-height: 20px;
+color: rgba(16, 16, 16, 1);
+font-size: 14px;
+text-align: center;
+font-family: Arial;
+}
+
+.is-none{
+  display: none
+}
+
+.line_2 {
+  left: 1px;
+top: 210px;
+width: 374px;
+height: 1px;
+}
+
+.icon1{
+left: 0vmax
+
+}
+.line_2 {
+  left: 1px;
+top: 210px;
+width: 374px;
+height: 1px;
+}
+.line_3 {
+  left: 1px;
+top: 407px;
+width: 374px;
+height: 1px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
