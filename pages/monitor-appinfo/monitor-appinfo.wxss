@@ -1,1 +1,96 @@
 /* pages/monitor-appinfo/monitor-appinfo.wxss */
+
+.header {
+  height: 30%;
+  background-color: tomato;
+  color: white;
+  overflow: hidden;
+}
+
+.header-content {
+  position: relative;
+  margin-top: 50rpx;
+  padding: 40rpx;
+}
+.header-content image {
+  width: 200rpx;
+  height: 200rpx;
+  float: left;
+  padding-right: 30rpx;
+}
+
+.title {
+  display: block;
+}
+
+.bio {
+  font-size: 14px;
+}
+
+.body {
+  height: 70%;
+}
+
+.outline {
+  position: relative;
+}
+
+.arrow-right {
+  position: absolute;
+  right: 20rpx;
+  top: 300rpx;
+  height: 120rpx;
+  width: 80rpx;
+}
+/*单选按钮组  */
+.type-radio {
+  margin: 0 0 5rpx 0;
+  display: inline-block;
+  border: none;
+  width: 150rpx;
+  box-sizing: border-box;
+  text-align: center;
+  background-color: tomato;
+  padding: 10rpx 0;
+  color: white;
+}
+
+.type-radio.checked {
+  background-color: white;
+  color: black;
+}
+
+/* 图表列表  */
+.list-item {
+  border-bottom: 1px solid lightgrey;
+  font-size: 14px;
+  height: 80rpx;
+}
+
+.list-item text {
+  line-height: 80rpx;
+  height: 80rpx;
+}
+
+.list-item .icon {
+  height: 50rpx;
+  width: 50rpx;
+  padding: 15rpx;
+  float: left; 
+}
+
+.list-item .enter {
+  float: right;
+  height: 50rpx;
+  width: 50rpx;
+  padding: 15rpx;
+
+}
+
+.list-item .collect {
+  float: right;
+  height: 50rpx;
+  width: 50rpx;
+  padding: 15rpx;
+  margin-right: 80rpx;
+}

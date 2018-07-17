@@ -32,8 +32,15 @@ App({
         }
       }
     })
+    // 获取设备信息
+    wx.getSystemInfo({
+      success: res => {
+        this.globalData.windowHeight = res.windowHeight;
+      }
+    })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    windowHeight: null
   }
 })

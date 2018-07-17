@@ -20,12 +20,12 @@
 异常信息：
 </text>
 
-<view wx:for="{{list}}">
+<view wx:for="{{list}}" wx:key='app-{{index}}'>
   <view bindtap='onTapGroup' data-index="{{index}}">
     {{item.groupName}}
   </view>
   <view class="{{item.flag?'is-none':''}}">
-    <block wx:for="{{item.friends}}">
+    <block wx:for="{{item.friends}}" wx:key='friends-{{index}}'>
       <view>
         --- {{item}}
       </view>

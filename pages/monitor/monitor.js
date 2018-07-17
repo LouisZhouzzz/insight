@@ -5,14 +5,35 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    apps: [
+      {
+        title: "应用一",
+      }, {
+        title: "应用二"
+      }, {
+        title: "应用三"
+      }, {
+        title: "应用四"
+      }, {
+        title: "应用五"
+      }, {
+        title: "应用六"
+      }, {
+        title: "应用七"
+      }
+    ],
+    windowHeight: getApp().globalData.windowHeight
+  },
+
+  viewAppInfo: function (e) {
+    
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    
   },
 
   /**

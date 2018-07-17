@@ -1,2 +1,25 @@
 <!--pages/monitor/monitor.wxml-->
-<text>pages/monitor/monitor.wxml</text>
+
+<view class='page' style='height:{{windowHeight}}px'>
+
+  <scroll-view
+    scroll-y
+    style='height:{{windowHeight}}px; overflow: hidden'>
+    <view class='app-list'>
+      <navigator 
+        class='app' 
+        wx:for='{{apps}}' 
+        wx:key='monitor-app-{{index}}'
+        url="../monitor-appinfo/monitor-appinfo"
+        hover-class="app-hover" >
+          <text>{{item.title}}</text>
+      </navigator>
+    </view>
+  </scroll-view>
+
+  <view class='tabBar'>
+    <button>异常分析</button>
+    <button disabled>监控</button>
+  </view>
+
+</view>

@@ -1,1 +1,53 @@
 /* pages/monitor/monitor.wxss */
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.page {
+  position: relative;
+}
+
+.tabBar {
+  position: absolute;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: 375rpx 375rpx;
+}
+
+.tabBar button{
+  display: inline-block;
+  width: 100%;
+  border: none;
+  border-radius: 0 !important;
+  font-size: 14px;
+}
+
+.app-list {
+  display: grid;
+  grid-template-columns: 375rpx 375rpx;
+  grid-template-rows: 375rpx 375rpx 375rpx 500rpx;
+}
+
+.app {
+  width: 375rpx;
+  height: 375rpx;
+  color: white;
+  box-sizing: border-box;
+  background-color: tomato;
+  text-align: center;
+  border: 1px solid white;
+  transition-duration: 150ms;
+}
+
+.app-hover {
+  color: black;
+  background-color: white;
+  border: none;
+}
+
+.app text {
+  line-height: 375rpx;
+  height: 375rpx;
+}

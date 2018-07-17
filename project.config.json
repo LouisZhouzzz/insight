@@ -1,5 +1,5 @@
 {
-	"description": "ECharts 图表示例",
+	"description": "insight后台监控小程序",
 	"setting": {
 		"urlCheck": true,
 		"es6": true,

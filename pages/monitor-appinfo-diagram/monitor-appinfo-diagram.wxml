@@ -1,2 +1,24 @@
 <!--pages/monitor-appinfo-diagram/monitor-appinfo-diagram.wxml-->
-<text>pages/monitor-appinfo-diagram/monitor-appinfo-diagram.wxml</text>
+<view class='page-content' style='height:{{windowHeight}}px'>
+  
+  <view class='nav' style='height: 10%;'>
+    <block wx:for='{{diagrams}}' wx:key='diagram-type-{{index}}'>
+     <button wx:if='{{index !== currentDiagramIndex}}' class='nav-item' >{{item.type}}</button>
+     <button wx:else class='nav-item activated'>{{item.type}}</button>
+    </block>
+  </view>
+
+  <swiper 
+    style='height: 80%;'
+    current='currentDiagramIndex'
+    bindchange='swiper'>
+    <swiper-item 
+      class='diagram-container' 
+      wx:for='{{diagrams}}' 
+      wx:key='diagram-{{index}}'
+      data-index='{{index}}'>
+      <text>{{index  + 1}}</text>
+    </swiper-item>
+  </swiper>  
+
+</view>
