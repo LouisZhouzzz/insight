@@ -1,1 +1,6 @@
 /* pages/analysis-history/analysis-history.wxss */
+.back{
+  text-align: center;
+
+
+}

@@ -1,12 +1,14 @@
-// pages/analysis/analysis.js
+//logs.js
 const util = require('../../utils/util.js')
 
 Page({
   data: {
+    sum:"2",
+    point:"70",
     list: [
       {
         flag: true,
-        groupName: 'CAPS(点击我展开)',
+        groupName: 'CAPS(点我展开)',
         friends: [
           '异常1',
           '异常2',
@@ -14,7 +16,7 @@ Page({
         ]
       }, {
         flag: true,
-        groupName: '分类2(点击我展开)',
+        groupName: '分类2(点我展开)',
         friends: [
           '异常1',
           '异常2',
@@ -22,7 +24,7 @@ Page({
         ]
       }, {
         flag: true,
-        groupName: '分类3(点击我展开)',
+        groupName: '分类3(点我展开)',
         friends: [
           '异常1',
           '异常2'
@@ -38,6 +40,14 @@ Page({
     this.setData({
       list: list
     })
-  }
+  },
+
+bindFocus: function(){
+  wx.navigateTo({
+    url: '../analysis-history/analysis-history'
+  })
+}
+
+
 
 })

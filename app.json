@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/analysis/analysis",
+    "pages/analysis-history/analysis-history",
     "pages/monitor/monitor",
     "pages/monitor-appinfo-diagram/monitor-appinfo-diagram",
     "pages/monitor-appinfo/monitor-appinfo",
@@ -12,5 +14,25 @@
     "navigationBarBackgroundColor": "#FF6347",
     "navigationBarTitleText": "insight",
     "navigationBarTextStyle": "white"
+  },
+
+  "tabBar": {
+    "color": "#a9b7b7",
+    "selectedColor": "#11cd6e",
+    "borderStyle": "white",
+    "list": [
+      {
+        "selectedIconPath": "img/bj.png",
+        "iconPath": "img/bj2.png",
+        "pagePath": "pages/analysis/analysis",
+        "text": "报警"
+      },
+      {
+        "selectedIconPath": "img/jk.png",
+        "iconPath": "img/jk2.png",
+        "pagePath": "pages/analysis/analysis",
+        "text": "监控"
+      }
+    ]
   }
 }

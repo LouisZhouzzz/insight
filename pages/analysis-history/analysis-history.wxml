@@ -1,2 +1,12 @@
 <!--pages/analysis-history/analysis-history.wxml-->
-<text>pages/analysis-history/analysis-history.wxml</text>
+<view style='text-align: center'>
+<text>历史异常</text>
+</view>
+
+<!--跳转    自动有返回按钮-->
+<view>
+<block wx:for="{{items}}" wx:for-item="item" wx:key="history-{{index}}">
+<view>{{index+1}}:{{item.yc}}</view>
+</block>
+</view>
+
