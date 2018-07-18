@@ -1,4 +1,33 @@
 /* pages/analysis-history/analysis-history.wxss */
+page {  
+  display: block;  
+  min-height: 100%;  
+  background-color: #ff6347;  
+}  
 .back{
   text-align: center;
+}
+
+.date{
+   text-align: center;
+   background: red;
+   border-color: yellow;
+   border-radius: 8px;
+    color: orange;
+   
+}
+
+.datezhong{ text-align: center;}
+
+.yuanjiao{
+   background: wheat;
+    border-radius: 10px;
+    margin:10px;
+}
+
+.exception-item {
+  text-align: center;
+  height: 80rpx;
+  background-color: rgba(199, 199, 199, 0.15);
+  border-top: 1px solid rgba(199, 199, 199, 0.5);
 }

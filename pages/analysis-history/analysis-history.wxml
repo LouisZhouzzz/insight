@@ -1,7 +1,34 @@
 <!--pages/analysis-history/analysis-history.wxml-->
+
 <view>
-  <block wx:for="{{items}}" wx:for-item="item" wx:key="history-{{index}}">
-  <view>{{index+1}}:{{item.yc}}</view>
-  </block>
+  <view class='datezhong'>
+  <text class='date'>{{date.day1}}</text>
+  </view>
+    <view class='yuanjiao'>
+      <view class='exception-item' wx:for="{{items}}" wx:for-item="item" 
+          wx:key="history-{{index}}">
+         <text>{{index+1}}:  {{item.yc}}</text>
+      </view>
+    </view>
+
+    <view class='datezhong' >
+  <text class='date' >{{date.day2}}</text>
+  </view>
+    <view  class='yuanjiao'>
+    <view class='exception-item' wx:for="{{items2}}" wx:for-item="item" 
+          wx:key="history-{{index}}">
+      <text>{{index+1}}:  {{item.yc}}</text>
+    </view>
+    </view>
+
+    <view class='datezhong'>
+  <text class='date'>{{date.day3}}</text>
+  </view>
+    <view  class='yuanjiao'>
+    <view class='exception-item' wx:for="{{items3}}" wx:for-item="item" 
+          wx:key="history-{{index}}">
+      <text>{{index+1}}:  {{item.yc}}</text>
+    </view>
+    </view>
 </view>
 

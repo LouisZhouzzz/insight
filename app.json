@@ -1,8 +1,9 @@
 {
   "pages": [
+    
     "pages/analysis/analysis",
     "pages/monitor-appinfo/monitor-appinfo",
-    "pages/analysis-history/analysis-history",
+   "pages/analysis-history/analysis-history",
     "pages/monitor/monitor",
     "pages/monitor-appinfo-diagram/monitor-appinfo-diagram"
   ],
