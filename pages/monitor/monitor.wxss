@@ -25,9 +25,13 @@
 }
 
 .app-list {
-  display: grid;
+  /* display: grid;
   grid-template-columns: 375rpx 375rpx;
-  grid-template-rows: 375rpx 375rpx 375rpx 500rpx;
+  grid-template-rows: 375rpx 375rpx 375rpx 500rpx; */
+  display: -webkit-flex;
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
 }
 
 .app {

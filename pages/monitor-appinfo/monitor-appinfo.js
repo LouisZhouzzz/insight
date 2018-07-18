@@ -1,11 +1,15 @@
 // pages/monitor-appinfo/monitor-appinfo.js
+var watch = require('../../utils/vuelike.js').watch;
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    windowHeight: getApp().globalData.windowHeight,
+    // windowHeight: getApp().globalData.windowHeight,
+    windowHeight: null,
+    headerHeight: 30,
     swiperIndex: 0,
     checkedKey: 'batch',
     typeItems: {
@@ -28,6 +32,48 @@ Page({
           ifCollected: false
         }, {
           title: '单次耗时过长语句',
+          ifCollected: false
+        }, {
+          title: '数据库硬解析次数过多',
+          ifCollected: false
+        }, {
+          title: '数据库硬解析次数过多',
+          ifCollected: false
+        }, {
+          title: '数据库服务器CPU使用率',
+          ifCollected: false
+        }, {
+          title: '数据库硬解析次数过多',
+          ifCollected: false
+        }, {
+          title: '数据库硬解析次数过多',
+          ifCollected: false
+        }, {
+          title: '数据库硬解析次数过多',
+          ifCollected: false
+        }, {
+          title: '数据库硬解析次数过多',
+          ifCollected: false
+        }, {
+          title: '数据库硬解析次数过多',
+          ifCollected: false
+        }, {
+          title: '数据库服务器CPU使用率',
+          ifCollected: false
+        }, {
+          title: '数据库服务器CPU使用率',
+          ifCollected: false
+        }, {
+          title: '实习生数量',
+          ifCollected: true
+        }, {
+          title: '数据库硬解析次数过多',
+          ifCollected: false
+        }, {
+          title: '数据库硬解析次数过多',
+          ifCollected: false
+        }, {
+          title: '数据库硬解析次数过多',
           ifCollected: false
         }, {
           title: '数据库硬解析次数过多',
@@ -64,11 +110,34 @@ Page({
       diagramListData: this.data.diagramListData
     });
   },
-
   swip: function (e) {
     this.setData({
-      swiperIndex: this.data.swiperIndex ? 0 : 1
+      swiperIndex: 1
     });
+  },
+
+  updateSwiperCurrent: function (e) {
+    console.log(e);
+    this.setData({
+      swiperIndex: e.detail.current
+    });
+    if (e.detail.current === 0)
+      this.setData({
+        headerHeight: 30
+      }); 
+  },
+
+  scrolltoupper: function (e) {
+    this.setData({
+      headerHeight: 30
+    });
+  },
+
+  scroll: function (e) {
+    if (e.detail.deltaY < 0)
+      this.setData({
+        headerHeight: 0
+      });
   },
 
   radioChange: function (e) {
@@ -81,7 +150,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    // watch(this, {
+    //   swiperIndex: function (newVal) {
+    //     if (newVal === 0 && this.data.headerHeight === 0)
+    //       this.setData({
+    //         headerHeight: 30
+    //       });
+    //   }
+    // });
+    wx.getSystemInfo({
+      success: res => {
+        this.setData({
+          windowHeight: res.windowHeight
+        })
+      }
+    })
   },
 
   /**

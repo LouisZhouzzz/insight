@@ -1,34 +1,45 @@
 <!--pages/monitor-appinfo/monitor-appinfo.wxml-->
-<view class='page' style='height:{{windowHeight}}px'>
+<view class='page' style='height:{{windowHeight}}px; overflow: hidden;'>
 
-  <view class='header'>
+  <view class='header' style='height:{{headerHeight}}%;'>
     <view class='header-content'>
       <image src='../../img/svgs/dashed_rect.svg'></image>
       <text class='title'>生酮营养师</text>
       <text class='bio'>这是一款专为佛系青年打造的养生App。</text>  
     </view>
   </view>
-  <view class='body'>
-    <swiper style='height: 100%' current='{{swiperIndex}}'>
-      
+    <swiper style='height:100%; overview: visible;' current='{{swiperIndex}}' bindchange='updateSwiperCurrent'>
       <swiper-item class='outline'>
         我是图表我是图表，总览的小图表~
         <image  bindtap='swip' class='arrow-right' src='../../img/svgs/arrow_right.svg'></image>
       </swiper-item>
       
       <swiper-item class='detail'>
-        <radio-group bindchange='radioChange'>
-           <label wx:for='{{typeItems}}' wx:key='type-{{index}}' class='type-item'>
-            <view class='type-radio checked' wx:if='{{index === checkedKey}}'>{{item}}</view>
-            <view class='type-radio' wx:else>{{item}}</view> 
+        <radio-group class='types-group' bindchange='radioChange'>
+           <label wx:for='{{typeItems}}' wx:key='type-{{index}}' class="type-item {{index === checkedKey ? 'checked' : ''}}">
+            <view class="type-radio ">{{item}}</view>
             <radio value='{{index}}' checked="{{item.checked}}" style='display: none'>{{item}}</radio>
           </label>
         </radio-group>
-        <view class='diagram-list'>
+        <scroll-view 
+          class='diagram-list' 
+          style='height: 90%; overview: scroll;' 
+          bindscroll='scroll'
+          bindscrolltoupper='scrolltoupper'
+          scroll-y>
           <view class='list-item' wx:for='{{diagramListData[checkedKey]}}' wx:key='diagram-{{index}}'>
             <image class='icon' src='../../img/svgs/dashed_rect.svg'></image>
             <text>{{item.title}}</text>
-            <image  class='enter' src='../../img/svgs/arrow_right.svg'></image>
+
+            
+
+            <navigator 
+              class='enter' 
+              url="../monitor-appinfo-diagram/monitor-appinfo-diagram"
+              >
+                <image   src='../../img/svgs/arrow_right.svg'></image>
+            </navigator>
+
             <image wx:if='{{item.ifCollected}}' 
                    src='../../img/svgs/star_fill.svg' 
                    class='collect'
@@ -37,8 +48,7 @@
                    class='collect' bindtap='collect' data-index="{{index}}"></image>
             
           </view>
-        </view>
+        </scroll-view>
       </swiper-item>  <!-- 指标详情 -->
     </swiper>
-  </view>
 </view>

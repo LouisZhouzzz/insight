@@ -1,12 +1,10 @@
 {
   "pages": [
     "pages/analysis/analysis",
+    "pages/monitor-appinfo/monitor-appinfo",
     "pages/analysis-history/analysis-history",
     "pages/monitor/monitor",
-    "pages/monitor-appinfo-diagram/monitor-appinfo-diagram",
-    "pages/monitor-appinfo/monitor-appinfo",
-    "pages/analysis/analysis",
-    "pages/analysis-history/analysis-history"
+    "pages/monitor-appinfo-diagram/monitor-appinfo-diagram"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -17,20 +15,20 @@
   },
 
   "tabBar": {
-    "color": "#a9b7b7",
-    "selectedColor": "#11cd6e",
+    "color": "#504B43",
+    "selectedColor": "#8F8C87",
     "borderStyle": "white",
     "list": [
       {
-        "selectedIconPath": "img/bj.png",
-        "iconPath": "img/bj2.png",
+        "selectedIconPath": "img/bj2.png",
+        "iconPath": "img/bj.png",
         "pagePath": "pages/analysis/analysis",
-        "text": "报警"
+        "text": "分析"
       },
       {
-        "selectedIconPath": "img/jk.png",
-        "iconPath": "img/jk2.png",
-        "pagePath": "pages/analysis/analysis",
+        "selectedIconPath": "img/jk2.png",
+        "iconPath": "img/jk.png",
+        "pagePath": "pages/monitor/monitor",
         "text": "监控"
       }
     ]

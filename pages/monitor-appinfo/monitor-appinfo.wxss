@@ -1,10 +1,11 @@
 /* pages/monitor-appinfo/monitor-appinfo.wxss */
 
 .header {
-  height: 30%;
   background-color: tomato;
   color: white;
   overflow: hidden;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
 }
 
 .header-content {
@@ -27,10 +28,6 @@
   font-size: 14px;
 }
 
-.body {
-  height: 70%;
-}
-
 .outline {
   position: relative;
 }
@@ -42,23 +39,32 @@
   height: 120rpx;
   width: 80rpx;
 }
-/*单选按钮组  */
-.type-radio {
-  margin: 0 0 5rpx 0;
-  display: inline-block;
-  border: none;
-  width: 150rpx;
-  box-sizing: border-box;
-  text-align: center;
+
+/*类型单选按钮组  */
+.types-group {
+  display: flex;
+  justify-content: space-around;
+}
+
+.types-group > .type-item {
+  flex-grow: 1;
   background-color: tomato;
-  padding: 10rpx 0;
+  text-align: center;
   color: white;
 }
 
-.type-radio.checked {
+.types-group > .type-item.checked {
   background-color: white;
   color: black;
 }
+
+.type-radio {
+  margin-bottom: 5rpx;
+  border: none;
+  box-sizing: border-box;
+  padding: 10rpx 0;
+}
+
 
 /* 图表列表  */
 .list-item {
@@ -84,7 +90,11 @@
   height: 50rpx;
   width: 50rpx;
   padding: 15rpx;
+}
 
+.enter image {
+  height: 50rpx;
+  width: 50rpx;
 }
 
 .list-item .collect {

@@ -1,66 +1,45 @@
 <!--logs.wxml-->
-<!--模块1 异常数，异常历史，总分�->
-<view >
-<text class="log-list">
-异常总数：{{sum}}
-</text>
-<!--跳转自动有返回按�/-->
-<button class="logli" bindtap="bindFocus">
-异常历史
-</button>
+<!--模块1 异常数，异常历史，总分数-->
+<view class='page-content' style='height:{{windowHeight}}px'>
+  <view class='header'>
+    <view class='outline-item'>
+      <canvas class="cir" canvas-id="canvasArc">
+        <cover-view>
+          {{outline.point}}
+        </cover-view>
+      </canvas>
+    </view>    
 
-<text class="loglis">
-总分数：{{point}}
-</text>
-</view>
+    <view class='outline-item'>
+      <text>应用数</text>
+      <text>{{outline.appNum}}</text>
+    </view>
 
-<!--模块2 异常信息*/-->
-<view>
-<view class="line" style='background-color:black'></view>
+    <view class='outline-item'>
+      <text>异常数</text>
+      <text>{{outline.exceptionNum}}</text>
+    </view>
 
-<text class='yichang'>异常信息�/text>
-
-<view wx:for="{{list}}" wx:key='app-{{index}}'>
-  <view bindtap='onTapGroup' data-index="{{index}}">
-    {{item.groupName}}
+    <navigator class='view-history' url="../analysis-history/analysis-history" hover-class="navigator-hover">查看历史异常>></navigator>
   </view>
-  <view class="{{item.flag?'is-none':''}}">
-    <block wx:for="{{item.friends}}" wx:key='exception-{{index}}'>
-      <view>
-        --- {{item}}
+
+  <view class='body'>
+    
+    <!--模块2 异常信息*/-->
+    <scroll-view style='height:{{windowHeight-130}}px' scroll-y>
+      <view wx:for="{{list}}" wx:key='app-{{index}}' class="app-item-container {{item.flag?'collapsed':'open'}}">
+        <view class='app-item' bindtap='onTapGroup' data-index="{{index}}">
+          <text>{{item.groupName}}</text>
+          <image class="{{item.flag?'collapsed':'open'}}" src='../../img/svgs/arrow_right_fill.svg'></image>
+        </view>
+        <view hidden='{{item.flag}}'>
+          <view class='exception-item' wx:for="{{item.exceptions}}" wx:key='exception-{{index}}'> 
+            <text>- {{item}}</text>
+          </view>
+        </view>
       </view>
-    </block>
-  </view>
-</view>
+    </scroll-view> <!--模块2 异常信息*/-->
+
+  </view><!-- .body --> 
 
 </view>
-<!--模块3 总览-->
-<view>
-<view class="line_2" style='background-color:black'></view>
-
-<text class="zonglan"> 总览�/text>
-<!--关于按钮 设置跳转到关于页�未写-->
-<view class="guanyu" bindtap="bindGuanyu" style='text-align:right; padding-right: 20rpx;'>
-<icon type="info" class='icon1'/>
-</view>
-<!--总览的表格部�未写  -->
-<view>
-总览的图
-</view>
-
-</view>
-
-
-<!--模块4 底部报警和监控按� 要实现跳转功�未写*/
-<view class="line_3"  style='background-color:black'></view>
-
-
-模块5  底部两个按钮 2个点击事件未设置 
-<view class='container'>
-<button class="baojing" bindtap="bindBJ">
-报警
-</button>
-<button class="jiankong" bindtap="bindJK">
-监控
-</button>
-</view>-->

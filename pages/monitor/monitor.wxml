@@ -1,7 +1,6 @@
 <!--pages/monitor/monitor.wxml-->
 
 <view class='page' style='height:{{windowHeight}}px'>
-
   <scroll-view
     scroll-y
     style='height:{{windowHeight}}px; overflow: hidden'>
@@ -16,10 +15,4 @@
       </navigator>
     </view>
   </scroll-view>
-
-  <view class='tabBar'>
-    <button>异常分析</button>
-    <button disabled>监控</button>
-  </view>
-
 </view>

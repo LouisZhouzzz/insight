@@ -1,4 +1,131 @@
+.page-content {
+  background-color: rgba(199, 199, 199, 0.15);
+}
 
+/* 头部分析概览 */
+.cir{
+  display: inline-block;
+  width:120px; 
+  height:120px;
+  margin-left: 30rpx;
+}
+
+.cir cover-view {
+  height:120px;
+  font-size: 2.5em;
+  font-weight: bold;
+  color: '#EE964B';
+  line-height: 120px;
+  text-align: center;
+}
+
+.header {
+  background-color: tomato;
+  color: white;
+  /* display: -webkit-flex;
+  display: flex;
+  justify-content: flex-start; */
+  position: relative;
+  height: 130px;
+}
+
+.view-history {
+  position: absolute;
+  right: 1em;
+  bottom: 5rpx;
+  font-size: 12px;
+}
+
+.outline-item {
+  text-align: center;
+  display: inline-block;
+}
+
+.outline-item:nth-child(1) {
+  float: left;
+}
+
+
+.outline-item:nth-child(2) {
+  margin-left: 100rpx;
+}
+
+.outline-item:nth-child(3) {
+  margin-left: 100rpx;
+}
+
+.outline-item text:nth-child(1) {
+  display: block; 
+  font-size: 14px;
+}
+
+.outline-item text:nth-child(2) {
+  font-size: 2em;
+  height: 150rpx;
+  line-height: 150rpx;
+}
+
+
+
+/* 详细分析模块 */
+
+.body {
+
+}
+
+/* 列表一级子项 */
+
+.app-item-container {
+  background-color: white;
+  box-shadow: 0 0 30px 0 rgba(199, 199, 199, 0.25);
+  max-height: 100rpx; 
+  transition: 500ms;
+  overflow: hidden; 
+  transition-timing-function: linear; 
+}
+
+.app-item-container.open {
+  /* TODO 回滚无动效 */
+  max-height: 300px;
+}
+
+
+.app-item {
+  height: 100rpx;
+  text-indent: 1em;
+}
+
+.app-item text {
+  height: 100rpx;
+  line-height: 100rpx;
+}
+
+.app-item image {
+  height: 50rpx;
+  width: 50rpx;
+  float: right;
+  margin: 25rpx 1em 0;
+  transition-duration: 150ms;
+  transition-timing-function: linear;
+}
+
+.app-item image.open {
+  transform: rotate(90deg);
+}
+
+/* 列表二级子项 */
+.exception-item {
+  height: 80rpx;
+  text-indent: 2em;
+  background-color: rgba(199, 199, 199, 0.15);
+  border-top: 1px solid rgba(199, 199, 199, 0.5);
+}
+
+
+.exception-item text {
+  height: 80rpx;
+  line-height: 80rpx;
+}
 
 .log-list {
   left: 10px;
@@ -90,12 +217,4 @@ height: 1px;
   justify-content: space-between;
   align-items: center;
   bottom:10px;
-}
-
-
-.baojing{
-
-}
-.jiankong{
-  
 }

@@ -1,5 +1,4 @@
 {
-  "window": {
-    "navigationBarTitleText": "图表"
-  }
+  "navigationBarTitleText": "图表",
+  "tabBar": {}
 }
