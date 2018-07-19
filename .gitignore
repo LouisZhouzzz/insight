@@ -1,1 +1,5 @@
 *.bak
+*.orig
+*.imi
+.idea
+/.idea/workspace.xml

@@ -28,7 +28,7 @@
     <!--头部概览模块 end-->
 
     <view id="btn" class="fixedBtn {{ifFixedBtnShow ? '' : 'hidden'}}}" bindtap="backToTop">
-        <text>回到顶部 ∧</text>
+        <text>TOP ∧</text>
     </view>
 
     <!--模块2 异常信息*/-->

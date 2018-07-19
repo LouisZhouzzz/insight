@@ -84,7 +84,6 @@ Page({
     },
 
     scroll: function (e) {
-        console.log(e);
         let ifBeyond = e.detail.scrollTop > this.data.headerHeight - 24;
         if (this.data.ifFixedBtnShow === ifBeyond) return;
         this.setData({
