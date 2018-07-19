@@ -1,54 +1,82 @@
 <!--pages/monitor-appinfo/monitor-appinfo.wxml-->
-<view class='page' style='height:{{windowHeight}}px; overflow: hidden;'>
+<scroll-view
+        scroll-y="{{ifOuterScroll}}}"
+        class='container'
+        bindscroll='outerscroll'
+        scroll-with-animation="true"
+        xmlns:wx="http://www.w3.org/1999/xhtml">
 
-  <view class='header' style='height:{{headerHeight}}%;'>
-    <view class='header-content'>
-      <image src='../../img/svgs/dashed_rect.svg'></image>
-      <text class='title'>生酮营养师</text>
-      <text class='bio'>这是一款专为佛系青年打造的养生App。</text>  
+    <!--头部信息概览模块 start-->
+    <view class='header' style='height:400px;'>
+        <view class='header-content'>
+            <image src='../../img/svgs/dashed_rect.svg'></image>
+            <text class='title'>{{appOutline.title}}</text>
+            <text class='bio'>{{appOutline.bio}}</text>
+        </view>
+        <!--概览图表 start-->
+        <view style="height: 600rpx; padding: 1em;">
+            我是图表我是图表，总览的小图表~
+        </view>
+        <!--概览图表 end-->
     </view>
-  </view>
-    <swiper style='height:100%; overview: visible;' current='{{swiperIndex}}' bindchange='updateSwiperCurrent'>
-      <swiper-item class='outline'>
-        我是图表我是图表，总览的小图表~
-        <image  bindtap='swip' class='arrow-right' src='../../img/svgs/arrow_right.svg'></image>
-      </swiper-item>
-      
-      <swiper-item class='detail'>
-        <radio-group class='types-group' bindchange='radioChange'>
-           <label wx:for='{{typeItems}}' wx:key='type-{{index}}' class="type-item {{index === checkedKey ? 'checked' : ''}}">
+    <!--头部信息概览模块 end-->
+
+    <!--指标类型选项 start-->
+    <radio-group class='types-group' bindchange='radioChange'>
+        <label wx:for='{{typeItems}}' wx:key='type-{{index}}'
+               class="type-item {{index === checkedKey ? 'checked' : ''}}">
             <view class="type-radio ">{{item}}</view>
             <radio value='{{index}}' checked="{{item.checked}}" style='display: none'>{{item}}</radio>
-          </label>
-        </radio-group>
-        <scroll-view 
-          class='diagram-list' 
-          style='height: 90%; overview: scroll;' 
-          bindscroll='scroll'
-          bindscrolltoupper='scrolltoupper'
-          scroll-y>
-          <view class='list-item' wx:for='{{diagramListData[checkedKey]}}' wx:key='diagram-{{index}}'>
-            <image class='icon' src='../../img/svgs/dashed_rect.svg'></image>
-            <text>{{item.title}}</text>
+        </label>
+    </radio-group>
+    <!--指标类型选项 end-->
 
-            
+    <!--下拉时贴顶的指标类型选项 start-->
+    <radio-group class="types-group stuck {{ifTypeSelectedShow ? '': 'hidden'}}}" bindchange='radioChange' >
+        <label wx:for='{{typeItems}}' wx:key='type-stuck-{{index}}'
+               class="type-item {{index === checkedKey ? 'checked' : ''}}">
+            <view class="type-radio ">{{item}}</view>
+            <radio value='{{index}}' checked="{{item.checked}}" style='display: none'>{{item}}</radio>
+        </label>
+    </radio-group>
+    <!--下拉时贴顶的指标类型选项 end-->
 
-            <navigator 
-              class='enter' 
-              url="../monitor-appinfo-diagram/monitor-appinfo-diagram"
-              >
-                <image   src='../../img/svgs/arrow_right.svg'></image>
-            </navigator>
+    <!--二级列表 start-->
+    <view   class="quota-container {{item.ifCollapsed?'collapsed':'open'}}"
+            wx:for="{{list[checkedKey]}}"
+            wx:key='quota-{{index}}'
+            bindtap='onTapGroup'
+            data-index="{{index}}">
+        <!--二级列表一级子项 start-->
+        <view class='quota'>
+            <text class='title'>{{item.name}}</text>
+            <image class="collapse-btn" src='../../img/svgs/arrow_right_fill.svg'></image>
+            <view class='quota-items-num'>
+                <text>{{item.items.length}}</text>
+            </view>
+        </view>
+        <!--二级列表一级子项 end-->
 
-            <image wx:if='{{item.ifCollected}}' 
-                   src='../../img/svgs/star_fill.svg' 
-                   class='collect'
-                   bindtap='collect' data-index="{{index}}"></image>
-            <image wx:else='{{item.ifCollected}}' src='../../img/svgs/star_stroke.svg' 
-                   class='collect' bindtap='collect' data-index="{{index}}"></image>
-            
-          </view>
-        </scroll-view>
-      </swiper-item>  <!-- 指标详情 -->
-    </swiper>
-</view>
+        <!--二级列表二级子项 start-->
+        <view class="quota-items">
+            <view class='quota-item' wx:for="{{item.items}}" wx:key='quota-item-{{index}}'>
+                <text>- {{item.name}}</text>
+                <navigator
+                        class='enter'
+                        url="../monitor-appinfo-diagram/monitor-appinfo-diagram">
+                    <image src='../../img/svgs/arrow_right.svg'></image>
+                </navigator>
+
+                <image wx:if='{{item.ifCollected}}'
+                       src='../../img/svgs/star_fill.svg'
+                       class='collect'
+                       bindtap='collect' data-index="{{index}}"></image>
+                <image wx:else='{{item.ifCollected}}' src='../../img/svgs/star_stroke.svg'
+                       class='collect' bindtap='collect' data-index="{{index}}"></image>
+            </view>
+        </view>
+        <!--二级列表二级子项 end-->
+
+    </view>
+    <!--二级列表 end-->
+</scroll-view>

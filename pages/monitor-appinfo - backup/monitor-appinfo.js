@@ -11,7 +11,6 @@ Page({
         windowHeight: null,
         headerHeight: 30,
         swiperIndex: 0,
-        ifTypeSelectedShow: false, // 是否显示固定类型选择栏
         appOutline: {
             title: '生酮营养师',
             bio: '这是一款专为佛系青年打造的养生App。'
@@ -405,7 +404,9 @@ Page({
                     ]
                 }
             ]
-        }
+        },
+        toView: 'header',
+        ifOuterScroll: true //是否允许外层scrollView滑动，两个scrollView不能同时滑动，所以内层取反即可
     },
     onTapGroup: function (e) {
         var list = this.data.list;
@@ -439,11 +440,42 @@ Page({
     },
 
     outerscroll: function (e) {
-        if (this.data.ifTypeSelectedShow === (e.detail.scrollTop > 400)) return;
+        if (e.detail.deltaY < 0) //滑动条向下移动
+            this.setData({
+                toView: 'body',
+                ifOuterScroll: false
+            });
+    },
+
+    outerscrolltoupper: function (e) {
         this.setData({
-            ifTypeSelectedShow: e.detail.scrollTop > 400
+            toView: 'header',
+            ifOuterScroll: true
         });
     },
+
+    outerscrolltolower: function (e) { // 外层scrollview滑到底部解除滑动，启动内层scrollview滑动
+        // this.setData({
+        //     ifOuterScroll: false
+        // });
+    },
+
+    scrolltoupper: function (e) {
+        console.log(e);
+        this.setData({
+            ifOuterScroll: true,
+            toView: 'header'
+        });
+    },
+
+    scroll: function (e) {
+        console.log(e);
+        if (this.data.toView === 'header') //内层滑动时，外层还定位在header处
+            this.setData({
+                ifOuterScroll: true
+            });
+    },
+
     radioChange: function (e) {
         this.setData({
             checkedKey: e.detail.value
@@ -454,6 +486,21 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        // watch(this, {
+        //   swiperIndex: function (newVal) {
+        //     if (newVal === 0 && this.data.headerHeight === 0)
+        //       this.setData({
+        //         headerHeight: 30
+        //       });
+        //   }
+        // });
+        wx.getSystemInfo({
+            success: res => {
+                this.setData({
+                    windowHeight: res.windowHeight
+                })
+            }
+        })
     },
 
     /**

@@ -51,14 +51,6 @@ $quotaItemHeight: 80rpx;
   display: -webkit-flex;
   display: flex;
   justify-content: space-around;
-  width: 100%;
-  z-index: 1001;
-  &.stuck {
-    position: fixed; top: 0;
-  }
-  &.hidden {
-    display: none;
-  }
 }
 
 .types-group > .type-item {

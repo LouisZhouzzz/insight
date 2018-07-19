@@ -1,0 +1,46 @@
+//Sass允许使用变量，所有变量以$开头。变量甚至可以被#{}包裹镶嵌在字符串中
+//代码中有计算功能
+//既允许选择器嵌套，也可以嵌套属性，后者在 {} 之前使用 : 加以区分
+$backgroundColor: #FF6347;
+$side: left;
+
+@mixin flex() {
+  display: -webkit-flex;
+  display: flex;
+}
+
+//mixin类似宏，可以传入参数并设置缺省值
+@mixin rounded($vert, $horz, $radius: 5rpx) { //兼容性处理
+  border-#{$vert}-#{$horz}-radius: $radius;
+  -moz-border-radius-#{$vert}#{$horz}: $radius;
+  -webkit-border-#{$vert}-#{$horz}-radius: $radius;
+}
+
+@function getCircumference ($radius) { //自定义函数，sass也提供一些内置函数，注意使用
+  @return 2 * 3.14 * $radius;
+}
+
+.container {
+  border-#{$side}: (1px + 4px) / 2 solid $backgroundColor;
+
+  @include rounded(top, left);
+
+  margin: {
+    top: 5px * 2;
+    left: 10px;
+  };
+}
+
+.pane {
+  @extend .container; //选择器继承
+  text { //后代选择器
+    color: red;
+  }
+
+  button {
+    &:hover { //用 & 指向父选择器
+
+    }
+  }
+}
+

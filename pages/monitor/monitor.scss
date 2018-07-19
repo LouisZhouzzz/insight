@@ -1,57 +1,37 @@
-/* pages/monitor/monitor.wxss */
-::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-  color: transparent;
-}
+/* pages/monitor/monitor.scss */
+@import "../../app.scss";
 
-.page {
-  position: relative;
-}
+$appCardWidth: 375rpx;
+$appCardHeight: 375rpx;
 
-.tabBar {
-  position: absolute;
-  bottom: 0;
-  display: grid;
-  grid-template-columns: 375rpx 375rpx;
-}
-
-.tabBar button{
-  display: inline-block;
-  width: 100%;
-  border: none;
-  border-radius: 0 !important;
-  font-size: 14px;
-}
-
-.app-list {
-  /* display: grid;
-  grid-template-columns: 375rpx 375rpx;
-  grid-template-rows: 375rpx 375rpx 375rpx 500rpx; */
-  display: -webkit-flex;
-  display: flex;
-  align-content: flex-start;
-  flex-wrap: wrap;
+.container {
+  .app-list {
+    height: 100%;
+    display: -webkit-flex;
+    display: flex;
+    align-content: flex-start;
+    flex-wrap: wrap;
+  }
 }
 
 .app {
-  width: 375rpx;
-  height: 375rpx;
-  color: white;
+  display: inline-block;
+  width: $appCardWidth;
+  height: $appCardHeight;
+  color: $darkenWhite;
   box-sizing: border-box;
-  background-color: tomato;
+  background-color: $themeBackgroundColor;
   text-align: center;
-  border: 1px solid white;
+  border: 1px solid $themeColor;
   transition-duration: 150ms;
+  text {
+    line-height: $appCardHeight;
+    height: $appCardHeight;
+  }
 }
 
 .app-hover {
-  color: black;
-  background-color: white;
+  color: $lightenBlack;
+  background-color: $darkenWhite;
   border: none;
-}
-
-.app text {
-  line-height: 375rpx;
-  height: 375rpx;
 }

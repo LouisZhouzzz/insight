@@ -1,0 +1,32 @@
+$themeBackgroundColor:#ff6347; //主题背景色
+$themeColor: white; //主题文字色
+$darkenWhite: snow;
+$lightenBlack: #25231F;
+$defaultFontSize: 16px;
+
+page {
+  font: {
+    family: Helvetica, serif;
+    size: $defaultFontSize;
+  };
+}
+
+::-webkit-scrollbar { //隐藏默认滑动条
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}

@@ -1,7 +1,15 @@
 <!--pages/analysis-history/analysis-history.wxml-->
 <view>
+
+  <view class="nav {{toggle? 'toggle' : ''}}" bindtap='navigate'>
+    
+  <view style='text-align: center; width: 100rpx;'>
+    <text>123</text>
+  </view>
+  
   <block wx:for="{{items}}" wx:for-item="item" wx:key="history-{{index}}">
-  <view>{{index+1}}:{{item.yc}}</view>
+    <view>{{index+1}}:{{item.yc}}</view>
   </block>
+</view>
 </view>
 

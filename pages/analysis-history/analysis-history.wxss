@@ -2,3 +2,14 @@
 .back{
   text-align: center;
 }
+
+.nav {
+  max-height: 200rpx;
+  background-color: wheat;
+  transition: 500ms linear;
+  overflow: hidden;
+}
+
+.nav.toggle {
+  max-height: 1000rpx;
+}

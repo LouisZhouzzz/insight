@@ -1,0 +1,151 @@
+@import "../../app.scss";
+
+$pageBackgroundColor: #F9F9F9;
+$appItemHeight: 100rpx;
+$itemTagHeight: 50rpx;
+$itemTagFontSize: 12px;
+$itemTabBackgroundColor: #75A3D6;
+$exceptionNumHinderRadius: 30rpx;
+
+
+.container {
+  background-color: $pageBackgroundColor;
+  color: $lightenBlack;
+
+  .header {
+    background-color: $themeBackgroundColor;
+    color: $themeColor;
+    position: relative;
+    height: 130px;
+    width: 100%;
+  }
+  .fixedBtn {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    color: $themeColor;
+    background-color: $themeBackgroundColor;
+    text-align: center;
+    padding: 2.5px 0;
+    &.hidden {
+      display: none;
+    }
+  }
+  .body {
+    width: 100%;
+  }
+}
+
+/* 头部分析概览 */
+.cir{
+  display: inline-block;
+  width:120px;
+  height:120px;
+  margin-left: 30rpx;
+
+  cover-view {
+    height:120px;
+    font-size: 2.5em;
+    font-weight: bold;
+    color: $themeColor;
+    line-height: 120px;
+    text-align: center;
+  }
+}
+
+
+.view-history {
+  position: absolute;
+  right: 1em;
+  bottom: 10rpx;
+  font-size: 14px;
+}
+
+.outline-item {
+  text-align: center;
+  display: inline-block;
+
+  &:nth-child(1) {
+    float: left;
+  }
+  &:nth-child(2) {
+    margin-left: 100rpx;
+  }
+  &:nth-child(3) {
+    margin-left: 100rpx;
+  }
+  text {
+    &:nth-child(1) {
+      display: block;
+    }
+    &:nth-child(2) {
+      font-size: 2em;
+      height: 150rpx;
+      line-height: 150rpx;
+    }
+  }
+}
+
+
+/* 列表一级子项 */
+.app-item-container {
+  background-color: $themeColor;
+  box-shadow: 0 0 30px 0 darken($pageBackgroundColor, 10%);
+  max-height: $appItemHeight;
+  transition: 500ms linear 0ms;
+  overflow: hidden;
+  &.open {
+    max-height: $appItemHeight * 10;
+    image {
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.app-item {
+  height: $appItemHeight;
+  padding-left: 1em;
+  & > text {
+    height: $appItemHeight;
+    line-height: $appItemHeight;
+  }
+  .enter {
+    float: right;
+    height: $appItemHeight / 2;
+    width: $appItemHeight / 2;
+    margin: $appItemHeight / 4 1em 0;
+    image {
+      height: $appItemHeight / 2;
+      width: $appItemHeight / 2;
+      transition: 150ms linear 0ms;
+    }
+  }
+}
+
+.tag {
+  height: $itemTagHeight;
+  margin: ($appItemHeight - $itemTagHeight) / 2 1em;
+  padding: 0 0.5em;
+  text-align: center;
+  border-radius: 10rpx;
+  background-color: $itemTabBackgroundColor;
+  display: inline-block;
+  text {
+    color: $themeColor;
+    line-height: $itemTagHeight;
+    height: $itemTagHeight;
+    font-size: $itemTagFontSize;
+  }
+}
+
+/* 列表二级子项 */
+.exception-item {
+  height: $itemTagHeight;
+  text-indent: 2em;
+  background-color: $pageBackgroundColor;
+  border-top: 1px solid darken($pageBackgroundColor, 10%);
+  text {
+    height: $itemTagHeight;
+    line-height: $itemTagHeight;
+  }
+}

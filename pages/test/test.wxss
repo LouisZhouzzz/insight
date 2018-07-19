@@ -1,0 +1,2 @@
+.container,.pane{border-left:2.5px solid tomato;border-top-left-radius:5rpx;-moz-border-radius-topleft:5rpx;-webkit-border-top-left-radius:5rpx;margin-top:10px;margin-left:10px}.pane text{color:red}
+/*# sourceMappingURL=test.wxss.map */
