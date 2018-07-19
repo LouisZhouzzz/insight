@@ -3,6 +3,7 @@
 <view class='container'>
     <!--应用入口列表 start-->
     <scroll-view class='app-list' scroll-y>
+          <!-- 每个异常类名 start-->
         <navigator
                 class='app'
                 wx:for='{{apps}}'
@@ -11,6 +12,7 @@
                 hover-class="app-hover">
             <text>{{item.title}}</text>
         </navigator>
+         <!-- 每个异常类名 end-->
     </scroll-view>
     <!--应用列表入口 end-->
 </view>

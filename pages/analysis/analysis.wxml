@@ -1,53 +1,69 @@
 <!--logs.wxml-->
-<!--模块1 异常数，异常历史，总分数-->
+
 <scroll-view class='container' bindscroll="scroll" scroll-into-view="{{toView}}" scroll-with-animation scroll-y>
     <!--头部概览模块 130px高 start-->
     <view id="header" class='header' style="height:{{headerHeight}}">
         <view class='outline-item'>
+            <!--分数圆形画布 以及 上面的分数 start-->
             <canvas class="cir" canvas-id="canvasArc">
                 <cover-view>
                     {{outline.point}}
                 </cover-view>
             </canvas>
+             <!--分数圆形画布 以及 上面的分数 end-->
         </view>
-
+         <!--应用数 start-->
         <view class='outline-item'>
             <text>应用数</text>
             <text>{{outline.appNum}}</text>
         </view>
-
+         <!--应用数 end-->
+         <!--异常数 start-->
         <view class='outline-item'>
             <text>异常数</text>
             <text>{{outline.exceptionNum}}</text>
         </view>
-
+        <!--异常数 end-->
+         <!--历史异常导航 start-->
         <navigator class='view-history' url="../analysis-history/analysis-history" hover-class="navigator-hover">
             查看历史异常>>
         </navigator>
+         <!--历史异常导航 end-->
     </view>
     <!--头部概览模块 end-->
-
+    
+    <!-- 上滑后顶部显示TOP start-->
     <view id="btn" class="fixedBtn {{ifFixedBtnShow ? '' : 'hidden'}}}" bindtap="backToTop">
         <text>TOP ∧</text>
     </view>
+    <!-- 上滑后顶部显示TOP end-->
 
-    <!--模块2 异常信息*/-->
+    <!-- 异常信息模块 start-->
     <view   id="body"
             wx:for="{{exceptionList}}"
             wx:key='app-{{index}}'
             class="app-item-container"
             bindtap='onTapGroup'
             data-index="{{index}}">
+          
         <view class='app-item'>
+                <!-- 显示单条异常 start-->
             <text class='title'>{{item.name}}</text>
+                <!-- 显示单条异常 end-->
+                       <!-- 设置右箭头作为按钮 跳转到该异常对应的图表 start-->
             <navigator class='enter' url="../monitor-appinfo-diagram/monitor-appinfo-diagram">
                 <image src='../../img/svgs/arrow_right.svg'></image>
             </navigator>
+                       <!-- 设置右箭头作为按钮 跳转到该异常对应的图表 end-->
+                    
+                       <!-- 异常的应用类型 start-->
             <view class='tag'>
                 <text>{{item.source}}</text>
             </view>
+                       <!-- 异常的应用类型 end-->
         </view>
+         
     </view>
-    <!--模块2 异常信息*/-->
+    <!-- 异常信息模块 end-->
 
 </scroll-view>
