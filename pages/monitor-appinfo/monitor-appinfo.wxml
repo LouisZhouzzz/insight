@@ -9,7 +9,7 @@
     <!--头部信息概览模块 start-->
     <view class='header' style='height:400px;'>
         <view class='header-content'>
-            <image src='../../img/svgs/dashed_rect.svg'></image>
+            <image src='../../img/common/svgs/dashed_rect.svg'></image>
             <text class='title'>{{appOutline.title}}</text>
             <text class='bio'>{{appOutline.bio}}</text>
         </view>
@@ -50,7 +50,7 @@
         <!--二级列表一级子项 start-->
         <view class='quota'>
             <text class='title'>{{item.name}}</text>
-            <image class="collapse-btn" src='../../img/svgs/arrow_right_fill.svg'></image>
+            <image class="collapse-btn" src='../../img/common/svgs/arrow_right_fill.svg'></image>
             <view class='quota-items-num'>
                 <text>{{item.items.length}}</text>
             </view>
@@ -61,17 +61,19 @@
         <view class="quota-items">
             <view class='quota-item' wx:for="{{item.items}}" wx:key='quota-item-{{index}}'>
                 <text>- {{item.name}}</text>
+                 <!--二级子项导航 start-->
                 <navigator
                         class='enter'
                         url="../monitor-appinfo-diagram/monitor-appinfo-diagram">
-                    <image src='../../img/svgs/arrow_right.svg'></image>
+                    <image src='../../img/common/svgs/arrow_right.svg'></image>
                 </navigator>
+                 <!--二二级子项导航 end-->
 
                 <image wx:if='{{item.ifCollected}}'
-                       src='../../img/svgs/star_fill.svg'
+                       src='../../img/common/svgs/star_fill.svg'
                        class='collect'
                        bindtap='collect' data-index="{{index}}"></image>
-                <image wx:else='{{item.ifCollected}}' src='../../img/svgs/star_stroke.svg'
+                <image wx:else='{{item.ifCollected}}' src='../../img/common/svgs/star_stroke.svg'
                        class='collect' bindtap='collect' data-index="{{index}}"></image>
             </view>
         </view>

@@ -27,12 +27,16 @@
          <!--历史异常导航 end-->
     </view>
     <!--头部概览模块 end-->
+     <!--首页收藏部分 start-->
     <view class="collect-list">
         <view class="title">收藏</view>
+         <!--收藏图表 start-->
         <scroll-view scroll-x>
             <view class="card" wx:for="{{collectList}}" wx:key="collect-{{index}}">{{item.name}}</view>
         </scroll-view>
+         <!--收藏图表 end-->
     </view>
+     <!--首页收藏部分 end-->
 
     <!--异常信息模块 start-->
     <navigator id="body"
@@ -45,7 +49,7 @@
           
         <view class='app-item'>
             <text class='title'>{{item.name}}</text>
-            <image  class='enter' src='../../img/svgs/arrow_right.svg'></image>
+            <image  class='enter' src='../../img/common/svgs/arrow_right.svg'></image>
 
             <view class='tag'>
                 <text>{{item.source}}</text>
@@ -54,5 +58,7 @@
     </navigator>
     <!--异常信息模块 end-->
 
+     <!--加载动画 start-->
     <view class="loading-hinder {{ifLoading ? '' : 'hidden'}}" >Loading...</view>
+     <!--加载动画 end-->
 </view>
