@@ -1,15 +1,12 @@
-<!--logs.wxml-->
-<!--模块1 异常数，异常历史，总分数-->
-<scroll-view class='container' bindscroll="scroll" scroll-into-view="{{toView}}" scroll-with-animation scroll-y>
-    <!--头部概览模块 130px高 start-->
-    <view id="header" class='header' style="height:{{headerHeight}}">
-        <view class='outline-item'>
-            <canvas class="cir" canvas-id="canvasArc">
-                <cover-view>
-                    {{outline.point}}
-                </cover-view>
-            </canvas>
-        </view>
+<view class="page-content">
+
+    <!--头部概览模块 start-->
+    <view class='header'>
+        <canvas class="cir outline-item" canvas-id="canvasArc">
+            <cover-view>
+                {{outline.point}}
+            </cover-view>
+        </canvas>
 
         <view class='outline-item'>
             <text>应用数</text>
@@ -27,27 +24,30 @@
     </view>
     <!--头部概览模块 end-->
 
-    <view id="btn" class="fixedBtn {{ifFixedBtnShow ? '' : 'hidden'}}}" bindtap="backToTop">
-        <text>TOP ∧</text>
+    <view class="collect-list">
+        <view class="title">收藏</view>
+        <scroll-view scroll-x>
+            <view class="card" wx:for="{{collectList}}" wx:key="collect-{{index}}">{{item.name}}</view>
+        </scroll-view>
     </view>
 
-    <!--模块2 异常信息*/-->
-    <view   id="body"
-            wx:for="{{exceptionList}}"
-            wx:key='app-{{index}}'
-            class="app-item-container"
-            bindtap='onTapGroup'
-            data-index="{{index}}">
+    <!--异常信息模块 start-->
+    <navigator id="body"
+               wx:for="{{exceptionList}}"
+               wx:key='app-{{index}}'
+               class="app-item-container"
+               hover-class="app-item-hover"
+               url="../monitor-appinfo-diagram/monitor-appinfo-diagram"
+               data-index="{{index}}">
         <view class='app-item'>
             <text class='title'>{{item.name}}</text>
-            <navigator class='enter' url="../monitor-appinfo-diagram/monitor-appinfo-diagram">
-                <image src='../../img/svgs/arrow_right.svg'></image>
-            </navigator>
+            <image  class='enter' src='../../img/svgs/arrow_right.svg'></image>
             <view class='tag'>
                 <text>{{item.source}}</text>
             </view>
         </view>
-    </view>
-    <!--模块2 异常信息*/-->
+    </navigator>
+    <!--异常信息模块 end-->
 
-</scroll-view>
+    <view class="loading-hinder {{ifLoading ? '' : 'hidden'}}" >Loading...</view>
+</view>

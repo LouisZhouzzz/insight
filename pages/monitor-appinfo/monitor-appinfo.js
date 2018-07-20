@@ -1,5 +1,6 @@
 // pages/monitor-appinfo/monitor-appinfo.js
 var watch = require('../../utils/vuelike.js').watch;
+var service = require('../../service/test');
 
 Page({
 
@@ -7,15 +8,7 @@ Page({
      * 页面的初始数据
      */
     data: {
-        // windowHeight: getApp().globalData.windowHeight,
-        windowHeight: null,
-        headerHeight: 30,
-        swiperIndex: 0,
         ifTypeSelectedShow: false, // 是否显示固定类型选择栏
-        appOutline: {
-            title: '生酮营养师',
-            bio: '这是一款专为佛系青年打造的养生App。'
-        },
         checkedKey: 'batch',
         typeItems: {
             batch: '批量',
@@ -23,6 +16,10 @@ Page({
             service: '业务',
             performance: '性能',
             property: '资源'
+        },
+        appOutline: {
+            title: null,
+            bio: null
         },
         list: {
             batch: [
@@ -421,22 +418,6 @@ Page({
             diagramListData: this.data.diagramListData
         });
     },
-    swip: function (e) {
-        this.setData({
-            swiperIndex: 1
-        });
-    },
-
-    updateSwiperCurrent: function (e) {
-        console.log(e);
-        this.setData({
-            swiperIndex: e.detail.current
-        });
-        if (e.detail.current === 0)
-            this.setData({
-                headerHeight: 30
-            });
-    },
 
     outerscroll: function (e) {
         if (this.data.ifTypeSelectedShow === (e.detail.scrollTop > 400)) return;
@@ -454,6 +435,28 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        service.getAppInfo(
+            (res) => {
+                this.setData({
+                    appOutline: {
+                        title: '生酮营养师',
+                        bio: '这是一款专为佛系青年打造的养生App。'
+                    }
+                });
+            },
+            (res) => {
+
+            }
+        );
+        // service.getAppQuotaList(
+        //     (res) => {
+        //         this.setData({
+        //         });
+        //     },
+        //     (res) => {
+        //
+        //     }
+        // );
     },
 
     /**
