@@ -14,7 +14,6 @@
       <change beforePath="$PROJECT_DIR$/pages/analysis/analysis.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/analysis/analysis.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/analysis/analysis.json" beforeDir="false" afterPath="$PROJECT_DIR$/pages/analysis/analysis.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/analysis/analysis.scss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/analysis/analysis.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/analysis/analysis.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/analysis/analysis.wxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/analysis/analysis.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/analysis/analysis.wxss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/analysis/analysis.wxss.map" beforeDir="false" afterPath="$PROJECT_DIR$/pages/analysis/analysis.wxss.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/monitor-appinfo-diagram/monitor-appinfo-diagram.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/monitor-appinfo-diagram/monitor-appinfo-diagram.wxss" afterDir="false" />
@@ -44,8 +43,8 @@
       <file leaf-file-name="analysis.wxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/analysis/analysis.wxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="3" column="29" lean-forward="true" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
+            <state relative-caret-position="114">
+              <caret line="6" column="28" lean-forward="true" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -62,24 +61,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="monitor-appinfo.wxml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="monitor-appinfo.wxml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pages/monitor-appinfo/monitor-appinfo.wxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-17">
-              <caret line="33" column="22" lean-forward="true" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
-              <folding>
-                <element signature="n#style#0;n#view#1;n#view#0;n#scroll-view#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#radio#0;n#label#0;n#radio-group#0;n#scroll-view#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="430">
+              <caret line="94" column="89" selection-start-line="94" selection-start-column="89" selection-end-line="94" selection-end-column="89" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="monitor-appinfo.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="monitor-appinfo.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/monitor-appinfo/monitor-appinfo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="40" column="10" lean-forward="true" selection-start-line="40" selection-start-column="10" selection-end-line="40" selection-end-column="10" />
+            <state relative-caret-position="380">
+              <caret line="53" column="10" lean-forward="true" selection-start-line="53" selection-start-column="10" selection-end-line="53" selection-end-column="10" />
               <folding>
                 <element signature="e#268#415#0" />
                 <element signature="e#456#901#0" />
@@ -87,6 +82,7 @@
                 <element signature="e#2328#5448#0" />
                 <element signature="e#5467#7008#0" />
                 <element signature="e#7031#8941#0" />
+                <element signature="e#8961#12083#0" />
                 <element signature="e#12431#12638#0" />
                 <element signature="e#12829#14045#0" />
                 <element signature="e#11406#14447#0" />
@@ -190,7 +186,6 @@
         <option value="$PROJECT_DIR$/pages/analysis-history/analysis-history.scss" />
         <option value="$PROJECT_DIR$/pages/analysis-history/analysis-history.js" />
         <option value="$PROJECT_DIR$/pages/analysis/analysis.scss" />
-        <option value="$PROJECT_DIR$/pages/analysis/analysis.wxml" />
         <option value="$PROJECT_DIR$/service/test.js" />
         <option value="$PROJECT_DIR$/pages/monitor/monitor.js" />
         <option value="$PROJECT_DIR$/pages/monitor/monitor.scss" />
@@ -198,8 +193,9 @@
         <option value="$PROJECT_DIR$/pages/monitor-appinfo/monitor-appinfo.scss" />
         <option value="$PROJECT_DIR$/service/service.js" />
         <option value="$PROJECT_DIR$/pages/analysis/analysis.js" />
-        <option value="$PROJECT_DIR$/pages/monitor-appinfo/monitor-appinfo.wxml" />
         <option value="$PROJECT_DIR$/pages/monitor-appinfo/monitor-appinfo.js" />
+        <option value="$PROJECT_DIR$/pages/analysis/analysis.wxml" />
+        <option value="$PROJECT_DIR$/pages/monitor-appinfo/monitor-appinfo.wxml" />
       </list>
     </option>
   </component>
@@ -351,12 +347,12 @@
       <workItem from="1532045907553" duration="26342000" />
       <workItem from="1532094135115" duration="22437000" />
       <workItem from="1532249494606" duration="8000" />
-      <workItem from="1532307615649" duration="7056000" />
+      <workItem from="1532307615649" duration="8095000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="110401000" />
+    <option name="totallyTimeSpent" value="111440000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="-7" width="1486" height="878" extended-state="6" />
@@ -609,10 +605,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pages/monitor-appinfo/monitor-appinfo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="53" column="10" lean-forward="true" selection-start-line="53" selection-start-column="10" selection-end-line="53" selection-end-column="10" />
+          <folding>
+            <element signature="e#268#415#0" />
+            <element signature="e#456#901#0" />
+            <element signature="e#1016#2310#0" />
+            <element signature="e#2328#5448#0" />
+            <element signature="e#5467#7008#0" />
+            <element signature="e#7031#8941#0" />
+            <element signature="e#8961#12083#0" />
+            <element signature="e#12431#12638#0" />
+            <element signature="e#12829#14045#0" />
+            <element signature="e#11406#14447#0" />
+            <element signature="e#13865#15325#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pages/analysis/analysis.wxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="29" lean-forward="true" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
+        <state relative-caret-position="114">
+          <caret line="6" column="28" lean-forward="true" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -628,31 +644,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/monitor-appinfo/monitor-appinfo.wxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-17">
-          <caret line="33" column="22" lean-forward="true" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
-          <folding>
-            <element signature="n#style#0;n#view#1;n#view#0;n#scroll-view#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#radio#0;n#label#0;n#radio-group#0;n#scroll-view#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/monitor-appinfo/monitor-appinfo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="40" column="10" lean-forward="true" selection-start-line="40" selection-start-column="10" selection-end-line="40" selection-end-column="10" />
-          <folding>
-            <element signature="e#268#415#0" />
-            <element signature="e#456#901#0" />
-            <element signature="e#1016#2310#0" />
-            <element signature="e#2328#5448#0" />
-            <element signature="e#5467#7008#0" />
-            <element signature="e#7031#8941#0" />
-            <element signature="e#12431#12638#0" />
-            <element signature="e#12829#14045#0" />
-            <element signature="e#11406#14447#0" />
-            <element signature="e#13865#15325#0" />
-          </folding>
+        <state relative-caret-position="430">
+          <caret line="94" column="89" selection-start-line="94" selection-start-column="89" selection-end-line="94" selection-end-column="89" />
         </state>
       </provider>
     </entry>
