@@ -1,15 +1,13 @@
 // pages/monitor-appinfo/monitor-appinfo.js
-var watch = require('../../utils/vuelike.js').watch;
-var service = require('../../service/test');
+const computed = require('../../utils/vuelike.js').computed;
+const service = require('../../service/test');
 
 Page({
-
     /**
      * 页面的初始数据
      */
     data: {
         ifTypeSelectedShow: false, // 是否显示固定类型选择栏
-        checkedKey: 'batch',
         typeItems: {
             batch: '批量',
             online: '联机',
@@ -17,408 +15,82 @@ Page({
             performance: '性能',
             property: '资源'
         },
+        swiperIndex: 0,
+        types: [
+            {
+                name: '批量',
+                value: 'batch',
+                checked: true
+            }, {
+                name: '联机',
+                value: 'online'
+            }, {
+                name: '业务',
+                value: 'service'
+            }, {
+                name: '性能',
+                value: 'performance'
+            }, {
+                name: '资源',
+                value: 'property'
+            }
+        ],
         appOutline: {
-            title: null,
-            bio: null
+            title: '',
+            bio: ''
         },
-        list: {
-            batch: [
-                {
-                    name: 'CPU性能指标',
-                    ifCollapsed: false,
-                    items: [
-                        {
-                            name: '应用服务器CPU使用率',
-                            ifCollected: true
-                        }, {
-                            name: '数据库服务器CPU使用率',
-                            ifCollected: false
-                        }, {
-                            name: '应用服务器CPU功耗',
-                            ifCollected: false
-                        }
-                    ]
-                }, {
-                    name: '语句解析性能',
-                    ifCollapsed: true,
-                    items: [
-                        {
-                            name: '单次耗时过长语句',
-                            ifCollected: false
-                        }, {
-                            name: '数据库硬解析次数',
-                            ifCollected: true
-                        }
-                    ]
-                }, {
-                    name: '语句解析性能',
-                    ifCollapsed: true,
-                    items: [
-                        {
-                            name: '单次耗时过长语句',
-                            ifCollected: false
-                        }, {
-                            name: '数据库硬解析次数',
-                            ifCollected: true
-                        }
-                    ]
-                }, {
-                    name: '语句解析性能',
-                    ifCollapsed: true,
-                    items: [
-                        {
-                            name: '单次耗时过长语句',
-                            ifCollected: false
-                        }, {
-                            name: '数据库硬解析次数',
-                            ifCollected: true
-                        }
-                    ]
-                }, {
-                    name: '语句解析性能',
-                    ifCollapsed: true,
-                    items: [
-                        {
-                            name: '单次耗时过长语句',
-                            ifCollected: false
-                        }, {
-                            name: '数据库硬解析次数',
-                            ifCollected: true
-                        }
-                    ]
-                }, {
-                    name: '语句解析性能',
-                    ifCollapsed: true,
-                    items: [
-                        {
-                            name: '单次耗时过长语句',
-                            ifCollected: false
-                        }, {
-                            name: '数据库硬解析次数',
-                            ifCollected: true
-                        }
-                    ]
-                }, {
-                    name: '语句解析性能',
-                    ifCollapsed: true,
-                    items: [
-                        {
-                            name: '单次耗时过长语句',
-                            ifCollected: false
-                        }, {
-                            name: '数据库硬解析次数',
-                            ifCollected: true
-                        }
-                    ]
-                }, {
-                    name: '语句解析性能',
-                    ifCollapsed: true,
-                    items: [
-                        {
-                            name: '单次耗时过长语句',
-                            ifCollected: false
-                        }, {
-                            name: '数据库硬解析次数',
-                            ifCollected: true
-                        }
-                    ]
-                }, {
-                    name: '语句解析性能',
-                    ifCollapsed: true,
-                    items: [
-                        {
-                            name: '单次耗时过长语句',
-                            ifCollected: false
-                        }, {
-                            name: '数据库硬解析次数',
-                            ifCollected: true
-                        }
-                    ]
-                }, {
-                    name: '语句解析性能',
-                    ifCollapsed: true,
-                    items: [
-                        {
-                            name: '单次耗时过长语句',
-                            ifCollected: false
-                        }, {
-                            name: '数据库硬解析次数',
-                            ifCollected: true
-                        }
-                    ]
-                }
-            ],
-            online: [
-                {
-                    name: 'CPU性能指标',
-                    ifCollapsed: false,
-                    items: [
-                        {
-                            name: '应用服务器CPU使用率',
-                            ifCollected: true
-                        }, {
-                            name: '数据库服务器CPU使用率',
-                            ifCollected: false
-                        }, {
-                            name: '应用服务器CPU功耗',
-                            ifCollected: false
-                        }
-                    ]
-                }, {
-                    name: '语句解析性能',
-                    ifCollapsed: true,
-                    items: [
-                        {
-                            name: '单次耗时过长语句',
-                            ifCollected: false
-                        }, {
-                            name: '数据库硬解析次数',
-                            ifCollected: true
-                        }
-                    ]
-                }, {
-                    name: '语句解析性能',
-                    ifCollapsed: true,
-                    items: [
-                        {
-                            name: '单次耗时过长语句',
-                            ifCollected: false
-                        }, {
-                            name: '数据库硬解析次数',
-                            ifCollected: true
-                        }
-                    ]
-                }, {
-                    name: '语句解析性能',
-                    ifCollapsed: true,
-                    items: [
-                        {
-                            name: '单次耗时过长语句',
-                            ifCollected: false
-                        }, {
-                            name: '数据库硬解析次数',
-                            ifCollected: true
-                        }
-                    ]
-                }, {
-                    name: '语句解析性能',
-                    ifCollapsed: true,
-                    items: [
-                        {
-                            name: '单次耗时过长语句',
-                            ifCollected: false
-                        }, {
-                            name: '数据库硬解析次数',
-                            ifCollected: true
-                        }
-                    ]
-                }, {
-                    name: '语句解析性能',
-                    ifCollapsed: true,
-                    items: [
-                        {
-                            name: '单次耗时过长语句',
-                            ifCollected: false
-                        }, {
-                            name: '数据库硬解析次数',
-                            ifCollected: true
-                        }
-                    ]
-                }, {
-                    name: '语句解析性能',
-                    ifCollapsed: true,
-                    items: [
-                        {
-                            name: '单次耗时过长语句',
-                            ifCollected: false
-                        }, {
-                            name: '数据库硬解析次数',
-                            ifCollected: true
-                        }
-                    ]
-                }, {
-                    name: '语句解析性能',
-                    ifCollapsed: true,
-                    items: [
-                        {
-                            name: '单次耗时过长语句',
-                            ifCollected: false
-                        }, {
-                            name: '数据库硬解析次数',
-                            ifCollected: true
-                        }
-                    ]
-                }, {
-                    name: '语句解析性能',
-                    ifCollapsed: true,
-                    items: [
-                        {
-                            name: '单次耗时过长语句',
-                            ifCollected: false
-                        }, {
-                            name: '数据库硬解析次数',
-                            ifCollected: true
-                        }
-                    ]
-                }, {
-                    name: '语句解析性能',
-                    ifCollapsed: true,
-                    items: [
-                        {
-                            name: '单次耗时过长语句',
-                            ifCollected: false
-                        }, {
-                            name: '数据库硬解析次数',
-                            ifCollected: true
-                        }
-                    ]
-                }
-            ],
-            service: [],
-            performance: [],
-            property: [
-                {
-                    name: 'CPU性能指标',
-                    ifCollapsed: false,
-                    items: [
-                        {
-                            name: '应用服务器CPU使用率',
-                            ifCollected: true
-                        }, {
-                            name: '数据库服务器CPU使用率',
-                            ifCollected: false
-                        }, {
-                            name: '应用服务器CPU功耗',
-                            ifCollected: false
-                        }
-                    ]
-                }, {
-                    name: '语句解析性能',
-                    ifCollapsed: true,
-                    items: [
-                        {
-                            name: '单次耗时过长语句',
-                            ifCollected: false
-                        }, {
-                            name: '数据库硬解析次数',
-                            ifCollected: true
-                        }
-                    ]
-                }, {
-                    name: '语句解析性能',
-                    ifCollapsed: true,
-                    items: [
-                        {
-                            name: '单次耗时过长语句',
-                            ifCollected: false
-                        }, {
-                            name: '数据库硬解析次数',
-                            ifCollected: true
-                        }
-                    ]
-                }, {
-                    name: '语句解析性能',
-                    ifCollapsed: true,
-                    items: [
-                        {
-                            name: '单次耗时过长语句',
-                            ifCollected: false
-                        }, {
-                            name: '数据库硬解析次数',
-                            ifCollected: true
-                        }
-                    ]
-                }, {
-                    name: '语句解析性能',
-                    ifCollapsed: true,
-                    items: [
-                        {
-                            name: '单次耗时过长语句',
-                            ifCollected: false
-                        }, {
-                            name: '数据库硬解析次数',
-                            ifCollected: true
-                        }
-                    ]
-                }, {
-                    name: '语句解析性能',
-                    ifCollapsed: true,
-                    items: [
-                        {
-                            name: '单次耗时过长语句',
-                            ifCollected: false
-                        }, {
-                            name: '数据库硬解析次数',
-                            ifCollected: true
-                        }
-                    ]
-                }, {
-                    name: '语句解析性能',
-                    ifCollapsed: true,
-                    items: [
-                        {
-                            name: '单次耗时过长语句',
-                            ifCollected: false
-                        }, {
-                            name: '数据库硬解析次数',
-                            ifCollected: true
-                        }
-                    ]
-                }, {
-                    name: '语句解析性能',
-                    ifCollapsed: true,
-                    items: [
-                        {
-                            name: '单次耗时过长语句',
-                            ifCollected: false
-                        }, {
-                            name: '数据库硬解析次数',
-                            ifCollected: true
-                        }
-                    ]
-                }, {
-                    name: '语句解析性能',
-                    ifCollapsed: true,
-                    items: [
-                        {
-                            name: '单次耗时过长语句',
-                            ifCollected: false
-                        }, {
-                            name: '数据库硬解析次数',
-                            ifCollected: true
-                        }
-                    ]
-                }, {
-                    name: '语句解析性能',
-                    ifCollapsed: true,
-                    items: [
-                        {
-                            name: '单次耗时过长语句',
-                            ifCollected: false
-                        }, {
-                            name: '数据库硬解析次数',
-                            ifCollected: true
-                        }
-                    ]
-                }
-            ]
-        }
+        size: 10,
+        batch: {
+            name: 'batch',
+            data: []
+        },
+        online: {
+            name: 'online',
+            data: []
+        },
+        service: {
+            name: 'service',
+            data: []
+        },
+        performance: {
+            name: 'performance',
+            data: []
+        },
+        property: {
+            name: 'property',
+            data: []
+        },
     },
-    onTapGroup: function (e) {
-        var list = this.data.list;
-        var row = list[this.data.checkedKey][e.currentTarget.dataset.index];
+    collapse: function (e) {
+        var type = this.data.types[this.data.swiperIndex].value;
+        var list = this.data[type];
+        var row = list.data[e.currentTarget.dataset.index];
         row.ifCollapsed = !row.ifCollapsed;
         this.setData({
-            list: list
+            [type]: list
         })
     },
+
+    onFormSubmit: function (e) {
+        service.sendFormId(
+            (res) => {
+                console.log('FormId:' + e.detail.formId + ', 发送成功。');
+            },
+            (res) => {
+            },
+            e.detail.formId
+        );
+    },
     collect: function (e) {
-        this.data.diagramListData[this.data.checkedKey][e.currentTarget.dataset.index].ifCollected = !this.data.diagramListData[this.data.checkedKey][e.currentTarget.dataset.index].ifCollected;
+        var outerIndex = e.currentTarget.dataset.outer;
+        var innnerIndex = e.currentTarget.dataset.index;
+        var type = this.data.types[this.data.swiperIndex].value;
+        var list = this.data[type];
+        list.data[outerIndex].items[innnerIndex].ifCollected = !list.data[outerIndex].items[innnerIndex].ifCollected;
         this.setData({
-            diagramListData: this.data.diagramListData
+            [type]: list
         });
     },
-
     outerscroll: function (e) {
         if (this.data.ifTypeSelectedShow === (e.detail.scrollTop > 400)) return;
         this.setData({
@@ -426,11 +98,14 @@ Page({
         });
     },
     radioChange: function (e) {
+        let types = this.data.types;
+        types[this.data.swiperIndex].checked = false;
+        types[e.detail.value].checked = true;
         this.setData({
-            checkedKey: e.detail.value
+            types,
+            swiperIndex: parseInt(e.detail.value)
         });
     },
-
     /**
      * 生命周期函数--监听页面加载
      */
@@ -445,66 +120,226 @@ Page({
                 });
             },
             (res) => {
-
             }
         );
-        // service.getAppQuotaList(
-        //     (res) => {
-        //         this.setData({
-        //         });
-        //     },
-        //     (res) => {
-        //
-        //     }
-        // );
+        service.getAppQuotaList(
+            (res) => {
+                let batch = this.data.batch;
+                let online = this.data.online;
+                let service = this.data.service;
+                let performance = this.data.performance;
+                let property = this.data.property;
+                batch.data = [
+                    {
+                        name: 'CPU性能指标',
+                        ifCollapsed: false,
+                        items: [
+                            {
+                                name: '应用服务器CPU使用率',
+                                ifCollected: true
+                            }, {
+                                name: '数据库服务器CPU使用率',
+                                ifCollected: false
+                            }, {
+                                name: '应用服务器CPU功耗',
+                                ifCollected: false
+                            }
+                        ]
+                    }, {
+                        name: '语句解析性能',
+                        ifCollapsed: true,
+                        items: [
+                            {
+                                name: '单次耗时过长语句',
+                                ifCollected: false
+                            }, {
+                                name: '数据库硬解析次数',
+                                ifCollected: true
+                            }
+                        ]
+                    }, {
+                        name: '语句解析性能',
+                        ifCollapsed: true,
+                        items: [
+                            {
+                                name: '单次耗时过长语句',
+                                ifCollected: false
+                            }, {
+                                name: '数据库硬解析次数',
+                                ifCollected: true
+                            }
+                        ]
+                    }];
+                online.data = [
+                    {
+                        name: 'CPU性能指标',
+                        ifCollapsed: false,
+                        items: [
+                            {
+                                name: '应用服务器CPU使用率',
+                                ifCollected: true
+                            }, {
+                                name: '数据库服务器CPU使用率',
+                                ifCollected: false
+                            }, {
+                                name: '应用服务器CPU功耗',
+                                ifCollected: false
+                            }
+                        ]
+                    }, {
+                        name: '语句解析性能',
+                        ifCollapsed: true,
+                        items: [
+                            {
+                                name: '单次耗时过长语句',
+                                ifCollected: false
+                            }, {
+                                name: '数据库硬解析次数',
+                                ifCollected: true
+                            }
+                        ]
+                    }, {
+                        name: '语句解析性能',
+                        ifCollapsed: true,
+                        items: [
+                            {
+                                name: '单次耗时过长语句',
+                                ifCollected: false
+                            }, {
+                                name: '数据库硬解析次数',
+                                ifCollected: true
+                            }
+                        ]
+                    }, {
+                        name: '语句解析性能',
+                        ifCollapsed: true,
+                        items: [
+                            {
+                                name: '单次耗时过长语句',
+                                ifCollected: false
+                            }, {
+                                name: '数据库硬解析次数',
+                                ifCollected: true
+                            }
+                        ]
+                    }, {
+                        name: '语句解析性能',
+                        ifCollapsed: true,
+                        items: [
+                            {
+                                name: '单次耗时过长语句',
+                                ifCollected: false
+                            }, {
+                                name: '数据库硬解析次数',
+                                ifCollected: true
+                            }
+                        ]
+                    }, {
+                        name: '语句解析性能',
+                        ifCollapsed: true,
+                        items: [
+                            {
+                                name: '单次耗时过长语句',
+                                ifCollected: false
+                            }, {
+                                name: '数据库硬解析次数',
+                                ifCollected: true
+                            }
+                        ]
+                    }, {
+                        name: '语句解析性能',
+                        ifCollapsed: true,
+                        items: [
+                            {
+                                name: '单次耗时过长语句',
+                                ifCollected: false
+                            }, {
+                                name: '数据库硬解析次数',
+                                ifCollected: true
+                            }
+                        ]
+                    }, {
+                        name: '语句解析性能',
+                        ifCollapsed: true,
+                        items: [
+                            {
+                                name: '单次耗时过长语句',
+                                ifCollected: false
+                            }, {
+                                name: '数据库硬解析次数',
+                                ifCollected: true
+                            }
+                        ]
+                    }];
+                service.data = [
+                    {
+                        name: '语句解析性能',
+                        ifCollapsed: true,
+                        items: [
+                            {
+                                name: '单次耗时过长语句',
+                                ifCollected: false
+                            }, {
+                                name: '数据库硬解析次数',
+                                ifCollected: true
+                            }
+                        ]
+                    }, {
+                        name: '语句解析性能',
+                        ifCollapsed: true,
+                        items: [
+                            {
+                                name: '单次耗时过长语句',
+                                ifCollected: false
+                            }, {
+                                name: '数据库硬解析次数',
+                                ifCollected: true
+                            }
+                        ]
+                    }, {
+                        name: '语句解析性能',
+                        ifCollapsed: true,
+                        items: [
+                            {
+                                name: '单次耗时过长语句',
+                                ifCollected: false
+                            }, {
+                                name: '数据库硬解析次数',
+                                ifCollected: true
+                            }
+                        ]
+                    }, {
+                        name: '语句解析性能',
+                        ifCollapsed: true,
+                        items: [
+                            {
+                                name: '单次耗时过长语句',
+                                ifCollected: false
+                            }, {
+                                name: '数据库硬解析次数',
+                                ifCollected: true
+                            }
+                        ]
+                    }];
+                performance.data = [];
+                property.data = [];
+                this.setData({
+                    batch,
+                    online,
+                    service,
+                    performance,
+                    property
+                });
+                wx.stopPullDownRefresh();
+            },
+            (res) => {
+                wx.stopPullDownRefresh();
+            }
+        )
     },
 
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
     onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
+        wx.startPullDownRefresh();
+        this.onLoad();
     }
-})
+});

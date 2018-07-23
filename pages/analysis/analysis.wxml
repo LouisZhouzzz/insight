@@ -1,58 +1,77 @@
-<view class="page-content">
-    <!--头部概览模块 start-->
-    <view class='header'>
-        <!--分数圆形画布 以及 上面的分数 start-->
-        <canvas class="cir outline-item" canvas-id="canvasArc">
-            <cover-view>
-                {{outline.point}}
-            </cover-view>
-        </canvas>
-        <!--分数圆形画布 以及 上面的分数 end-->
-         <!--应用 start-->
-        <view class='outline-item'>
-            <text>应用</text>
-            <text>{{outline.appNum}}</text>
-        </view>
-         <!--应用 end-->
-         <!--异常 start-->
-        <view class='outline-item'>
-            <text>异常</text>
-            <text>{{outline.exceptionNum}}</text>
-        </view>
-        <!--异常 end-->
-         <!--历史异常导航 start-->
-        <navigator class='view-history' url="../analysis-history/analysis-history" hover-class="navigator-hover">
-            查看历史异常>>
-        </navigator>
-         <!--历史异常导航 end-->
-    </view>
-    <!--头部概览模块 end-->
-    <view class="collect-list">
-        <view class="title">收藏</view>
-        <scroll-view scroll-x>
-            <view class="card" wx:for="{{collectList}}" wx:key="collect-{{index}}">{{item.name}}</view>
-        </scroll-view>
-    </view>
-
-    <!--异常信息模块 start-->
-    <navigator id="body"
-               wx:for="{{exceptionList}}"
-               wx:key='app-{{index}}'
-               class="app-item-container"
-               hover-class="app-item-hover"
-               url="../monitor-appinfo-diagram/monitor-appinfo-diagram"
-               data-index="{{index}}">
-          
-        <view class='app-item'>
-            <text class='title'>{{item.name}}</text>
-            <image  class='enter' src='../../img/svgs/arrow_right.svg'></image>
-
-            <view class='tag'>
-                <text>{{item.source}}</text>
+<view class="container" xmlns:wx="http://java.sun.com/JSP/Page">
+    <form report-submit="true" bindsubmit="onFormSubmit">
+        <!--头部概览模块 start-->
+        <view class='header'>
+            <!--分数圆形画布 以及 上面的分数 start-->
+            <canvas class="cir outline-item" canvas-id="canvasArc">
+                <cover-view>
+                    {{outline.point}}
+                </cover-view>
+            </canvas>
+            <!--分数圆形画布 以及 上面的分数 end-->
+            <!--应用 start-->
+            <view class='outline-item'>
+                <text>应用</text>
+                <text>{{outline.appNum}}</text>
             </view>
-        </view>
-    </navigator>
-    <!--异常信息模块 end-->
+            <!--应用 end-->
+            <!--异常 start-->
+            <view class='outline-item'>
+                <text>异常</text>
+                <text>{{outline.exceptionNum}}</text>
+            </view>
+            <!--异常 end-->
+            <!--历史异常导航 start-->
+            <navigator class='view-history' url="../analysis-history/analysis-history" hover-class="navigator-hover">
+                <label>
+                    查看历史异常>>
+                    <button formType="submit"></button>
+                </label>
+            </navigator>
 
-    <view class="loading-hinder {{ifLoading ? '' : 'hidden'}}" >Loading...</view>
+            <!--历史异常导航 end-->
+        </view>
+        <!--头部概览模块 end-->
+        <view class="collect-list">
+            <view class="title">收藏</view>
+            <scroll-view scroll-x>
+                <navigator class="card"
+                           wx:for="{{collectList}}"
+                           wx:key="collect-{{index}}"
+                           hover-class="card-hover"
+                           url="../monitor-appinfo-diagram/monitor-appinfo-diagram">
+                    <label>
+                        {{item.name}}
+                        <button formType="submit"></button>
+                    </label>
+                </navigator>
+            </scroll-view>
+        </view>
+
+        <!--异常信息模块 start-->
+        <navigator id="body"
+                   wx:for="{{exceptionList}}"
+                   wx:key='app-{{index}}'
+                   class="app-item-container"
+                   hover-class="app-item-hover"
+                   url="../monitor-appinfo-diagram/monitor-appinfo-diagram"
+                   data-index="{{index}}">
+            <label>
+                <view class='app-item'>
+                    <text class='title'>{{item.name}}</text>
+                    <image class='enter' src='../../img/svgs/arrow_right.svg'></image>
+                    <view class='tag'>
+                        <text>{{item.source}}</text>
+                    </view>
+                </view>
+                <button formType="submit"></button>
+            </label>
+        </navigator>
+        <!--异常信息模块 end-->
+
+        <view class="loading-hinder">
+            <text wx:if="{{ifLoading}}">Loading...</text>
+            <text wx:else class="{{ifMore ? 'hidden' : ''}}">No more items.</text>
+        </view>
+    </form>
 </view>

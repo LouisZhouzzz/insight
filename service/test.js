@@ -14,6 +14,10 @@ function test (success, fail) {
     } , 1000);
 }
 
-
+testModule.sendFormId = function test (success, fail) {
+    setTimeout(() => {
+        success();
+    } , 1000);
+};
 
 module.exports = testModule;

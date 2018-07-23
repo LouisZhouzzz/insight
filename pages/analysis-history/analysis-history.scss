@@ -1,0 +1,50 @@
+@import "../../app.scss";
+
+.background {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+.container {
+  justify-content: flex-start;
+  align-items: center;
+  color: $themeColor;
+  background-color: $themeBackgroundColor;
+}
+
+.tag {
+  //display: inline-block; //因为tag自动适应父元素的宽度
+  text-align: center;
+  border-radius: 20rpx;
+  background-color: darken($themeBackgroundColor, 10%);
+  padding: 0.5em;
+  margin: 1em 0 0.5em 0;
+}
+
+.modal {
+  background-color: lighten($themeBackgroundColor, 20%);
+  border-radius: 20rpx;
+  color: $lightenBlack;
+  padding: 1em;
+  width: 600rpx;
+  .item {
+    text {
+      display: inline-block;
+    }
+    text:nth-child(1) {
+      width:  4em;
+      text-indent: 1em;
+    }
+    text:nth-child(2) {
+    }
+  }
+}
+
+.loading-hinder {
+  margin: 2em 0;
+  text-align: center;
+  font-size: 14px;
+  color: darken($darkenWhite, 10%);
+}

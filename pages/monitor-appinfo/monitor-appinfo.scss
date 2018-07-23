@@ -117,8 +117,11 @@ $quotaItemHeight: 80rpx;
   }
 }
 
-
 /* 列表一级子项 */
+.quota-group {
+  display: unset;
+}
+
 .quota-list {
   background-color: $pageBackgroundColor;
 }
@@ -140,7 +143,7 @@ $quotaItemHeight: 80rpx;
   background-color: $darkenWhite;
   height: $quotaHeight;
   padding-left: 1em;
-  & > text {
+  text {
     height: $quotaHeight;
     line-height: $quotaHeight;
   }
@@ -183,16 +186,10 @@ $quotaItemHeight: 80rpx;
     height: $listIconSize;
     width: $listIconSize;
     padding: ($quotaItemHeight - $listIconSize) / 2 $listIconSize / 4;
-  }
-  .collect {
     float: right;
-    //margin-right: 1em;
   }
-  .enter {
-    float: right;
-    image {
-      height: $listIconSize;
-      width: $listIconSize;
-    }
-  }
+}
+
+.hidden {
+  display: none;
 }

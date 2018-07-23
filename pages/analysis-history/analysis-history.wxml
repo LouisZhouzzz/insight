@@ -1,44 +1,17 @@
-<!--pages/analysis-history/analysis-history.wxml-->
-
-<!-- 特定一天的历史异常模块 start-->
-<view>
-  <view class='datezhong'>
-  <!-- 日期 start-->
-  <text class='date'>{{date.day1}}</text>
-  <!-- 日期 end-->
-  </view>
-   <!-- 异常信息框 start-->
-    <view class='yuanjiao'>
-        <!-- 显示每条异常 start-->
-      <view class='exception-item' wx:for="{{items}}" wx:for-item="item" 
-          wx:key="history-{{index}}">
-         <text>{{index+1}}:  {{item.yc}}</text>
-      </view>
-        <!-- 显示每条异常 end-->
-    </view>
-    <!--异常信息框 end-->
-  <!-- 特定一天的历史异常模块 end-->
-  
-
-   <!-- 以下两天结构和上面一天完全一样-->
-    <view class='datezhong' >
-  <text class='date' >{{date.day2}}</text>
-  </view>
-    <view  class='yuanjiao'>
-    <view class='exception-item' wx:for="{{items2}}" wx:for-item="item" 
-          wx:key="history-{{index}}">
-      <text>{{index+1}}:  {{item.yc}}</text>
-    </view>
-    </view>
-
-    <view class='datezhong'>
-  <text class='date'>{{date.day3}}</text>
-  </view>
-    <view  class='yuanjiao'>
-    <view class='exception-item' wx:for="{{items3}}" wx:for-item="item" 
-          wx:key="history-{{index}}">
-      <text>{{index+1}}:  {{item.yc}}</text>
-    </view>
+<!--<view class="background"></view>-->
+<view class="container">
+    <block wx:for="{{records}}" wx:key="record-{{index}}">
+        <view class="tag">{{item.date}}</view>
+        <view class="modal">
+            <view class="item" wx:for="{{item.exceptions}}" wx:key="record-item-{{index}}">
+                <text>{{item.time}}</text>
+                <text>{{item.name}}</text>
+                <text>({{item.source}})</text>
+            </view>
+        </view>
+    </block>
+    <view class="loading-hinder">
+        <text wx:if="{{ifLoading}}" >Loading...</text>
+        <text wx:else class="{{ifMore ? 'hidden' : ''}}">No more items.</text>
     </view>
 </view>
-

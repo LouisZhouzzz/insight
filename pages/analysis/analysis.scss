@@ -7,9 +7,10 @@ $itemTagFontSize: 12px;
 $itemTabBackgroundColor: #75A3D6;
 $exceptionNumHinderRadius: 30rpx;
 
-.page-content {
+.container {
   overflow: hidden;
-  //background-color: $themeBackgroundColor;
+  background-color: $pageBackgroundColor;
+  align-items: stretch;
 }
 
 
@@ -111,7 +112,10 @@ $exceptionNumHinderRadius: 30rpx;
     padding: 10rpx;
     margin:  0 10rpx;
     font-size: 14px;
-
+  }
+  .card-hover {
+    color:  lighten($themeBackgroundColor, 10%);
+    background: $themeColor;
   }
 }
 
@@ -120,19 +124,6 @@ scroll-view.container {
   position: relative;
   color: $lightenBlack;
   z-index: 2;
-
-  .fixedBtn {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    color: $themeColor;
-    background-color: $themeBackgroundColor;
-    text-align: center;
-    padding: 2.5px 0;
-    &.hidden {
-      display: none;
-    }
-  }
   .body {
     width: 100%;
   }
@@ -205,8 +196,6 @@ scroll-view.container {
   text-align: center;
   height: $appItemHeight;
   line-height: $appItemHeight;
-  color: $lightenBlack;
-  &.hidden {
-    display: none;
-  }
+  font-size: 14px;
+  color: lighten($lightenBlack, 50%);
 }

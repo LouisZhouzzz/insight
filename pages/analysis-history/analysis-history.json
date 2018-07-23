@@ -1,5 +1,4 @@
 {
-  "navigationBarTitleText": "历史异常记录"
-
-  
+  "navigationBarTitleText": "历史异常记录",
+  "enablePullDownRefresh": true
 }

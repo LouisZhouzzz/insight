@@ -1,20 +1,24 @@
 var service = require('../../service/test');
+var computed = require('../../utils/vuelike').computed;
 
 Page({
     data: {
         outline: { //概览面板数据
-            appNum: 0, //异常应用数
-            exceptionNum: 0, //异常总数
-            point: 0 //系统总体评分
+            appNum: '', //异常应用数
+            exceptionNum: '', //异常总数
+            point: '' //系统总体评分
         },
         collectList: [], //收藏列表数据
-        exceptionList: [ //异常列表数据
-        ],
+        exceptionList: [], //异常列表数据
         ifLoading: true, //标识加载态，以防多次触发上拉加载事件
         page: 0, //异常列表页码
         size: 10 //异常列表单页项数
     },
+
     onLoad: function () {
+        this.setData({
+            ifLoading: true
+        });
         service.getOutline(
             (res) => {
                 this.setData({
@@ -83,43 +87,17 @@ Page({
                             id: 'fake id',
                             name: '路线导航异常',
                             source: '数字园区导航'
-                        }, {
-                            id: 'fake id',
-                            name: '权限异常',
-                            source: '数字园区导航'
-                        }, {
-                            id: 'fake id',
-                            name: '实时测距异常',
-                            source: '数字园区导航'
-                        }, {
-                            id: 'fake id',
-                            name: '性能异常',
-                            source: '数字园区导航'
-                        }, {
-                            id: 'fake id',
-                            name: 'GPS定位异常',
-                            source: '数字园区导航'
-                        }, {
-                            id: 'fake id',
-                            name: '数据处理异常',
-                            source: '考勤打卡'
-                        }, {
-                            id: 'fake id',
-                            name: '并发处理异常',
-                            source: '考勤打卡'
-                        }, {
-                            id: 'fake id',
-                            name: '流量统计异常',
-                            source: '考勤打卡'
                         }],
                     page: this.data.page + 1,
-                    loading: false
+                    ifLoading: false
                 });
+                wx.stopPullDownRefresh()
             },
             (res) => {
                 this.setData({
-                    loading: false
+                    ifLoading: false
                 });
+                wx.stopPullDownRefresh()
             },
             this.data.page,
             this.data.size
@@ -127,10 +105,28 @@ Page({
 
     },
 
+    onReady: function () { // 监听页面初次渲染完成
+        computed(this, {
+            ifMore: function () {
+                return this.data.page * this.data.size === this.data.exceptionList.length
+            }
+        })
+    },
+
+    onFormSubmit: function (e) {
+        service.sendFormId(
+            (res) => {
+                console.log('FormId:' + e.detail.formId + ', 发送成功。');
+            },
+            (res) => {},
+            e.detail.formId
+        );
+    },
+
     loadExceptionList: function () {
-        if (this.data.loading) return;
+        if (this.data.ifLoading) return;
         this.setData({
-            loading: true
+            ifLoading: true
         });
         service.getExceptionList(
             (res) => {
@@ -154,12 +150,12 @@ Page({
                 this.setData({
                     exceptionList: this.data.exceptionList,
                     page: this.data.page + 1,
-                    loading: false
+                    ifLoading: false
                 });
             },
             (res) => {
                 this.setData({
-                    loading: false
+                    ifLoading: false
                 });
             },
             this.data.page,
@@ -167,12 +163,14 @@ Page({
         );
     },
 
+    onPullDownRefresh: function () {
+        wx.startPullDownRefresh();
+        this.onLoad();
+    },
+
     onReachBottom: function() {
         // Do something when page reach bottom.
         this.loadExceptionList();
-    },
-
-    onReady: function () { // 监听页面初次渲染完成
     },
 
     drawCircleProcess: function () { // 绘制分析界面的概览圆

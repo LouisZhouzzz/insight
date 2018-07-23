@@ -5,13 +5,13 @@ const domain = 'https://insight.service.com/';
  * @param success
  * @param fail
  */
-var getOutline = (success, fail) => fetch('analysis', {}, success, fail);
+const getOutline = (success, fail) => fetch('analysis', {}, success, fail);
 /**
  * 获取收藏列表
  * @param success
  * @param fail
  */
-var getCollectionList = (success, fail) => fetch('collect', {}, success, fail);
+const getCollectionList = (success, fail) => fetch('collect', {}, success, fail);
 /**
  * 获取异常信息列表
  * @param success
@@ -19,7 +19,7 @@ var getCollectionList = (success, fail) => fetch('collect', {}, success, fail);
  * @param page 指定页码
  * @param size 指定单页信息项数
  */
-var getExceptionList = (success, fail, page, size) => fetch('exception?page=' + page + '&size=' + size, {}, success, fail, 'GET', 'loading...');
+const getExceptionList = (success, fail, page, size) => fetch('exception?page=' + page + '&size=' + size, {}, success, fail, 'GET', 'loading...');
 
 /**
  * 获取历史异常信息
@@ -28,14 +28,14 @@ var getExceptionList = (success, fail, page, size) => fetch('exception?page=' + 
  * @param page
  * @param size
  */
-var getExceptionHistory = (success, fail, page, size) => fetch('exception/history?page=' + page + '&size=' + size, {}, success, fail, 'GET', 'loading...');
+const getExceptionHistory = (success, fail, page, size) => fetch('exception/history?page=' + page + '&size=' + size, {}, success, fail, 'GET', 'loading...');
 
 /**
  * 获取应用列表
  * @param success
  * @param fail
  */
-var getAppList = (success, fail) => fetch('app', {}, success, fail, 'GET', 'loading...');
+const getAppList = (success, fail) => fetch('app', {}, success, fail, 'GET', 'loading...');
 
 /**
  * 获取应用概览信息
@@ -43,17 +43,15 @@ var getAppList = (success, fail) => fetch('app', {}, success, fail, 'GET', 'load
  * @param fail
  * @param id 应用id
  */
-var getAppInfo = (success, fail, id) => fetch('app/info?id=' + id, {}, success, fail, 'GET', 'loading...');
+const getAppInfo = (success, fail, id) => fetch('app/info?id=' + id, {}, success, fail, 'GET', 'loading...');
 
 /**
- * 获取应用指标
+ * 获取应用全部指标
  * @param success
  * @param fail
  * @param id 应用id
- * @param page
- * @param size
  */
-var getAppQuotaList = (success, fail, id, page, size) => fetch('app/quota?id=' + id + '&page=' + page + '&size=' + size, {}, success, fail, 'GET', 'loading...');
+const getAppQuotaList = (success, fail, id) => fetch('app/quota?id=' + id, {}, success, fail, 'GET', 'loading...');
 
 /**
  * 变更图表的收藏状态
@@ -61,7 +59,15 @@ var getAppQuotaList = (success, fail, id, page, size) => fetch('app/quota?id=' +
  * @param fail
  * @param id 图表id
  */
-var collectItem = (success, fail, id) => fetch('app/diagram?id=' + id, {}, success, fail, 'GET', 'loading...');
+const collectItem = (success, fail, id) => fetch('app/diagram?id=' + id, {}, success, fail, 'GET', 'loading...');
+
+/**
+ * 向后端发送formid
+ * @param formid
+ * @param success
+ * @param fail
+ */
+const sendFormId = (success, fail, formid) => fetch('formid', {formid}, success, fail, 'POST');
 
 /**
  * 网络请求封装
@@ -106,5 +112,6 @@ module.exports = {
     getAppList,
     getAppInfo,
     collectItem,
-    getAppQuotaList
+    getAppQuotaList,
+    sendFormId
 };

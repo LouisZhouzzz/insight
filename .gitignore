@@ -3,3 +3,4 @@
 *.imi
 .idea
 /.idea/workspace.xml
+.sass-cache

@@ -30,3 +30,7 @@ page {
   justify-content: flex-start;
   box-sizing: border-box;
 }
+
+.hidden { //小程序里没有wx;show这样的控制指令，自己写个hidden代替
+  display: none;
+}

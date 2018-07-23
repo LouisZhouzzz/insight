@@ -1,4 +1,3 @@
-/* pages/monitor/monitor.scss */
 @import "../../app.scss";
 
 $appCardWidth: 375rpx;
@@ -18,15 +17,16 @@ $appCardHeight: 375rpx;
   display: inline-block;
   width: $appCardWidth;
   height: $appCardHeight;
+  line-height: $appCardHeight - 16rpx;
   color: $darkenWhite;
-  box-sizing: border-box;
+  //box-sizing: border-box;
   background-color: $themeBackgroundColor;
   text-align: center;
-  border: 1px solid $themeColor;
   transition-duration: 150ms;
-  text {
-    line-height: $appCardHeight;
-    height: $appCardHeight;
+  label {
+    height: 100%;
+    width: 100%;
+    display: block;
   }
 }
 
