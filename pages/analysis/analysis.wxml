@@ -32,8 +32,10 @@
             <!--历史异常导航 end-->
         </view>
         <!--头部概览模块 end-->
+     <!--首页收藏部分 start-->
         <view class="collect-list">
             <view class="title">收藏</view>
+         <!--收藏图表 start-->
             <scroll-view scroll-x>
                 <navigator class="card"
                            wx:for="{{collectList}}"
@@ -46,7 +48,9 @@
                     </label>
                 </navigator>
             </scroll-view>
+         <!--收藏图表 end-->
         </view>
+     <!--首页收藏部分 end-->
 
         <!--异常信息模块 start-->
         <navigator id="body"

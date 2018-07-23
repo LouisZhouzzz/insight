@@ -85,6 +85,7 @@
         <view class="quota-items">
             <label>
                 <navigator catchtap="" class='quota-item' wx:for="{{item.items}}" wx:key='quota-item-{{index}}'
+                 <!--二级子项导航 start-->
                            url="../monitor-appinfo-diagram/monitor-appinfo-diagram">
                     <text>- {{item.name}}</text>
                     <image class='enter' src='../../img/svgs/arrow_right.svg'></image>

@@ -22,14 +22,14 @@
     "borderStyle": "white",
     "list": [
       {
-        "selectedIconPath": "img/nav_analysis_selected.png",
-        "iconPath": "img/nav_analysis.png",
+        "selectedIconPath": "img/tabBar/nav_analysis_selected.png",
+        "iconPath": "img/tabBar/nav_analysis.png",
         "pagePath": "pages/analysis/analysis",
         "text": "分析"
       },
       {
-        "selectedIconPath": "img/nav_monitor_selected.png",
-        "iconPath": "img/nav_monitor.png",
+        "selectedIconPath": "img/tabBar/nav_monitor_selected.png",
+        "iconPath": "img/tabBar/nav_monitor.png",
         "pagePath": "pages/monitor/monitor",
         "text": "监控"
       }
