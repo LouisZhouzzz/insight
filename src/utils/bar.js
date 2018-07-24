@@ -1,166 +1,244 @@
-import * as echarts from '../ec-canvas/echarts.js';
-
-let chart = null;
-
-function initChart(canvas, width, height) {
-  chart = echarts.init(canvas, null, {
-    width: width,
-    height: height
-  });
-  canvas.setChart(chart);
-
-  //var Dem = ['product', '2012', '2013', '2014', '2015'];
-  var localData = [
-    ['product', '2012', '2013', '2014', '2015'],
-    ['Matcha Latte', 41.1, 30.4, 65.1, 53.3],
-    ['Milk Tea', 86.5, 92.1, 85.7, 83.1],
-    ['Cheese Cocoa', 24.1, 67.2, 79.5, 86.4]
-  ];
-
-  //标题
-  var title = {
-    show: true,                    //显示开关
-    left: 'left',
-    top: 0,                        //位置
-    text: '这是用来调试的图表',      //标题名
-    subtext: '数据来源：ICBCSDC',   //副标题名
-  };
-
+function getOption(localData, para, TL){
   var option = {
-    color: [],
-    title: {},
-    legend: {},
-    grid: {},
-    xAxis: {},
-    yAxis: {},
-    //dataZoom: [],
-    //visualMap: [],
-    tooltip: {},
-    //axisPointer: {},
-    toolbox: {},
-    //brush: {},
-    //timeline: {},
-    //graphic: {},
-    //aria: {},
-    dataset: {},
-    series: {}
-  };
 
-  chart.setOption({
-    //color: ['#37a2da', '#32c5e9', '#67e0e3'],
+    //color: TL.color,
 
-    //标题
     title: {
-      //id: '填写id',
-      show: title.show,
-      left: title.left,
-      top: title.top,
-      text: title.text,
-      testStyle: {
+      show: true, //默认true
+      text: para.titleText,
+      //link:[],                                //超链接
+      subtext: para.titleSubText,
+      //sublnk:[],                              //超链接
+      textStyle: {
+        //color: TL.textColor, //颜色
+        fontSize: 30, //字体大小
+        fontWeight: 'bold', //加粗
+        //align:'right',                        //文字水平对齐方式
+        //verticalAlign: 'top',                 //文字垂直对齐方式
+        //fontFamily:'sans-serif',              //文字字体系列
+        //lineHeight:number,                    //行高
+        //textBorderColor:'transparent',        //文字描边颜色
+        //textShadowColor:'color',              //阴影颜色
+        //textShadowBlur:number,                //阴影长度
+      },
+      subtextStyle: {
+        //color: TL.textColor,
         fontSize: 16,
+        //fontWeight: 'bold',                   //加粗
+        //align:'right',                        //文字水平对齐方式
+        //verticalAlign: 'top',                 //文字垂直对齐方式
+        //fontFamily:'sans-serif',              //文字字体系列
+        //lineHeight:number,                    //行高
+        //textBorderColor:'transparent',        //文字描边颜色
+        //textShadowColor:'color',              //阴影颜色
+        //textShadowBlur:number,                //阴影长度
       },
-      subtext: title.subtext,
-      subtextStyle: {},
-      //主副标题间距
-      itemGap: 10,
+      //padding:[number]                          //标题内边距
+      itemGap: 10, //主副标题间距，默认10
+      left: TL.titleLeft,
+      top: TL.titleTop,
+      //backgroundColor: 'transparent',
+      //borderColor: 'transparent',
+
     },
 
-    //图例
+    graphic: {
+      elements: [{
+        type: 'text',
+        left: TL.graExpLeft,
+        top: TL.graExpTop,
+        invisible: false,
+        draggable: false,
+        style: {
+          text: para.graExpText,
+          font: 'italic bolder 16px cursive',
+          textAlign: 'center',
+          fill: TL.textColor,
+        }
+      },
+      {
+        type: 'text',
+        left: TL.graStaLeft,
+        top: TL.graStaTop,
+        invisible: false,
+        draggable: false,
+        style: {
+          text: para.graStaText,
+          font: 'italic bolder 16px cursive',
+          textAlign: 'center',
+          fill: TL.textColor,
+        }
+      }
+      ]
+    },
+
+
     legend: {
-      //id: '填写id',
+      //type:'scroll',                    //可滚动翻页的图例，较多时使用，缺省为普通图例
       show: true,
-      right: 'right',
-      top: '0%',
-      orient: 'vertical',
-      //data: [],
+      left: TL.legLeft,
+      top: TL.legTop,
+      width: 'auto',                      //图例组件的宽度和高度
+      height: 'auto',
+      orient: TL.legorient,               //默认为'horizontal'
+      align: 'auto',                      //图例标记和文本对齐
+      padding: 5,                         //图例内边距，默认5
+      itemGap: 10,                        //图例间隔
+      itemWidth: 25,                      //图例宽，默认25
+      itemHeight: 14,                     //图例高，默认14
+      formatter: '{name}',                //图例文本格式 
+      //selectedMode:false,
+      //inactiveColor: '#ccc',
+      //selected:{} ,                     //图例选中状态表
+
+      //text: para.legText,
+      textStyle: {
+        //color: TL.textColor,
+        //fontStyle:'italic',             //字体风格，默认normal
+        fontWeight: 'lighter',            //字体粗细
+        fontFamily: 'sans-serif',
+        fontSize: '12',
+        //lineHeight:number,                //行高
+        //background: 'transparent',
+        //border: 'transparent',
+        padding: 0,
+      },
+      //backgroundColor: 'transparent',
     },
 
-    grid: [
-      {
-        show: false,
-        bottom: '10%',
+    grid: {
+      show: false,
+      containLabel: true,
+      left: TL.gridLeft,
+      right: TL.gridRight,
+      top: TL.gridTop,
+      bottom: TL.gridBottom,
+      //width:'auto',
+      //height:'auto',
+      //containLabel:true,
+      //backgroundColor: 'transparent',
+      //borderColor: '#ccc',
+      borderWidth: 1,
+    },
+
+    tooltip: {
+      axisPointer: {
+        type: 'cross',
+        label: {
+          show: true,
+          //color: '#000',
+          //backgroundcolor: '#fff',
+        }
+      }
+    },
+
+    xAxis: {
+      show: true,
+      position: 'bottom',
+      type: 'category',
+      name: para.xname,
+      nameLocation: 'end',
+      nameTextStyle: {
+        //color: 'white',
+        fontStyle: 'normal',
+        fontWeight: 'normal',
+        fontFamily: 'sans-serif',
+        fontSize: 12,
+        align: 'auto',
+        verticalAlign: 'auto',
       },
-      //{ top: '55%' }
-    ],
-    xAxis: [
-      {
-        gridIndex: 0,
-        name: '年份',
-        nameLocation: 'center',
-        type: 'category',
-        position: 'bottom',
-        inverse: false,
-        min: 'datamin',
-        max: 'datamax',
-        axisLine: {},
-        axisTick: {},
-        axisLabel: {},
-        axisPointer: {},
+      nameGap: 5, //坐标轴名称与轴线之间的距离,取默认
+      nameRotate: null,
+      //boundaryGap:['20%','20%'],
+      boundaryGap: true,
+      //xmin:
+      //xmax:
+      //triggerEvent:true,
+      axisLine: {
+        show: true,
+        onZero: true,
+
+        lineStyle: {
+          //color: '#ccc',
+          width: 1,
+          type: 'solid',
+        },
       },
-      //{ type: 'category', gridIndex: 1 }
-    ],
-    yAxis: [
-      {
-        gridIndex: 0,
-        name: '销量',
-        nameLocation: '40%',
-        nameTextStyle: {},
-        boundaryGap: true,
+      axisTick: { //刻度线
+        show: true,
+        alignWithLabel: true,
       },
-      //{ gridIndex: 1 }
-    ],
+      axisLabel: {
+        show: true,
+        //fontSize,fontWeight,align，backgroundColor等等也可以在这里面设置
+      },
+      //splitLine:{},             //设置分隔线
+      //data: xdata,
+    },
+
+    yAxis: {
+      show: true,
+      position: 'left',
+      type: 'value',
+      name: para.yname,
+      nameLocation: 'end',
+      nameTextStyle: {
+        //color: '#ccc',
+        fontStyle: 'normal',
+        fontWeight: 'normal',
+        fontFamily: 'sans-serif',
+        fontSize: 12,
+        align: 'auto',
+        verticalAlign: 'auto',
+      },
+      nameGap: 5,
+      boundaryGap: ['0%', '2%'],
+      //min:
+      //max:
+
+      splitLine: {
+        lineStyle: {
+          type: 'dotted',
+          //color: '#ccc'
+        }
+      },
+      axisLine: {
+        show: true,
+        onZero: true,
+        lineStyle: {
+          //color: 'white'
+        }
+      },
+    },
 
     dataset: {
       //dimensions: Dem,
       source: localData
     },
-    
-    series: [
-      // These series are in the first grid.
-      { type: 'bar', seriesLayoutBy: 'row' },
-      { type: 'bar', seriesLayoutBy: 'row' },
-      { type: 'bar', seriesLayoutBy: 'row' }
-      // These series are in the second grid.
-      /*{
-        type: 'bar',
-        encode: {
-          x: 0,
-          y: 1
-        },
-        xAxisIndex: 1,
-        yAxisIndex: 1
-      }, {
-        type: 'bar',
-        encode: {
-          x: 'product',
-          y: '2013'
-        },
-        xAxisIndex: 1,
-        yAxisIndex: 1
-      }, {
-        type: 'bar',
-        encode: {
-          x: 'product',
-          y: '2014'
-        },
-        xAxisIndex: 1,
-        yAxisIndex: 1
-      }, {
-        type: 'bar',
-        encode: {
-          x: 'product',
-          y: '2015'
-        },
-        xAxisIndex: 1,
-        yAxisIndex: 1
-      }*/
-    ]
-  })
 
-  chart.setOption(option);
-  return chart;
+    series: [{
+      //name: 'A',
+      type: para.chartType,
+      //smooth: true,
+      //data: data1,
+    }, {
+      //name: 'B',
+      type: para.chartType,
+      //smooth: true,
+      //data: data2,
+    }, {
+      //name: 'C',
+      type: para.chartType,
+      //smooth: true,
+      //data: data3,
+    }, {
+      type: para.chartType,
+    }]
+  };
+
+  return option;
 }
 
 module.exports = {
-  initChart: initChart
+  getOption: getOption 
 }
