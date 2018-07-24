@@ -1,4 +1,3 @@
-// pages/monitor-appinfo/monitor-appinfo.js
 const computed = require('../../utils/vuelike.js').computed;
 const service = require('../../service/test');
 
@@ -62,9 +61,9 @@ Page({
         },
     },
     collapse: function (e) {
-        var type = this.data.types[this.data.swiperIndex].value;
-        var list = this.data[type];
-        var row = list.data[e.currentTarget.dataset.index];
+        let type = this.data.types[this.data.swiperIndex].value;
+        let list = this.data[type];
+        let row = list.data[e.currentTarget.dataset.index];
         row.ifCollapsed = !row.ifCollapsed;
         this.setData({
             [type]: list
@@ -82,10 +81,10 @@ Page({
         );
     },
     collect: function (e) {
-        var outerIndex = e.currentTarget.dataset.outer;
-        var innnerIndex = e.currentTarget.dataset.index;
-        var type = this.data.types[this.data.swiperIndex].value;
-        var list = this.data[type];
+        let outerIndex = e.currentTarget.dataset.outer;
+        let innnerIndex = e.currentTarget.dataset.index;
+        let type = this.data.types[this.data.swiperIndex].value;
+        let list = this.data[type];
         list.data[outerIndex].items[innnerIndex].ifCollected = !list.data[outerIndex].items[innnerIndex].ifCollected;
         this.setData({
             [type]: list

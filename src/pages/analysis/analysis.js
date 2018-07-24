@@ -1,5 +1,5 @@
-var service = require('../../service/test');
-var computed = require('../../utils/vuelike').computed;
+const service = require('../../service/test');
+const computed = require('../../utils/vuelike').computed;
 
 Page({
     data: {
@@ -16,6 +16,7 @@ Page({
     },
 
     onLoad: function () {
+        debugger;
         this.setData({
             ifLoading: true
         });
@@ -114,6 +115,7 @@ Page({
     },
 
     onFormSubmit: function (e) {
+        debugger;
         service.sendFormId(
             (res) => {
                 console.log('FormId:' + e.detail.formId + ', 发送成功。');

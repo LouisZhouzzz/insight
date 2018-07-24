@@ -1,4 +1,10 @@
-var service = require('service.js');
+const service = require('service.js');
+
+// const mock = require('mock-min.js');
+//
+// Mock.mock(service.domain + 'analysis',{
+//
+// });
 
 var testModule = {};
 

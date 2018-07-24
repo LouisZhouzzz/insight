@@ -105,6 +105,7 @@ function fetch (url, data, success, fail, method, msg) {
 }
 
 module.exports = {
+    domain,
     getOutline,
     getCollectionList,
     getExceptionList,

@@ -1,15 +1,10 @@
-<!--pages/monitor-appinfo/monitor-appinfo.wxml-->
 <scroll-view
         scroll-y="{{ifOuterScroll}}}"
         class='container'
-        upper-threshold="20"
-        bindscrolltoupper="onPullDownRefresh"
         bindscroll='outerscroll'
         scroll-with-animation="true"
         xmlns:wx="http://www.w3.org/1999/xhtml">
-
     <form report-submit="true" bindsubmit="onFormSubmit">
-
         <!--头部信息概览模块 start-->
         <view class='header' style='height:400px;'>
             <view class='header-content'>
@@ -61,7 +56,6 @@
             <template is="list" data="{{...property}}"></template>
         </view>
         <!--二级列表 end-->
-
     </form>
 </scroll-view>
 
