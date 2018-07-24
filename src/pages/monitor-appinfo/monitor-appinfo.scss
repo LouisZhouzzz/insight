@@ -9,7 +9,7 @@ $quotaHeight: 100rpx;
 $quotaItemHeight: 80rpx;
 
 .header {
-  background-color: tomato;
+  background-color: $themeBackgroundColor;
   color: white;
   overflow: hidden;
   transition-duration: 300ms;
