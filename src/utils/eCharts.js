@@ -1,27 +1,32 @@
-import * as echarts from '../../ec-canvas/echarts';
-import theme from '../../ec-canvas/roma.js'
-const app = getApp();
+import * as echarts from '../ec-canvas/echarts';
 import geoJson from './china.js';
+//import themeShine from '../ec-canvas/shine.js';
+require('../ec-canvas/vintage.js');
+require('../ec-canvas/dark.js');
+require('../ec-canvas/shine.js');
+require('../ec-canvas/roma.js');
+require('../ec-canvas/macarons.js');
+require('../ec-canvas/infographic.js');
+
 let chart = null;
 
 function initChart(canvas, width, height) {
-  chart = echarts.init(canvas, 'roma', {
+  chart = echarts.init(canvas, 'infographic' , {
     width: width,
     height: height
   });
   canvas.setChart(chart);
 
-  
   //入参
   var para = {
-    chartType: 'line', //图表类型
+    chartType: 'bar', //图表类型
     titleText: 'title', //标题
     titleSubText: 'subtitle', //副标题
     //柱状图&折线图坐标轴名称
     xname: 'x',
     yname: 'y',
-    graExpText: 'explain\niioojjojoisbfgsbsbiso\nisthjgoihoiho', //说明
-    graStaText: 'statistic\n最大值：****\t最小值：****\n平均值：****\t标准差：****\n最稳定：****\t最跌宕：****\n', //统计值
+    graExpText: 'explaination', //说明
+    graStaText: 'statistic', //统计值
     //地图visual Map指标
     mapMin: 0,
     mapMax: 1000,
@@ -29,13 +34,13 @@ function initChart(canvas, width, height) {
   //主题与布局参数
   var TL = {
     //文字颜色
-    textColor: 'grey',
+    textColor: '#000',
     //标题布局
     titleLeft: 'center',
     titleTop: '2%',
     //图例布局
     legLeft: 'center',
-    legTop: '25.5%',
+    legTop: '20%',
     legorient: 'horizontal',
     //附加文本栏布局
     graExpLeft: 'center',
@@ -44,14 +49,14 @@ function initChart(canvas, width, height) {
     graStaTop: '80%',
     //柱状图&折线图网格布局
     gridLeft: '5%',
-    gridRight: '12%',
-    gridTop: '35%',
-    gridBottom: '22%',
+    gridRight: '10%',
+    gridTop: '30%',
+    gridBottom: '25%',
     //饼图参数
-    pieCenter: ['50%', '57%'], //圆心位置
-    pieRadius: ['25%', '67%'], //半径
+    pieCenter: ['50%', '50%'], //圆心位置
+    pieRadius: ['25%', '75%'], //半径
     //仪表盘参数
-    gauCenter: ['50%', '57%'], //圆心位置
+    gauCenter: ['50%', '50%'], //圆心位置
     gauRadius: '75%', //半径
     //地图参数
     mapCenter: [], //当前视角的中心点，用经纬度表示
@@ -155,20 +160,6 @@ function initChart(canvas, width, height) {
   return chart;
 };
 
-Page({
-  onShareAppMessage: function (res) {
-    return {
-      title: 'ECharts 可以在微信小程序中使用啦！',
-      path: '/pages/index/index',
-      success: function () { },
-      fail: function () { }
-    }
-  },
-  data: {
-    ec: {
-      onInit: initChart,
-    }
-  },
-  onReady() {
-  }
-});
+module.exports = {
+  initChart: initChart
+}
