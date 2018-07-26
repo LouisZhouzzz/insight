@@ -54,14 +54,26 @@
     var colorPalette = ['#dd6b66','#759aa0','#e69d87','#8dc1a9','#ea7e53','#eedd78','#73a373','#73b9bc','#7289ab', '#91ca8c','#f49f42'];
     var theme = {
         color: colorPalette,
-        backgroundColor: '#333',
+        backgroundColor: '#000',
+        visualMap: {
+          //color: ['#C1232B', '#FCCE10'],
+          //color:['#c00000','pink'],
+          textStyle: {
+            color: contrastColor,
+          },
+        },
+
         tooltip: {
             axisPointer: {
                 lineStyle: {
                     color: contrastColor
                 },
                 crossStyle: {
-                    color: contrastColor
+                    color: contrastColor,
+                },
+                label:{
+                      show: true,
+                      color: '#000'
                 }
             }
         },
@@ -75,7 +87,7 @@
         },
         title: {
             textStyle: {
-                color: contrastColor
+                color: contrastColor,
             }
         },
         toolbox: {

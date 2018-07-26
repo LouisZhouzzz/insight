@@ -1,32 +1,27 @@
-import * as echarts from '../ec-canvas/echarts';
+import * as echarts from '../../ec-canvas/echarts';
+import theme from '../../ec-canvas/dark.js'
+const app = getApp();
 import geoJson from './china.js';
-//import themeShine from '../ec-canvas/shine.js';
-require('../ec-canvas/vintage.js');
-require('../ec-canvas/dark.js');
-require('../ec-canvas/shine.js');
-require('../ec-canvas/roma.js');
-require('../ec-canvas/macarons.js');
-require('../ec-canvas/infographic.js');
-
 let chart = null;
 
 function initChart(canvas, width, height) {
-  chart = echarts.init(canvas, 'infographic' , {
+  chart = echarts.init(canvas, 'dark', {
     width: width,
     height: height
   });
   canvas.setChart(chart);
 
+  
   //入参
   var para = {
-    chartType: 'bar', //图表类型
+    chartType: 'map', //图表类型
     titleText: 'title', //标题
     titleSubText: 'subtitle', //副标题
     //柱状图&折线图坐标轴名称
     xname: 'x',
     yname: 'y',
-    graExpText: 'explaination', //说明
-    graStaText: 'statistic', //统计值
+    graExpText: 'explain\niioojjojoisbfgsbsbiso\nisthjgoihoiho', //说明
+    graStaText: 'statistic\n最大值：****\t最小值：****\n平均值：****\t标准差：****\n最稳定：****\t最跌宕：****\n', //统计值
     //地图visual Map指标
     mapMin: 0,
     mapMax: 1000,
@@ -34,13 +29,13 @@ function initChart(canvas, width, height) {
   //主题与布局参数
   var TL = {
     //文字颜色
-    textColor: '#000',
+    textColor: 'grey',
     //标题布局
     titleLeft: 'center',
     titleTop: '2%',
     //图例布局
     legLeft: 'center',
-    legTop: '20%',
+    legTop: '25.5%',
     legorient: 'horizontal',
     //附加文本栏布局
     graExpLeft: 'center',
@@ -49,22 +44,22 @@ function initChart(canvas, width, height) {
     graStaTop: '80%',
     //柱状图&折线图网格布局
     gridLeft: '5%',
-    gridRight: '10%',
-    gridTop: '30%',
-    gridBottom: '25%',
+    gridRight: '12%',
+    gridTop: '35%',
+    gridBottom: '22%',
     //饼图参数
-    pieCenter: ['50%', '50%'], //圆心位置
-    pieRadius: ['25%', '75%'], //半径
+    pieCenter: ['50%', '57%'], //圆心位置
+    pieRadius: ['26%', '73%'], //半径
     //仪表盘参数
-    gauCenter: ['50%', '50%'], //圆心位置
-    gauRadius: '75%', //半径
+    gauCenter: ['50%', '53%'], //圆心位置
+    gauRadius: '80%', //半径
     //地图参数
     mapCenter: [], //当前视角的中心点，用经纬度表示
     mapScale: 0.75, //地图长宽比，默认0.75
   };
   //数据
   var localData = [
-    /***************柱状图&折线图****************/
+    /***************柱状图&折线图****************
     ['product', '2012', '2013', '2014', '2015'],
     ['Matcha Latte', 41.1, 30.4, 65.1, 53.3],
     ['Milk Tea', 86.5, 92.1, 85.7, 83.1],
@@ -83,7 +78,7 @@ function initChart(canvas, width, height) {
       {value: 38, name: '上海'},
     /******************************************/
 
-    /**************************地图**************************
+    /**************************地图**************************/
     { name: '北京', value: Math.round(Math.random() * 1000) },
     { name: '天津', value: Math.round(Math.random() * 1000) },
     { name: '上海', value: Math.round(Math.random() * 1000) },
@@ -160,6 +155,20 @@ function initChart(canvas, width, height) {
   return chart;
 };
 
-module.exports = {
-  initChart: initChart
-}
+Page({
+  onShareAppMessage: function (res) {
+    return {
+      title: 'ECharts 可以在微信小程序中使用啦！',
+      path: '/pages/index/index',
+      success: function () { },
+      fail: function () { }
+    }
+  },
+  data: {
+    ec: {
+      onInit: initChart,
+    }
+  },
+  onReady() {
+  }
+});
