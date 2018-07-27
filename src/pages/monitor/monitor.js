@@ -13,45 +13,23 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        service.getAppList(
-            () => {
+        service.getApps(
+            (res) => {
                 this.setData({
-                    apps: [
-                        {
-                            id: "mock id",
-                            title: "数字园区导航",
-                        }, {
-                            id: "mock id",
-                            title: "生酮营养师"
-                        }, {
-                            id: "mock id",
-                            title: "考勤打卡应用"
-                        }, {
-                            id: "mock id",
-                            title: "快眼看书"
-                        }, {
-                            id: "mock id",
-                            title: "工行云服务"
-                        }, {
-                            id: "mock id",
-                            title: "无聊的应用"
-                        }, {
-                            id: "mock id",
-                            title: "不存在的小游戏"
-                        }
-                    ]
+                    apps: res.records
                 });
             },
-            () => {}
+            (res) => {}
         );
     },
 
     onFormSubmit: function (e) {
-        service.sendFormId(
+        service.patchUserFormId(
             (res) => {
-                console.log('FormId:' + e.detail.formId + ', 发送成功。');
+                console.log(res.msg);
             },
             (res) => {},
+            'user id',
             e.detail.formId
         );
     },

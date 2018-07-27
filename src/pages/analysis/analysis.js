@@ -3,6 +3,7 @@ const computed = require('../../utils/vuelike').computed;
 
 Page({
     data: {
+        userInfo:  null,
         outline: { //概览面板数据
             appNum: '', //异常应用数
             exceptionNum: '', //异常总数
@@ -16,18 +17,14 @@ Page({
     },
 
     onLoad: function () {
-        debugger;
+
         this.setData({
             ifLoading: true
         });
-        service.getOutline(
+        service.getSystem(
             (res) => {
                 this.setData({
-                    outline: {
-                        appNum: 5, //异常应用数
-                        exceptionNum: 11, //异常总数
-                        point: 67 //系统总体评分
-                    }
+                    outline: res.data
                 });
                 this.drawCircleProcess();
             },
@@ -35,60 +32,21 @@ Page({
             }
         );
 
-        service.getCollectionList(
+        service.getUserDiagrams(
             (res) => {
                 this.setData({
-                    collectList: [
-                        {
-                            name: 'XXXX图表',
-                            id: 'mock id'
-                        }, {
-                            name: 'XXXX图表',
-                            id: 'mock id'
-                        }, {
-                            name: 'XXXXXXXXXXXXXXXXXX图表',
-                            id: 'mock id'
-                        }, {
-                            name: 'X图表',
-                            id: 'mock id'
-                        }, {
-                            name: 'XXXX图表',
-                            id: 'mock id'
-                        }, {
-                            name: 'XXXXXXXXXXXXXX图表',
-                            id: 'mock id'
-                        }, {
-                            name: 'XXXXXXXXXXXXXX图表',
-                            id: 'mock id'
-                        }
-                    ]
+                    collectList: res.records
                 });
             },
             (res) => {
-            }
+            },
+            this.data.userInfo
         );
 
-        service.getExceptionList(
+        service.getUnhandledExceptions(
             (res) => {
                 this.setData({
-                    exceptionList: [
-                        {
-                            id: 'fake id',
-                            name: '性能异常',
-                            source: '生酮营养师'
-                        }, {
-                            id: 'fake id',
-                            name: '支付异常',
-                            source: '生酮营养师'
-                        }, {
-                            id: 'fake id',
-                            name: 'GPS定位异常',
-                            source: '数字园区导航'
-                        }, {
-                            id: 'fake id',
-                            name: '路线导航异常',
-                            source: '数字园区导航'
-                        }],
+                    exceptionList: res.records,
                     page: this.data.page + 1,
                     ifLoading: false
                 });
@@ -115,12 +73,12 @@ Page({
     },
 
     onFormSubmit: function (e) {
-        debugger;
-        service.sendFormId(
+        service.patchUserFormId(
             (res) => {
                 console.log('FormId:' + e.detail.formId + ', 发送成功。');
             },
             (res) => {},
+            this.data.userInfo,
             e.detail.formId
         );
     },
@@ -130,7 +88,7 @@ Page({
         this.setData({
             ifLoading: true
         });
-        service.getExceptionList(
+        service.getUnhandledExceptions(
             (res) => {
                 this.data.exceptionList.push({
                     id: 'fake id',
@@ -201,5 +159,4 @@ Page({
 
         cxt_arc.draw();
     }
-
 });

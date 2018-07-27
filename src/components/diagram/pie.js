@@ -4,16 +4,9 @@ function getOption(localData, para, TL) {
     title: {
       show: true, //默认true
       text: para.titleText,
+      //link:[],                                //超链接
       subtext: para.titleSubText,
-      textStyle: {
-        fontSize: 30,                           //字体大小
-        fontWeight: 'bold',                     //加粗
-      },
-      subtextStyle: {
-        fontSize: 16,
-      },
-      //padding:[number]                        //标题内边距
-      itemGap: 10,                              //主副标题间距，默认10
+      //sublnk:[],                              //超链接
       left: TL.titleLeft,
       top: TL.titleTop,
     },
@@ -44,34 +37,35 @@ function getOption(localData, para, TL) {
             textAlign: 'center',
             fill: TL.textColor,
           }
-        }]
+        }
+      ]
+    },
+
+    legend: {
+      show: true,
+      left: TL.legLeft,
+      top: TL.legTop,
+      orient: TL.legorient, //默认为'horizontal'
+      formatter: '{name}', //图例文本格式 
+    },
+
+    dataset: {
+      //dimensions: Dem,
+      source: localData
     },
 
     series: [{
       type: para.chartType,
-      center: TL.gauCenter,
-      radius: TL.gauRadius, //仪表盘半径
-      axisLine: {
-        show: true,
-        lineStyle: {
-          width: 30,
-          shadowBlur: 0,
-        }
+      center: TL.pieCenter,
+      radius: TL.pieRadius,
+      label: {
+        normal: {
+          show: true,
+          position: 'inside',
+          formatter: '{b}:\n{d}%',
+        },
       },
-      axisLabel: {},
-      pointer: {
-        show: true,
-        length: '80%',
-        width: '6%',
-      },
-      itemStyle: {},
-      emphasis: {},
-      //title:{},
-      detail: { //设置文字块
-        show: true,
-        formatter: '{value}%'
-      },
-      data: localData,
+      //ayoutBy:'column',       //当使用dataset时，指定行对应还是列对应
     }]
   };
 

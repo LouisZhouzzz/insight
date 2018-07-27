@@ -1,29 +1,3 @@
-<!--pages/monitor-appinfo-diagram/monitor-appinfo-diagram.wxml-->
-<view class='page-content' style='height:{{windowHeight}}px'>
-  <!--导航栏三个按钮 start-->
-  <view class='nav' style='height: 10%;'>
-    <block wx:for='{{diagrams}}' wx:key='diagram-type-{{index}}'>
-     <button wx:if='{{index !== currentDiagramIndex}}' class='nav-item' >{{item.type}}</button>
-     <button wx:else class='nav-item activated'>{{item.type}}</button>
-    </block>
-  </view>
-  <!--导航栏三个按钮 end-->
-
- <!--设置屏幕下面80%为左右滑动区域 start-->
-  <swiper 
-    style='height: 80%;'
-    current='currentDiagramIndex'
-    bindchange='swiper'>
-    <!--每个滑动区  start-->
-    <swiper-item 
-      class='diagram-container' 
-      wx:for='{{diagrams}}' 
-      wx:key='diagram-{{index}}'
-      data-index='{{index}}'>
-      <text>{{index  + 1}}</text>
-    </swiper-item>
-    <!--每个滑动区  end-->
-  </swiper>  
-  <!--设置屏幕下面80%为左右滑动区域 end-->
-
+<view class="container">
+    <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
 </view>

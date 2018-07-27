@@ -11,7 +11,7 @@
                     hover-class="app-hover">
                 <label>
                     {{item.title}}
-                    <button formType="submit"></button>
+                    <button form-type="submit"></button>
                 </label>
             </navigator>
             <!-- 每个异常类名 end-->

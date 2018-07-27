@@ -30,7 +30,7 @@
         "selectedIconPath": "img/nav_monitor_selected.png",
         "iconPath": "img/nav_monitor.png",
         "pagePath": "pages/monitor/monitor",
-        "text": "监控90099"
+        "text": "监控"
       }
     ]
   }

@@ -1,5 +1,5 @@
-var service = require('../../service/test.js');
-var computed = require('../../utils/vuelike').computed;
+const service = require('../../service/test');
+const computed = require('../../utils/vuelike').computed;
 
 Page({
     data: {
@@ -12,46 +12,10 @@ Page({
         this.setData({
             ifLoading: true
         });
-        service.getExceptionHistory(
+        service.getHandledExceptions(
             (res) => {
                 this.setData({
-                    records: [
-                        {
-                            date: '2018-07-01',
-                            exceptions: [
-                                {
-                                    time: '19:30',
-                                    name: '性能异常',
-                                    source: '生酮营养师'
-                                }, {
-                                    time: '10:30',
-                                    name: '性能异常',
-                                    source: '数字园区导航'
-                                }, {
-                                    time: '07:30',
-                                    name: '性能异常',
-                                    source: '生酮营养师'
-                                }
-                            ]
-                        }, {
-                            date: '2017-08-21',
-                            exceptions: [
-                                {
-                                    time: '11:30',
-                                    name: '性能异常',
-                                    source: '生酮营养师'
-                                }, {
-                                    time: '00:30',
-                                    name: '性能异常',
-                                    source: '汕大课程表'
-                                }, {
-                                    time: '00:29',
-                                    name: '发布异常',
-                                    source: '生酮营养师'
-                                }
-                            ]
-                        }
-                    ],
+                    records: res.records,
                     page:  1,
                     ifLoading: false
                 });
@@ -62,18 +26,19 @@ Page({
                     ifLoading: false
                 });
                 wx.stopPullDownRefresh();
-            });
+            }, this.data.page, this.data.size);
     },
 
     onReady: function () { // 监听页面初次渲染完成
         computed(this, {
-            ifMore: function () {
+            ifMore: function () { // 判断是否存在更多数据
                 return this.data.page * this.data.size === this.data.records.length
             }
         })
     },
 
     onPullDownRefresh: function () {
+        if (this.data.ifLoading || !this.data.ifMore) return;
         wx.startPullDownRefresh();
         this.onLoad();
     },
@@ -83,52 +48,16 @@ Page({
     },
 
     loadMoreRecords: function () {
-        if (this.data.ifLoading) return;
+        if (this.data.ifLoading || !this.data.ifMore) return;
         this.setData({
             ifLoading: true
         });
-        service.getExceptionHistory(
+        service.getHandledExceptions(
             (res) => {
-                this.data.records.push(
-                    {
-                        date: '2018-07-01',
-                        exceptions: [
-                            {
-                                time: '19:30',
-                                name: '性能异常',
-                                source: '生酮营养师'
-                            }, {
-                                time: '10:30',
-                                name: '性能异常',
-                                source: '数字园区导航'
-                            }, {
-                                time: '07:30',
-                                name: '性能异常',
-                                source: '生酮营养师'
-                            }
-                        ]
-                    }, {
-                        date: '2017-08-21',
-                        exceptions: [
-                            {
-                                time: '11:30',
-                                name: '性能异常',
-                                source: '生酮营养师'
-                            }, {
-                                time: '00:30',
-                                name: '性能异常',
-                                source: '汕大课程表'
-                            }, {
-                                time: '00:29',
-                                name: '发布异常',
-                                source: '生酮营养师'
-                            }
-                        ]
-                    }
-                );
+                this.data.records.push(res.records);
                 this.setData({
                     records: this.data.records,
-                    page:  1,
+                    page:  this.data.page + 1,
                     ifLoading: false
                 });
             },

@@ -25,7 +25,7 @@
             <navigator class='view-history' url="../analysis-history/analysis-history" hover-class="navigator-hover">
                 <label>
                     查看历史异常>>
-                    <button formType="submit"></button>
+                    <button form-type="submit"></button>
                 </label>
             </navigator>
 
@@ -44,7 +44,7 @@
                            url="../monitor-appinfo-diagram/monitor-appinfo-diagram">
                     <label>
                         {{item.name}}
-                        <button formType="submit"></button>
+                        <button form-type="submit"></button>
                     </label>
                 </navigator>
             </scroll-view>
@@ -68,7 +68,7 @@
                         <text>{{item.source}}</text>
                     </view>
                 </view>
-                <button formType="submit"></button>
+                <button form-type="submit"></button>
             </label>
         </navigator>
         <!--异常信息模块 end-->

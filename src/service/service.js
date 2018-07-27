@@ -1,17 +1,36 @@
-const domain = 'https://insight.service.com/';
+// const domain = 'https://insight.service.com/';
+const domain = 'https://result.eolinker.com/zdBe81Pa8b841f6b8fe96ba5e8e67a6fac3804a3da7c8b8?uri=';
+/**
+ * 获取后台概览信息
+ * @param success
+ * @param fail
+ */
+const getSystem = (success, fail) => fetch('/system', {}, success, fail);
 
 /**
- * 获取应用的概览信息
+ * 获取应用列表
  * @param success
  * @param fail
  */
-const getOutline = (success, fail) => fetch('analysis', {}, success, fail);
+const getApps = (success, fail) => fetch('/apps', {}, success, fail, 'GET', 'loading...');
+
 /**
- * 获取收藏列表
+ * 获取应用概览信息
  * @param success
  * @param fail
+ * @param appid
  */
-const getCollectionList = (success, fail) => fetch('collect', {}, success, fail);
+const getApp = (success, fail, appid) => fetch('/apps/' + appid, {}, success, fail, 'GET', 'loading...');
+
+/**
+ * 获取应用全部指标
+ * @param success
+ * @param fail
+ * @param appid
+ */
+const getAppQuotas = (success, fail, appid) => fetch('/apps/'+ appid +'/quotas', {}, success, fail, 'GET', 'loading...');
+
+
 /**
  * 获取异常信息列表
  * @param success
@@ -19,7 +38,7 @@ const getCollectionList = (success, fail) => fetch('collect', {}, success, fail)
  * @param page 指定页码
  * @param size 指定单页信息项数
  */
-const getExceptionList = (success, fail, page, size) => fetch('exception?page=' + page + '&size=' + size, {}, success, fail, 'GET', 'loading...');
+const getUnhandledExceptions = (success, fail, page, size) => fetch('/unhandledexceptions?page=' + page + '&size=' + size, {}, success, fail, 'GET', 'loading...');
 
 /**
  * 获取历史异常信息
@@ -28,46 +47,35 @@ const getExceptionList = (success, fail, page, size) => fetch('exception?page=' 
  * @param page
  * @param size
  */
-const getExceptionHistory = (success, fail, page, size) => fetch('exception/history?page=' + page + '&size=' + size, {}, success, fail, 'GET', 'loading...');
+const getHandledExceptions = (success, fail, page, size) => fetch('/handledexceptions?page=' + page + '&size=' + size, {}, success, fail, 'GET', 'loading...');
+
 
 /**
- * 获取应用列表
+ * 获取收藏列表
  * @param success
  * @param fail
+ * @param id
  */
-const getAppList = (success, fail) => fetch('app', {}, success, fail, 'GET', 'loading...');
+const getUserDiagrams = (success, fail, id) => fetch('/users/'+ id +'/diagrams', {}, success, fail);
 
-/**
- * 获取应用概览信息
- * @param success
- * @param fail
- * @param id 应用id
- */
-const getAppInfo = (success, fail, id) => fetch('app/info?id=' + id, {}, success, fail, 'GET', 'loading...');
-
-/**
- * 获取应用全部指标
- * @param success
- * @param fail
- * @param id 应用id
- */
-const getAppQuotaList = (success, fail, id) => fetch('app/quota?id=' + id, {}, success, fail, 'GET', 'loading...');
 
 /**
  * 变更图表的收藏状态
  * @param success
  * @param fail
- * @param id 图表id
+ * @param usrid
+ * @param diagramid
  */
-const collectItem = (success, fail, id) => fetch('app/diagram?id=' + id, {}, success, fail, 'GET', 'loading...');
+const toggleUserDiagram = (success, fail, usrid, diagramid) => fetch('/users/'+ usrid +'diagram?id=' + diagramid, {}, success, fail, 'PATCH', 'loading...');
 
 /**
  * 向后端发送formid
  * @param formid
  * @param success
  * @param fail
+ * @param userid
  */
-const sendFormId = (success, fail, formid) => fetch('formid', {formid}, success, fail, 'POST');
+const patchUserFormId = (success, fail, userid, formid) => fetch('/users/' + userid + '?formid=' + formid, success, fail, 'PATCH');
 
 /**
  * 网络请求封装
@@ -87,7 +95,6 @@ function fetch (url, data, success, fail, method, msg) {
         url: domain + url,
         data: data || {},
         header: {
-            'content-type': 'application/x-www-form-urlencoded'
         },
         method: method || 'GET',
         success: function (res) {
@@ -106,13 +113,13 @@ function fetch (url, data, success, fail, method, msg) {
 
 module.exports = {
     domain,
-    getOutline,
-    getCollectionList,
-    getExceptionList,
-    getExceptionHistory,
-    getAppList,
-    getAppInfo,
-    collectItem,
-    getAppQuotaList,
-    sendFormId
+    getSystem,
+    getApps,
+    getApp,
+    getAppQuotas,
+    getHandledExceptions,
+    getUnhandledExceptions,
+    getUserDiagrams,
+    patchUserFormId,
+    toggleUserDiagram
 };

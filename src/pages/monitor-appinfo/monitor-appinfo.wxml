@@ -34,7 +34,7 @@
             <label wx:for='{{types}}' wx:key='type-stuck-{{index}}' class="type-item {{item.checked ? 'checked' : ''}}">
                 <view class="type-radio ">{{item.name}}</view>
                 <radio value='{{index}}' checked="{{item.checked}}" style='display: none'></radio>
-                <button formType="submit"></button>
+                <button form-type="submit"></button>
             </label>
         </radio-group>
         <!--下拉时贴顶的指标类型选项 end-->
@@ -83,16 +83,15 @@
                     <text>- {{item.name}}</text>
                     <image class='enter' src='../../img/svgs/arrow_right.svg'></image>
                     <label>
-                        <image wx:if='{{item.ifCollected}}'
-                               src='../../img/svgs/star_fill.svg'
-                               class='collect'
+                        <image src='../../img/svgs/star_fill.svg'
+                               class="collect {{item.ifCollected ? '' : 'hidden'}}"
                                catchtap='collect' data-index="{{index}}" data-outer="{{idx}}"></image>
-                        <image wx:else='{{item.ifCollected}}' src='../../img/svgs/star_stroke.svg'
-                               class='collect' catchtap='collect' data-index="{{index}}" data-outer="{{idx}}"></image>
-                        <button formType="submit"></button>
+                        <image src='../../img/svgs/star_stroke.svg'
+                               class="collect {{item.ifCollected ? 'hidden' : ''}}" catchtap='collect' data-index="{{index}}" data-outer="{{idx}}"></image>
+                        <button form-type="submit"></button>
                     </label>
                 </navigator>
-                <button formType="submit"></button>
+                <button form-type="submit"></button>
             </label>
         </view>
         <!--二级列表二级子项 end-->

@@ -9,39 +9,52 @@ const gulpLoadPlugins = require('gulp-load-plugins');
 //Loads gulp plugins from package dependencies and attaches them to plugins
 const plugins = gulpLoadPlugins();
 
+const condition = './src/ec-canvas';
+
 // 清空 ./dist 目录
 gulp.task('clean', () => del(['./dist/**']));
 
 //gulp.task(name[, deps], fn), name指定任务名，可以diy
 gulp.task('wxml', () => {
-    return gulp.src('./src/pages/**/*.wxml')
+    return gulp.src(['./src/**/*.wxml'])
         .pipe(plugins.htmlmin({
             collapseWhitespace: true,
-            removeComments: true
+            keepClosingSlash: true, // wxml
+            removeComments: true,
+            removeEmptyAttributes: true,
+            removeScriptTypeAttributes: true,
+            removeStyleLinkTypeAttributes: true
         }))
-        .pipe(gulp.dest('dist/pages/'));
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('scss', () => {
     return gulp.src('./src/**/*.scss')
         .pipe(plugins.sass())
-        .pipe(plugins.if(isProduction, plugins.cssnano({ compatibility: '*' })))
+        .pipe(plugins.if(isProduction, plugins.cssnano({compatibility: '*'})))
         .pipe(plugins.rename({
             extname: '.wxss'
         }))
         .pipe(gulp.dest('dist'));
 });
-
+// , '!./src/ec-canvas/**'
 gulp.task('js', () => {
-    return gulp.src('./src/**/*.js')
+    return gulp.src(['./src/**/*.js', '!./src/ec-canvas/*.js'])
         .pipe(plugins.babel({
-            presets: ['env']
+            presets: ['env'],
+            compact: false
         }))
         .pipe(plugins.if(isProduction, plugins.uglify()))
         .on('error', function (err) {
             gulplog.error(err.toString());
         })
         .pipe(gulp.dest('dist'));
+});
+
+gulp.task('extras', () => {
+    // 这里输出位置匹配要注意
+    return gulp.src('./src/ec-canvas/*.js')
+        .pipe(gulp.dest('dist/ec-canvas'));
 });
 
 gulp.task('json', () => {
@@ -59,6 +72,7 @@ gulp.task('img', () => {
 gulp.task('build', callback => {
     return runSequence(
         'clean',
+        'extras',
         ['js', 'wxml', 'scss', 'json', 'img'],
         callback);
 });
