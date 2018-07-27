@@ -19,7 +19,7 @@
         log('ECharts is not Loaded');
         return;
     }
-    var contrastColor = '#eee';
+  var contrastColor = '#A5EFEF';
     var axisCommon = function () {
         return {
             axisLine: {
@@ -40,7 +40,7 @@
             splitLine: {
                 lineStyle: {
                     type: 'dashed',
-                    color: '#aaa'
+                  color: '#E1FFFF'
                 }
             },
             splitArea: {
@@ -51,13 +51,20 @@
         };
     };
 
-    var colorPalette = ['#dd6b66','#759aa0','#e69d87','#8dc1a9','#ea7e53','#eedd78','#73a373','#73b9bc','#7289ab', '#91ca8c','#f49f42'];
+  var colorPalette = ['#8A2BE2', '#800080', '#BA55D3', '#CD00CD', '#FF69B4', '#4B0082', '#FF00FF', '#FFBBFF', '#FFE1FF','#DDA0DD']
+
+    //var colorPalette = ['#00BFFF','#00FFFF', '#00CED1', '#AFEEEE','#20B2AA']
+
+    //var colorPalette = ['#0080ff','#46a3ff','#66b3ff','#00ffff','#80ffff']
+
+    //var colorPalette = ["#fa0909", "#005eaa", "#ffee51","#43e6c1","#2b821d","#339ca8","#cda819","#32a487"]
+    //var colorPalette = ['#dd6b66','#759aa0','#e69d87','#8dc1a9','#ea7e53','#eedd78','#73a373','#73b9bc','#7289ab', '#91ca8c','#f49f42'];
     var theme = {
         color: colorPalette,
-        backgroundColor: '#000',
+      backgroundColor: '#080808',//'#1c122a',
         visualMap: {
           //color: ['#C1232B', '#FCCE10'],
-          //color:['#c00000','pink'],
+          color: ['#4B0082', '#8A2BE2','#FFBBFF'],
           textStyle: {
             color: contrastColor,
           },
@@ -87,7 +94,7 @@
         },
         title: {
             textStyle: {
-                color: contrastColor,
+              color: contrastColor,
             }
         },
         toolbox: {
@@ -136,13 +143,34 @@
         graph: {
             color: colorPalette
         },
+        
         gauge: {
-            title: {
-                textStyle: {
-                    color: contrastColor
-                }
+          axisLine: {
+            lineStyle: {
+              color: [[0.2, '#BA55D3'], [0.8, '#8A2BE2'], [1, '#FFBBFF']]
             }
+          },
+          axisTick: {
+            lineStyle: {
+              color: '#4B0082'
+            }
+          },
+          axisLabel: {
+            textStyle: {
+              color: '#4B0082'
+            }
+          },
+          splitLine: {
+            lineStyle: {
+              color: '#4B0082'
+            }
+          },
+          title: {
+            offsetCenter: [0, -20]
+          }
         },
+
+
         candlestick: {
             itemStyle: {
                 normal: {

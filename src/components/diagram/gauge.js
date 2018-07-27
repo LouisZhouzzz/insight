@@ -1,12 +1,19 @@
 function getOption(localData, para, TL) {
   var option = {
-    
+
     title: {
       show: true, //默认true
       text: para.titleText,
-      //link:[],                                //超链接
       subtext: para.titleSubText,
-      //sublnk:[],                              //超链接
+      textStyle: {
+        fontSize: 30,                           //字体大小
+        fontWeight: 'bold',                     //加粗
+      },
+      subtextStyle: {
+        fontSize: 16,
+      },
+      //padding:[number]                        //标题内边距
+      itemGap: 10,                              //主副标题间距，默认10
       left: TL.titleLeft,
       top: TL.titleTop,
     },
@@ -20,7 +27,7 @@ function getOption(localData, para, TL) {
           draggable: false,
           style: {
             text: para.graExpText,
-            font: 'italic bolder 16px cursive',
+            font: 'bolder 16px cursive',
             textAlign: 'center',
             fill: TL.textColor,
           }
@@ -33,25 +40,34 @@ function getOption(localData, para, TL) {
           draggable: false,
           style: {
             text: para.graStaText,
-            font: 'italic bolder 16px cursive',
+            font: 'bolder 16px cursive',
             textAlign: 'center',
             fill: TL.textColor,
           }
         }]
     },
 
-
     series: [{
       type: para.chartType,
       center: TL.gauCenter,
       radius: TL.gauRadius, //仪表盘半径
+      axisLine: {
+        show: true,
+        lineStyle: {
+          width: 30,
+          shadowBlur: 0,
+        }
+      },
+      axisLabel: {},
       pointer: {
         show: true,
         length: '80%',
         width: '6%',
       },
-      //设置文字块
-      detail: { 
+      itemStyle: {},
+      emphasis: {},
+      //title:{},
+      detail: { //设置文字块
         show: true,
         formatter: '{value}%'
       },
