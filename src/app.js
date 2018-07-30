@@ -1,43 +1,37 @@
+const service = require('service/test');
 App({
-  onLaunch: function () {
-    // 展示本地存储能力
-    let logs = wx.getStorageSync('logs') || [];
-    logs.unshift(Date.now());
-    wx.setStorageSync('logs', logs);
+    onLaunch: function () {
+        // 展示本地存储能力
+        let logs = wx.getStorageSync('logs') || [];
+        logs.unshift(Date.now());
+        wx.setStorageSync('logs', logs);
 
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      }
-    });
-    // 获取用户信息
-    wx.getSetting({
-      success: res => {
-        if (res.authSetting['scope.userInfo']) {
-          wx.getUserInfo({
+        // 登录
+        wx.login({
             success: res => {
-              // 可以将 res 发送给后台解码出 unionId
-              this.globalData.userInfo = res.userInfo;
-              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-              // 所以此处加入 callback 以防止这种情况
-              if (this.userInfoReadyCallback) {
-                this.userInfoReadyCallback(res)
-              }
+                // 发送 res.code 到后台换取与openId, sessionKey相关联的自定义登录态
+                service.login(
+                    (res) => {
+                        this.globalData.token = res.token;
+                        this.globalData.openid = res.openid;
+                    },
+                    (res) => {
+                        console.log('登录失败！');
+                    },
+                    res.code
+                );
             }
-          })
-        }
-      }
-    });
-    // 获取设备信息
-    wx.getSystemInfo({
-      success: res => {
-        this.globalData.windowHeight = res.windowHeight;
-      }
-    })
-  },
-  globalData: {
-    userInfo: null,
-    windowHeight: null
-  }
+        });
+        // 获取设备信息
+        wx.getSystemInfo({
+            success: res => {
+                this.globalData.windowHeight = res.windowHeight;
+            }
+        })
+    },
+    globalData: {
+        windowHeight: null,
+        token: null,
+        openid: null
+    }
 });

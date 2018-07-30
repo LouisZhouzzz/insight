@@ -6,7 +6,6 @@ const isProduction = () => env === 'production';
 const runSequence = require('run-sequence');
 
 const gulpLoadPlugins = require('gulp-load-plugins');
-//Loads gulp plugins from package dependencies and attaches them to plugins
 const plugins = gulpLoadPlugins();
 
 const condition = './src/ec-canvas';

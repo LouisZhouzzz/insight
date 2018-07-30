@@ -75,7 +75,7 @@ Page({
     onFormSubmit: function (e) {
         service.patchUserFormId(
             (res) => {
-                console.log('FormId:' + e.detail.formId + ', 发送成功。');
+                console.log(res);
             },
             (res) => {},
             this.data.userInfo,

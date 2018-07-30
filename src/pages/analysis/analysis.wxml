@@ -24,7 +24,7 @@
             <!--历史异常导航 start-->
             <navigator class='view-history' url="../analysis-history/analysis-history" hover-class="navigator-hover">
                 <label>
-                    查看历史异常>>
+                    查看历史异常 >>
                     <button form-type="submit"></button>
                 </label>
             </navigator>

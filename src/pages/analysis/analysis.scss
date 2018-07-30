@@ -13,7 +13,6 @@ $exceptionNumHinderRadius: 30rpx;
   align-items: stretch;
 }
 
-
 /* 头部分析概览 */
 .header {
   background: $themeBackgroundColor;
@@ -166,14 +165,19 @@ scroll-view.container {
 
 .tag {
   height: $itemTagHeight;
-  margin: ($appItemHeight - $itemTagHeight) / 2 1em;
+  margin: 0 1em;
+  vertical-align: middle;
   padding: 0 0.5em;
   text-align: center;
   border-radius: 10rpx;
-  background-color: $itemTabBackgroundColor;
   display: inline-block;
+  color: $darkenWhite;
+  background-color: $itemTabBackgroundColor;
+  //box-shadow: h-shadow v-shadow blur spread color inset;
+  box-shadow:2px 2px 5px rgba(0, 0, 0, 0.2) inset;
+  border:1px solid rgba(0, 0, 0, 0.03);
+  box-sizing:border-box;
   text {
-    color: $themeColor;
     line-height: $itemTagHeight;
     height: $itemTagHeight;
     font-size: $itemTagFontSize;

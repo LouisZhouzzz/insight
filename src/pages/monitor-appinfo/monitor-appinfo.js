@@ -51,7 +51,7 @@ Page({
         property: {
             name: 'property',
             data: []
-        },
+        }
     },
     collapse: function (e) {
         let type = this.data.types[this.data.swiperIndex].value;
@@ -80,9 +80,16 @@ Page({
         let type = this.data.types[this.data.swiperIndex].value;
         let list = this.data[type];
         list.data[outerIndex].items[innnerIndex].ifCollected = !list.data[outerIndex].items[innnerIndex].ifCollected;
-        this.setData({
-            [type]: list
-        });
+        service.toggleUserDiagram(
+            (res) => {
+                this.setData({
+                    [type]: list
+                });
+            },
+            (res) => {},
+            'user id',
+            e.currentTarget.dataset.id
+        )
     },
     outerscroll: function (e) {
         if (this.data.ifTypeSelectedShow === (e.detail.scrollTop > 400)) return;

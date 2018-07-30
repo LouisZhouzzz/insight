@@ -82,14 +82,18 @@
                            url="../monitor-appinfo-diagram/monitor-appinfo-diagram">
                     <text>- {{item.name}}</text>
                     <image class='enter' src='../../img/svgs/arrow_right.svg'></image>
-                    <label>
-                        <image src='../../img/svgs/star_fill.svg'
-                               class="collect {{item.ifCollected ? '' : 'hidden'}}"
-                               catchtap='collect' data-index="{{index}}" data-outer="{{idx}}"></image>
-                        <image src='../../img/svgs/star_stroke.svg'
-                               class="collect {{item.ifCollected ? 'hidden' : ''}}" catchtap='collect' data-index="{{index}}" data-outer="{{idx}}"></image>
-                        <button form-type="submit"></button>
-                    </label>
+                    <image src='../../img/svgs/star_fill.svg'
+                           class="collect {{item.ifCollected ? '' : 'hidden'}}"
+                           catchtap='collect'
+                           data-id="{{item.id}}"
+                           data-index="{{index}}"
+                           data-outer="{{idx}}"></image>
+                    <image src='../../img/svgs/star_stroke.svg'
+                           class="collect {{item.ifCollected ? 'hidden' : ''}}"
+                           catchtap='collect'
+                           data-id="{{item.id}}"
+                           data-index="{{index}}"
+                           data-outer="{{idx}}"></image>
                 </navigator>
                 <button form-type="submit"></button>
             </label>

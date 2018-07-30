@@ -1,5 +1,14 @@
 // const domain = 'https://insight.service.com/';
 const domain = 'https://result.eolinker.com/zdBe81Pa8b841f6b8fe96ba5e8e67a6fac3804a3da7c8b8?uri=';
+
+/**
+ * 发送临时登录凭证以换取自定义登录态
+ * @param success
+ * @param fail
+ * @param code
+ */
+const login = (success, fail, code) => fetch('/loginstate?code=' + code,{}, success, fail);
+
 /**
  * 获取后台概览信息
  * @param success
@@ -66,7 +75,7 @@ const getUserDiagrams = (success, fail, id) => fetch('/users/ID/diagrams', {}, s
  * @param usrid
  * @param diagramid
  */
-const toggleUserDiagram = (success, fail, usrid, diagramid) => fetch('/users/ID/diagram?id=' + diagramid, {}, success, fail, 'PATCH', 'loading...');
+const toggleUserDiagram = (success, fail, usrid, diagramid) => fetch('/users/ID/diagram?id=' + diagramid, {}, success, fail, 'PUT');
 
 /**
  * 向后端发送formid
@@ -75,7 +84,7 @@ const toggleUserDiagram = (success, fail, usrid, diagramid) => fetch('/users/ID/
  * @param fail
  * @param userid
  */
-const patchUserFormId = (success, fail, userid, formid) => fetch('/users/ID?formid=' + formid, success, fail, 'PATCH');
+const patchUserFormId = (success, fail, userid, formid) => fetch('/users/ID?formid=' + formid, {},success, fail, 'PUT');
 
 /**
  * 网络请求封装
@@ -89,12 +98,13 @@ const patchUserFormId = (success, fail, userid, formid) => fetch('/users/ID?form
 function fetch (url, data, success, fail, method, msg) {
     wx.showNavigationBarLoading();
 
-    if (msg) wx.showLoading({title: msg});
+    // if (msg) wx.showLoading({title: msg});
 
     wx.request({
         url: domain + url,
         data: data || {},
         header: {
+            "Content-Type":"application/x-www-form-urlencoded"
         },
         method: method || 'GET',
         success: function (res) {
@@ -106,13 +116,14 @@ function fetch (url, data, success, fail, method, msg) {
         },
         complete: function (res) {
             wx.hideNavigationBarLoading();
-            if (msg) wx.hideLoading();
+            // if (msg) wx.hideLoading();
         }
     });
 }
 
 module.exports = {
     domain,
+    login,
     getSystem,
     getApps,
     getApp,
