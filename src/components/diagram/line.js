@@ -153,7 +153,7 @@ function getSeries(data, chartType) {
     var item = {
       name: data[i].name,
       type: chartType,
-      seriesLayoutBy: 'row',
+      //seriesLayoutBy: 'row',
       data: data.value
     }
     serie.push(item);

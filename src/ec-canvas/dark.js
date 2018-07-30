@@ -19,7 +19,7 @@
         log('ECharts is not Loaded');
         return;
     }
-  var contrastColor = '#A5EFEF';
+    var contrastColor = '#A5EFEF';
     var axisCommon = function () {
         return {
             axisLine: {
@@ -51,20 +51,18 @@
         };
     };
 
-  var colorPalette = ['#8A2BE2', '#800080', '#BA55D3', '#CD00CD', '#FF69B4', '#4B0082', '#FF00FF', '#FFBBFF', '#FFE1FF','#DDA0DD']
+    //var colorPalette = ['#8A2BE2', '#800080', '#BA55D3', '#CD00CD', '#FF69B4', '#4B0082', '#FF00FF', '#FFBBFF', '#FFE1FF','#DDA0DD']//purple
 
-    //var colorPalette = ['#00BFFF','#00FFFF', '#00CED1', '#AFEEEE','#20B2AA']
-
-    //var colorPalette = ['#0080ff','#46a3ff','#66b3ff','#00ffff','#80ffff']
-
-    //var colorPalette = ["#fa0909", "#005eaa", "#ffee51","#43e6c1","#2b821d","#339ca8","#cda819","#32a487"]
-    //var colorPalette = ['#dd6b66','#759aa0','#e69d87','#8dc1a9','#ea7e53','#eedd78','#73a373','#73b9bc','#7289ab', '#91ca8c','#f49f42'];
+    var colorPalette = ['#00BFFF', '#00FFFF', '#00CED1', '#AFEEEE', '#20B2AA', '#87CEEB', '#48D1CC', '#008B8B',]//green
+    var colorVisualmap =[ '#00ffff', '#bbffff']
+    //var colorVisualmap=
     var theme = {
         color: colorPalette,
-      backgroundColor: '#080808',//'#1c122a',
+        backgroundColor: '#080808',//'#1c122a',
         visualMap: {
-          //color: ['#C1232B', '#FCCE10'],
-          color: ['#4B0082', '#8A2BE2','#FFBBFF'],
+          //color: ['#4B0082', '#8A2BE2','#FFBBFF'],
+          //color: ['#6495ED','#6495ED', '#87CEFA','#AFEEEE'],
+          color: colorVisualmap,
           textStyle: {
             color: contrastColor,
           },
@@ -90,7 +88,8 @@
             }
         },
         textStyle: {
-            color: contrastColor
+            //color: contrastColor,
+          color:'#2F4F4F'
         },
         title: {
             textStyle: {
@@ -138,7 +137,7 @@
         categoryAxis: axisCommon(),
 
         line: {
-            symbol: 'circle'
+            symbol: 'circle',
         },
         graph: {
             color: colorPalette
@@ -147,12 +146,14 @@
         gauge: {
           axisLine: {
             lineStyle: {
-              color: [[0.2, '#BA55D3'], [0.8, '#8A2BE2'], [1, '#FFBBFF']]
+              //color: [[0.2, '#BA55D3'], [0.8, '#8A2BE2'], [1, '#FFBBFF']]
+              color: [[0.3, '#AFEEEE'], [0.7, '#00FFFF'], [1, '#00CED1']]
             }
           },
           axisTick: {
             lineStyle: {
-              color: '#4B0082'
+              //color: '#4B0082'
+              color: '#2F4F4F'
             }
           },
           axisLabel: {
@@ -162,7 +163,9 @@
           },
           splitLine: {
             lineStyle: {
-              color: '#4B0082'
+              //color: '#4B0082'
+              //color:'#6495ED'
+              color: '#2F4F4F'
             }
           },
           title: {
