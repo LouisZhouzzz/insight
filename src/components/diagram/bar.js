@@ -189,4 +189,4 @@ function getSeries(data, chartType) {
 
 module.exports = {
   getOption: getOption
-}
+};

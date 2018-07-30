@@ -10,6 +10,14 @@ const domain = 'https://result.eolinker.com/zdBe81Pa8b841f6b8fe96ba5e8e67a6fac38
 const login = (success, fail, code) => fetch('/loginstate?code=' + code,{}, success, fail);
 
 /**
+ * 获取图表信息
+ * @param success
+ * @param fail
+ * @param id
+ */
+const getDiagram = (success, fail, id) => fetch('/diagrams/ID', {}, success, fail);
+
+/**
  * 获取后台概览信息
  * @param success
  * @param fail
@@ -124,6 +132,7 @@ function fetch (url, data, success, fail, method, msg) {
 module.exports = {
     domain,
     login,
+    getDiagram,
     getSystem,
     getApps,
     getApp,

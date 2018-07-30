@@ -58,7 +58,7 @@
                    wx:key='app-{{index}}'
                    class="app-item-container"
                    hover-class="app-item-hover"
-                   url="../monitor-appinfo-diagram/monitor-appinfo-diagram"
+                   url="../monitor-appinfo-diagram/monitor-appinfo-diagram?id={{item.id}}"
                    data-index="{{index}}">
             <label>
                 <view class='app-item'>
