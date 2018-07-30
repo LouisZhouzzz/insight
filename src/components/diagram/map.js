@@ -1,15 +1,19 @@
-//import geoJson from './china.js';
-//echarts.registerMap('china', geoJson);
-
 function getOption(localData, para, TL) {
   var option = {
 
     title: {
       show: true, //默认true
       text: para.titleText,
-      //link:[],                                //超链接
       subtext: para.titleSubText,
-      //sublnk:[],                              //超链接
+      textStyle: {
+        fontSize: 30,                             //字体大小
+        fontWeight: 'bold',                       //加粗
+      },
+      subtextStyle: {
+        fontSize: 16,
+      },
+      //padding:[number]                          //标题内边距
+      itemGap: 10,                                //主副标题间距，默认10
       left: TL.titleLeft,
       top: TL.titleTop,
     },
@@ -23,7 +27,7 @@ function getOption(localData, para, TL) {
         draggable: false,
         style: {
           text: para.graExpText,
-          font: 'italic bolder 16px cursive',
+          font: 'bolder 16px cursive',
           textAlign: 'center',
           fill: TL.textColor,
         }
@@ -36,7 +40,7 @@ function getOption(localData, para, TL) {
         draggable: false,
         style: {
           text: para.graStaText,
-          font: 'italic bolder 16px cursive',
+          font: 'bolder 16px cursive',
           textAlign: 'center',
           fill: TL.textColor,
         }
@@ -65,13 +69,36 @@ function getOption(localData, para, TL) {
 
     series: [{
 
+      top: '24%',
+      bottom: '25%',
+      left: '1%',
+      right: '1%',
+
       type: para.chartType,
       mapType: 'china',
+      //center: TL.mapCenter,
       aspectScale: TL.mapScale,
+      //nameMap:{},自定义地区名称映射
       label: {
         normal: {
+          //show: true,
           position: 'inside',
+          //color: '#A5EFEF',
         },
+        emphasis: {
+          textStyle: {
+            //color: '#4B0082', 
+            color:'#2F4F4F'
+          }
+        }
+      },
+      itemStyle: {
+        normal: {
+        },
+        emphasis: {
+          areaColor:'yellow'
+          //areaColor: '#A5EFEF'      
+        }
       },
     }]
   };
