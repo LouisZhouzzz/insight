@@ -1,6 +1,5 @@
 function getOption(localData, para, TL){
-  var option = {
-
+  const option = {
     title: {
       show: true, //默认true
       text: para.titleText,
@@ -27,7 +26,7 @@ function getOption(localData, para, TL){
         draggable: false,
         style: {
           text: para.graExpText,
-          font: 'bolder 16px cursive',
+          font: '16px',
           textAlign: 'center',
           fill: TL.textColor,
         }
@@ -40,7 +39,7 @@ function getOption(localData, para, TL){
         draggable: false,
         style: {
           text: para.graStaText,
-          font: 'bolder 16px cursive',
+          font: '16px',
           textAlign: 'center',
           fill: TL.textColor,
         }
@@ -62,7 +61,7 @@ function getOption(localData, para, TL){
       itemGap: 10,                        //图例间隔
       itemWidth: 25,                      //图例宽，默认25
       itemHeight: 14,                     //图例高，默认14
-      formatter: '{name}',                //图例文本格式 
+      formatter: '{name}',                //图例文本格式
       //selectedMode:false,
       textStyle: {
         fontWeight: 'lighter',            //字体粗细
@@ -170,9 +169,9 @@ function getOption(localData, para, TL){
 }
 
 function getSeries(data, chartType) {
-  var serie = [];
-  for (var i = 0; i < data.length; i++) {
-    var item = {
+  let serie = [];
+  for (let i = 0; i < data.length; i++) {
+    let item = {
       name: data[i].name,
       type: chartType,
       data: data.value,
@@ -181,7 +180,7 @@ function getSeries(data, chartType) {
           show:true
         }
       }
-    }
+    };
     serie.push(item);
   };
   return serie;

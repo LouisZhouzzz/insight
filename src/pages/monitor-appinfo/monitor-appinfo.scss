@@ -6,31 +6,46 @@ $listIconSize: 50rpx;
 $quotaHeight: 100rpx;
 $quotaItemHeight: 80rpx;
 
+canvas {
+  width: 700rpx;
+  height: 280px;
+  display: block;
+  margin: 0 auto;
+}
+
 .header {
   background-color: $themeBackgroundColor;
   color: white;
   overflow: hidden;
   transition-duration: 300ms;
   transition-timing-function: linear;
+  .bio {
+    text-align: center;
+    height: 100rpx;
+    line-height: 100rpx;
+    background-color: rgba(#F9FBB2, 0.25);
+    margin: 0 1em;
+    border-radius: 10rpx;
+  }
 }
 
-.header-content {
-  position: relative;
-  margin-top: 40rpx;
-  padding: 40rpx;
-  image {
-    width: 150rpx;
-    height: 150rpx;
-    float: left;
-    padding-right: 30rpx;
-  }
-  .title {
-    display: block;
-  }
-  .bio {
-    font-size: 14px;
-  }
-}
+//.header-content {
+//  position: relative;
+//  margin-top: 40rpx;
+//  padding: 40rpx;
+//  image {
+//    width: 150rpx;
+//    height: 150rpx;
+//    float: left;
+//    padding-right: 30rpx;
+//  }
+//  .title {
+//    display: block;
+//  }
+//  .bio {
+//    font-size: 14px;
+//  }
+//}
 
 .outline {
   position: relative;

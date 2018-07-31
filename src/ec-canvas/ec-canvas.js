@@ -3,6 +3,9 @@ import * as echarts from './echarts';
 
 let ctx;
 
+let chart = null;
+
+
 Component({
   properties: {
     canvasId: {
@@ -66,7 +69,7 @@ Component({
       if (!opt.canvasId) {
         opt.canvasId = this.data.canvasId;
       }
-      
+
       ctx.draw(true, () => {
         wx.canvasToTempFilePath(opt, this);
       });

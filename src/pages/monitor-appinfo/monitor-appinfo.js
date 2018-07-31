@@ -1,10 +1,22 @@
+import * as echarts from "../../ec-canvas/echarts";
+import geoJson from "../../ec-canvas/china";
+
 const service = require('../../service/test');
+const bar = require('../../components/diagram/bar.js');
+const line = require('../../components/diagram/outline-line.js');
+const pie = require('../../components/diagram/outline-pie.js');
+const map = require('../../components/diagram/map.js');
+const gauge = require('../../components/diagram/gauge.js');
+const TL = require('../../components/diagram/config.js');
 
 Page({
     /**
      * 页面的初始数据
      */
     data: {
+        ec: {
+            lazyLoad: true
+        },
         ifTypeSelectedShow: false, // 是否显示固定类型选择栏
         swiperIndex: 0,
         types: [
@@ -31,6 +43,7 @@ Page({
             title: '',
             bio: ''
         },
+        charts: [],
         size: 10,
         batch: {
             name: 'batch',
@@ -106,15 +119,40 @@ Page({
             swiperIndex: parseInt(e.detail.value)
         });
     },
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function (options) {
+    onLoad: function () {
         service.getApp(
             (res) => {
                 this.setData({
-                    appOutline: res.data
+                    appOutline: res.data,
+                    charts: res.charts
                 });
+
+                wx.setNavigationBarTitle({ title: this.data.appOutline.title });
+
+                this.ecComponents.push(this.selectComponent('#preview-chart-1'));
+                this.ecComponents.push(this.selectComponent('#preview-chart-2'));
+                this.ecComponents.push(this.selectComponent('#preview-chart-3'));
+
+                for (let i = 0; i < res.charts.length; i++) {
+                    this.ecComponents[i].init((canvas, width, height) => {
+
+                        // 获取组件的 canvas、width、height 后的回调函数
+                        // 在这里初始化图表
+                        const chart = echarts.init(canvas, null, {
+                            width: width,
+                            height: height
+                        });
+
+                        // 将图表实例绑定到 this 上，可以在其他成员函数（如 dispose）中访问
+                        this.chart = chart;
+
+                        this.setChart(res.charts[i]);
+
+                        // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+                        return chart;
+                    });
+                }
+
             },
             (res) => {
             },
@@ -143,8 +181,39 @@ Page({
         )
     },
 
+    onReady: function () {
+        this.ecComponents = [];
+
+    },
+
     onPullDownRefresh: function () {
         wx.startPullDownRefresh();
         this.onLoad();
+    },
+
+    setChart(bundle) {
+        let type;
+        switch (bundle.chart.chartType) {
+            case 'bar':
+                type = bar;
+                break;
+            case 'line':
+                type = line;
+                break;
+            case 'pie':
+                type = pie;
+                break;
+            case 'gauge':
+                type = gauge;
+                break;
+            case 'map':
+                type = map;
+                echarts.registerMap('china', geoJson);
+                break;
+        }
+
+        let option = type.getOption(bundle.data, bundle.chart, TL);
+
+        this.chart.setOption(option);
     }
 });

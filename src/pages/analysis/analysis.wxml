@@ -32,25 +32,30 @@
             <!--历史异常导航 end-->
         </view>
         <!--头部概览模块 end-->
-     <!--首页收藏部分 start-->
+        <!--首页收藏部分 start-->
         <view class="collect-list">
-            <view class="title">收藏</view>
-         <!--收藏图表 start-->
+            <view class="title">
+                <image src="../../img/svgs/star_fill.svg"></image>
+            </view>
+            <!--收藏图表 start-->
             <scroll-view scroll-x>
-                <navigator class="card"
-                           wx:for="{{collectList}}"
-                           wx:key="collect-{{index}}"
-                           hover-class="card-hover"
-                           url="../monitor-appinfo-diagram/monitor-appinfo-diagram">
-                    <label>
-                        {{item.name}}
-                        <button form-type="submit"></button>
-                    </label>
-                </navigator>
+                <block  wx:for="{{collectList}}"
+                        wx:key="collect-{{index}}">
+                    <navigator class="card"
+                               hover-class="card-hover"
+                               url="../monitor-appinfo-diagram/monitor-appinfo-diagram?id={{item.id}}">
+                        <label>
+                            <text>
+                                {{item.name}}
+                            </text>
+                            <button form-type="submit"></button>
+                        </label>
+                    </navigator>
+                </block>
             </scroll-view>
-         <!--收藏图表 end-->
+            <!--收藏图表 end-->
         </view>
-     <!--首页收藏部分 end-->
+        <!--首页收藏部分 end-->
 
         <!--异常信息模块 start-->
         <navigator id="body"

@@ -15,9 +15,7 @@ Page({
         page: 0, //异常列表页码
         size: 10 //异常列表单页项数
     },
-
     onLoad: function () {
-
         this.setData({
             ifLoading: true
         });
@@ -31,7 +29,6 @@ Page({
             (res) => {
             }
         );
-
         service.getUserDiagrams(
             (res) => {
                 this.setData({

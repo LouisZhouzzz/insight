@@ -79,42 +79,43 @@ $exceptionNumHinderRadius: 30rpx;
   background-color: $pageBackgroundColor;
   width: 100%;
   display: flex;
-  height: 120rpx;
+  height: 80rpx;
+  line-height: 80rpx;
   .title {
-    line-height: 50rpx;
-    width: 5%;
-    padding: 10rpx;
-    background-color: lighten($themeBackgroundColor, 20%);
+    white-space: nowrap;
+    padding: 0 0.5em;
+    background-color: darken($themeBackgroundColor, 8%);
     color: $themeColor;
+    image {
+      height: 80rpx;
+      width: 50rpx;
+    }
   }
   scroll-view {
-    width: 95%;
-    padding: {
-      top: 20rpx;
-      bottom: 20rpx;
-    }
     overflow: scroll;
     white-space: nowrap;
-    background-color:  lighten($themeBackgroundColor, 10%);
-  }
-  .card {
-    line-height: 56rpx;
-    height: 56rpx;
-    max-width: 6em;
-    overflow: hidden;
-    background: none;
-    color: $themeColor;
-    display: inline-block;
-    border: 2rpx solid $themeColor;
-    border-radius: 10rpx;
-    text-align: center;
-    padding: 10rpx;
-    margin:  0 10rpx;
-    font-size: 14px;
-  }
-  .card-hover {
-    color:  lighten($themeBackgroundColor, 10%);
-    background: $themeColor;
+    background-color:  lighten($themeBackgroundColor, 8%);
+    .card {
+      background: none;
+      color: $themeColor;
+      display: inline-block;
+      //border: 2rpx solid $themeColor;
+      //border-radius: 10rpx;
+      text-align: center;
+      padding:  0 0.5em;
+      font-size: 14px;
+      border-right: 1px solid white;
+
+      text {
+        max-width: 7em;
+        display: inline-block;
+        overflow: hidden;
+      }
+    }
+    .card-hover {
+      color:  lighten($themeBackgroundColor, 10%);
+      background: $themeColor;
+    }
   }
 }
 
@@ -164,6 +165,8 @@ scroll-view.container {
 }
 
 .tag {
+  max-width: 6em;
+  overflow: hidden;
   height: $itemTagHeight;
   margin: 0 1em;
   vertical-align: middle;

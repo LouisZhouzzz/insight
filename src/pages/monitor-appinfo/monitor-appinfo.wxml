@@ -1,21 +1,38 @@
-<scroll-view
-        scroll-y="{{ifOuterScroll}}}"
+<view
         class='container'
-        bindscroll='outerscroll'
-        scroll-with-animation="true"
         xmlns:wx="http://www.w3.org/1999/xhtml">
-    <form report-submit="true" bindsubmit="onFormSubmit">
+    <form report-submit="true" bindsubmit="onFormSubmit" style="width: 100%">
         <!--头部信息概览模块 start-->
-        <view class='header' style='height:400px;'>
-            <view class='header-content'>
-                <image src='../../img/svgs/dashed_rect.svg'></image>
-                <text class='title'>{{appOutline.title}}</text>
-                <text class='bio'>{{appOutline.bio}}</text>
+        <view class='header'>
+            <view class='bio'>
+                <text>{{appOutline.bio}}</text>
             </view>
             <!--概览图表 start-->
-            <view style="height: 600rpx; padding: 1em;">
-                我是图表我是图表，总览的小图表~
-            </view>
+
+            <swiper indicator-dots="true"  style="height: 500rpx; padding: 2em 0">
+                <swiper-item wx:if="{{charts.length >= 1}}">
+                    <ec-canvas id="preview-chart-1" canvas-id="preview-chart-1" ec="{{ ec }}"></ec-canvas>
+                </swiper-item>
+
+                <swiper-item wx:if="{{charts.length >= 2}}">
+                    <ec-canvas id="preview-chart-2" canvas-id="preview-chart-2" ec="{{ ec }}"></ec-canvas>
+                </swiper-item>
+
+                <swiper-item wx:if="{{charts.length >= 3}}">
+                    <ec-canvas id="preview-chart-3" canvas-id="preview-chart-3" ec="{{ ec }}"></ec-canvas>
+                </swiper-item>
+            </swiper>
+
+            <!--<view style="height: 600rpx; padding: 1em;">-->
+
+                <!--&lt;!&ndash;<siwper indicator-dots="true">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<swiper-item wx:for="{{charts}}" wx:key="chart - {{index}}">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<ec-canvas id="preview-chart-{{index + 1}}" canvas-id="preview-chart-{{index + 1}}" ec="{{ ec }}"></ec-canvas>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</swiper-item>&ndash;&gt;-->
+                <!--&lt;!&ndash;</siwper>&ndash;&gt;-->
+            <!--</view>-->
+
+
             <!--概览图表 end-->
         </view>
         <!--头部信息概览模块 end-->
@@ -30,13 +47,13 @@
         <!--指标类型选项 end-->
 
         <!--下拉时贴顶的指标类型选项 start-->
-        <radio-group class="types-group stuck {{ifTypeSelectedShow ? '': 'hidden'}}}" bindchange='radioChange'>
-            <label wx:for='{{types}}' wx:key='type-stuck-{{index}}' class="type-item {{item.checked ? 'checked' : ''}}">
-                <view class="type-radio ">{{item.name}}</view>
-                <radio value='{{index}}' checked="{{item.checked}}" style='display: none'></radio>
-                <button form-type="submit"></button>
-            </label>
-        </radio-group>
+        <!--<radio-group class="types-group stuck {{ifTypeSelectedShow ? '': 'hidden'}}}" bindchange='radioChange'>-->
+        <!--<label wx:for='{{types}}' wx:key='type-stuck-{{index}}' class="type-item {{item.checked ? 'checked' : ''}}">-->
+        <!--<view class="type-radio ">{{item.name}}</view>-->
+        <!--<radio value='{{index}}' checked="{{item.checked}}" style='display: none'></radio>-->
+        <!--<button form-type="submit"></button>-->
+        <!--</label>-->
+        <!--</radio-group>-->
         <!--下拉时贴顶的指标类型选项 end-->
 
         <!--二级列表 start-->
@@ -57,7 +74,7 @@
         </view>
         <!--二级列表 end-->
     </form>
-</scroll-view>
+</view>
 
 <!--二级列表模板-->
 <template name="list">
@@ -78,8 +95,11 @@
         <!--二级列表二级子项 start-->
         <view class="quota-items">
             <label>
-                <navigator catchtap="" class='quota-item' wx:for="{{item.items}}" wx:key='quota-item-{{index}}'
-                           url="../monitor-appinfo-diagram/monitor-appinfo-diagram">
+                <navigator catchtap=""
+                           class='quota-item'
+                           wx:for="{{item.items}}"
+                           wx:key='quota-item-{{index}}'
+                           url="../monitor-appinfo-diagram/monitor-appinfo-diagram?id={{item.id}}">
                     <text>- {{item.name}}</text>
                     <image class='enter' src='../../img/svgs/arrow_right.svg'></image>
                     <image src='../../img/svgs/star_fill.svg'
