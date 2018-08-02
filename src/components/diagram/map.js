@@ -1,3 +1,4 @@
+let testa = 10;
 function getOption(localData, para, TL) {
   var option = {
 
@@ -26,7 +27,7 @@ function getOption(localData, para, TL) {
         invisible: false,
         draggable: false,
         style: {
-          text: para.graExpText,
+          text: textCov(para.graExpText, 36),
           font: 'bolder 16px cursive',
           textAlign: 'center',
           fill: TL.textColor,
@@ -39,9 +40,11 @@ function getOption(localData, para, TL) {
         invisible: false,
         draggable: false,
         style: {
-          text: para.graStaText,
+          text: ['最大值: ' + getExt(localData).max + ',\t省份: ' + extLoc(localData).maxLoc
+          + '\n最小值: ' + getExt(localData).min + ',\t省份: ' + extLoc(localData).minLoc
+          + '\n平均值: ' + getExt(localData).ave],
           font: 'bolder 16px cursive',
-          textAlign: 'center',
+          textAlign: 'left',
           fill: TL.textColor,
         }
       }
@@ -54,8 +57,8 @@ function getOption(localData, para, TL) {
     },
 
     visualMap: {
-      min: para.mapMin,
-      max: para.mapMax,
+      min: getMapExt(localData).min,
+      max: getMapExt(localData).max,
       left: 'left',
       top: 'bottom',
       text: ['高', '低'], // 文本，默认为数值文本
@@ -69,7 +72,7 @@ function getOption(localData, para, TL) {
 
     series: [{
 
-      top: '24%',
+      top: '30%',
       bottom: '25%',
       left: '1%',
       right: '1%',
@@ -104,6 +107,64 @@ function getOption(localData, para, TL) {
   };
 
   return option;
+}
+
+function textCov(text, n) {
+    let outText = '';
+    let mark = 0;
+    for(let i = 0; i < text.length; i++) {
+        outText += text[i];
+        mark++;
+        if(text[i].match(/[^\x00-\xff]/ig) != null)
+            mark++;
+        if(mark == n  + 1 || mark == n) {
+            outText += '\n';
+            mark = 0;
+        }
+    }
+    return outText;
+}
+
+function extLoc(data) {
+    let min = getExt(data).min;
+    let max = getExt(data).max;
+    let minLoc = '', maxLoc = '';
+    for(let i in data) {
+        if(data[i].value == min)
+            minLoc += data[i].name + ' ';
+        if(data[i].value == max)
+            maxLoc += data[i].name + ' ';
+    }
+    return {
+        minLoc: minLoc,
+        maxLoc: maxLoc,
+    }
+}
+
+function getExt(data) {
+    let arr = new Array;
+    let ave = 0;
+    for(let i in data) {
+        arr.push(data[i].value);
+        ave += arr[i];
+    }
+    ave /= arr.length;
+
+    return {
+        min: Math.min.apply(Math, arr),
+        max: Math.max.apply(Math, arr),
+        ave: ave.toFixed(2),
+    }
+}
+
+function getMapExt(data) {
+    let ext = getExt(data);
+    let temp = ext.max.toString().split('.');
+    let n = temp[0].length -1;
+    return{
+        min: Math.floor(ext.min / Math.pow(10, n))*Math.pow(10, n),
+        max: Math.ceil(ext.max / Math.pow(10, n))*Math.pow(10, n),
+    }
 }
 
 module.exports = {

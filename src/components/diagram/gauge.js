@@ -26,22 +26,9 @@ function getOption(localData, para, TL) {
           invisible: false,
           draggable: false,
           style: {
-            text: para.graExpText,
+            text: textCov(para.graExpText, 36),
             font: 'bolder 16px cursive',
-            textAlign: 'center',
-            fill: TL.textColor,
-          }
-        },
-        {
-          type: 'text',
-          left: TL.graStaLeft,
-          top: TL.graStaTop,
-          invisible: false,
-          draggable: false,
-          style: {
-            text: para.graStaText,
-            font: 'bolder 16px cursive',
-            textAlign: 'center',
+            textAlign: 'left',
             fill: TL.textColor,
           }
         }]
@@ -76,6 +63,22 @@ function getOption(localData, para, TL) {
   };
 
   return option;
+}
+
+function textCov(text, n) {
+    let outText = '';
+    let mark = 0;
+    for(let i = 0; i < text.length; i++) {
+        outText += text[i];
+        mark++;
+        if(text[i].match(/[^\x00-\xff]/ig) != null)
+            mark++;
+        if(mark == n  + 1 || mark == n) {
+            outText += '\n';
+            mark = 0;
+        }
+    }
+    return outText;
 }
 
 module.exports = {
