@@ -8,6 +8,7 @@ const pie = require('../../components/diagram/pie.js');
 const map = require('../../components/diagram/map.js');
 const gauge = require('../../components/diagram/gauge.js');
 const TL = require('../../components/diagram/config.js');
+const chartInit = require('../../components/diagram/eCharts').init;
 
 Page({
     data: {
@@ -20,22 +21,23 @@ Page({
         this.ecComponent = this.selectComponent('#mychart-dom-bar');
         service.getDiagram(
             (res) => {
-                this.ecComponent.init((canvas, width, height) => {
-
-                    // 获取组件的 canvas、width、height 后的回调函数
-                    // 在这里初始化图表
-                    const chart = echarts.init(canvas, null, {
-                        width: width,
-                        height: height
-                    });
-                    // 将图表实例绑定到 this 上，可以在其他成员函数（如 dispose）中访问
-                    this.chart = chart;
-
-                    this.setChart(res);
-
-                    // 注意这里一定要返回 chart 实例，否则会影响事件处理等
-                    return chart;
-                });
+                // this.ecComponent.init((canvas, width, height) => {
+                //
+                //     // 获取组件的 canvas、width、height 后的回调函数
+                //     // 在这里初始化图表
+                //     const chart = echarts.init(canvas, null, {
+                //         width: width,
+                //         height: height
+                //     });
+                //     // 将图表实例绑定到 this 上，可以在其他成员函数（如 dispose）中访问
+                //     this.chart = chart;
+                //
+                //     this.setChart(res);
+                //
+                //     // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+                //     return chart;
+                // });
+                this.ecComponent.init(chartInit(res));
             },
             () => {
             },
