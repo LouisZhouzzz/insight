@@ -9,11 +9,15 @@ const map = require('../../components/diagram/map.js');
 const gauge = require('../../components/diagram/gauge.js');
 const TL = require('../../components/diagram/config.js');
 
+const computed = require('../../utils/vuelike').computed;
+
 Page({
     /**
      * 页面的初始数据
      */
     data: {
+        canvasLabels: ['一年异常发生', '指标类型分布'],
+        canvasIndex: 0,
         ec: {
             lazyLoad: true
         },
@@ -110,6 +114,26 @@ Page({
             ifTypeSelectedShow: e.detail.scrollTop > 400
         });
     },
+    canvasChange (e) {
+        let index = parseInt(e.detail.value);
+        this.setData({
+           canvasIndex: index
+        });
+        this.ecComponents[index].init((canvas, width, height) => {
+
+            // 获取组件的 canvas、width、height 后的回调函数
+            // 在这里初始化图表
+            const chart = echarts.init(canvas, null, {
+                width: width,
+                height: height
+            });
+
+            this.setChart(this.data.charts[index], chart);
+
+            // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+            return chart;
+        });
+    },
     radioChange: function (e) {
         let types = this.data.types;
         types[this.data.swiperIndex].checked = false;
@@ -133,25 +157,40 @@ Page({
                 this.ecComponents.push(this.selectComponent('#preview-chart-2'));
                 this.ecComponents.push(this.selectComponent('#preview-chart-3'));
 
-                for (let i = 0; i < res.charts.length; i++) {
-                    this.ecComponents[i].init((canvas, width, height) => {
+                this.ecComponents[0].init((canvas, width, height) => {
 
-                        // 获取组件的 canvas、width、height 后的回调函数
-                        // 在这里初始化图表
-                        const chart = echarts.init(canvas, null, {
-                            width: width,
-                            height: height
-                        });
-
-                        // 将图表实例绑定到 this 上，可以在其他成员函数（如 dispose）中访问
-                        this.chart = chart;
-
-                        this.setChart(res.charts[i]);
-
-                        // 注意这里一定要返回 chart 实例，否则会影响事件处理等
-                        return chart;
+                    // 获取组件的 canvas、width、height 后的回调函数
+                    // 在这里初始化图表
+                    const chart = echarts.init(canvas, null, {
+                        width: width,
+                        height: height
                     });
-                }
+
+                    this.setChart(res.charts[0], chart);
+
+                    // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+                    return chart;
+                });
+
+                // for (let i = 0; i < res.charts.length; i++) {
+                //     this.ecComponents[i].init((canvas, width, height) => {
+                //
+                //         // 获取组件的 canvas、width、height 后的回调函数
+                //         // 在这里初始化图表
+                //         const chart = echarts.init(canvas, null, {
+                //             width: width,
+                //             height: height
+                //         });
+                //
+                //         // 将图表实例绑定到 this 上，可以在其他成员函数（如 dispose）中访问
+                //         this.chart = chart;
+                //
+                //         this.setChart(res.charts[i]);
+                //
+                //         // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+                //         return chart;
+                //     });
+                // }
 
             },
             (res) => {
@@ -183,7 +222,19 @@ Page({
 
     onReady: function () {
         this.ecComponents = [];
+        computed(this, {
+            canvasNavs () {
+                let s = this.data.canvasLabels.map(function (e) {
+                    return {
+                        name: e,
+                        checked: false
+                    }
+                });
+                s[this.data.canvasIndex].checked = true;
 
+                return s;
+            }
+        });
     },
 
     onPullDownRefresh: function () {
@@ -191,7 +242,7 @@ Page({
         this.onLoad();
     },
 
-    setChart(bundle) {
+    setChart(bundle, chart) {
         let type;
         switch (bundle.chart.chartType) {
             case 'bar':
@@ -214,6 +265,6 @@ Page({
 
         let option = type.getOption(bundle.data, bundle.chart, TL);
 
-        this.chart.setOption(option);
+        chart.setOption(option);
     }
 });

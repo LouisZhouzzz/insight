@@ -1,14 +1,12 @@
 @import "../../app.scss";
 
-$pageBackgroundColor: #F9F9F9;
 $appItemHeight: 100rpx;
 $itemTagHeight: 50rpx;
 $itemTagFontSize: 12px;
-$itemTabBackgroundColor: #75A3D6;
+$itemTabBackgroundColor: #8EA8C3;
 $exceptionNumHinderRadius: 30rpx;
 
 .container {
-  overflow: hidden;
   background-color: $pageBackgroundColor;
   align-items: stretch;
 }
@@ -19,7 +17,7 @@ $exceptionNumHinderRadius: 30rpx;
   color: $themeColor;
   position: relative;
   overflow: visible;
-  padding-bottom: 1em;
+  padding-bottom: 2em;
   height: 120px;
   width: 100%;
   .cir{
@@ -38,14 +36,14 @@ $exceptionNumHinderRadius: 30rpx;
       text-align: center;
     }
   }
+  .view-history {
+    position: absolute;
+    right: 1em;
+    bottom: 1em;
+    font-size: 14px;
+  }
 }
 
-.view-history {
-  position: absolute;
-  right: 1em;
-  bottom: 10rpx;
-  font-size: 14px;
-}
 
 .outline-item {
   text-align: center;
@@ -74,7 +72,13 @@ $exceptionNumHinderRadius: 30rpx;
   }
 }
 
-//收藏模块
+/*******************************************label-page-nav************************************/
+.nav {
+  background-color: lighten($themeBackgroundColor, 10%);
+}
+
+
+/*******************************************旧收藏模块************************************/
 .collect-list {
   background-color: $pageBackgroundColor;
   width: 100%;
@@ -133,7 +137,7 @@ scroll-view.container {
 /* 列表一级子项 */
 .app-item-container {
   background-color: $themeColor;
-  box-shadow: 0 0 30px 0 darken($pageBackgroundColor, 10%);
+  box-shadow: 0 0 15px 0 darken($pageBackgroundColor, 10%);
   max-height: $appItemHeight;
   transition: 500ms linear 0ms;
   overflow: hidden;
@@ -150,17 +154,20 @@ scroll-view.container {
 }
 
 .app-item {
+  display: flex;
   height: $appItemHeight;
   padding-left: 1em;
+  align-items: center;
   & > text {
-    height: $appItemHeight;
+    display: inline-block;
     line-height: $appItemHeight;
+    flex-grow: 1;
+    overflow: hidden;
   }
-  .enter {
-    float: right;
+  image {
     height: $appItemHeight / 2;
     width: $appItemHeight / 2;
-    margin: $appItemHeight / 4 1em 0;
+    margin: 0 0.5em;
   }
 }
 
@@ -168,7 +175,6 @@ scroll-view.container {
   max-width: 6em;
   overflow: hidden;
   height: $itemTagHeight;
-  margin: 0 1em;
   vertical-align: middle;
   padding: 0 0.5em;
   text-align: center;

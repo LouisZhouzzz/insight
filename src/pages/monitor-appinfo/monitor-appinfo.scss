@@ -59,6 +59,30 @@ canvas {
   width: 80rpx;
 }
 
+/*************************************应用总览图表***********************************************/
+.canvas-nav {
+  display: flex;
+  justify-content: center;
+  .item {
+    border-radius: 15rpx;
+    padding: 0 1em;
+    font-size: 12px;
+    border: 1px solid $themeColor;
+    &.checked {
+      background-color: $themeColor;
+      color: $themeBackgroundColor;
+    }
+    &:nth-child(1) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    &:nth-child(2) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+}
+
 /*类型单选按钮组  */
 .types-group {
   display: -webkit-flex;

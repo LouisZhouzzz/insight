@@ -1,10 +1,12 @@
-$themeBackgroundColor:#ff6347; //主题背景色
-$themeColor: white; //主题文字色
+$themeBackgroundColor:#2C75B3; //主题背景色
+$themeColor: #FFFFFF; //主题文字色
 $darkenWhite: snow;
 $lightenBlack: #25231F;
 $defaultFontSize: 16px;
+$pageBackgroundColor: #E9F1F7;
 
 page {
+  background-color: #E9F1F7;
   font: {
     family: Helvetica, serif;
     size: $defaultFontSize;

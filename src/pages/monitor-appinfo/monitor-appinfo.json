@@ -6,6 +6,7 @@
     "backgroundTextStyle": "light"
   },
   "usingComponents": {
-    "ec-canvas": "../../ec-canvas/ec-canvas"
+    "ec-canvas": "../../ec-canvas/ec-canvas",
+    "label-page": "../../components/label-page/label-page"
   }
 }

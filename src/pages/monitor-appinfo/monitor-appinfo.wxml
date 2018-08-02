@@ -4,24 +4,36 @@
     <form report-submit="true" bindsubmit="onFormSubmit" style="width: 100%">
         <!--头部信息概览模块 start-->
         <view class='header'>
-            <view class='bio'>
-                <text>{{appOutline.bio}}</text>
-            </view>
+            <!--<view class='bio'>-->
+                <!--<text>{{appOutline.bio}}</text>-->
+            <!--</view>-->
             <!--概览图表 start-->
 
-            <swiper indicator-dots="true"  style="height: 500rpx; padding: 2em 0">
-                <swiper-item wx:if="{{charts.length >= 1}}">
-                    <ec-canvas id="preview-chart-1" canvas-id="preview-chart-1" ec="{{ ec }}"></ec-canvas>
-                </swiper-item>
+            <radio-group class='canvas-nav' bindchange='canvasChange'>
+                <label wx:for='{{canvasNavs}}'
+                       wx:key="label-nav-{{index}}"
+                       class="item {{item.checked ? 'checked' : ''}}">
+                    <view class="type-radio">{{item.name}}</view>
+                    <radio value='{{index}}' checked="{{item.checked}}" style='display: none'></radio>
+                </label>
+            </radio-group>
 
-                <swiper-item wx:if="{{charts.length >= 2}}">
-                    <ec-canvas id="preview-chart-2" canvas-id="preview-chart-2" ec="{{ ec }}"></ec-canvas>
-                </swiper-item>
+            <ec-canvas class="{{canvasIndex === 0 ? '' : 'hidden'}}" id="preview-chart-1" canvas-id="preview-chart-1" ec="{{ ec }}"></ec-canvas>
+            <ec-canvas class="{{canvasIndex === 1 ? '' : 'hidden'}}" id="preview-chart-2" canvas-id="preview-chart-2" ec="{{ ec }}"></ec-canvas>
 
-                <swiper-item wx:if="{{charts.length >= 3}}">
-                    <ec-canvas id="preview-chart-3" canvas-id="preview-chart-3" ec="{{ ec }}"></ec-canvas>
-                </swiper-item>
-            </swiper>
+            <!--<swiper indicator-dots="true"  style="height: 500rpx; padding: 2em 0">-->
+                <!--<swiper-item wx:if="{{charts.length >= 1}}">-->
+                    <!--<ec-canvas id="preview-chart-1" canvas-id="preview-chart-1" ec="{{ ec }}"></ec-canvas>-->
+                <!--</swiper-item>-->
+
+                <!--<swiper-item wx:if="{{charts.length >= 2}}">-->
+                    <!--<ec-canvas id="preview-chart-2" canvas-id="preview-chart-2" ec="{{ ec }}"></ec-canvas>-->
+                <!--</swiper-item>-->
+
+                <!--<swiper-item wx:if="{{charts.length >= 3}}">-->
+                    <!--<ec-canvas id="preview-chart-3" canvas-id="preview-chart-3" ec="{{ ec }}"></ec-canvas>-->
+                <!--</swiper-item>-->
+            <!--</swiper>-->
 
             <!--<view style="height: 600rpx; padding: 1em;">-->
 

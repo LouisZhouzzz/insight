@@ -8,14 +8,14 @@ function getOption(localData, para, TL) {
     }
 
     let option = {
-        title: {
-            text: '一年内异常发生',
-            left: 'center',
-            top: '0',
-            textStyle: {
-                color: '#fff'
-            }
-        },
+        // title: {
+        //     text: '一年内异常发生',
+        //     left: 'center',
+        //     top: '0',
+        //     textStyle: {
+        //         color: '#fff'
+        //     }
+        // },
         grid: {
             left: "10%",
             right: "10%",
@@ -99,5 +99,5 @@ function getSeries(data, chartType) {
 
 module.exports = {
   getOption: getOption
-}
+};
 

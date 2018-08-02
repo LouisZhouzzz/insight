@@ -1,0 +1,14 @@
+<label-page  xmlns:wx="http://www.w3.org/1999/xhtml">
+    <radio-group class='nav nav-class' bindchange='radioChange'>
+        <label wx:for='{{navs}}'
+               wx:key="label-nav-{{index}}"
+               class="item {{item.checked ? 'checked' : ''}}">
+            <view class="type-radio">{{item.name}}</view>
+            <radio value='{{index}}' checked="{{item.checked}}" style='display: none'></radio>
+        </label>
+    </radio-group>
+
+    <block wx:for="{{navs}}" wx:key="page-slot-{{index}}">
+        <slot wx:if="{{index === checkedIndex}}" name="page-{{index + 1}}"></slot>
+    </block>
+</label-page>

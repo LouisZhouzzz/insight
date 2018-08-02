@@ -28,60 +28,85 @@
                     <button form-type="submit"></button>
                 </label>
             </navigator>
-
             <!--历史异常导航 end-->
         </view>
         <!--头部概览模块 end-->
-        <!--首页收藏部分 start-->
-        <view class="collect-list">
-            <view class="title">
-                <image src="../../img/svgs/star_fill.svg"></image>
-            </view>
-            <!--收藏图表 start-->
-            <scroll-view scroll-x>
-                <block  wx:for="{{collectList}}"
-                        wx:key="collect-{{index}}">
-                    <navigator class="card"
-                               hover-class="card-hover"
-                               url="../monitor-appinfo-diagram/monitor-appinfo-diagram?id={{item.id}}">
-                        <label>
-                            <text>
-                                {{item.name}}
-                            </text>
-                            <button form-type="submit"></button>
-                        </label>
-                    </navigator>
-                </block>
-            </scroll-view>
-            <!--收藏图表 end-->
-        </view>
-        <!--首页收藏部分 end-->
+        <!--&lt;!&ndash;首页收藏部分 start&ndash;&gt;-->
+        <!--<view class="collect-list">-->
+            <!--<view class="title">-->
+                <!--<image src="../../img/svgs/star_fill.svg"></image>-->
+            <!--</view>-->
+            <!--&lt;!&ndash;收藏图表 start&ndash;&gt;-->
+            <!--<scroll-view scroll-x>-->
+                <!--<block  wx:for="{{collectList}}"-->
+                        <!--wx:key="collect-{{index}}">-->
+                    <!--<navigator class="card"-->
+                               <!--hover-class="card-hover"-->
+                               <!--url="../monitor-appinfo-diagram/monitor-appinfo-diagram?id={{item.id}}">-->
+                        <!--<label>-->
+                            <!--<text>-->
+                                <!--{{item.name}}-->
+                            <!--</text>-->
+                            <!--<button form-type="submit"></button>-->
+                        <!--</label>-->
+                    <!--</navigator>-->
+                <!--</block>-->
+            <!--</scroll-view>-->
+            <!--&lt;!&ndash;收藏图表 end&ndash;&gt;-->
+        <!--</view>-->
+        <!--&lt;!&ndash;首页收藏部分 end&ndash;&gt;-->
 
-        <!--异常信息模块 start-->
-        <navigator id="body"
-                   wx:for="{{exceptionList}}"
-                   wx:key='app-{{index}}'
-                   class="app-item-container"
-                   hover-class="app-item-hover"
-                   url="../monitor-appinfo-diagram/monitor-appinfo-diagram?id={{item.id}}"
-                   data-index="{{index}}">
-            <label>
-                <view class='app-item'>
-                    <text class='title'>{{item.name}}</text>
-                    <image class='enter' src='../../img/svgs/arrow_right.svg'></image>
-                    <view class='tag'>
-                        <text>{{item.source}}</text>
-                    </view>
+        <label-page nav-class="nav" labels="{{labels}}">
+            <view slot="page-1">
+                <!--异常信息模块 start-->
+                <navigator wx:for="{{exceptionList}}"
+                           wx:key='app-{{index}}'
+                           class="app-item-container"
+                           hover-class="app-item-hover"
+                           url="../monitor-appinfo-diagram/monitor-appinfo-diagram?id={{item.id}}"
+                           data-index="{{index}}">
+                    <label>
+                        <view class='app-item'>
+                            <text class='title'>{{item.name}}</text>
+                            <view class='tag'>
+                                <text>{{item.source}}</text>
+                            </view>
+                            <image class='enter' src='../../img/svgs/arrow_right.svg'></image>
+                        </view>
+                        <button form-type="submit"></button>
+                    </label>
+                </navigator>
+                <view class="loading-hinder">
+                    <text wx:if="{{ifLoading}}">Loading...</text>
+                    <text wx:else class="{{ifMore ? 'hidden' : ''}}">No more items.</text>
                 </view>
-                <button form-type="submit"></button>
-            </label>
-        </navigator>
-        <!--异常信息模块 end-->
+                <!--异常信息模块 end-->
+            </view>
+            <view slot="page-2">
+                <!--图表收藏模块 start-->
+                <navigator wx:for="{{collectList}}"
+                           wx:key='collection-{{index}}'
+                           class="app-item-container"
+                           hover-class="app-item-hover"
+                           url="../monitor-appinfo-diagram/monitor-appinfo-diagram?id={{item.id}}"
+                           data-index="{{index}}">
+                    <label>
+                        <view class='app-item'>
+                            <text class='title'>{{item.name}}</text>
+                            <image src="../../img/svgs/delete.svg"></image>
+                            <image class='enter' src='../../img/svgs/arrow_right.svg'></image>
+                        </view>
+                        <button form-type="submit"></button>
+                    </label>
+                </navigator>
+                <view class="loading-hinder">
+                    <text wx:if="{{ifLoading}}">Loading...</text>
+                    <text wx:else class="{{ifMore ? 'hidden' : ''}}">No more items.</text>
+                </view>
+                <!--图表收藏模块 end-->
+            </view>
+        </label-page>
 
-        <view class="loading-hinder">
-            <text wx:if="{{ifLoading}}">Loading...</text>
-            <text wx:else class="{{ifMore ? 'hidden' : ''}}">No more items.</text>
-        </view>
     </form>
 </view>
 

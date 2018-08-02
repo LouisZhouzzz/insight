@@ -21,13 +21,13 @@ module.exports = {
  * computed实现
  */
 function computed(ctx, obj) {
-  var keys = Object.keys(obj); // 计算属性键名集合
-  var dataKeys = Object.keys(ctx.data); // ctx绑定数据属性集合
+  let keys = Object.keys(obj); // 计算属性键名集合
+  let dataKeys = Object.keys(ctx.data); // ctx绑定数据属性集合
   // 因为无法预知计算属性会依赖哪些属性，所以只好逐一监听 data 属性，
   dataKeys.forEach(function (dataKey) {
     defineReactive(ctx.data, dataKey, ctx.data[dataKey]);
   });
-  var firstComputedObj = keys.reduce(function (prev, next) {
+  let firstComputedObj = keys.reduce(function (prev, next) {
     // 计算每个计算属性的初始值
     ctx.data.$target = function () {
       // 
@@ -45,7 +45,7 @@ function computed(ctx, obj) {
  * 数据监听方法
  */
 function defineReactive(data, key, val, fn) {
-  var subs = data['$' + key] || [];
+  let subs = data['$' + key] || [];
   Object.defineProperty(data, key, {
     configurable: true,
     enumerable: true,

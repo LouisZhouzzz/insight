@@ -1,0 +1,16 @@
+$pageBackgroundColor: #E9F1F7;
+
+.nav {
+  display: flex;
+  align-items: center;
+  line-height: 2em;
+  text-align: center;
+  .item {
+    flex-grow: 1;
+    color: white;
+    &.checked {
+      color: black;
+      background-color: $pageBackgroundColor;
+    }
+  }
+}

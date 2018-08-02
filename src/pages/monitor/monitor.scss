@@ -14,6 +14,7 @@ $appCardHeight: 375rpx;
 }
 
 .app {
+  position: relative;
   display: inline-block;
   width: $appCardWidth;
   height: $appCardHeight;
@@ -24,14 +25,31 @@ $appCardHeight: 375rpx;
   text-align: center;
   transition-duration: 150ms;
   label {
+    font-size: 18px;
     height: 100%;
     width: 100%;
     display: block;
+    position: relative;
+  }
+  .mask,
+  image {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+  .mask {
+    background-color: $themeBackgroundColor;
+    opacity: 0.3;
+    transition-duration: 200ms;
   }
 }
 
 .app-hover {
-  color: $lightenBlack;
-  background-color: $darkenWhite;
-  border: none;
+  .mask {
+    opacity: 1;
+  }
 }

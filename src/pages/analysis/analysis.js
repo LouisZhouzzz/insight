@@ -1,9 +1,10 @@
 const service = require('../../service/test');
 const computed = require('../../utils/vuelike').computed;
+import {BACKGROUND_COLOR, ACTIVE_COLOR} from '../../config/config'
 
 Page({
     data: {
-        userInfo:  null,
+        labels: ['存在异常', '收藏夹'],
         outline: { //概览面板数据
             appNum: '', //异常应用数
             exceptionNum: '', //异常总数
@@ -37,7 +38,7 @@ Page({
             },
             (res) => {
             },
-            this.data.userInfo
+            getApp().globalData.openid
         );
 
         service.getUnhandledExceptions(
@@ -75,7 +76,7 @@ Page({
                 console.log(res);
             },
             (res) => {},
-            this.data.userInfo,
+            getApp().globalData.openid,
             e.detail.formId
         );
     },
@@ -120,6 +121,11 @@ Page({
         );
     },
 
+    onHide:function(){
+        // 生命周期函数--监听页面隐藏
+        wx.hideNavigationBarLoading();
+    },
+
     onPullDownRefresh: function () {
         wx.startPullDownRefresh();
         this.onLoad();
@@ -133,8 +139,6 @@ Page({
     drawCircleProcess: function () { // 绘制分析界面的概览圆
         const LINE_WIDTH = 10;
         const RADIUS = 50;
-        const BACKGROUND_COLOR = '#f0f0f0';
-        const ACTIVE_COLOR = '#F4D35E';
 
         let rate = this.data.outline.point / 100 * 2 - 0.5;
 

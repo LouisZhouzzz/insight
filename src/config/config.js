@@ -1,0 +1,7 @@
+const BACKGROUND_COLOR = '#f0f0f0';
+const ACTIVE_COLOR = '#F4E04D';
+
+export {
+    BACKGROUND_COLOR,
+    ACTIVE_COLOR
+}

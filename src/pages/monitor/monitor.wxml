@@ -9,8 +9,10 @@
                     wx:key='monitor-app-{{index}}'
                     url="../monitor-appinfo/monitor-appinfo"
                     hover-class="app-hover">
+                <image src="{{item.url}}"></image>
+                <div class="mask"></div>
                 <label>
-                    {{item.title}}
+                    <text>{{item.title}}</text>
                     <button form-type="submit"></button>
                 </label>
             </navigator>

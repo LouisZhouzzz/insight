@@ -8,15 +8,15 @@
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "backgroundColor": "#FF6347",
-    "navigationBarBackgroundColor": "#FF6347",
+    "backgroundColor": "#2C75B3",
+    "navigationBarBackgroundColor": "#2C75B3",
     "navigationBarTitleText": "insight",
     "navigationBarTextStyle": "white"
   },
 
   "tabBar": {
     "color": "#504B43",
-    "backgroundColor": "#F9F9F9",
+    "backgroundColor": "#E9F1F7",
     "selectedColor": "#FF6347",
     "borderStyle": "white",
     "list": [

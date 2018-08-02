@@ -1,18 +1,18 @@
 function getOption(localData, para, TL) {
     let option = {
 
-        title: {
-            text: '指标类型分布',
-            left: 'center',
-            top: 0,
-            textStyle: {
-                color: '#fff'
-            }
-        },
+        // title: {
+        //     text: '指标类型分布',
+        //     left: 'center',
+        //     top: 0,
+        //     textStyle: {
+        //         color: '#fff'
+        //     }
+        // },
         grid: {
             left: "5%",
             right: "5%",
-            top: "5%",
+            top: "0",
             bottom: "30%",
         },
         visualMap: {
@@ -51,7 +51,7 @@ function getOption(localData, para, TL) {
                 },
                 itemStyle: {
                     normal: {
-                        color: '#643A71',
+                        color: '#F8B9A9',
                     }
                 },
                 animationType: 'scale',
