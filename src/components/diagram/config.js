@@ -3,19 +3,19 @@ module.exports ={
     titleLeft: "center",
     titleTop: "2%",
     legLeft: "center",
-    legTop: "20%",
+    legTop: "25%",
     legorient: "horizontal",
     graExpLeft: "center",
-    graExpTop: "15%",
+    graExpTop: "12%",
     graStaLeft: "center",
-    graStaTop: "80%",
+    graStaTop: "82%",
     gridLeft: "5%",
     gridRight: "10%",
-    gridTop: "30%",
-    gridBottom: "25%",
+    gridTop: "32%",
+    gridBottom: "20%",
     pieCenter: [
     "50%",
-    "50%"
+    "55%"
 ],
     pieRadius: [
     "25%",

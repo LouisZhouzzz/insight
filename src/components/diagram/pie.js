@@ -1,4 +1,5 @@
 function getOption(localData, para, TL) {
+    let tabn = 36;
   var option = {
     title: {
       show: true,                                 //默认true
@@ -25,9 +26,9 @@ function getOption(localData, para, TL) {
         invisible: false,
         draggable: false,
         style: {
-          text: para.graExpText,
+          text: textCov(para.graExpText, tabn),
           font: 'bolder 16px cursive',
-          textAlign: 'center',
+          textAlign: 'left',
           fill: TL.textColor,
         }
       },
@@ -38,9 +39,10 @@ function getOption(localData, para, TL) {
         invisible: false,
         draggable: false,
         style: {
-          text: para.graStaText,
+          text: ['占比最大: ' + extLoc(localData).maxLoc + '\t比重: ' + getPer(localData).maxPer
+          + '%\n占比最小: ' + extLoc(localData).minLoc + '\t比重: ' + getPer(localData).minPer + '%'],
           font: 'bolder 16px cursive',
-          textAlign: 'center',
+          textAlign: 'left',
           fill: TL.textColor,
         }
       }
@@ -118,6 +120,63 @@ function getOption(localData, para, TL) {
   };
 
   return option;
+}
+
+function textCov(text, n) {
+    let outText = '';
+    let mark = 0;
+    for(let i = 0; i < text.length; i++) {
+        outText += text[i];
+        mark++;
+        if(text[i].match(/[^\x00-\xff]/ig) != null)
+            mark++;
+        if(mark == n  + 1 || mark == n) {
+            outText += '\n';
+            mark = 0;
+        }
+    }
+    return outText;
+}
+
+function extLoc(data) {
+    let min = getExt(data).min;
+    let max = getExt(data).max;
+    let minLoc = '', maxLoc = '';
+    for(let i in data) {
+        if(data[i].value == min)
+            minLoc += data[i].name + ' ';
+        if(data[i].value == max)
+            maxLoc += data[i].name + ' ';
+    }
+    return {
+        minLoc: minLoc,
+        maxLoc: maxLoc,
+    }
+}
+
+function getPer(data) {
+    let minPer, maxPer;
+    minPer = getExt(data).min/getExt(data).sum*100;
+    maxPer = getExt(data).max/getExt(data).sum*100;
+    return {
+        minPer: minPer.toFixed(2),
+        maxPer: maxPer.toFixed(2)
+    }
+}
+
+function getExt(data) {
+    let arr = new Array;
+    let sum = 0;
+    for(let i in data) {
+        arr.push(data[i].value);
+        sum += arr[i];
+    }
+
+    return {
+        min: Math.min.apply(Math, arr),
+        max: Math.max.apply(Math, arr),
+        sum: sum,
+    }
 }
 
 module.exports = {

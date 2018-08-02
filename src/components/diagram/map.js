@@ -1,5 +1,5 @@
-let testa = 10;
 function getOption(localData, para, TL) {
+    let tabn = 36;
   var option = {
 
     title: {
@@ -27,9 +27,9 @@ function getOption(localData, para, TL) {
         invisible: false,
         draggable: false,
         style: {
-          text: textCov(para.graExpText, 36),
+          text: textCov(para.graExpText, tabn),
           font: 'bolder 16px cursive',
-          textAlign: 'center',
+          textAlign: 'left',
           fill: TL.textColor,
         }
       },
