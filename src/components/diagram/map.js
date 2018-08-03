@@ -97,7 +97,7 @@ function getOption(localData, para, TL) {
       itemStyle: {
         normal: {
             borderColor:'rgba(255,255,255,0.6)',
-            borderWidth:1.3
+            borderWidth:2
         },
         emphasis: {
           areaColor:'yellow'

@@ -41,10 +41,6 @@ function getOption(localData, para, TL) {
       radius: TL.gauRadius, //仪表盘半径
       axisLine: {
         show: true,
-        lineStyle: {
-          width: 30,
-          shadowBlur: 0,
-        }
       },
       axisLabel: {},
       pointer: {
