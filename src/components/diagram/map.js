@@ -72,8 +72,7 @@ function getOption(localData, para, TL) {
 
     series: [{
 
-      top: '30%',
-      bottom: '25%',
+      top: '25%',
       left: '1%',
       right: '1%',
 
@@ -91,12 +90,14 @@ function getOption(localData, para, TL) {
         emphasis: {
           textStyle: {
             //color: '#4B0082', 
-            color:'#2F4F4F'
+            color:'#2c75b3'
           }
         }
       },
       itemStyle: {
         normal: {
+            borderColor:'rgba(255,255,255,0.6)',
+            borderWidth:1.3
         },
         emphasis: {
           areaColor:'yellow'
