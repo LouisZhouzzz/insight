@@ -178,11 +178,13 @@
                 }
             },
             "axisLine":{
-              "lineStyle":{
-                "color": [[0.3, "#6495ED"], [0.7, "#4169E1"], [1, "#0000ff" ]]
-              }
-
-            }
+                "lineStyle":{
+                    "color": [[0.3, "rgba(255,255,255,0.2)"], [0.7, "rgba(255,255,255,0.5)"], [1, "rgba(255,255,255,0.7)" ]],
+                    "width": 4,
+                    "shadowColor": "#fff",
+                    "shadowBlur": 20
+                },
+            },
         },
         "candlestick": {
             "itemStyle": {
@@ -236,11 +238,11 @@
             "itemStyle": {
                 "normal": {
                     "areaColor": "#eee",
-                    "borderColor": "#444",
-                    "borderWidth": 0.5
+                    "borderColor": "rgba(255,255,0.5)",
+                    "borderWidth": 1.2
                 },
                 "emphasis": {
-                    "areaColor": "rgba(255,215,0,0.8)",
+                    "areaColor": "yellow",
                     "borderColor": "#444",
                     "borderWidth": 1
                 }
@@ -508,11 +510,8 @@
         },
         "visualMap": {
             "color": [
-                //"#1790cf",
-                //"#a2d4e6"
                 "rgba(44,117,179,1)",
-                "rgba(255,255,255,1)",
-                
+                "rgba(255,255,255,0.8)"
             ]
         },
         "dataZoom": {
