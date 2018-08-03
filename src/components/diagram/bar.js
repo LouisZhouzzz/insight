@@ -1,5 +1,5 @@
 function getOption(localData, para, TL){
-    let tabn = 36;
+    let tabn = 40;
   const option = {
     title: {
       text: para.titleText,
@@ -26,7 +26,7 @@ function getOption(localData, para, TL){
         draggable: false,
         style: {
           text: textCov(para.graExpText, tabn),
-          font: 'bolder 16px cursive',
+          font: 'bolder 14px cursive',
           textAlign: 'left',
           fill: TL.textColor,
         }
@@ -41,7 +41,7 @@ function getOption(localData, para, TL){
             text: [textCov('最大值: ' + getExt(localData).max + ',\t对应项:' + extLoc(localData).maxLoc, tabn)
             + '\n' + textCov('最小值: ' + getExt(localData).min + ',\t对应项:' + extLoc(localData).minLoc, tabn)
             + '\n' +  textCov('平均值: ' + getExt(localData).ave, tabn)],
-          font: 'bolder 16px cursive',
+          font: 'bolder 14px cursive',
           textAlign: 'left',
           fill: TL.textColor,
         }

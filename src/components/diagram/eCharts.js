@@ -1,8 +1,7 @@
 ﻿import * as echarts from '../../ec-canvas/echarts';
 import geoJson from '../../ec-canvas/china.js';
+import deepblue from '../../ec-canvas/deepblue';
 
-require('../../ec-canvas/dark.js');
-require('../../ec-canvas/deepblue');
 
 const bar = require('bar');
 const line = require('line');

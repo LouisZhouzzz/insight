@@ -86,7 +86,7 @@ function getOption(localData, para, TL) {
         normal: {
           //show: true,
           position: 'inside',
-          //color: '#A5EFEF',
+          color: '#A5EFEF',
         },
         emphasis: {
           textStyle: {

@@ -1,5 +1,5 @@
 module.exports ={
-    textColor: "#000",
+    textColor: "rgba(255,255,255,0.5)",
     titleLeft: "center",
     titleTop: "2%",
     legLeft: "center",

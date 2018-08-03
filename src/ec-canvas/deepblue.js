@@ -21,23 +21,32 @@
     }
     echarts.registerTheme('deepblue', {
         "color": [
-            "#0000ff",
-            "#4169E1",
-            "#6495ED",
-            "#1E90FF",
-            "#4682B4",
-            "#000080",
-            "#00BFFF",
-            "#ADD8E6",
-            "#00008B",
-            "#6495ED",
-            "#0000CD"
+            "#EFBDEB",
+            "#A6B1E1",
+            "#F3F8F2",
+            "#AFEEEF",
+            "#FFC0CB",
+            "#9370DB",
+            "#ACFCD9",
+            "#F7D1CD",
+            "#EEF4D4",
+            "#DC6ACF",
+            "#8884FF",
+            "#99EDCC",
+            "#F5CCE8",
+            "#F283B6",
+            "#725AC1",
+            "#A3D5FF",
+            "#FCB0B3",
+            "#4BC6B9",
+            "#E06C9F",
+            "#96C3CE"
         ],
-        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "backgroundColor": "rgba(44,117,179,1)",
         "textStyle": {},
         "title": {
             "textStyle": {
-                "color": "#333"
+                "color": "#fff"
             },
             "subtextStyle": {
                 "color": "#aaa"
@@ -54,7 +63,7 @@
                     "width": 2
                 }
             },
-            "symbolSize": 4,
+            "symbolSize": 8,
             "symbol": "emptyCircle",
             "smooth": false
         },
@@ -77,7 +86,7 @@
             "itemStyle": {
                 "normal": {
                     "barBorderWidth": 0,
-                    "barBorderColor": "#ccc"
+                    "barBorderColor": "#000"
                 },
                 "emphasis": {
                     "barBorderWidth": 0,
@@ -279,26 +288,26 @@
             "axisLine": {
                 "show": true,
                 "lineStyle": {
-                    "color": "#333"
+                    "color": "#fff"
                 }
             },
             "axisTick": {
                 "show": true,
                 "lineStyle": {
-                    "color": "#333"
+                    "color": "#fff"
                 }
             },
             "axisLabel": {
                 "show": true,
                 "textStyle": {
-                    "color": "#333"
+                    "color": "#fff"
                 }
             },
             "splitLine": {
                 "show": false,
                 "lineStyle": {
                     "color": [
-                        "#ccc"
+                        "rgba(255,255,255,0.5)"
                     ]
                 }
             },
@@ -316,26 +325,26 @@
             "axisLine": {
                 "show": true,
                 "lineStyle": {
-                    "color": "#333"
+                    "color": "#fff"
                 }
             },
             "axisTick": {
                 "show": true,
                 "lineStyle": {
-                    "color": "#333"
+                    "color": "#fff"
                 }
             },
             "axisLabel": {
                 "show": true,
                 "textStyle": {
-                    "color": "#333"
+                    "color": "#fff"
                 }
             },
             "splitLine": {
                 "show": true,
                 "lineStyle": {
                     "color": [
-                        "#ccc"
+                        "rgba(255,255,255,0.5)"
                     ]
                 }
             },
@@ -435,7 +444,7 @@
         },
         "legend": {
             "textStyle": {
-                "color": "#333"
+                "color": "#fff"
             }
         },
         "tooltip": {
@@ -447,6 +456,10 @@
                 "crossStyle": {
                     "color": "#ccc",
                     "width": 1
+                },
+                "label":{
+                    "color": "#2c75b3",
+                    "backgroundColor":"rgba(255,255,255,0.5)"
                 }
             }
         },
@@ -495,8 +508,11 @@
         },
         "visualMap": {
             "color": [
-                "#1790cf",
-                "#a2d4e6"
+                //"#1790cf",
+                //"#a2d4e6"
+                "rgba(44,117,179,1)",
+                "rgba(255,255,255,1)",
+                
             ]
         },
         "dataZoom": {

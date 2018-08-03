@@ -8,11 +8,7 @@ function getOption(localData, para, TL) {
                 fontSize: 30,                           //字体大小
                 fontWeight: 'bold',                     //加粗
             },
-            subtextStyle: {
-                fontSize: 16,
-            },
             //padding:[number]                         //标题内边距
-            itemGap: 10, //主副标题间距，默认10
             left: TL.titleLeft,
             top: TL.titleTop,
         },
@@ -58,7 +54,6 @@ function getOption(localData, para, TL) {
             height: 'auto',
             orient: TL.legorient,                       //默认为'horizontal'
             formatter: '{name}',                        //图例文本格式
-
             textStyle: {
                 fontWeight: 'lighter',                    //字体粗细
                 fontFamily: 'sans-serif',
