@@ -60,7 +60,7 @@
             </view>
             <view slot="page-2">
                 <!--图表收藏模块 start-->
-                <navigator wx:for="{{collectList}}"
+                <navigator wx:for="{{collections}}"
                            wx:key='collection-{{index}}'
                            class="app-item-container"
                            hover-class="app-item-hover"
@@ -69,7 +69,10 @@
                     <label>
                         <view class='app-item'>
                             <text class='title'>{{item.name}}</text>
-                            <image src="../../img/svgs/delete.svg"></image>
+                            <image catchtap="delCollection"
+                                   src="../../img/svgs/delete.svg"
+                                   data-id="{{item.id}}"
+                                   data-index="{{index}}"></image>
                             <image class='enter' src='../../img/svgs/arrow_right.svg'></image>
                         </view>
                         <button form-type="submit"></button>

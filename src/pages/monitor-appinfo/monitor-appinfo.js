@@ -97,10 +97,10 @@ Page({
   },
   collect: function (e) {
     let outerIndex = e.currentTarget.dataset.outer;
-    let innnerIndex = e.currentTarget.dataset.index;
+    let innerIndex = e.currentTarget.dataset.index;
     let type = this.data.types[this.data.swiperIndex].value;
     let list = this.data[type];
-    list.data[outerIndex].items[innnerIndex].ifCollected = !list.data[outerIndex].items[innnerIndex].ifCollected;
+    list.data[outerIndex].items[innerIndex].ifCollected = !list.data[outerIndex].items[innerIndex].ifCollected;
     service.toggleUserDiagram(
       (res) => {
         this.setData({
@@ -110,7 +110,8 @@ Page({
       (res) => {
       },
       globalData.openid,
-      e.currentTarget.dataset.id
+      e.currentTarget.dataset.id,
+      list.data[outerIndex].items[innerIndex].ifCollected
     )
   },
   outerscroll: function (e) {
@@ -199,13 +200,13 @@ Page({
           performance: this.data.performance,
           property: this.data.property
         });
-        debugger;
         wx.stopPullDownRefresh();
       },
       (res) => {
         wx.stopPullDownRefresh();
       },
-      this.data.appId
+      this.data.appId,
+      globalData.openid
     )
   },
 

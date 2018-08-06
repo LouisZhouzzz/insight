@@ -66,8 +66,9 @@ const getApp = (success, fail, appid) => fetch('/apps/' + appid, {}, success, fa
  * @param success
  * @param fail
  * @param appid
+ * @param userid
  */
-const getAppQuotas = (success, fail, appid) => fetch('/apps/'+ appid +'/quotas', {}, success, fail, 'GET', 'loading...');
+const getAppQuotas = (success, fail, appid, userid) => fetch('/apps/'+ appid +'/quotas?openid=' + userid, {}, success, fail, 'GET', 'loading...');
 
 /**
  * 获取应用详情
@@ -113,8 +114,10 @@ const getUserDiagrams = (success, fail, id) => fetch('/users/'+ id +'/diagrams',
  * @param fail
  * @param userid
  * @param diagramid
+ * @param operflag
  */
-const toggleUserDiagram = (success, fail, userid, diagramid) => fetch('/users/'+ userid +'/diagram?id=' + diagramid, {}, success, fail, 'PUT');
+const toggleUserDiagram = (success, fail, userid, diagramid, operflag) =>
+  fetch('/users/'+ userid +'/diagrams/' + diagramid + '?operflag=' + operflag, {}, success, fail, 'PUT');
 
 /**
  * 向后端发送formid

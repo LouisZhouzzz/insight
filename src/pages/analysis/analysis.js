@@ -1,5 +1,6 @@
 const service = require('../../service/test');
 import {BACKGROUND_COLOR, ACTIVE_COLOR} from '../../config/config'
+let globalData = getApp().globalData;
 
 Page({
   data: {
@@ -9,7 +10,7 @@ Page({
       exceptionNum: '', //异常总数
       point: '' //系统总体评分
     },
-    collectList: [], //收藏列表数据
+    collections: [], //收藏列表数据
     exceptionList: [], //异常列表数据
     ifLoading: true, //标识加载态，以防多次触发上拉加载事件
     page: 0, //异常列表页码
@@ -33,7 +34,7 @@ Page({
     service.getUserDiagrams(
       (res) => {
         this.setData({
-          collectList: res.records
+          collections: res.records
         });
       },
       (res) => {
@@ -143,5 +144,25 @@ Page({
     cxt_arc.stroke();//对当前路径进行描边
 
     cxt_arc.draw();
+  },
+
+  delCollection (e) {
+    let diagramId = e.currentTarget.dataset.id;
+    let index = e.currentTarget.dataset.index;
+    service.toggleUserDiagram(
+      (res) => {
+        let collections = this.data.collections;
+        collections.splice(index, 1);
+        this.setData({
+          collections: collections
+        })
+      },
+      (res) => {
+
+      },
+      globalData.openid,
+      diagramId,
+      false
+    )
   }
 });

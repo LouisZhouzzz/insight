@@ -20,30 +20,6 @@
 
             <ec-canvas class="{{canvasIndex === 0 ? '' : 'hidden'}}" id="preview-chart-1" canvas-id="preview-chart-1" ec="{{ ec }}"></ec-canvas>
             <ec-canvas class="{{canvasIndex === 1 ? '' : 'hidden'}}" id="preview-chart-2" canvas-id="preview-chart-2" ec="{{ ec }}"></ec-canvas>
-
-            <!--<swiper indicator-dots="true"  style="height: 500rpx; padding: 2em 0">-->
-                <!--<swiper-item wx:if="{{charts.length >= 1}}">-->
-                    <!--<ec-canvas id="preview-chart-1" canvas-id="preview-chart-1" ec="{{ ec }}"></ec-canvas>-->
-                <!--</swiper-item>-->
-
-                <!--<swiper-item wx:if="{{charts.length >= 2}}">-->
-                    <!--<ec-canvas id="preview-chart-2" canvas-id="preview-chart-2" ec="{{ ec }}"></ec-canvas>-->
-                <!--</swiper-item>-->
-
-                <!--<swiper-item wx:if="{{charts.length >= 3}}">-->
-                    <!--<ec-canvas id="preview-chart-3" canvas-id="preview-chart-3" ec="{{ ec }}"></ec-canvas>-->
-                <!--</swiper-item>-->
-            <!--</swiper>-->
-
-            <!--<view style="height: 600rpx; padding: 1em;">-->
-
-                <!--&lt;!&ndash;<siwper indicator-dots="true">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<swiper-item wx:for="{{charts}}" wx:key="chart - {{index}}">&ndash;&gt;-->
-                        <!--&lt;!&ndash;<ec-canvas id="preview-chart-{{index + 1}}" canvas-id="preview-chart-{{index + 1}}" ec="{{ ec }}"></ec-canvas>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</swiper-item>&ndash;&gt;-->
-                <!--&lt;!&ndash;</siwper>&ndash;&gt;-->
-            <!--</view>-->
-
             <!--概览图表 end-->
         </view>
         <!--头部信息概览模块 end-->
