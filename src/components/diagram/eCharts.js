@@ -1,8 +1,7 @@
 ﻿import * as echarts from '../../ec-canvas/echarts';
 import geoJson from '../../ec-canvas/china.js';
+import deepblue from '../../ec-canvas/deepblue';
 
-require('../../ec-canvas/dark.js');
-require('../../ec-canvas/deepblue');
 
 const bar = require('bar');
 const line = require('line');
@@ -12,15 +11,19 @@ const pie = require('pie');
 const TL = require('config');
 
 function init(bundle) {
-    let maxNum = 500; //单条数据量阈值上限
+    let maxNum; //单条数据量阈值上限
+    if (bundle.chart.chartType == 'bar')
+        maxNum = 30;
+    else if (bundle.chart.chartType == 'line')
+        maxNum = 365;
     let minNum = 4; //单条数据量阈值下限
-    if (bundle.length > maxNum) {
+    if (bundle.data.length > maxNum) {
         //截取后Maxnum条数据
-        bundle[0] = bundle[0].slice(-maxNum);
-        bundle[1] = bundle[1].slice(-maxNum);
-        bundle[2] = bundle[2].slice(-maxNum);
-        bundle[3] = bundle[3].slice(-maxNum);
-    } else if (bundle.length < minNum) {
+        bundle.data[0] = bundle.data[0].slice(-maxNum);
+        bundle.data[1] = bundle.data[1].slice(-maxNum);
+        bundle.data[2] = bundle.data[2].slice(-maxNum);
+        bundle.data[3] = bundle.data[3].slice(-maxNum);
+    } else if (bundle.data.length < minNum) {
         TL.gridLeft = '20%', TL.gridRight = '30%';
     }
 

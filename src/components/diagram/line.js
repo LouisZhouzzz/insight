@@ -1,4 +1,5 @@
 function getOption(localData, para, TL) {
+    let tabn = 36;
     let option = {
         title: {
             text: para.titleText,
@@ -7,11 +8,7 @@ function getOption(localData, para, TL) {
                 fontSize: 30,                           //字体大小
                 fontWeight: 'bold',                     //加粗
             },
-            subtextStyle: {
-                fontSize: 16,
-            },
             //padding:[number]                         //标题内边距
-            itemGap: 10, //主副标题间距，默认10
             left: TL.titleLeft,
             top: TL.titleTop,
         },
@@ -24,9 +21,9 @@ function getOption(localData, para, TL) {
                 invisible: false,
                 draggable: false,
                 style: {
-                    text: para.graExpText,
+                    text: textCov(para.graExpText, tabn),
                     font: 'bolder 16px cursive',
-                    textAlign: 'center',
+                    textAlign: 'left',
                     fill: TL.textColor,
                 }
             },
@@ -37,9 +34,11 @@ function getOption(localData, para, TL) {
                     invisible: false,
                     draggable: false,
                     style: {
-                        text: para.graStaText,
+                        text: [textCov('最大值: ' + getExt(localData).max + ',\t对应项:' + extLoc(localData).maxLoc, tabn)
+                        + '\n' + textCov('最小值: ' + getExt(localData).min + ',\t对应项:' + extLoc(localData).minLoc, tabn)
+                        + '\n' +  textCov('平均值: ' + getExt(localData).ave, tabn)],
                         font: 'bolder 16px cursive',
-                        textAlign: 'center',
+                        textAlign: 'left',
                         fill: TL.textColor,
                     }
                 }
@@ -55,7 +54,6 @@ function getOption(localData, para, TL) {
             height: 'auto',
             orient: TL.legorient,                       //默认为'horizontal'
             formatter: '{name}',                        //图例文本格式
-
             textStyle: {
                 fontWeight: 'lighter',                    //字体粗细
                 fontFamily: 'sans-serif',
@@ -71,8 +69,6 @@ function getOption(localData, para, TL) {
             right: TL.gridRight,
             top: TL.gridTop,
             bottom: TL.gridBottom,
-
-
             borderWidth: 1,
         },
 
@@ -124,8 +120,6 @@ function getOption(localData, para, TL) {
             nameLocation: 'end',
             nameGap: 5,
             boundaryGap: ['0%', '2%'],
-            //min:
-            //max:
             splitLine: {
                 lineStyle: {
                     type: 'dotted',
@@ -148,9 +142,64 @@ function getOption(localData, para, TL) {
     return option;
 }
 
+function textCov(text, n) {
+    let outText = '';
+    let mark = 0;
+    for(let i = 0; i < text.length; i++) {
+        outText += text[i];
+        mark++;
+        if(text[i].match(/[^\x00-\xff]/ig) != null)
+            mark++;
+        if(mark == n  + 1 || mark == n) {
+            outText += '\n';
+            mark = 0;
+        }
+    }
+    return outText;
+}
+
+function getExt(data) {
+    let min, max, ave = 0;
+    min = data[1][1];
+    max = data[1][1];
+    for (let i = 1; i< data.length; i++)
+        for(let j = 1; j<data[0].length; j++) {
+            if (data[i][j] > max)
+                max = data[i][j];
+            if (data[i][j] < min)
+                min = data[i][j];
+            ave += data[i][j];
+        }
+
+    ave /= data.length*data[0].length;
+
+    return {
+        min: min,
+        max: max,
+        ave: ave.toFixed(2),
+    }
+}
+
+function extLoc(data) {
+    let min = getExt(data).min;
+    let max = getExt(data).max;
+    let minLoc = '', maxLoc = '';
+    for (let i = 1; i < data.length; i++)
+        for(let j = 1; j <data[0].length; j++) {
+            if (data[i][j] == min)
+                minLoc += ' ' + data[i][0] + ' ' + data[0][j] + ';';
+            if (data[i][j] == max)
+                maxLoc += ' ' + data[i][0] + ' ' + data[0][j] + ';';
+        }
+    return {
+        minLoc: minLoc,
+        maxLoc: maxLoc,
+    }
+}
+
 function getSeries(data, chartType) {
     let series = [];
-    for (let i = 0; i < data.length; i++) {
+    for (let i = 0; i < data[0].length - 1; i++) {
         let item = {
             name: data[i].name,
             type: chartType,

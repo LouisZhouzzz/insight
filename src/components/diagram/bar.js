@@ -1,7 +1,7 @@
 function getOption(localData, para, TL){
+    let tabn = 40;
   const option = {
     title: {
-      show: true, //默认true
       text: para.titleText,
       subtext: para.titleSubText,
       textStyle: {
@@ -25,9 +25,9 @@ function getOption(localData, para, TL){
         invisible: false,
         draggable: false,
         style: {
-          text: para.graExpText,
-          font: '16px',
-          textAlign: 'center',
+          text: textCov(para.graExpText, tabn),
+          font: 'bolder 14px cursive',
+          textAlign: 'left',
           fill: TL.textColor,
         }
       },
@@ -38,15 +38,16 @@ function getOption(localData, para, TL){
         invisible: false,
         draggable: false,
         style: {
-          text: para.graStaText,
-          font: '16px',
-          textAlign: 'center',
+            text: [textCov('最大值: ' + getExt(localData).max + ',\t对应项:' + extLoc(localData).maxLoc, tabn)
+            + '\n' + textCov('最小值: ' + getExt(localData).min + ',\t对应项:' + extLoc(localData).minLoc, tabn)
+            + '\n' +  textCov('平均值: ' + getExt(localData).ave, tabn)],
+          font: 'bolder 14px cursive',
+          textAlign: 'left',
           fill: TL.textColor,
         }
       }
       ]
     },
-
 
     legend: {
       type:'scroll',                      //可滚动翻页的图例，较多时使用，缺省为普通图例
@@ -56,13 +57,8 @@ function getOption(localData, para, TL){
       width: 'auto',                      //图例组件的宽度和高度
       height: 'auto',
       orient: TL.legorient,               //默认为'horizontal'
-      align: 'auto',                      //图例标记和文本对齐
-      padding: 5,                         //图例内边距，默认5
-      itemGap: 10,                        //图例间隔
-      itemWidth: 25,                      //图例宽，默认25
-      itemHeight: 14,                     //图例高，默认14
       formatter: '{name}',                //图例文本格式
-      //selectedMode:false,
+
       textStyle: {
         fontWeight: 'lighter',            //字体粗细
         fontFamily: 'sans-serif',
@@ -85,10 +81,6 @@ function getOption(localData, para, TL){
       trigger:'axis',
       axisPointer: {
         type: 'cross',
-        //snap:true,
-        label: {
-          show: true,
-        }
       }
     },*/
 
@@ -105,15 +97,10 @@ function getOption(localData, para, TL){
       },
       nameGap: 5,                         //坐标轴名称与轴线之间的距离,取默认
       nameRotate: null,
-      //boundaryGap:['20%','20%'],
       boundaryGap: true,
-      //xmin:
-      //xmax:
-      //triggerEvent:true,
       axisLine: {
         show: true,
         onZero: true,
-
         lineStyle: {
           width: 1,
           type: 'solid',
@@ -127,7 +114,6 @@ function getOption(localData, para, TL){
         show: true,
         //fontSize,fontWeight,align，backgroundColor等等也可以在这里面设置
       },
-      //splitLine:{},             //设置分隔线
     },
 
     yAxis: {
@@ -136,17 +122,8 @@ function getOption(localData, para, TL){
       type: 'value',
       name: para.yname,
       nameLocation: 'end',
-      nameTextStyle: {
-        fontStyle: 'normal',
-        fontWeight: 'normal',
-        fontFamily: 'sans-serif',
-        fontSize: 12,
-        align: 'auto',
-        verticalAlign: 'auto',
-      },
       nameGap: 5,
       boundaryGap: ['0%', '2%'],
-
       splitLine: {
         lineStyle: {
           type: 'dotted',
@@ -159,7 +136,7 @@ function getOption(localData, para, TL){
     },
 
     dataset: {
-      source: localData
+        source: localData
     },
 
     series: getSeries(localData, para.chartType),
@@ -168,9 +145,64 @@ function getOption(localData, para, TL){
   return option;
 }
 
+function textCov(text, n) {
+    let outText = '';
+    let mark = 0;
+    for(let i = 0; i < text.length; i++) {
+        outText += text[i];
+        mark++;
+        if(text[i].match(/[^\x00-\xff]/ig) != null)
+            mark++;
+        if((mark == n  + 1 || mark == n)) {
+            outText += '\n';
+            mark = 0;
+        }
+    }
+    return outText;
+}
+
+function getExt(data) {
+    let min, max, ave = 0;
+    min = data[1][1];
+    max = data[1][1];
+    for (let i = 1; i< data.length; i++)
+      for(let j = 1; j<data[0].length; j++) {
+        if (data[i][j] > max)
+          max = data[i][j];
+        if (data[i][j] < min)
+          min = data[i][j];
+        ave += data[i][j];
+      }
+
+    ave /= data.length*data[0].length;
+
+    return {
+        min: min,
+        max: max,
+        ave: ave.toFixed(2),
+    }
+}
+
+function extLoc(data) {
+    let min = getExt(data).min;
+    let max = getExt(data).max;
+    let minLoc = '', maxLoc = '';
+    for (let i = 1; i < data.length; i++)
+      for(let j = 1; j <data[0].length; j++) {
+        if (data[i][j] == min)
+            minLoc += ' ' + data[i][0] + ' ' + data[0][j] + ';';
+        if (data[i][j] == max)
+            maxLoc += ' ' + data[i][0] + ' ' + data[0][j] + ';';
+      }
+    return {
+        minLoc: minLoc,
+        maxLoc: maxLoc,
+    }
+}
+
 function getSeries(data, chartType) {
-  let serie = [];
-  for (let i = 0; i < data.length; i++) {
+  let series = [];
+  for (let i = 0; i < data[0].length - 1; i++) {
     let item = {
       name: data[i].name,
       type: chartType,
@@ -181,9 +213,9 @@ function getSeries(data, chartType) {
         }
       }
     };
-    serie.push(item);
+    series.push(item);
   };
-  return serie;
+  return series;
 }
 
 module.exports = {
