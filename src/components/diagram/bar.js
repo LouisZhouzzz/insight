@@ -1,53 +1,6 @@
 function getOption(localData, para, TL){
     let tabn = 40;
   const option = {
-    title: {
-      text: para.titleText,
-      subtext: para.titleSubText,
-      textStyle: {
-        fontSize: 30, //字体大小
-        fontWeight: 'bold', //加粗
-      },
-      subtextStyle: {
-        fontSize: 16,
-      },
-      //padding:[number]                          //标题内边距
-      itemGap: 10,                                //主副标题间距，默认10
-      left: TL.titleLeft,
-      top: TL.titleTop,
-    },
-
-    graphic: {
-      elements: [{
-        type: 'text',
-        left: TL.graExpLeft,
-        top: TL.graExpTop,
-        invisible: false,
-        draggable: false,
-        style: {
-          text: textCov(para.graExpText, tabn),
-          font: 'bolder 14px cursive',
-          textAlign: 'left',
-          fill: TL.textColor,
-        }
-      },
-      {
-        type: 'text',
-        left: TL.graStaLeft,
-        top: TL.graStaTop,
-        invisible: false,
-        draggable: false,
-        style: {
-            text: [textCov('最大值: ' + getExt(localData).max + ',\t对应项:' + extLoc(localData).maxLoc, tabn)
-            + '\n' + textCov('最小值: ' + getExt(localData).min + ',\t对应项:' + extLoc(localData).minLoc, tabn)
-            + '\n' +  textCov('平均值: ' + getExt(localData).ave, tabn)],
-          font: 'bolder 14px cursive',
-          textAlign: 'left',
-          fill: TL.textColor,
-        }
-      }
-      ]
-    },
 
     legend: {
       type:'scroll',                      //可滚动翻页的图例，较多时使用，缺省为普通图例
@@ -145,22 +98,6 @@ function getOption(localData, para, TL){
   return option;
 }
 
-function textCov(text, n) {
-    let outText = '';
-    let mark = 0;
-    for(let i = 0; i < text.length; i++) {
-        outText += text[i];
-        mark++;
-        if(text[i].match(/[^\x00-\xff]/ig) != null)
-            mark++;
-        if((mark == n  + 1 || mark == n)) {
-            outText += '\n';
-            mark = 0;
-        }
-    }
-    return outText;
-}
-
 function getExt(data) {
     let min, max, ave = 0;
     min = data[1][1];
@@ -183,22 +120,6 @@ function getExt(data) {
     }
 }
 
-function extLoc(data) {
-    let min = getExt(data).min;
-    let max = getExt(data).max;
-    let minLoc = '', maxLoc = '';
-    for (let i = 1; i < data.length; i++)
-      for(let j = 1; j <data[0].length; j++) {
-        if (data[i][j] == min)
-            minLoc += ' ' + data[i][0] + ' ' + data[0][j] + ';';
-        if (data[i][j] == max)
-            maxLoc += ' ' + data[i][0] + ' ' + data[0][j] + ';';
-      }
-    return {
-        minLoc: minLoc,
-        maxLoc: maxLoc,
-    }
-}
 
 function getSeries(data, chartType) {
   let series = [];
