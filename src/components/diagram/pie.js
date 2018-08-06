@@ -28,7 +28,6 @@ function getOption(localData, para, TL) {
       },
     },
     dataset: {
-      //dimensions: Dem,
       source: localData
     },
 
@@ -39,7 +38,7 @@ function getOption(localData, para, TL) {
       label: {
         normal: {
           show: true,
-          position: 'inside',
+          position: 'outside',
           formatter: '{b}\n({d}%)',
           fontStyle: 'normal',
           fontWeight: 'normal',
@@ -49,7 +48,14 @@ function getOption(localData, para, TL) {
           verticalAlign: 'auto',
         },
       },
-      labelLine: {},
+      labelLine: {
+          length:16,
+          length2:10,
+          lineStyle:{
+              width:2
+          }
+
+      },
       itemStyle: {
         normal: {
           borderWidth: 0,
@@ -73,31 +79,6 @@ function getOption(localData, para, TL) {
   };
 
   return option;
-}
-
-function getPer(data) {
-    let minPer, maxPer;
-    minPer = getExt(data).min/getExt(data).sum*100;
-    maxPer = getExt(data).max/getExt(data).sum*100;
-    return {
-        minPer: minPer.toFixed(2),
-        maxPer: maxPer.toFixed(2)
-    }
-}
-
-function getExt(data) {
-    let arr = new Array;
-    let sum = 0;
-    for(let i in data) {
-        arr.push(data[i].value);
-        sum += arr[i];
-    }
-
-    return {
-        min: Math.min.apply(Math, arr),
-        max: Math.max.apply(Math, arr),
-        sum: sum,
-    }
 }
 
 module.exports = {

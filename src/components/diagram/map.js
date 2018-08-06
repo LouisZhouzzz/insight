@@ -1,5 +1,4 @@
 function getOption(localData, para, TL) {
-    let tabn = 36;
   var option = {
 
     tooltip: {
@@ -10,7 +9,7 @@ function getOption(localData, para, TL) {
     visualMap: {
       min: getMapExt(localData).min,
       max: getMapExt(localData).max,
-        precision:getMapExt(localData).precision,
+      precision:getMapExt(localData).precision,
       left: 'left',
       top: 'bottom',
       text: ['高', '低'], // 文本，默认为数值文本
@@ -23,7 +22,7 @@ function getOption(localData, para, TL) {
 
     series: [{
 
-      top: '25%',
+      top: '0%',
       left: '1%',
       right: '1%',
 
@@ -59,39 +58,6 @@ function getOption(localData, para, TL) {
   };
 
   return option;
-}
-
-function getExt(data) {
-    let arr = new Array;
-    let ave = 0;
-    for(let i in data) {
-        arr.push(data[i].value);
-        ave += arr[i];
-    }
-    ave /= arr.length;
-
-    return {
-        min: Math.min.apply(Math, arr),
-        max: Math.max.apply(Math, arr),
-        ave: ave.toFixed(2),
-    }
-}
-
-function getMapExt(data) {
-    let ext = getExt(data);
-    let temp = ext.max.toString().split('.');
-    let temp1 = ext.min.toString().split('.')
-    let n = temp[0].length -1;
-    let m = temp[0].length -1;
-    let precision =0;
-    if(ext.min<1){
-        precision=2
-    }
-    return{
-        min: Math.floor(ext.min / Math.pow(10, m))*Math.pow(10, m),
-        max: Math.ceil(ext.max / Math.pow(10, n))*Math.pow(10, n),
-        precision:precision,
-    }
 }
 
 module.exports = {

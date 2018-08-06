@@ -16,7 +16,7 @@ function init(bundle) {
         maxNum = 30;
     else if (bundle.chart.chartType == 'line')
         maxNum = 365;
-    let minNum = 4; //单条数据量阈值下限
+    let minNum = 0; //单条数据量阈值下限
     if (bundle.data.length > maxNum) {
         //截取后Maxnum条数据
         bundle.data[0] = bundle.data[0].slice(-maxNum);
