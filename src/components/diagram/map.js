@@ -11,7 +11,9 @@ function getOption(localData, para, TL) {
       max: getMapExt(localData).max,
       precision:getMapExt(localData).precision,
       left: 'left',
-      top: 'bottom',
+      orient:'horizontal',
+      top: '0%',
+      itemHeight:70,
       text: ['高', '低'], // 文本，默认为数值文本
       calculable: true
     },
