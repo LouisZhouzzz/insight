@@ -73,7 +73,7 @@ function getOption(localData, para, TL) {
             type: 'value',
             name: para.yname,
             nameLocation: 'end',
-            nameGap: 5,
+            nameGap: 10,
             boundaryGap: ['0%', '2%'],
             splitLine: {
                 lineStyle: {
@@ -87,7 +87,6 @@ function getOption(localData, para, TL) {
         },
 
         dataset: {
-            //dimensions: Dem,
             source: localData
         },
 
@@ -95,28 +94,6 @@ function getOption(localData, para, TL) {
     };
 
     return option;
-}
-
-function getExt(data) {
-    let min, max, ave = 0;
-    min = data[1][1];
-    max = data[1][1];
-    for (let i = 1; i< data.length; i++)
-        for(let j = 1; j<data[0].length; j++) {
-            if (data[i][j] > max)
-                max = data[i][j];
-            if (data[i][j] < min)
-                min = data[i][j];
-            ave += data[i][j];
-        }
-
-    ave /= data.length*data[0].length;
-
-    return {
-        min: min,
-        max: max,
-        ave: ave.toFixed(2),
-    }
 }
 
 function getSeries(data, chartType) {

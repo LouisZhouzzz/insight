@@ -44,7 +44,7 @@
         ],
         "backgroundColor": "rgba(44,117,179,1)",
         "textStyle": {
-            "color":"#2c75b3"
+            "color":"rgba(255,255,255,0.7)"
         },
         "title": {
             "textStyle": {

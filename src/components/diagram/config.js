@@ -3,29 +3,25 @@ module.exports ={
     titleLeft: "center",
     titleTop: "2%",
     legLeft: "center",
-    legTop: "25%",
+    legTop: "0%",
     legorient: "horizontal",
-    graExpLeft: "center",
-    graExpTop: "12%",
-    graStaLeft: "center",
-    graStaTop: "82%",
     gridLeft: "5%",
-    gridRight: "10%",
-    gridTop: "32%",
-    gridBottom: "20%",
+    gridRight: "12%",
+    gridTop: "10%",
+    gridBottom: "50%",
     pieCenter: [
     "50%",
-    "55%"
+    "22%"
 ],
     pieRadius: [
-    "25%",
-    "75%"
+    "0%",
+    "52%"
 ],
     gauCenter: [
     "50%",
-    "55%"
+    "22%"
 ],
-    gauRadius: "80%",
+    gauRadius: "52%",
     mapCenter: [],
     mapScale: 0.75
 };
