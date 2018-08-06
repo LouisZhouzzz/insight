@@ -1,4 +1,4 @@
-function getOption(localData, para, TL) {
+function getOption(localData) {
     let option = {
 
         // title: {

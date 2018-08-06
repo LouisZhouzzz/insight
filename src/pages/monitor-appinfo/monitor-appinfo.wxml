@@ -44,7 +44,6 @@
                 <!--&lt;!&ndash;</siwper>&ndash;&gt;-->
             <!--</view>-->
 
-
             <!--概览图表 end-->
         </view>
         <!--头部信息概览模块 end-->
@@ -90,14 +89,14 @@
 
 <!--二级列表模板-->
 <template name="list">
-    <view class="quota-container {{item.ifCollapsed?'collapsed':'open'}} "
+    <view class="quota-container {{item.ifNotCollapsed?'open':'collapsed'}} "
           wx:for="{{data}}"
           wx:key='quota-{{name}}-{{idx}}'
           wx:for-index="idx">
         <!--二级列表一级子项 start-->
         <view class='quota' bindtap='collapse' data-index="{{idx}}">
             <text class='title'>{{item.name}}</text>
-            <image class="collapse-btn" src='../../img/svgs/arrow_right_fill.svg'></image>
+            <image class="collapse-btn {{item.items.length <= 0 ? 'transparent' : ''}}" src='../../img/svgs/arrow_right_fill.svg'></image>
             <view class='quota-items-num'>
                 <text>{{item.items.length}}</text>
             </view>
@@ -113,7 +112,7 @@
                            wx:key='quota-item-{{index}}'
                            url="../monitor-appinfo-diagram/monitor-appinfo-diagram?id={{item.id}}">
                     <text>- {{item.name}}</text>
-                    <image class='enter' src='../../img/svgs/arrow_right.svg'></image>
+                    <image class="enter " src='../../img/svgs/arrow_right.svg'></image>
                     <image src='../../img/svgs/star_fill.svg'
                            class="collect {{item.ifCollected ? '' : 'hidden'}}"
                            catchtap='collect'

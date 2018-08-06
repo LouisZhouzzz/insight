@@ -1,5 +1,6 @@
-// const domain = 'https://insight.service.com/';
-const domain = 'https://result.eolinker.com/zdBe81Pa8b841f6b8fe96ba5e8e67a6fac3804a3da7c8b8?uri=';
+const domain = 'https://www.hi5399.xyz';
+// const domain = 'https://result.eolinker.com/zdBe81Pa8b841f6b8fe96ba5e8e67a6fac3804a3da7c8b8?uri=';
+
 
 /**
  * 发送临时登录凭证以换取自定义登录态
@@ -7,7 +8,7 @@ const domain = 'https://result.eolinker.com/zdBe81Pa8b841f6b8fe96ba5e8e67a6fac38
  * @param fail
  * @param code
  */
-const login = (success, fail, code) => fetch('/loginstate?code=' + code,{}, success, fail);
+const login = (success, fail, code) => fetch('/loginstate?code=' + code, {}, success, fail);
 
 // const login = function  (success, fail, code) {
 //     wx.showNavigationBarLoading();
@@ -36,7 +37,7 @@ const login = (success, fail, code) => fetch('/loginstate?code=' + code,{}, succ
  * @param fail
  * @param id
  */
-const getDiagram = (success, fail, id) => fetch('/diagrams/ID', {}, success, fail);
+const getDiagram = (success, fail, id) => fetch('/diagrams/' + id, {}, success, fail);
 
 /**
  * 获取后台概览信息
@@ -58,7 +59,7 @@ const getApps = (success, fail) => fetch('/apps', {}, success, fail, 'GET', 'loa
  * @param fail
  * @param appid
  */
-const getApp = (success, fail, appid) => fetch('/apps/ID', {}, success, fail, 'GET', 'loading...');
+const getApp = (success, fail, appid) => fetch('/apps/' + appid, {}, success, fail, 'GET', 'loading...');
 
 /**
  * 获取应用全部指标
@@ -66,8 +67,17 @@ const getApp = (success, fail, appid) => fetch('/apps/ID', {}, success, fail, 'G
  * @param fail
  * @param appid
  */
-const getAppQuotas = (success, fail, appid) => fetch('/apps/ID/quotas', {}, success, fail, 'GET', 'loading...');
+const getAppQuotas = (success, fail, appid) => fetch('/apps/'+ appid +'/quotas', {}, success, fail, 'GET', 'loading...');
 
+/**
+ * 获取应用详情
+ * @param success
+ * @param fail
+ * @param id
+ */
+const getException = (success, fail, id) => fetch('/exception/' + id, {}, success, fail);
+
+// const getException = (success, fail, id) => fetch('/exception/ID', {}, success, fail);
 
 /**
  * 获取异常信息列表
@@ -115,21 +125,21 @@ const toggleUserDiagram = (success, fail, usrid, diagramid) => fetch('/users/ID/
  */
 // const patchUserFormId = (success, fail, userid, formid) => fetch('/users/ID?formid=' + formid, {},success, fail, 'PUT');
 
-const patchUserFormId =  (success, fail, userid, formid) => {
-    wx.request({
-        url: "https://www.hi5399.xyz/users/"+ userid + "?formid=" + formid,
-        header: {
-            "Content-Type":"application/x-www-form-urlencoded"
-        },
-        method: 'PUT',
-        success: function (res) {
-            if (res.statusCode === 200 ) success && success(res.data);
-            else fail && fail();
-        },
-        fail: function (res) {
-            fail && fail();
-        }
-    });
+const patchUserFormId = (success, fail, userid, formid) => {
+  wx.request({
+    url: "https://www.hi5399.xyz/users/" + userid + "?formid=" + formid,
+    header: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    method: 'PUT',
+    success: function (res) {
+      if (res.statusCode === 200) success && success(res.data);
+      else fail && fail();
+    },
+    fail: function (res) {
+      fail && fail();
+    }
+  });
 };
 
 /**
@@ -141,43 +151,44 @@ const patchUserFormId =  (success, fail, userid, formid) => {
  * @param method
  * @param msg 定义loading框里的文本信息，空则不显示加载框
  */
-function fetch (url, data, success, fail, method, msg) {
-    wx.showNavigationBarLoading();
+function fetch(url, data, success, fail, method, msg) {
+  wx.showNavigationBarLoading();
 
-    // if (msg) wx.showLoading({title: msg});
+  // if (msg) wx.showLoading({title: msg});
 
-    wx.request({
-        url: domain + url,
-        data: data || {},
-        header: {
-            "Content-Type":"application/x-www-form-urlencoded"
-        },
-        method: method || 'GET',
-        success: function (res) {
-            if (res.statusCode === 200 ) success && success(res.data);
-            else fail && fail();
-        },
-        fail: function (res) {
-            fail && fail();
-        },
-        complete: function (res) {
-            wx.hideNavigationBarLoading();
-            // if (msg) wx.hideLoading();
-        }
-    });
+  wx.request({
+    url: domain + url,
+    data: data || {},
+    header: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    method: method || 'GET',
+    success: function (res) {
+      if (res.statusCode === 200) success && success(res.data);
+      else fail && fail();
+    },
+    fail: function (res) {
+      fail && fail();
+    },
+    complete: function (res) {
+      wx.hideNavigationBarLoading();
+      // if (msg) wx.hideLoading();
+    }
+  });
 }
 
 module.exports = {
-    domain,
-    login,
-    getDiagram,
-    getSystem,
-    getApps,
-    getApp,
-    getAppQuotas,
-    getHandledExceptions,
-    getUnhandledExceptions,
-    getUserDiagrams,
-    patchUserFormId,
-    toggleUserDiagram
+  domain,
+  getException,
+  login,
+  getDiagram,
+  getSystem,
+  getApps,
+  getApp,
+  getAppQuotas,
+  getHandledExceptions,
+  getUnhandledExceptions,
+  getUserDiagrams,
+  patchUserFormId,
+  toggleUserDiagram
 };

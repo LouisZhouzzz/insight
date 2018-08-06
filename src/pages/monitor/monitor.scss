@@ -9,6 +9,7 @@ $appCardHeight: 375rpx;
     display: -webkit-flex;
     display: flex;
     align-content: flex-start;
+    flex-direction: column;
     flex-wrap: wrap;
   }
 }
@@ -20,19 +21,24 @@ $appCardHeight: 375rpx;
   height: $appCardHeight;
   line-height: $appCardHeight - 16rpx;
   color: $darkenWhite;
-  //box-sizing: border-box;
   background-color: $themeBackgroundColor;
   text-align: center;
   transition-duration: 150ms;
+  .title {
+    position: relative;
+    z-index: 1001;
+    font-size: 16px;
+  }
   label {
     font-size: 18px;
     height: 100%;
     width: 100%;
     display: block;
-    position: relative;
+    position: absolute;
   }
   .mask,
-  image {
+  image,
+  navigator {
     height: 100%;
     width: 100%;
     position: absolute;

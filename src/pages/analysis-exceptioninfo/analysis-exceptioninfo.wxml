@@ -1,3 +1,35 @@
-<view>
-    hah
+<view class="container">
+
+    <view class="pane upper">
+        <view class="tag">{{description.time}}</view>
+        <view class="pane-header">异常详情</view>
+        <view class="pane-content">
+            <view class="segment">
+                <view class="key">来源</view>
+                <view class="value">{{app.name}}</view>
+            </view>
+            <view class="segment">
+                <view class="key">详情</view>
+                <view class="value">
+                    {{description.content}}
+                </view>
+            </view>
+        </view>
+    </view>
+
+
+    <view wx:if="{{solution}}" class="pane lower">
+        <view class="tag">{{solution.time}}</view>
+        <view class="pane-header">解决方案</view>
+        <view class="pane-content">
+            <view class="segment">
+                <view class="key">方案</view>
+                <view class="value">
+                    {{solution.content}}
+                </view>
+            </view>
+        </view>
+    </view>
 </view>
+
+<view class="container"></view>

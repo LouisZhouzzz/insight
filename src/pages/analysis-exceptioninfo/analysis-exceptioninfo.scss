@@ -1,0 +1,70 @@
+@import "../../app";
+
+.container {
+  background-color: $themeBackgroundColor;
+  color: $themeColor;
+  &:nth-child(1) {
+    position: relative;
+    padding-bottom: 1em;
+    z-index: 1001;
+  }
+  &:nth-child(2) {
+    z-index: -1;
+  }
+}
+
+.tag {
+  background-color: darken($themeBackgroundColor, 10%);
+  font-size: 12px;
+  padding: 0.5em;
+  border-radius: 20rpx;
+  width: 10em;
+  text-align: center;
+  margin: 0 auto 1em auto;
+}
+
+.pane {
+  margin-top: 1em;
+  width: 90%;
+  overflow: hidden;
+  border-radius: 10rpx;
+  .pane-header {
+    font-size: 18px;
+    height: 2em;
+    line-height: 2em;
+    padding-left: 1em;;
+  }
+  .pane-content {
+    overflow: hidden;
+    background-color: lighten($themeBackgroundColor, 10%);
+    //height: 500rpx;
+    padding: 0 1em 1em 1em;
+    .segment {
+      overflow: hidden;
+      margin-top: 1em;
+      line-height: 1.5em;
+      .key {
+        float: left;
+      }
+      .value {
+        border-left: 1px solid $themeColor;
+        padding-left: 1em;
+        float: right;
+        width: 70%;
+        max-height: 10rem;
+      }
+    }
+  }
+}
+
+.upper {
+  .pane-header {
+    background-color: #F06543;
+  }
+}
+
+.lower {
+  .pane-header {
+    background-color: #8EA8C3;
+  }
+}

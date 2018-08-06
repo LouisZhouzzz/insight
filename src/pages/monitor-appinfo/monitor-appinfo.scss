@@ -183,7 +183,7 @@ canvas {
     margin: ($quotaHeight - $listIconSize) / 2  $listIconSize / 4;
     text-align: center;
     border-radius: 100%;
-    background-color: $themeBackgroundColor;
+    background-color: lighten($themeBackgroundColor, 10%);
     text {
       color: $themeColor;
       line-height: $listIconSize;
