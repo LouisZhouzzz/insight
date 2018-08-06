@@ -1,53 +1,6 @@
 function getOption(localData, para, TL) {
     let tabn = 36;
   var option = {
-    title: {
-      show: true,                                 //默认true
-      text: para.titleText,   
-      subtext: para.titleSubText,   
-      textStyle: {
-        fontSize: 30,                              //字体大小
-        fontWeight: 'bold',                        //加粗
-      },
-      subtextStyle: {
-        color: TL.textColor,
-        fontSize: 16,
-      },
-      itemGap: 10,                                 //主副标题间距，默认10
-      left: TL.titleLeft,
-      top: TL.titleTop,
-    },
-
-    graphic: {
-      elements: [{
-        type: 'text',
-        left: TL.graExpLeft,
-        top: TL.graExpTop,
-        invisible: false,
-        draggable: false,
-        style: {
-          text: textCov(para.graExpText, tabn),
-          font: 'bolder 16px cursive',
-          textAlign: 'left',
-          fill: TL.textColor,
-        }
-      },
-      {
-        type: 'text',
-        left: TL.graStaLeft,
-        top: TL.graStaTop,
-        invisible: false,
-        draggable: false,
-        style: {
-          text: ['占比最大: ' + extLoc(localData).maxLoc + '\t比重: ' + getPer(localData).maxPer
-          + '%\n占比最小: ' + extLoc(localData).minLoc + '\t比重: ' + getPer(localData).minPer + '%'],
-          font: 'bolder 16px cursive',
-          textAlign: 'left',
-          fill: TL.textColor,
-        }
-      }
-      ]
-    },
 
     legend: {
       type:'scroll',                         //可滚动翻页的图例，较多时使用，缺省为普通图例
@@ -120,38 +73,6 @@ function getOption(localData, para, TL) {
   };
 
   return option;
-}
-
-function textCov(text, n) {
-    let outText = '';
-    let mark = 0;
-    for(let i = 0; i < text.length; i++) {
-        outText += text[i];
-        mark++;
-        if(text[i].match(/[^\x00-\xff]/ig) != null)
-            mark++;
-        if(mark == n  + 1 || mark == n) {
-            outText += '\n';
-            mark = 0;
-        }
-    }
-    return outText;
-}
-
-function extLoc(data) {
-    let min = getExt(data).min;
-    let max = getExt(data).max;
-    let minLoc = '', maxLoc = '';
-    for(let i in data) {
-        if(data[i].value == min)
-            minLoc += data[i].name + ' ';
-        if(data[i].value == max)
-            maxLoc += data[i].name + ' ';
-    }
-    return {
-        minLoc: minLoc,
-        maxLoc: maxLoc,
-    }
 }
 
 function getPer(data) {
