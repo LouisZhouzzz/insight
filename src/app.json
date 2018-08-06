@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/auth/auth",
     "pages/analysis/analysis",
     "pages/analysis-exceptioninfo/analysis-exceptioninfo",
     "pages/monitor-appinfo/monitor-appinfo",

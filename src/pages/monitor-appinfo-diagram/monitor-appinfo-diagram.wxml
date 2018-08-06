@@ -1,3 +1,9 @@
 <view class="container">
     <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}" ></ec-canvas>
+    <view class="progress-group">
+        <progress wx:for="{{progresses}}"
+                  wx:key="progress-{{index}}"
+                  percent="{{item.value}}"
+                  activeColor="blue"></progress>
+    </view>
 </view>

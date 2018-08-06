@@ -11,67 +11,63 @@ const TL = require('../../components/diagram/config.js');
 const chartInit = require('../../components/diagram/eCharts').init;
 
 Page({
-    data: {
-        id: null,
-        ec: {
-            lazyLoad: true
-        }
+  data: {
+    id: null,
+    ec: {
+      lazyLoad: true
     },
-    onReady() {
-        this.ecComponent = this.selectComponent('#mychart-dom-bar');
-        service.getDiagram(
-            (res) => {
-                // this.ecComponent.init((canvas, width, height) => {
-                //
-                //     // 获取组件的 canvas、width、height 后的回调函数
-                //     // 在这里初始化图表
-                //     const chart = echarts.init(canvas, null, {
-                //         width: width,
-                //         height: height
-                //     });
-                //     // 将图表实例绑定到 this 上，可以在其他成员函数（如 dispose）中访问
-                //     this.chart = chart;
-                //
-                //     this.setChart(res);
-                //
-                //     // 注意这里一定要返回 chart 实例，否则会影响事件处理等
-                //     return chart;
-                // });
-                this.ecComponent.init(chartInit(res));
-            },
-            () => {
-            },
-            this.data.id
-        );
-    },
-
-    onLoad(data) {
-        this.setData({
-            id: data.id
-        });
-    },
-
-    setChart(bundle) {
-        let type;
-        switch (bundle.chart.chartType) {
-            case 'bar':
-                type = bar;
-                break;
-            case 'line':
-                type = line;
-                break;
-            case 'pie':
-                type = pie;
-                break;
-            case 'gauge':
-                type = gauge;
-                break;
-            case 'map':
-                type = map;
-                echarts.registerMap('china', geoJson);
-                break;
-        }
-
-        this.chart.setOption(type.getOption(bundle.data, bundle.chart, TL));
+    progresses: [{
+      key: '最大值',
+      value: 80
+    }, {
+      key: '平均值',
+      value: 70
+    }, {
+      key: '最小值',
+      value: 30
     }
+    ]
+  },
+  onReady() {
+    this.ecComponent = this.selectComponent('#mychart-dom-bar');
+    service.getDiagram(
+      (res) => {
+        this.ecComponent.init(chartInit(res));
+
+      },
+      () => {
+      },
+      this.data.id
+    );
+  },
+
+  onLoad(data) {
+    this.setData({
+      id: data.id
+    });
+  },
+
+  setChart(bundle) {
+    let type;
+    switch (bundle.chart.chartType) {
+      case 'bar':
+        type = bar;
+        break;
+      case 'line':
+        type = line;
+        break;
+      case 'pie':
+        type = pie;
+        break;
+      case 'gauge':
+        type = gauge;
+        break;
+      case 'map':
+        type = map;
+        echarts.registerMap('china', geoJson);
+        break;
+    }
+
+    this.chart.setOption(type.getOption(bundle.data, bundle.chart, TL));
+  }
 });

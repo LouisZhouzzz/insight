@@ -104,17 +104,17 @@ const getHandledExceptions = (success, fail, page, size) => fetch('/handledexcep
  * @param fail
  * @param id
  */
-const getUserDiagrams = (success, fail, id) => fetch('/users/ID/diagrams', {}, success, fail);
+const getUserDiagrams = (success, fail, id) => fetch('/users/'+ id +'/diagrams', {}, success, fail);
 
 
 /**
  * 变更图表的收藏状态
  * @param success
  * @param fail
- * @param usrid
+ * @param userid
  * @param diagramid
  */
-const toggleUserDiagram = (success, fail, usrid, diagramid) => fetch('/users/ID/diagram?id=' + diagramid, {}, success, fail, 'PUT');
+const toggleUserDiagram = (success, fail, userid, diagramid) => fetch('/users/'+ userid +'/diagram?id=' + diagramid, {}, success, fail, 'PUT');
 
 /**
  * 向后端发送formid

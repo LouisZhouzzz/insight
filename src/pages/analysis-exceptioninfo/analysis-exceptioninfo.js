@@ -13,7 +13,7 @@ Page({
         this.setData({
           app: res.app,
           description: res.description,
-          solution: res.solution.time === 'null' ? null : res.solution
+          solution: res.solution ? res.solution : null
         });
       },
       () => {},

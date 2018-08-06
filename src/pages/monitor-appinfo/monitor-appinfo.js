@@ -2,6 +2,7 @@ import * as echarts from "../../ec-canvas/echarts";
 import geoJson from "../../ec-canvas/china";
 
 const service = require('../../service/test');
+let globalData = getApp().globalData;
 
 const diagram = {
   line: require('../../components/diagram/outline-line.js'),
@@ -90,7 +91,7 @@ Page({
       },
       (res) => {
       },
-      'user id',
+      globalData.openid,
       e.detail.formId
     );
   },
@@ -108,7 +109,7 @@ Page({
       },
       (res) => {
       },
-      'user id',
+      globalData.openid,
       e.currentTarget.dataset.id
     )
   },
@@ -198,6 +199,7 @@ Page({
           performance: this.data.performance,
           property: this.data.property
         });
+        debugger;
         wx.stopPullDownRefresh();
       },
       (res) => {

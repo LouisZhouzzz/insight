@@ -5,8 +5,8 @@
         <view class="modal">
             <view class="item" wx:for="{{item.exceptions}}" wx:key="record-item-{{index}}">
                 <text>{{item.time}}</text>
-                <text>{{item.name}}</text>
-                <text>({{item.source}})</text>
+                <text>{{item.title}}</text>
+                <text>({{item.app}})</text>
             </view>
         </view>
     </block>

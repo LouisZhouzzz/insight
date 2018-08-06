@@ -4,6 +4,7 @@
   "description": "本项目是 ECharts 的微信小程序版本，以及使用的示例。",
   "main": "gulpfile.js",
   "scripts": {
+    "test": "cross-env NODE_ENV=test gulp watch",
     "dev": "cross-env NODE_ENV=development gulp watch",
     "build": "cross-env NODE_ENV=production gulp build"
   },

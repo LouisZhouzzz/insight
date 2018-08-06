@@ -14,7 +14,6 @@ Page({
         });
         service.getHandledExceptions(
             (res) => {
-              debugger;
                 this.setData({
                     records: res.records,
                     page:  1,
