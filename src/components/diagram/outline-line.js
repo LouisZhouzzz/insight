@@ -8,14 +8,6 @@ function getOption(localData) {
     }
 
     let option = {
-        // title: {
-        //     text: '一年内异常发生',
-        //     left: 'center',
-        //     top: '0',
-        //     textStyle: {
-        //         color: '#fff'
-        //     }
-        // },
         grid: {
             left: "10%",
             right: "10%",

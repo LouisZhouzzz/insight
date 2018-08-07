@@ -55,9 +55,7 @@ const getAppQuotas = (success, fail, appid, userid) => fetch('/apps/'+ appid +'/
  * @param fail
  * @param id
  */
-const getException = (success, fail, id) => fetch('/exception/' + id, {}, success, fail);
-
-// const getException = (success, fail, id) => fetch('/exception/ID', {}, success, fail);
+const getException = (success, fail, id) => fetch('/exceptions/' + id, {}, success, fail);
 
 /**
  * 获取异常信息列表

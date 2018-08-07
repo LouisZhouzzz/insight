@@ -11,23 +11,20 @@ Page({
     ec: {
       lazyLoad: true
     },
-    progresses: [{
-      key: '最大值',
-      value: 80
-    }, {
-      key: '平均值',
-      value: 70
-    }, {
-      key: '最小值',
-      value: 30
-    }
-    ]
+    graExpText: ''
   },
   onReady() {
     this.ecComponent = this.selectComponent('#mychart-dom-bar');
     this.staBarComponent = this.selectComponent('#sta-bar');
     service.getDiagram(
       (res) => {
+        // 设置标题
+        wx.setNavigationBarTitle({title: res.chart.titleText});
+        // 设置介绍文本
+        this.setData({
+          graExpText: res.chart.graExpText
+        });
+        // 加载图表
         this.ecComponent.init(chartInit(res));
 
         this.staBarComponent.init((canvas, width, height) => {

@@ -9,7 +9,7 @@ module.exports ={
     gridBottom: "10%",
     pieCenter: [
     "50%",
-    "50%"
+    "60%"
 ],
     pieRadius: [
     "0%",

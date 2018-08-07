@@ -1,31 +1,35 @@
 @import '../../app';
+
 .container {
   background-color: $themeBackgroundColor;
-}
-
-.sta-container {
-  width: 700rpx;
-  padding: 10rpx;
-  margin: 0 auto;
-  background-color: $themeColor;
-  canvas {
-    margin: 0 auto;
-  }
+  overflow: hidden;
+  justify-content: space-around;
 }
 
 #mychart-dom-bar {
-  height: 50vh;
+  width: 90vw;
+  canvas {
+    height: 50vh;
+    width: 90vw;
+  }
+}
+
+.txt-container {
+  color: $themeColor;
+  background-color: lighten($themeBackgroundColor, 10%);
+  width: 90vw;
+  padding: 0.5em 1em;
+  border-radius: 10rpx;
+  line-height: 1.5em;
+  text-align: justify;
+  font-size: 14px;
 }
 
 #sta-bar {
-  height: 30vh;
+  width: 90vw;
+  canvas {
+    width: 90vw;
+    margin: 0 auto;
+    height: 30vh;
+  }
 }
-
-.progress-group {
-  width: 750rpx;
-  height: 500rpx;
-}
-
-//.container {
-// background-color: $themeBackgroundColor;
-//}

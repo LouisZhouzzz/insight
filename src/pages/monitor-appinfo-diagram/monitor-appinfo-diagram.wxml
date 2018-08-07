@@ -1,12 +1,7 @@
 <view class="container">
-    <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}" ></ec-canvas>
-    <view class="sta-container">
-        <ec-canvas id="sta-bar" canvas-id="sta-bar" ec="{{ ec }}" ></ec-canvas>
+    <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
+    <view wx:if="{{graExpText}}" class="txt-container">
+        <text>{{graExpText}}</text>
     </view>
-    <!--<view class="progress-group">-->
-        <!--<progress wx:for="{{progresses}}"-->
-                  <!--wx:key="progress-{{index}}"-->
-                  <!--percent="{{item.value}}"-->
-                  <!--activeColor="blue"></progress>-->
-    <!--</view>-->
+    <ec-canvas id="sta-bar" canvas-id="sta-bar" ec="{{ ec }}"></ec-canvas>
 </view>
