@@ -514,7 +514,10 @@
             "color": [
                 "rgba(44,117,179,1)",
                 "rgba(255,255,255,0.8)"
-            ]
+            ],
+            "textStyle":{
+                "color":"#fff"
+            }
         },
         "dataZoom": {
             "backgroundColor": "rgba(47,69,84,0)",

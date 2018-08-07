@@ -11,10 +11,11 @@ function getOption(localData, para, TL) {
       max: getMapExt(localData).max,
       precision:getMapExt(localData).precision,
       left: 'left',
-      orient:'horizontal',
-      top: '0%',
-      itemHeight:70,
-      text: ['高', '低'], // 文本，默认为数值文本
+      //orient:'horizontal',
+      bottom: '0%',
+      itemHeight:60,
+      itemWidth:10,
+      //text: ['高', '低'], // 文本，默认为数值文本
       calculable: true
     },
 
@@ -25,7 +26,7 @@ function getOption(localData, para, TL) {
     series: [{
 
       top: '0%',
-      left: '1%',
+      left: '3%',
       right: '1%',
 
       type: para.chartType,
