@@ -7,15 +7,15 @@ module.exports ={
     legorient: "horizontal",
     gridLeft: "5%",
     gridRight: "12%",
-    gridTop: "10%",
-    gridBottom: "50%",
+    gridTop: "0%",
+    gridBottom: "0%",
     pieCenter: [
     "50%",
-    "22%"
+    "50%"
 ],
     pieRadius: [
     "0%",
-    "52%"
+    "100%"
 ],
     gauCenter: [
     "50%",

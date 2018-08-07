@@ -1,6 +1,24 @@
-canvas {
-  height: 100vh;
-  width: 750rpx;
+@import '../../app';
+.container {
+  background-color: $themeBackgroundColor;
+}
+
+.sta-container {
+  width: 700rpx;
+  padding: 10rpx;
+  margin: 0 auto;
+  background-color: $themeColor;
+  canvas {
+    margin: 0 auto;
+  }
+}
+
+#mychart-dom-bar {
+  height: 50vh;
+}
+
+#sta-bar {
+  height: 30vh;
 }
 
 .progress-group {

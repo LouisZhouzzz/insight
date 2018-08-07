@@ -1,5 +1,5 @@
-const domain = 'https://www.hi5399.xyz';
-// const domain = 'https://result.eolinker.com/zdBe81Pa8b841f6b8fe96ba5e8e67a6fac3804a3da7c8b8?uri=';
+// const domain = 'https://www.hi5399.xyz';
+const domain = 'https://result.eolinker.com/zdBe81Pa8b841f6b8fe96ba5e8e67a6fac3804a3da7c8b8?uri=';
 
 
 /**
@@ -9,27 +9,6 @@ const domain = 'https://www.hi5399.xyz';
  * @param code
  */
 const login = (success, fail, code) => fetch('/loginstate?code=' + code, {}, success, fail);
-
-// const login = function  (success, fail, code) {
-//     wx.showNavigationBarLoading();
-//     wx.request({
-//         url: "https://www.hi5399.xyz/loginstate?code=" + code,
-//         header: {
-//             "Content-Type":"application/x-www-form-urlencoded"
-//         },
-//         method: 'GET',
-//         success: function (res) {
-//             if (res.statusCode === 200 ) success && success(res.data);
-//             else fail && fail();
-//         },
-//         fail: function (res) {
-//             fail && fail();
-//         },
-//         complete: function (res) {
-//             wx.hideNavigationBarLoading();
-//         }
-//     });
-// };
 
 /**
  * 获取图表信息
@@ -126,11 +105,10 @@ const toggleUserDiagram = (success, fail, userid, diagramid, operflag) =>
  * @param fail
  * @param userid
  */
-// const patchUserFormId = (success, fail, userid, formid) => fetch('/users/ID?formid=' + formid, {},success, fail, 'PUT');
-
 const patchUserFormId = (success, fail, userid, formid) => {
+  if (formid === 'the formId is a mock one') return;
   wx.request({
-    url: "https://www.hi5399.xyz/users/" + userid + "?formid=" + formid,
+    url: domain + '/users/' + userid + "?formid=" + formid,
     header: {
       "Content-Type": "application/x-www-form-urlencoded"
     },

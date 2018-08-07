@@ -1,24 +1,15 @@
-<view class='container'>
-    <form bindsubmit="onFormSubmit" report-submit="true">
-        <!--应用入口列表 start-->
-        <scroll-view class='app-list' scroll-y>
-            <!-- 每个异常类名 start-->
-            <view class="app"
-                  wx:for='{{apps}}'
-                  wx:key='monitor-app-{{index}}'>
-                <text class="title">
-                    {{item.title}}
-                </text>
-                <navigator url="../monitor-appinfo/monitor-appinfo?id={{item.id}}">
-                    <label>
-                        <image src="{{item.url}}"></image>
-                        <div class="mask"></div>
-                        <button form-type="submit"></button>
-                    </label>
-                </navigator>
-            </view>
-            <!-- 每个异常类名 end-->
-        </scroll-view>
-        <!--应用列表入口 end-->
-    </form>
-</view>
+<form bindsubmit="onFormSubmit" report-submit="true">
+    <view class='app-list'>
+        <navigator class="app"
+                   wx:for='{{apps}}'
+                   wx:key='monitor-app-{{index}}'
+                   url="../monitor-appinfo/monitor-appinfo?id={{item.id}}">
+            <label >
+                <div class="title">{{item.title}}</div>
+                <div class="mask"></div>
+                <image src="{{item.url}}"></image>
+                <button form-type="submit"></button>
+            </label>
+        </navigator>
+    </view>
+</form>

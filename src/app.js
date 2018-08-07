@@ -49,7 +49,7 @@ App({
   getLoginState() {
     return this.login().then(res => new Promise((resolve, reject) => {
       wx.request({
-        url: 'https://www.hi5399.xyz' + '/loginstate?code=' + res.code,
+        url: service.domain + '/loginstate?code=' + res.code,
         header: {
           "Content-Type": "application/x-www-form-urlencoded"
         },

@@ -1,14 +1,13 @@
 function getOption(localData, para, TL) {
-    let tabn = 36;
-  var option = {
-
+  let tabn = 36;
+  let option = {
     legend: {
-      type:'scroll',                         //可滚动翻页的图例，较多时使用，缺省为普通图例
+      type: 'scroll',                         //可滚动翻页的图例，较多时使用，缺省为普通图例
       show: true,
-      left: TL.legLeft,
-      top: TL.legTop,
+      left: '0%',
+      top: '0%',
+      bottom: '0%',
       width: '80%',                            //图例组件的宽度和高度
-      height: 'auto',
       orient: TL.legorient,                     //默认为'horizontal'
       align: 'auto',                            //图例标记和文本对齐
       padding: 5,                               //图例内边距，默认5
@@ -16,8 +15,8 @@ function getOption(localData, para, TL) {
       itemWidth: 25,                            //图例宽，默认25
       itemHeight: 14,                           //图例高，默认14
       formatter: '{name}',                      //图例文本格式 
-      selectedMode:false,
-      
+      selectedMode: false,
+
       textStyle: {
         fontWeight: 'lighter',                  //字体粗细
         fontFamily: 'sans-serif',
@@ -49,11 +48,11 @@ function getOption(localData, para, TL) {
         },
       },
       labelLine: {
-          length:16,
-          length2:10,
-          lineStyle:{
-              width:2
-          }
+        length: 16,
+        length2: 10,
+        lineStyle: {
+          width: 2
+        }
 
       },
       itemStyle: {

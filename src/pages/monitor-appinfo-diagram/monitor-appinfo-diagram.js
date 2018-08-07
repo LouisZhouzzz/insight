@@ -2,13 +2,8 @@ import * as echarts from "../../ec-canvas/echarts";
 import geoJson from "../../ec-canvas/china";
 
 const service = require('../../service/test');
-const bar = require('../../components/diagram/bar.js');
-const line = require('../../components/diagram/line.js');
-const pie = require('../../components/diagram/pie.js');
-const map = require('../../components/diagram/map.js');
-const gauge = require('../../components/diagram/gauge.js');
-const TL = require('../../components/diagram/config.js');
 const chartInit = require('../../components/diagram/eCharts').init;
+const staBar = require('../../components/diagram/sta-bar');
 
 Page({
   data: {
@@ -30,10 +25,24 @@ Page({
   },
   onReady() {
     this.ecComponent = this.selectComponent('#mychart-dom-bar');
+    this.staBarComponent = this.selectComponent('#sta-bar');
     service.getDiagram(
       (res) => {
         this.ecComponent.init(chartInit(res));
 
+        this.staBarComponent.init((canvas, width, height) => {
+          let chart = echarts.init(canvas, {
+            width: width,
+            height: height
+          });
+          canvas.setChart(chart);
+
+          const option = staBar.getOption(res.sta);
+
+          chart.setOption(option);
+
+          return chart;
+        })
       },
       () => {
       },
@@ -45,29 +54,5 @@ Page({
     this.setData({
       id: data.id
     });
-  },
-
-  setChart(bundle) {
-    let type;
-    switch (bundle.chart.chartType) {
-      case 'bar':
-        type = bar;
-        break;
-      case 'line':
-        type = line;
-        break;
-      case 'pie':
-        type = pie;
-        break;
-      case 'gauge':
-        type = gauge;
-        break;
-      case 'map':
-        type = map;
-        echarts.registerMap('china', geoJson);
-        break;
-    }
-
-    this.chart.setOption(type.getOption(bundle.data, bundle.chart, TL));
   }
 });
