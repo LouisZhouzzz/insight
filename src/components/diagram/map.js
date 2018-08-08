@@ -27,7 +27,7 @@ function getOption(localData, para, TL) {
 
       top: '0%',
       left: '3%',
-      right: '1%',
+      right: '0%',
 
       type: para.chartType,
       mapType: 'china',

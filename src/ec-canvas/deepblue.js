@@ -181,12 +181,33 @@
             },
             "axisLine":{
                 "lineStyle":{
-                    "color": [[0.3, "rgba(255,255,255,0.2)"], [0.7, "rgba(255,255,255,0.5)"], [1, "rgba(255,255,255,0.7)" ]],
+                    "color": [[0.3, "rgba(255,255,255,0.4)"], [0.7, "rgba(233,241,247,0.75)"], [1, "rgba(255,255,255,1)" ]],
                     "width": 4,
                     "shadowColor": "#fff",
-                    "shadowBlur": 20
+                    "shadowBlur": 15
                 },
             },
+            "splitLine":{
+                "length":12,
+                "lineStyle":{
+                    "color":"#fff",
+                    "width":2,
+                    "type":"solid",
+                    "shadowBlur":10,
+                    "shadowColor":"#eee"
+                }
+            },
+            "axisTick":{
+                "splitNumber":5,
+                "length":8,
+                "lineStyle":{
+
+                }
+            },
+            "pointer":{
+                "length":"80%",
+                "width":6,
+            }
         },
         "candlestick": {
             "itemStyle": {
