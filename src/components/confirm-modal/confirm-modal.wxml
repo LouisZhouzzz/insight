@@ -1,0 +1,9 @@
+<view  class="mask" >
+    <view class="modal">
+        <view class="msg">
+            <slot></slot>
+        </view>
+        <button class="btn" catchTap="onConfirmBtnClick">确认</button>
+        <button class="btn" catchTap="onCancelBtnClick">取消</button>
+    </view>
+</view>

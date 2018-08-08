@@ -169,16 +169,12 @@ Page({
 
         this.ecComponents[0].init((canvas, width, height) => {
 
-          // 获取组件的 canvas、width、height 后的回调函数
-          // 在这里初始化图表
           const chart = echarts.init(canvas, null, {
             width: width,
             height: height
           });
 
           chart.setOption(diagram.line.getOption(res.charts.line));
-
-          // 注意这里一定要返回 chart 实例，否则会影响事件处理等
           return chart;
         });
       },

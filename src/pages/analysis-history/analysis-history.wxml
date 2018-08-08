@@ -1,17 +1,17 @@
 <!--<view class="background"></view>-->
 <view class="container">
-    <block wx:for="{{records}}" wx:key="record-{{index}}">
-        <view class="tag">{{item.date}}</view>
-        <view class="modal">
-            <view class="item" wx:for="{{item.exceptions}}" wx:key="record-item-{{index}}">
-                <text>{{item.time}}</text>
-                <text>{{item.title}}</text>
-                <text>({{item.app}})</text>
+        <block wx:for="{{records}}" wx:key="record-{{index}}">
+            <view class="tag">{{item.date}}</view>
+            <view class="modal">
+                <view class="item" wx:for="{{item.exceptions}}" wx:key="record-item-{{index}}">
+                    <text>{{item.time}}</text>
+                    <text>{{item.title}}</text>
+                    <text>({{item.app}})</text>
+                </view>
             </view>
+        </block>
+        <view class="loading-hinder">
+            <text wx:if="{{ifLoading}}" >Loading...</text>
+            <text wx:else class="{{ifMore ? 'hidden' : ''}}">No more items.</text>
         </view>
-    </block>
-    <view class="loading-hinder">
-        <text wx:if="{{ifLoading}}" >Loading...</text>
-        <text wx:else class="{{ifMore ? 'hidden' : ''}}">No more items.</text>
-    </view>
 </view>

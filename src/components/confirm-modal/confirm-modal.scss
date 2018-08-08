@@ -1,0 +1,27 @@
+.mask {
+  background-color: rgba(0, 0, 0, 0.6);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  width: 80%;
+  margin-top: -10vh;
+  .msg {
+    padding: 1em;
+    background-color: #fff;
+  }
+  .btn {
+    display: inline-block;
+    width: 50%;
+    border-radius: 0;
+    transition: 100ms linear;
+  }
+}
+
+.button-hover {
+  background-color: #2C75B3;
+  color: white;
+}

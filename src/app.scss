@@ -5,6 +5,14 @@ $lightenBlack: #25231F;
 $defaultFontSize: 16px;
 $pageBackgroundColor: #E9F1F7;
 
+@mixin full-page {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
 page {
   background-color: #E9F1F7;
   font: {

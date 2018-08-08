@@ -1,6 +1,8 @@
 {
   "enablePullDownRefresh": true,
   "usingComponents": {
-    "label-page": "../../components/label-page/label-page"
+    "label-page": "../../components/label-page/label-page",
+    "ec-canvas": "../../ec-canvas/ec-canvas",
+    "confirm-modal": "../../components/confirm-modal/confirm-modal"
   }
 }
