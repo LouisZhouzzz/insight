@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "留言板",
+  "navigationBarBackgroundColor": "#2C75B3",
+
+  "usingComponents": {
+    "WxComment": "../../components/WxComment/WxComment"
+  }
+}
+

@@ -16,14 +16,14 @@ gulp.task('clean', () => del(['./dist/**']));
 //gulp.task(name[, deps], fn), name指定任务名，可以diy
 gulp.task('wxml', () => {
     return gulp.src(['./src/**/*.wxml'])
-        .pipe(plugins.htmlmin({
-            collapseWhitespace: true,
-            keepClosingSlash: true, // wxml
-            removeComments: true,
-            removeEmptyAttributes: true,
-            removeScriptTypeAttributes: true,
-            removeStyleLinkTypeAttributes: true
-        }))
+        //.pipe(plugins.htmlmin({
+        //    collapseWhitespace: true,
+        //    keepClosingSlash: true, // wxml
+        //    removeComments: true,
+        //    removeEmptyAttributes: true,
+        //    removeScriptTypeAttributes: true,
+        //    removeStyleLinkTypeAttributes: true
+        //}))
         .pipe(gulp.dest('dist'));
 });
 

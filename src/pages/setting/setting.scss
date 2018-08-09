@@ -1,0 +1,35 @@
+/* pages/setting/setting.wxss */
+
+ .enter {
+    float: right;
+    height: 50rpx;
+    width: 50rpx;
+    margin: 25rpx 1em 0; }
+
+  .title {
+    line-height: 50rpx;
+    width: 5%;
+    padding: 10rpx;
+    color: black; }
+
+.app-item-container {
+  background-color: white;
+  box-shadow: 0 0 30px 0 #e0e0e0;
+  max-height: 100rpx;
+  transition: 500ms linear 0ms;
+  overflow: hidden; }
+  .app-item-container.open {
+    max-height: 1000rpx; }
+    .app-item-container.open image {
+      transform: rotate(90deg); }
+
+.app-item-hover {
+  background-color: #e6e6e6; }
+
+.app-item {
+  height: 100rpx;
+  padding-left: 1em; }
+  .app-item > text {
+    height: 100rpx;
+    line-height: 100rpx; }
+ 

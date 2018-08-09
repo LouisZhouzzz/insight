@@ -1,6 +1,11 @@
 const service = require('service/test');
+
+var hotapp = require('utils/hotapp.js');
+
 App({
   onLaunch: function () {
+      hotapp.init('hotapp491327934');
+      hotapp.setDebug(true);
     // 展示本地存储能力
     let logs = wx.getStorageSync('logs') || [];
     logs.unshift(Date.now());
@@ -80,6 +85,7 @@ App({
   globalData: {
     windowHeight: null,
     token: null,
-    openid: null
+    openid: null,
+      hotapp: hotapp
   }
 });
