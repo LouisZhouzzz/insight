@@ -17,9 +17,9 @@ module.exports ={
 ],
     gauCenter: [
     "50%",
-    "50%"
+    "45%"
 ],
-    gauRadius: "68%",
+    gauRadius: "75%",
     mapCenter: [],
     mapScale: 0.75
 };
