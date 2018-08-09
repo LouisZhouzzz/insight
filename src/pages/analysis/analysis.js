@@ -1,9 +1,4 @@
-import * as echarts from "../../ec-canvas/echarts";
-
 const service = require('../../service/test');
-const analysisPie = require('../../components/diagram/analysis-pie');
-import {BACKGROUND_COLOR, ACTIVE_COLOR} from '../../config/config';
-
 let globalData = getApp().globalData;
 
 Page({
@@ -47,10 +42,11 @@ Page({
 
   // 绘制分数面板
   showScoreAnim(value, max) {
-    let sideLength = this.data.sideLength;
-    let lineWidth = 6;
+    let shadowOffset = 2;
+    let sideLength = this.data.sideLength - shadowOffset;
+    let lineWidth = 10;
     let fontSize = 60;
-    let radius = (sideLength - lineWidth) / 2;
+    let radius = (sideLength - lineWidth) / 2  - shadowOffset;
 
     let colors = [
       [240, 101, 67],
@@ -70,34 +66,46 @@ Page({
       let b = cubicEaseOut(t, colors[i][2], colors[i + 1][2] - colors[i][2], frames);
 
       t++;
+      // 画底层圆
       ctx.setLineWidth(lineWidth);
-      ctx.setStrokeStyle('#eee');
+      ctx.setStrokeStyle('rgba(255, 255, 255, 0.2)');
       ctx.setLineCap('round');
       ctx.beginPath();
-      ctx.arc(radius + lineWidth / 2, radius + lineWidth / 2, radius, 0, 2 * Math.PI, false);
+      ctx.arc(radius + lineWidth / 2 + shadowOffset / 2, radius + lineWidth / 2 + shadowOffset / 2, radius, 0, 2 * Math.PI, false);
       ctx.stroke();
 
-      ctx.setLineWidth(lineWidth);
-      ctx.setLineCap('round');
-      ctx.strokeStyle = 'rgb(' + [r, g, b].join() + ')';
-      ctx.beginPath();
-      ctx.arc(radius + lineWidth / 2, radius + lineWidth / 2, radius, -Math.PI / 2, 2 * Math.PI * (t / max) - Math.PI / 2, false);
-      ctx.stroke();
-
+      // 绘制主标题
       ctx.font = fontSize + "px Arial";
       ctx.fillStyle = "#fff";
       ctx.textAlign = 'center';//文本水平对齐
       ctx.textBaseline = 'middle';//文本垂直方向，基线位置
       ctx.fillText(t + '', sideLength / 2, sideLength / 2 - fontSize / 2); // x,y分别设置两条基线位置
 
-      ctx.setLineWidth(2);
-      ctx.strokeStyle = '#eee';
-      ctx.moveTo(fontSize, sideLength / 2 + 20);
-      ctx.lineTo(sideLength - fontSize, sideLength / 2 + 20);
+      // ctx.fillText('-', sideLength / 2, sideLength / 2 ); // x,y分别设置两条基线位置
+
+      // 绘制分割线
+      ctx.beginPath();
+      ctx.setLineWidth(1);
+      ctx.setStrokeStyle('#eee');
+      ctx.moveTo(fontSize, sideLength / 2 + 10);
+      ctx.lineTo(sideLength - fontSize, sideLength / 2 + 10);
       ctx.stroke();
 
+      // 绘制副标题
       ctx.font = "16px Arial";
       ctx.fillText('出现 ' + this.data.outline.exceptionNum + ' 个异常', sideLength / 2, sideLength / 4 * 3);
+
+      // 画外层圆弧
+      ctx.setLineWidth(lineWidth);
+      ctx.setLineCap('round');
+      ctx.setStrokeStyle('rgb(' + [r, g, b].join() + ')');
+      ctx.shadowOffsetX = shadowOffset;
+      ctx.shadowOffsetY = shadowOffset;
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+      ctx.beginPath();
+      ctx.arc(radius + lineWidth / 2 + shadowOffset / 2, radius + lineWidth / 2 + shadowOffset / 2, radius, -Math.PI / 2, 2 * Math.PI * (t / max) - Math.PI / 2, false);
+      ctx.stroke();
 
       ctx.draw();
 

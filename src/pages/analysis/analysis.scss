@@ -128,7 +128,8 @@ scroll-view.container {
 /* 列表一级子项 */
 .app-item-container {
   background-color: $themeColor;
-  box-shadow: 0 0 15px 0 darken($pageBackgroundColor, 10%);
+  //box-shadow: 0 0 15px 0 darken($pageBackgroundColor, 10%);
+  border-bottom: 1px solid  darken($pageBackgroundColor, 5%);
   max-height: $appItemHeight;
   transition: 500ms linear 0ms;
   overflow: hidden;
