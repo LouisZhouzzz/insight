@@ -1,0 +1,15 @@
+<!--pages/setting/setting.wxml-->
+
+
+<navigator id="body" wx:for="{{dataList}}" wx:key="app-{{index}}" class="app-item-container" hover-class="app-item-hover" url="{{item.url}}">
+  <label>
+    <view class="app-item" style='text-align:center'>
+
+      <text  class="title">{{item.title}}</text>
+
+      <image class="enter" src="../../img/svgs/arrow_right.svg"></image>
+
+    </view>
+    <button form-type="submit"></button>
+  </label>
+</navigator>
