@@ -1,87 +1,128 @@
-// pages/setting/setting.js
+const service = require('../../service/test');
+let globalData = getApp().globalData;
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    dataList: [
+    confirmModalShow: false,
+    labels: ['收藏夹', '设置'],
+    authorized: false,
+    ifLoading: true,
+    userInfo: {
+      gender: '男',
+      avatarUrl: '../../img/svgs/avatar.svg',
+      nickName: '用户'
+    },
+    settings: [
       {
-
         "title": "官方公告",
         "url": '../announcement/announcement'
-      },
-      {
-
+      }, {
         "title": "意见反馈",
         "url": '../feedback/index'
 
-      },
-
-      {
-
+      }, {
         "title": "留言板",
         "url": '../message-board/message-board'
+      }]
+  },
 
+  //打开确认框
+  openConfirmModal() {
+    this.setData({
+      confirmModalShow: true
+    });
+    return new Promise((resolve, reject) => {
+      this.onConfirmEvent = (e) => {
+        if (e.detail) resolve();
+        else reject();
+        this.setData({
+          confirmModalShow: false
+        });
       }
-    ]
-   
-
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-  
+  getUserInfo(e) {
+    if (!e.detail.userInfo) return;
+    this.setData({
+      userInfo: e.detail.userInfo,
+      authorized: true,
+    });
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+  onFormSubmit (e) {
+    service.patchUserFormId(
+      (res) => {
+        console.log(res);
+      },
+      (res) => {
+      },
+      globalData.openid,
+      e.detail.formId
+    );
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+
+  // 取消收藏
+  delCollection(e) {
+    let diagramId = e.currentTarget.dataset.id;
+    let index = e.currentTarget.dataset.index;
+    this.openConfirmModal().then(
+      () => {
+        service.toggleUserDiagram(
+          (res) => {
+            let collections = this.data.collections;
+            collections.splice(index, 1);
+            this.setData({
+              collections: collections
+            })
+          },
+          (res) => {
+
+          },
+          globalData.openid,
+          diagramId,
+          false
+        )
+      },
+      () => {
+        console.log('取消了呗~');
+      }
+    );
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
+  onLoad() {
+    // 查看是否授权
+    wx.getSetting({
+      success: (res) => {
+        if (res.authSetting['scope.userInfo']) {
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+          wx.getUserInfo({
+            success: (res) => {
+              this.setData({
+                userInfo: res.userInfo,
+                authorized: true
+              })
+            }
+          })
+        }
+      },
+      complete: () => {
+        this.setData({
+          ifLoading: false
+        })
+      }
+    });
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+    service.getUserDiagrams(
+      (res) => {
+        this.setData({
+          collections: res.records
+        });
+      },
+      (res) => {
+      },
+      globalData.openid
+    );
   }
-})
+});

@@ -26,6 +26,13 @@ const getDiagram = (success, fail, id) => fetch('/diagrams/' + id, {}, success, 
 const getSystem = (success, fail) => fetch('/system', {}, success, fail);
 
 /**
+ * 获取公告信息
+ * @param success
+ * @param fail
+ */
+const getAnnouncements = (success, fail) => fetch('/system/announcements', {}, success, fail);
+
+/**
  * 获取应用列表
  * @param success
  * @param fail
@@ -132,8 +139,6 @@ const patchUserFormId = (success, fail, userid, formid) => {
  */
 function fetch(url, data, success, fail, method, msg) {
   wx.showNavigationBarLoading();
-
-  // if (msg) wx.showLoading({title: msg});
 
   wx.request({
     url: domain + url,

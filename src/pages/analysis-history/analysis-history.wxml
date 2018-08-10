@@ -1,17 +1,24 @@
-<!--<view class="background"></view>-->
-<view class="container">
+<form report-submit="true" bindsubmit="onFormSubmit">
+    <view class="container">
         <block wx:for="{{records}}" wx:key="record-{{index}}">
             <view class="tag">{{item.date}}</view>
             <view class="modal">
-                <view class="item" wx:for="{{item.exceptions}}" wx:key="record-item-{{index}}">
+                <navigator class="item"
+                           wx:for="{{item.exceptions}}"
+                           wx:key="history-record-item-{{index}}"
+                           hover-class="modal-item-hover"
+                           url="../analysis-exceptioninfo/analysis-exceptioninfo?id={{item.id}}&title={{item.title}}">
                     <text>{{item.time}}</text>
                     <text>{{item.title}}</text>
                     <text>({{item.app}})</text>
-                </view>
+
+                    <button form-type="submit"></button>
+                </navigator>
             </view>
         </block>
         <view class="loading-hinder">
-            <text wx:if="{{ifLoading}}" >Loading...</text>
+            <text wx:if="{{ifLoading}}">Loading...</text>
             <text wx:else class="{{ifMore ? 'hidden' : ''}}">No more items.</text>
         </view>
-</view>
+    </view>
+</form>

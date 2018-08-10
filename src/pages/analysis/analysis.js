@@ -3,12 +3,10 @@ let globalData = getApp().globalData;
 
 Page({
   data: {
-    confirmModalShow: false,
     sideLength: 200,
     ec: {
       lazyLoad: false
     },
-    labels: ['存在异常', '收藏夹'],
     outline: { //概览面板数据
       appNum: '', //异常应用数
       exceptionNum: '', //异常总数
@@ -21,37 +19,20 @@ Page({
     size: 10 //异常列表单页项数
   },
 
-  openConfirmModal() {
-    this.setData({
-      confirmModalShow: true
-    });
-    return new Promise((resolve, reject) => {
-      this.onConfirmEvent = (e) => {
-        if (e.detail) resolve();
-        else reject();
-        this.setData({
-          confirmModalShow: false
-        });
-      }
-    })
-  },
-
-  onReady() {
-    this.scoreRing = this.selectComponent('#analysis-pie');
-  },
-
   // 绘制分数面板
-  showScoreAnim(value, max) {
+  showScoreAnim2(value, max) {
     let shadowOffset = 2;
     let sideLength = this.data.sideLength - shadowOffset;
-    let lineWidth = 10;
+    let lineWidth = 12;
     let fontSize = 60;
-    let radius = (sideLength - lineWidth) / 2  - shadowOffset;
+    let radius = sideLength / 2 - lineWidth;
 
     let colors = [
       [240, 101, 67],
       [244, 224, 77],
       [6, 214, 160],
+      // 背景色
+      // [44, 117, 179]
     ];
 
     let ctx = wx.createCanvasContext('canvasArc');
@@ -67,11 +48,11 @@ Page({
 
       t++;
       // 画底层圆
-      ctx.setLineWidth(lineWidth);
+      ctx.setLineWidth(lineWidth * 2 / 3);
       ctx.setStrokeStyle('rgba(255, 255, 255, 0.2)');
       ctx.setLineCap('round');
       ctx.beginPath();
-      ctx.arc(radius + lineWidth / 2 + shadowOffset / 2, radius + lineWidth / 2 + shadowOffset / 2, radius, 0, 2 * Math.PI, false);
+      ctx.arc(radius + lineWidth, radius + lineWidth, radius, 0, 2 * Math.PI, false);
       ctx.stroke();
 
       // 绘制主标题
@@ -102,9 +83,9 @@ Page({
       ctx.shadowOffsetX = shadowOffset;
       ctx.shadowOffsetY = shadowOffset;
       ctx.shadowBlur = 10;
-      ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.35)';
       ctx.beginPath();
-      ctx.arc(radius + lineWidth / 2 + shadowOffset / 2, radius + lineWidth / 2 + shadowOffset / 2, radius, -Math.PI / 2, 2 * Math.PI * (t / max) - Math.PI / 2, false);
+      ctx.arc(radius + lineWidth, radius + lineWidth, radius, -Math.PI / 2, 2 * Math.PI * (t / max) - Math.PI / 2, false);
       ctx.stroke();
 
       ctx.draw();
@@ -122,8 +103,106 @@ Page({
     }
   },
 
+  // 绘制分数面板
+  showScoreAnim(value, max) {
+    let sideLength = this.data.sideLength;
+    let fontSize = 60;
+    let radius = sideLength / 2;
+    let color = '#2C75B3';
+    let ctx = wx.createCanvasContext('canvasArc');
+
+    let rangeValue = value;
+    let nowRange = 0;
+
+    //Sin 曲线属性
+    let sX = 0;
+    let sY = sideLength / 2;
+    let axisLength = sideLength; //轴长
+    let waveWidth = 0.015 ;   //波浪宽度,数越小越宽
+    let waveHeight = 4; //波浪高度,数越大越高
+    let speed = 0.10; //波浪速度，数越大速度越快
+    let xOffset = 0; //波浪x偏移量
+
+    // 画圈
+    let IsdrawCircled = false;
+    function drawCircle (){
+      ctx.beginPath();
+      ctx.lineWidth = 0;
+      ctx.strokeStyle = '#eee';
+      ctx.fillStyle = '#eee';
+      ctx.arc(radius, radius, radius, 0, 2 * Math.PI);
+      // ctx.stroke();
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(radius, radius, radius - 8, 0, 2 * Math.PI);
+      ctx.strokeStyle = '#eee';
+      ctx.stroke();
+      ctx.clip(); // 裁剪圆形区域，之后的绘制工作只在改区域上可见
+    }
+
+
+    // 画 sin 函数
+    function drawSin (xOffset){
+      ctx.save();
+
+      let points=[];	//用于存放绘制Sin曲线的点
+
+      ctx.beginPath();
+      //在整个轴长上取点
+      for(let x = sX; x < sX + axisLength; x += 20 / axisLength){
+        //此处坐标(x,y)的取点，依靠公式 “振幅高*sin(x*振幅宽 + 振幅偏移量)”
+        let y = -Math.sin((sX + x) * waveWidth + xOffset);
+
+        let dY = sideLength * (1 - nowRange / 100 );
+
+        points.push([x, dY + y * waveHeight]);
+        ctx.lineTo(x, dY + y * waveHeight);
+      }
+
+      //封闭路径
+      ctx.lineTo(axisLength, sideLength);
+      ctx.lineTo(sX, sideLength);
+      ctx.lineTo(points[0][0],points[0][1]);
+      ctx.fillStyle = color;
+      ctx.fill();
+
+      ctx.restore();
+    }
+
+    this.render = function (){
+      ctx.clearRect(0, 0, sideLength, sideLength);
+
+      rangeValue = value;
+
+      if(IsdrawCircled === false){
+        drawCircle();
+      }
+
+      if(nowRange <= rangeValue){
+        nowRange += 1;
+      }
+
+      if(nowRange > rangeValue){
+        nowRange -= 1;
+      }
+
+      drawSin(xOffset);
+      // drawText();
+
+      if (nowRange > rangeValue - 2) {
+        xOffset += speed;
+      } else {
+        xOffset += speed * 3;
+      }
+      ctx.draw();
+    };
+
+  },
+
+
   onLoad() {
-    wx.setNavigationBarTitle({ title: 'insight' });
+    wx.setNavigationBarTitle({title: 'insight'});
     this.setData({
       ifLoading: true
     });
@@ -135,20 +214,13 @@ Page({
         this.setData({
           sideLength: 0.4 * globalData.windowHeight
         });
-        this.showScoreAnim(this.data.outline.point, 100);
+        setTimeout(
+          () => this.showScoreAnim2(this.data.outline.point, 100),
+          300
+        )
       },
       (res) => {
       }
-    );
-    service.getUserDiagrams(
-      (res) => {
-        this.setData({
-          collections: res.records
-        });
-      },
-      (res) => {
-      },
-      getApp().globalData.openid
     );
 
     service.getUnhandledExceptions(
@@ -178,14 +250,14 @@ Page({
 
   },
 
-  onFormSubmit: function (e) {
+  onFormSubmit (e) {
     service.patchUserFormId(
       (res) => {
         console.log(res);
       },
       (res) => {
       },
-      getApp().globalData.openid,
+      globalData.openid,
       e.detail.formId
     );
   },
@@ -219,9 +291,10 @@ Page({
     );
   },
 
-  onHide: function () {
+  onHide () {
     // 生命周期函数--监听页面隐藏
     wx.hideNavigationBarLoading();
+
   },
 
   onPullDownRefresh: function () {
@@ -229,31 +302,4 @@ Page({
     if (this.data.ifLoading) return;
     this.onLoad();
   },
-
-  delCollection(e) {
-    let diagramId = e.currentTarget.dataset.id;
-    let index = e.currentTarget.dataset.index;
-    this.openConfirmModal().then(
-      () => {
-        service.toggleUserDiagram(
-          (res) => {
-            let collections = this.data.collections;
-            collections.splice(index, 1);
-            this.setData({
-              collections: collections
-            })
-          },
-          (res) => {
-
-          },
-          globalData.openid,
-          diagramId,
-          false
-        )
-      },
-      () => {
-        console.log('取消了呗~');
-      }
-    );
-  }
 });

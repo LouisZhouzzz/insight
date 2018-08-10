@@ -5,7 +5,7 @@ Page({
   data: {
     records: [],
     page: 0,
-    size: 5,
+    size: 10,
     ifLoading: true
   },
   onLoad: function () {
@@ -17,7 +17,8 @@ Page({
       (res) => {
         this.setData({
           records: res.records,
-          ifLoading: false
+          ifLoading: false,
+          page: 1
         });
         wx.stopPullDownRefresh();
       },
@@ -26,7 +27,7 @@ Page({
           ifLoading: false
         });
         wx.stopPullDownRefresh();
-      }, 0, this.data.size * (this.data.page + 1));
+      }, 0, this.data.size);
   },
 
   // TODO
