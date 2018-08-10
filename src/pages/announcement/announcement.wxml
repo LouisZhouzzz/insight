@@ -1,11 +1,21 @@
 <!--pages/announcement/announcement.wxml-->
 <view class='title'>
-  <text>{{biaoti}}</text>
-  <view>
-  <text style='color:#2C75B3' space="ensp">Android      </text>
-   <text style='color:#2C75B3'>IOS</text>
-  </view>
+    <text class="font">{{biaoti}}</text>
+
 </view>
 
-<view><text>{{content}}</text></view>
+
+<block  wx:for="{{content}}" wx:for-item="item" wx:key="content-{{index}}">
+    <view class="font"> {{item.date}} </view>
+
+
+ <block  wx:for="{{item.details}}"   wx:key="details-{{index}}">
+      <view class="font">{{index+1}}. {{item}} </view>
+    </block>
+
+
+
+</block>
+
+
 
