@@ -813,7 +813,7 @@ Component({
         }).catch(console.error);
       }
     },
-    avatarClicked: function (e) {
+  /*  avatarClicked: function (e) {
       //console.log(e.currentTarget.dataset.user_id);
       var that = this;
       if (e.detail.userInfo) {
@@ -891,7 +891,7 @@ Component({
           console.log(err);
         });
       }
-    },
+    }, */
     _updateUserInfoInLeanCloud: function () {
       // 获得当前登录用户
       const user = AV.User.current();
