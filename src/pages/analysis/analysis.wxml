@@ -1,27 +1,10 @@
-<view class="container" xmlns:wx="http://java.sun.com/JSP/Page">
-    <form report-submit="true" bindsubmit="onFormSubmit">
+<form report-submit="true" bindsubmit="onFormSubmit">
+    <view class="container" xmlns:wx="http://java.sun.com/JSP/Page">
         <!--头部概览模块 start-->
         <view class='header'>
             <!--分数圆形画布 以及 上面的分数 start-->
-            <canvas class="cir outline-item" canvas-id="canvasArc">
-                <cover-view>
-                    {{outline.point}}
-                </cover-view>
-            </canvas>
+            <canvas class="cir" style=' width:{{sideLength}}px; height:{{sideLength}}px;' canvas-id="canvasArc"></canvas>
             <!--分数圆形画布 以及 上面的分数 end-->
-            <!--应用 start-->
-            <view class='outline-item'>
-                <text>应用</text>
-                <text>{{outline.appNum}}</text>
-            </view>
-            <!--应用 end-->
-            <!--异常 start-->
-            <view class='outline-item'>
-                <text>异常</text>
-                <text>{{outline.exceptionNum}}</text>
-            </view>
-            <!--异常 end-->
-            <!--历史异常导航 start-->
             <navigator class='view-history' url="../analysis-history/analysis-history" hover-class="navigator-hover">
                 <label>
                     查看历史异常 >>
@@ -32,60 +15,30 @@
         </view>
         <!--头部概览模块 end-->
 
-        <label-page nav-class="nav" labels="{{labels}}">
-            <view slot="page-1">
-                <!--异常信息模块 start-->
-                <navigator wx:for="{{exceptionList}}"
-                           wx:key='app-{{index}}'
-                           class="app-item-container"
-                           hover-class="app-item-hover"
-                           url="../analysis-exceptioninfo/analysis-exceptioninfo?id={{item.id}}&title={{item.title}}"
-                           data-index="{{index}}">
-                    <label>
-                        <view class='app-item'>
-                            <text class='title'>{{item.title}}</text>
-                            <view class='tag'>
-                                <text>{{item.app}}</text>
-                            </view>
-                            <image class='enter' src='../../img/svgs/arrow_right.svg'></image>
+        <!--异常信息模块 start-->
+        <view >
+            <navigator wx:for="{{exceptionList}}"
+                       wx:key='app-{{index}}'
+                       class="app-item-container"
+                       hover-class="app-item-hover"
+                       url="../analysis-exceptioninfo/analysis-exceptioninfo?id={{item.id}}&title={{item.title}}"
+                       data-index="{{index}}">
+                <label>
+                    <view class='app-item'>
+                        <text class='title'>{{item.title}}</text>
+                        <view class='tag'>
+                            <text>{{item.app}}</text>
                         </view>
-                        <button form-type="submit"></button>
-                    </label>
-                </navigator>
-                <view class="loading-hinder">
-                    <text wx:if="{{ifLoading}}">Loading...</text>
-                    <text wx:else class="{{ifMore ? 'hidden' : ''}}">No more items.</text>
-                </view>
-                <!--异常信息模块 end-->
+                        <image class='enter' src='../../img/svgs/arrow_right.svg'></image>
+                    </view>
+                    <button form-type="submit"></button>
+                </label>
+            </navigator>
+            <view class="loading-hinder">
+                <text wx:if="{{ifLoading}}">Loading...</text>
+                <text wx:else class="{{ifMore ? 'hidden' : ''}}">No more items.</text>
             </view>
-            <view slot="page-2">
-                <!--图表收藏模块 start-->
-                <navigator wx:for="{{collections}}"
-                           wx:key='collection-{{index}}'
-                           class="app-item-container"
-                           hover-class="app-item-hover"
-                           url="../monitor-appinfo-diagram/monitor-appinfo-diagram?id={{item.id}}"
-                           data-index="{{index}}">
-                    <label>
-                        <view class='app-item'>
-                            <text class='title'>{{item.name}}</text>
-                            <image catchtap="delCollection"
-                                   src="../../img/svgs/delete.svg"
-                                   data-id="{{item.id}}"
-                                   data-index="{{index}}"></image>
-                            <image class='enter' src='../../img/svgs/arrow_right.svg'></image>
-                        </view>
-                        <button form-type="submit"></button>
-                    </label>
-                </navigator>
-                <view class="loading-hinder">
-                    <text wx:if="{{ifLoading}}">Loading...</text>
-                    <text wx:else class="{{ifMore ? 'hidden' : ''}}">No more items.</text>
-                </view>
-                <!--图表收藏模块 end-->
-            </view>
-        </label-page>
-
-    </form>
-</view>
-
+        </view>
+        <!--异常信息模块 end-->
+    </view>
+</form>

@@ -1,15 +1,55 @@
-<!--pages/setting/setting.wxml-->
-
-
-<navigator id="body" wx:for="{{dataList}}" wx:key="app-{{index}}" class="app-item-container" hover-class="app-item-hover" url="{{item.url}}">
-  <label>
-    <view class="app-item" style='text-align:center'>
-
-      <text  class="title">{{item.title}}</text>
-
-      <image class="enter" src="../../img/svgs/arrow_right.svg"></image>
-
+<form report-submit="true" bindsubmit="onFormSubmit">
+    <!--<image class="background" src="../../img/background.jpg"></image>-->
+    <!--<view class="zoomImage background" style="background-image:url(../../img/background.jpg)"></view>-->
+    <view class="header">
+        <image src="{{userInfo.avatarUrl}}"></image>
+        <view></view>
+        <text wx:if="{{authorized}}">{{userInfo.nickName}}</text>
+        <button
+                wx:else
+                bindgetuserinfo='getUserInfo'
+                open-type='getUserInfo'
+                loading='{{ifLoading}}'
+                plain>授 权
+        </button>
     </view>
-    <button form-type="submit"></button>
-  </label>
-</navigator>
+
+    <label-page nav-class="nav" labels="{{labels}}">
+        <view slot="page-1">
+            <!--图表收藏模块 start-->
+            <navigator wx:for="{{collections}}"
+                       wx:key='collection-{{index}}'
+                       class="app-item"
+                       hover-class="app-item-hover"
+                       url="../monitor-appinfo-diagram/monitor-appinfo-diagram?id={{item.id}}"
+                       data-index="{{index}}">
+                <label>
+                    <text class='title'>{{item.name}}</text>
+                    <image class='enter' src='../../img/svgs/arrow_right.svg'></image>
+                    <image catchtap="delCollection"
+                           src="../../img/svgs/delete.svg"
+                           data-id="{{item.id}}"
+                           data-index="{{index}}"></image>
+                    <button form-type="submit"></button>
+                </label>
+            </navigator>
+            <!--图表收藏模块 end-->
+        </view>
+        <view slot="page-2">
+            <navigator wx:for="{{settings}}" wx:key="app-{{index}}" class="app-item" hover-class="app-item-hover"
+                       url="{{item.url}}">
+                <label>
+                    <text class="title">{{item.title}}</text>
+
+                    <image class="enter" src="../../img/svgs/arrow_right.svg"></image>
+
+                    <button form-type="submit"></button>
+                </label>
+            </navigator>
+        </view>
+    </label-page>
+</form>
+
+<confirm-modal wx:if="{{confirmModalShow}}" bindevent="onConfirmEvent">
+    是否取消该项收藏？
+</confirm-modal>

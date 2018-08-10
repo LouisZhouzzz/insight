@@ -11,30 +11,17 @@ $exceptionNumHinderRadius: 30rpx;
   align-items: stretch;
 }
 
-/* 头部分析概览 */
+/*******************************************头部概览信息************************************/
 .header {
   background: $themeBackgroundColor;
   color: $themeColor;
   position: relative;
   overflow: visible;
   padding-bottom: 2em;
-  height: 120px;
+  box-sizing: border-box;
   width: 100%;
-  .cir{
-    display: inline-block;
-    width:120px;
-    height:120px;
-    margin-left: 30rpx;
-    position:relative;
-    z-index: 1;
-    cover-view {
-      height:120px;
-      font-size: 2.5em;
-      font-weight: bold;
-      color: $themeColor;
-      line-height: 120px;
-      text-align: center;
-    }
+  .cir {
+    margin: 0 auto;
   }
   .view-history {
     position: absolute;
@@ -45,84 +32,10 @@ $exceptionNumHinderRadius: 30rpx;
 }
 
 
-.outline-item {
-  text-align: center;
-  display: inline-block;
-
-  &:nth-child(1) {
-    float: left;
-  }
-  &:nth-child(2) {
-    margin-right: 120rpx;
-    float: right;
-  }
-  &:nth-child(3) {
-    float: right;
-    margin-right: 60rpx;
-  }
-  text {
-    &:nth-child(1) {
-      display: block;
-    }
-    &:nth-child(2) {
-      font-size: 2em;
-      height: 150rpx;
-      line-height: 150rpx;
-    }
-  }
-}
-
 /*******************************************label-page-nav************************************/
 .nav {
   background-color: lighten($themeBackgroundColor, 10%);
 }
-
-
-/*******************************************旧收藏模块************************************/
-.collect-list {
-  background-color: $pageBackgroundColor;
-  width: 100%;
-  display: flex;
-  height: 80rpx;
-  line-height: 80rpx;
-  .title {
-    white-space: nowrap;
-    padding: 0 0.5em;
-    background-color: darken($themeBackgroundColor, 8%);
-    color: $themeColor;
-    image {
-      height: 80rpx;
-      width: 50rpx;
-    }
-  }
-  scroll-view {
-    overflow: scroll;
-    white-space: nowrap;
-    background-color:  lighten($themeBackgroundColor, 8%);
-    .card {
-      background: none;
-      color: $themeColor;
-      display: inline-block;
-      //border: 2rpx solid $themeColor;
-      //border-radius: 10rpx;
-      text-align: center;
-      padding:  0 0.5em;
-      font-size: 14px;
-      border-right: 1px solid white;
-
-      text {
-        max-width: 7em;
-        display: inline-block;
-        overflow: hidden;
-      }
-    }
-    .card-hover {
-      color:  lighten($themeBackgroundColor, 10%);
-      background: $themeColor;
-    }
-  }
-}
-
 
 scroll-view.container {
   position: relative;
@@ -137,7 +50,8 @@ scroll-view.container {
 /* 列表一级子项 */
 .app-item-container {
   background-color: $themeColor;
-  box-shadow: 0 0 15px 0 darken($pageBackgroundColor, 10%);
+  //box-shadow: 0 0 15px 0 darken($pageBackgroundColor, 10%);
+  border-bottom: 1px solid  darken($pageBackgroundColor, 5%);
   max-height: $appItemHeight;
   transition: 500ms linear 0ms;
   overflow: hidden;

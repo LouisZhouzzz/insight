@@ -1,5 +1,5 @@
-// const domain = 'https://www.hi5399.xyz';
-const domain = 'https://result.eolinker.com/zdBe81Pa8b841f6b8fe96ba5e8e67a6fac3804a3da7c8b8?uri=';
+const domain = 'https://www.hi5399.xyz';
+// const domain = 'https://result.eolinker.com/zdBe81Pa8b841f6b8fe96ba5e8e67a6fac3804a3da7c8b8?uri=';
 
 
 /**
@@ -24,6 +24,13 @@ const getDiagram = (success, fail, id) => fetch('/diagrams/' + id, {}, success, 
  * @param fail
  */
 const getSystem = (success, fail) => fetch('/system', {}, success, fail);
+
+/**
+ * 获取公告信息
+ * @param success
+ * @param fail
+ */
+const getAnnouncements = (success, fail) => fetch('/system/announcements', {}, success, fail);
 
 /**
  * 获取应用列表
@@ -132,8 +139,6 @@ const patchUserFormId = (success, fail, userid, formid) => {
  */
 function fetch(url, data, success, fail, method, msg) {
   wx.showNavigationBarLoading();
-
-  // if (msg) wx.showLoading({title: msg});
 
   wx.request({
     url: domain + url,
