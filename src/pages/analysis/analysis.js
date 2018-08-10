@@ -19,13 +19,16 @@ Page({
     size: 10 //异常列表单页项数
   },
 
-  // 绘制分数面板
+  // 绘制分数环
   showScoreAnim2(value, max) {
     let shadowOffset = 2;
     let sideLength = this.data.sideLength - shadowOffset;
     let lineWidth = 12;
-    let fontSize = 60;
+    let fontSize = 0;
     let radius = sideLength / 2 - lineWidth;
+
+    if (sideLength < 200) fontSize = 50;
+    else fontSize = 60;
 
     let colors = [
       [240, 101, 67],
@@ -74,7 +77,7 @@ Page({
 
       // 绘制副标题
       ctx.font = "16px Arial";
-      ctx.fillText('出现 ' + this.data.outline.exceptionNum + ' 个异常', sideLength / 2, sideLength / 4 * 3);
+      ctx.fillText('出现 ' + this.data.outline.exceptionNum + ' 个异常', sideLength / 2, sideLength / 2 + fontSize / 4 * 3);
 
       // 画外层圆弧
       ctx.setLineWidth(lineWidth);
@@ -103,7 +106,7 @@ Page({
     }
   },
 
-  // 绘制分数面板
+  // 绘制流量球
   showScoreAnim(value, max) {
     let sideLength = this.data.sideLength;
     let fontSize = 60;
@@ -200,7 +203,6 @@ Page({
 
   },
 
-
   onLoad() {
     wx.setNavigationBarTitle({title: 'insight'});
     this.setData({
@@ -247,7 +249,6 @@ Page({
       this.data.page,
       this.data.size
     );
-
   },
 
   onFormSubmit (e) {
@@ -262,44 +263,15 @@ Page({
     );
   },
 
-  loadExceptionList: function () {
-    if (this.data.ifLoading) return;
-
-    this.setData({
-      ifLoading: true
-    });
-
-    service.getUnhandledExceptions(
-      (res) => {
-        let list = this.data.exceptionList;
-        for (let i = 0; i < res.records.length; i++) {
-          list.push(res.records[i]);
-        }
-        this.setData({
-          exceptionList: list,
-          page: this.data.page + 1,
-          ifLoading: false
-        });
-      },
-      (res) => {
-        this.setData({
-          ifLoading: false
-        });
-      },
-      this.data.page,
-      this.data.size
-    );
-  },
-
   onHide () {
     // 生命周期函数--监听页面隐藏
     wx.hideNavigationBarLoading();
 
   },
 
-  onPullDownRefresh: function () {
+  onPullDownRefresh () {
     wx.startPullDownRefresh();
     if (this.data.ifLoading) return;
     this.onLoad();
-  },
+  }
 });
