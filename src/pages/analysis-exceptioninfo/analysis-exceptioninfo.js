@@ -8,16 +8,17 @@ Page({
   },
   onLoad (option) {
     wx.setNavigationBarTitle({ title: option.title });
-    service.getException(
-      (res) => {
+
+    service.getException(option.id)
+      .then(res => {
         this.setData({
-          app: res.app,
-          description: res.description,
-          solution: res.solution ? res.solution : null
+          app: res.data.app,
+          description: res.data.description,
+          solution: res.data.solution ? res.data.solution : null
         });
-      },
-      () => {},
-      option.id
-    );
+      })
+      .catch(res => {
+        console.log('错误：' + res);
+      });
   }
 });

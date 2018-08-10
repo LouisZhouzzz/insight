@@ -121,14 +121,15 @@ Page({
     let sX = 0;
     let sY = sideLength / 2;
     let axisLength = sideLength; //轴长
-    let waveWidth = 0.015 ;   //波浪宽度,数越小越宽
+    let waveWidth = 0.015;   //波浪宽度,数越小越宽
     let waveHeight = 4; //波浪高度,数越大越高
     let speed = 0.10; //波浪速度，数越大速度越快
     let xOffset = 0; //波浪x偏移量
 
     // 画圈
     let IsdrawCircled = false;
-    function drawCircle (){
+
+    function drawCircle() {
       ctx.beginPath();
       ctx.lineWidth = 0;
       ctx.strokeStyle = '#eee';
@@ -146,18 +147,18 @@ Page({
 
 
     // 画 sin 函数
-    function drawSin (xOffset){
+    function drawSin(xOffset) {
       ctx.save();
 
-      let points=[];	//用于存放绘制Sin曲线的点
+      let points = [];	//用于存放绘制Sin曲线的点
 
       ctx.beginPath();
       //在整个轴长上取点
-      for(let x = sX; x < sX + axisLength; x += 20 / axisLength){
+      for (let x = sX; x < sX + axisLength; x += 20 / axisLength) {
         //此处坐标(x,y)的取点，依靠公式 “振幅高*sin(x*振幅宽 + 振幅偏移量)”
         let y = -Math.sin((sX + x) * waveWidth + xOffset);
 
-        let dY = sideLength * (1 - nowRange / 100 );
+        let dY = sideLength * (1 - nowRange / 100);
 
         points.push([x, dY + y * waveHeight]);
         ctx.lineTo(x, dY + y * waveHeight);
@@ -166,27 +167,27 @@ Page({
       //封闭路径
       ctx.lineTo(axisLength, sideLength);
       ctx.lineTo(sX, sideLength);
-      ctx.lineTo(points[0][0],points[0][1]);
+      ctx.lineTo(points[0][0], points[0][1]);
       ctx.fillStyle = color;
       ctx.fill();
 
       ctx.restore();
     }
 
-    this.render = function (){
+    this.render = function () {
       ctx.clearRect(0, 0, sideLength, sideLength);
 
       rangeValue = value;
 
-      if(IsdrawCircled === false){
+      if (IsdrawCircled === false) {
         drawCircle();
       }
 
-      if(nowRange <= rangeValue){
+      if (nowRange <= rangeValue) {
         nowRange += 1;
       }
 
-      if(nowRange > rangeValue){
+      if (nowRange > rangeValue) {
         nowRange -= 1;
       }
 
@@ -204,72 +205,51 @@ Page({
   },
 
   onLoad() {
-    wx.setNavigationBarTitle({title: 'insight'});
+
+    wx.setNavigationBarTitle({title: '慧眼'});
+
     this.setData({
       ifLoading: true
     });
-    service.getSystem(
-      (res) => {
-        this.setData({
-          outline: res.data
-        });
-        this.setData({
-          sideLength: 0.4 * globalData.windowHeight
-        });
-        setTimeout(
-          () => this.showScoreAnim2(this.data.outline.point, 100),
-          300
-        )
-      },
-      (res) => {
-      }
-    );
 
-    service.getUnhandledExceptions(
-      (res) => {
-        this.setData({
-          exceptionList: res.records,
-          page: this.data.page + 1
-        });
-        setTimeout(() => {
-          this.setData({
-            ifLoading: false
-          })
-        }, 1000);
-        wx.stopPullDownRefresh()
-      },
-      (res) => {
-        setTimeout(() => {
-          this.setData({
-            ifLoading: false
-          })
-        }, 1000);
-        wx.stopPullDownRefresh()
-      },
-      this.data.page,
-      this.data.size
-    );
+    this.setData({
+      sideLength: 0.4 * globalData.windowHeight
+    });
+
+    // 向服务器请求系统概览信息与未处理的异常信息
+    Promise.all([
+      service.getSystem(),
+      service.getUnhandledExceptions()
+    ]).then(res => {
+      this.setData({
+        outline: res[0].data.data,
+        exceptionList: res[1].data.records
+      });
+      setTimeout(
+        () => this.showScoreAnim2(this.data.outline.point, 100),
+        300
+      )
+    }).catch(res => {
+      console.log('error: ' + res)
+    });
   },
 
-  onFormSubmit (e) {
-    service.patchUserFormId(
-      (res) => {
-        console.log(res);
-      },
-      (res) => {
-      },
-      globalData.openid,
-      e.detail.formId
-    );
+  onFormSubmit(e) {
+    service.patchUserFormId(globalData.openid, e.detail.formId)
+      .then(res => {
+        console.log('formid发送成功！');
+      })
+      .catch(res => {
+        console.log('formid发送失败');
+      });
   },
 
-  onHide () {
+  onHide() {
     // 生命周期函数--监听页面隐藏
     wx.hideNavigationBarLoading();
-
   },
 
-  onPullDownRefresh () {
+  onPullDownRefresh() {
     wx.startPullDownRefresh();
     if (this.data.ifLoading) return;
     this.onLoad();

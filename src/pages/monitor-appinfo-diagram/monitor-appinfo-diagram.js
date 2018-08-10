@@ -1,5 +1,4 @@
 import * as echarts from "../../ec-canvas/echarts";
-import geoJson from "../../ec-canvas/china";
 
 const service = require('../../service/test');
 const chartInit = require('../../components/diagram/eCharts').init;
@@ -16,35 +15,36 @@ Page({
   onReady() {
     this.ecComponent = this.selectComponent('#mychart-dom-bar');
     this.staBarComponent = this.selectComponent('#sta-bar');
-    service.getDiagram(
-      (res) => {
-        // 设置标题
-        wx.setNavigationBarTitle({title: res.chart.titleText});
-        // 设置介绍文本
-        this.setData({
-          graExpText: res.chart.graExpText
-        });
-        // 加载图表
-        this.ecComponent.init(chartInit(res));
-
-        this.staBarComponent.init((canvas, width, height) => {
-          let chart = echarts.init(canvas, {
-            width: width,
-            height: height
+    service.getDiagram(this.data.id)
+      .then(
+        (res) => {
+          // 设置标题
+          wx.setNavigationBarTitle({title: res.data.chart.titleText});
+          // 设置介绍文本
+          this.setData({
+            graExpText: res.data.chart.graExpText
           });
-          canvas.setChart(chart);
+          // 加载图表
+          this.ecComponent.init(chartInit(res.data));
 
-          const option = staBar.getOption(res.sta);
+          this.staBarComponent.init((canvas, width, height) => {
+            let chart = echarts.init(canvas, {
+              width: width,
+              height: height
+            });
+            canvas.setChart(chart);
 
-          chart.setOption(option);
+            const option = staBar.getOption(res.data.sta);
 
-          return chart;
+            chart.setOption(option);
+
+            return chart;
+          })
         })
-      },
-      () => {
-      },
-      this.data.id
-    );
+      .catch((res) => {
+          console.warn('获取图表信息失败！' + res)
+        }
+      );
   },
 
   onLoad(data) {

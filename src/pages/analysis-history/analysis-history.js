@@ -5,30 +5,60 @@ Page({
   data: {
     records: [],
     page: 0,
-    size: 10,
-    ifLoading: true
+    ifLoading: true,
+    size: 10
   },
-  onLoad: function () {
-    wx.setNavigationBarTitle({ title: '历史异常记录' });
+  onLoad() {
+    wx.setNavigationBarTitle({title: '历史异常记录'});
     this.setData({
       ifLoading: true
     });
-    service.getHandledExceptions(
-      (res) => {
+
+    service.getHandledExceptions(this.data.page)
+      .then(res => {
         this.setData({
-          records: res.records,
+          records: res.data.records,
           ifLoading: false,
           page: 1
         });
-        wx.stopPullDownRefresh();
-      },
-      (res) => {
+      })
+      .catch(res => {
+        console.log('错误：' + res);
+      });
+  },
+
+  onPullDownRefresh () {
+    wx.startPullDownRefresh();
+    this.onLoad();
+  },
+
+  onReachBottom () {
+    this.loadMoreRecords();
+  },
+
+  loadMoreRecords () {
+    if (this.data.ifLoading) return;
+    this.setData({
+      ifLoading: true
+    });
+
+    service.getHandledExceptions(this.data.page)
+      .then(res => {
+        let newRecords = res.data.records;
+        for (let i in newRecords) {
+          if (!newRecords.hasOwnProperty(i)) continue;
+          this.data.records.push(newRecords[i]);
+        }
         this.setData({
+          records: this.data.records,
+          page: this.data.page + 1,
           ifLoading: false
         });
-        wx.stopPullDownRefresh();
-      }, 0, this.data.size);
-  },
+      })
+      .catch(res => {
+        console.log('错误：' + res);
+      });
+  }
 
   // TODO
   // onReady: function () { // 监听页面初次渲染完成
@@ -38,40 +68,4 @@ Page({
   //     }
   //   })
   // },
-
-  onPullDownRefresh: function () {
-    wx.startPullDownRefresh();
-    this.onLoad();
-  },
-
-  onReachBottom: function () {
-    this.loadMoreRecords();
-  },
-
-  loadMoreRecords: function () {
-    let ifMore = (this.data.page + 1) * this.data.size === this.data.records.length;
-    if (this.data.ifLoading || !ifMore) return;
-    this.setData({
-      ifLoading: true
-    });
-    service.getHandledExceptions(
-      (res) => {
-        for (let i in res.records) {
-          if (!res.records.hasOwnProperty(i)) continue;
-          this.data.records.push(res.records[i]);
-        }
-        this.setData({
-          records: this.data.records,
-          page: this.data.page + 1,
-          ifLoading: false
-        });
-      },
-      (res) => {
-        this.setData({
-          ifLoading: false
-        })
-      },
-      this.data.page,
-      this.data.size);
-  }
 });

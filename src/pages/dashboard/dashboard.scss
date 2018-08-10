@@ -37,7 +37,6 @@
     color: $themeColor;
     border: 1px solid $themeColor;
     display: inline-block;
-    font-size: 14px;
     padding: 0 1em;
   }
 }
@@ -72,6 +71,7 @@
 confirm-modal {
   @include full-page
 }
+
 
 /*******************************************label-page-nav************************************/
 .nav {

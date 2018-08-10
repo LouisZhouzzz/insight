@@ -15,7 +15,7 @@
 
 .tag {
   background-color: darken($themeBackgroundColor, 10%);
-  font-size: 12px;
+  font-size: $smallFontSize;
   padding: 0.5em;
   border-radius: 20rpx;
   width: 10em;
@@ -29,7 +29,7 @@
   overflow: hidden;
   border-radius: 10rpx;
   .pane-header {
-    font-size: 18px;
+    font-size: $bigFontSize;
     height: 2em;
     line-height: 2em;
     padding-left: 1em;;
@@ -37,7 +37,6 @@
   .pane-content {
     overflow: hidden;
     background-color: lighten($themeBackgroundColor, 10%);
-    //height: 500rpx;
     padding: 0 1em 1em 1em;
     .segment {
       overflow: hidden;

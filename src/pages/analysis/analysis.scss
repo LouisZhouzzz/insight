@@ -2,14 +2,8 @@
 
 $appItemHeight: 100rpx;
 $itemTagHeight: 50rpx;
-$itemTagFontSize: 12px;
 $itemTabBackgroundColor: #8EA8C3;
 $exceptionNumHinderRadius: 30rpx;
-
-.container {
-  background-color: $pageBackgroundColor;
-  align-items: stretch;
-}
 
 /*******************************************头部概览信息************************************/
 .header {
@@ -26,11 +20,10 @@ $exceptionNumHinderRadius: 30rpx;
   .view-history {
     position: absolute;
     right: 1em;
-    bottom: 1em;
-    font-size: 14px;
+    bottom: 15rpx;
+    font-size: $smallFontSize;
   }
 }
-
 
 /*******************************************label-page-nav************************************/
 .nav {
@@ -46,49 +39,45 @@ scroll-view.container {
   }
 }
 
+/*******************************************主体列表模块************************************/
+.body {
+  width: 100%;
+}
 
-/* 列表一级子项 */
-.app-item-container {
+
+
+/***************************************列表项*************************************************/
+.app-item {
   background-color: $themeColor;
-  //box-shadow: 0 0 15px 0 darken($pageBackgroundColor, 10%);
-  border-bottom: 1px solid  darken($pageBackgroundColor, 5%);
-  max-height: $appItemHeight;
+  &:nth-child(n + 1) {
+    box-shadow: 0 0 20px 0 darken($pageBackgroundColor, 10%);
+  }
+  //border-bottom: 1px solid darken($pageBackgroundColor, 5%);
+  height: $appItemHeight;
+  line-height: $appItemHeight;
+  padding-left: 1em;
   transition: 500ms linear 0ms;
   overflow: hidden;
-  &.open {
-    max-height: $appItemHeight * 10;
-    image {
-      transform: rotate(90deg);
-    }
-  }
-}
-
-.app-item-hover {
-  background-color: darken($themeColor, 10%);
-}
-
-.app-item {
-  display: flex;
-  height: $appItemHeight;
-  padding-left: 1em;
-  align-items: center;
-  & > text {
-    display: inline-block;
-    line-height: $appItemHeight;
-    flex-grow: 1;
-    overflow: hidden;
+  &.app-item-hover {
+    background-color: darken($themeColor, 10%);
   }
   image {
-    height: $appItemHeight / 2;
-    width: $appItemHeight / 2;
-    margin: 0 0.5em;
+    float: right;
+    height: $itemTagHeight;
+    width: $itemTagHeight;
+    margin: ($appItemHeight - $itemTagHeight)/2 10rpx 0;
+  }
+  .tag {
+    float: right;
+    height: $itemTagHeight;
+    margin: ($appItemHeight - $itemTagHeight)/2 10rpx 0;
   }
 }
 
 .tag {
+  line-height: 0;
   max-width: 6em;
   overflow: hidden;
-  height: $itemTagHeight;
   vertical-align: middle;
   padding: 0 0.5em;
   text-align: center;
@@ -97,25 +86,13 @@ scroll-view.container {
   color: $darkenWhite;
   background-color: $itemTabBackgroundColor;
   //box-shadow: h-shadow v-shadow blur spread color inset;
-  box-shadow:2px 2px 5px rgba(0, 0, 0, 0.2) inset;
-  border:1px solid rgba(0, 0, 0, 0.03);
-  box-sizing:border-box;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2) inset;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  box-sizing: border-box;
   text {
     line-height: $itemTagHeight;
     height: $itemTagHeight;
-    font-size: $itemTagFontSize;
-  }
-}
-
-/* 列表二级子项 */
-.exception-item {
-  height: $itemTagHeight;
-  text-indent: 2em;
-  background-color: $pageBackgroundColor;
-  border-top: 1px solid darken($pageBackgroundColor, 10%);
-  text {
-    height: $itemTagHeight;
-    line-height: $itemTagHeight;
+    font-size: $smallFontSize;
   }
 }
 
@@ -123,6 +100,6 @@ scroll-view.container {
   text-align: center;
   height: $appItemHeight;
   line-height: $appItemHeight;
-  font-size: 14px;
+  font-size: $smallFontSize;
   color: lighten($lightenBlack, 50%);
 }

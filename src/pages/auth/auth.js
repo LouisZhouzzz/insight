@@ -1,6 +1,6 @@
 Page({
   onLoad: function () {
-    getApp().getAuthKey(() => {
+    getApp().setAuthKey(() => {
       wx.switchTab({ url:'../analysis/analysis' });
     });
   }

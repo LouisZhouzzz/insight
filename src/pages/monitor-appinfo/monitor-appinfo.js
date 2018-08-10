@@ -74,7 +74,7 @@ Page({
       data: []
     }
   },
-  collapse: function (e) {
+  collapse(e) {
     let type = this.data.types[this.data.swiperIndex].value;
     let list = this.data[type];
     let row = list.data[e.currentTarget.dataset.index];
@@ -84,37 +84,33 @@ Page({
     })
   },
 
-  onFormSubmit: function (e) {
-    service.patchUserFormId(
-      (res) => {
-        console.log(res.msg);
-      },
-      (res) => {
-      },
-      globalData.openid,
-      e.detail.formId
-    );
+  onFormSubmit(e) {
+    service.patchUserFormId(globalData.openid, e.detail.formId)
+      .then(res => {
+        console.log('formid发送成功！');
+      })
+      .catch(res => {
+        console.log('formid发送失败');
+      });
   },
-  collect: function (e) {
+
+  collect(e) {
     let outerIndex = e.currentTarget.dataset.outer;
     let innerIndex = e.currentTarget.dataset.index;
     let type = this.data.types[this.data.swiperIndex].value;
     let list = this.data[type];
     list.data[outerIndex].items[innerIndex].ifCollected = !list.data[outerIndex].items[innerIndex].ifCollected;
-    service.toggleUserDiagram(
-      (res) => {
+    service.toggleUserDiagram(globalData.openid, e.currentTarget.dataset.id, list.data[outerIndex].items[innerIndex].ifCollected)
+      .then(res => {
         this.setData({
           [type]: list
-        });
-      },
-      (res) => {
-      },
-      globalData.openid,
-      e.currentTarget.dataset.id,
-      list.data[outerIndex].items[innerIndex].ifCollected
-    )
+        })
+      })
+      .catch(res => {
+        console.log('收藏状态变更失败！' + res);
+      });
   },
-  outerscroll: function (e) {
+  outerscroll(e) {
     if (this.data.ifTypeSelectedShow === (e.detail.scrollTop > 400)) return;
     this.setData({
       ifTypeSelectedShow: e.detail.scrollTop > 400
@@ -142,7 +138,7 @@ Page({
       return chart;
     });
   },
-  radioChange: function (e) {
+  radioChange(e) {
     let types = this.data.types;
     types[this.data.swiperIndex].checked = false;
     types[e.detail.value].checked = true;
@@ -151,15 +147,15 @@ Page({
       swiperIndex: parseInt(e.detail.value)
     });
   },
-  onLoad: function (option) {
+  onLoad(option) {
     this.setData({
       appId: option.id
     });
-    service.getApp(
-      (res) => {
+    service.getApp(this.data.appId)
+      .then((res) => {
         this.setData({
-          appOutline: res.data,
-          charts: res.charts
+          appOutline: res.data.data,
+          charts: res.data.charts
         });
 
         wx.setNavigationBarTitle({title: this.data.appOutline.title});
@@ -174,39 +170,37 @@ Page({
             height: height
           });
 
-          chart.setOption(diagram.line.getOption(res.charts.line));
+          chart.setOption(diagram.line.getOption(res.data.charts.line));
           return chart;
         });
-      },
-      (res) => {
-      },
-      this.data.appId
-    );
-    service.getAppQuotas(
-      (res) => {
-        this.data.batch.data = res.piliang;
-        this.data.online.data = res.lianji;
-        this.data.service.data = res.yewu;
-        this.data.performance.data = res.xingneng;
-        this.data.property.data = res.ziyuan;
-        this.setData({
-          batch: this.data.batch,
-          online: this.data.online,
-          service: this.data.service,
-          performance: this.data.performance,
-          property: this.data.property
-        });
+      })
+      .catch((res) => {
+        console.log('获取应用详情失败！' + res);
+      });
+    service.getAppQuotas(this.data.appId, globalData.openid)
+      .then(
+        (res) => {
+          this.data.batch.data = res.data.piliang;
+          this.data.online.data = res.data.lianji;
+          this.data.service.data = res.data.yewu;
+          this.data.performance.data = res.data.xingneng;
+          this.data.property.data = res.data.ziyuan;
+          this.setData({
+            batch: this.data.batch,
+            online: this.data.online,
+            service: this.data.service,
+            performance: this.data.performance,
+            property: this.data.property
+          });
+          wx.stopPullDownRefresh();
+        })
+      .catch((res) => {
         wx.stopPullDownRefresh();
-      },
-      (res) => {
-        wx.stopPullDownRefresh();
-      },
-      this.data.appId,
-      globalData.openid
-    )
+        console.log('获取应用指标失败！' + res);
+      });
   },
 
-  onReady: function () {
+  onReady() {
     this.ecComponents = [];
     computed(this, {
       canvasNavs() {
@@ -223,7 +217,7 @@ Page({
     });
   },
 
-  onPullDownRefresh: function () {
+  onPullDownRefresh() {
     wx.startPullDownRefresh();
     this.onLoad();
   },

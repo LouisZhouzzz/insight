@@ -25,6 +25,38 @@ Page({
         "url": '../dashboard-message-board/dashboard-message-board'
       }]
   },
+
+  onLoad() {
+    wx.setNavigationBarTitle({title: '慧眼'});
+    // 查看是否授权
+
+    service.wxSetting()
+      .then(res => {
+        if (!res.authSetting['scope.userInfo']) return;
+        service.wxUserInfo().then(res => {
+          this.setData({
+            userInfo: res.userInfo,
+            authorized: true,
+            ifLoading: false
+          })
+        })
+      })
+      .catch(res => {
+        console.log('获取用户配置失败！' + res);
+      });
+
+    service.getUserDiagrams(globalData.openid)
+      .then(
+        (res) => {
+          this.setData({
+            collections: res.data.records
+          });
+        })
+      .catch(res => {
+        console.log('收藏夹信息加载失败！' + res)
+      })
+  },
+
   //打开确认框
   openConfirmModal() {
     this.setData({
@@ -49,79 +81,36 @@ Page({
     });
   },
 
-  onFormSubmit (e) {
-    service.patchUserFormId(
-      (res) => {
-        console.log(res);
-      },
-      (res) => {
-      },
-      globalData.openid,
-      e.detail.formId
-    );
+  onFormSubmit(e) {
+    service.patchUserFormId(globalData.openid, e.detail.formId)
+      .then(res => {
+        console.log('formid发送成功！');
+      })
+      .catch(res => {
+        console.log('formid发送失败');
+      });
   },
-
 
   // 取消收藏
   delCollection(e) {
     let diagramId = e.currentTarget.dataset.id;
     let index = e.currentTarget.dataset.index;
     this.openConfirmModal().then(
-      () => {
-        service.toggleUserDiagram(
-          (res) => {
+      (res) => {
+        service.toggleUserDiagram(globalData.openid, diagramId, false)
+          .then(res => {
             let collections = this.data.collections;
             collections.splice(index, 1);
             this.setData({
               collections: collections
             })
-          },
-          (res) => {
-
-          },
-          globalData.openid,
-          diagramId,
-          false
-        )
-      },
-      () => {
-        console.log('取消了呗~');
-      }
-    );
-  },
-
-  onLoad() {
-    // 查看是否授权
-    wx.getSetting({
-      success: (res) => {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-          wx.getUserInfo({
-            success: (res) => {
-              this.setData({
-                userInfo: res.userInfo,
-                authorized: true
-              })
-            }
           })
-        }
-      },
-      complete: () => {
-        this.setData({
-          ifLoading: false
-        })
+          .catch(res => {
+            console.log('取消收藏失败！ ' + res)
+          })
       }
+    ).catch(res => {
+      console.log('取消了呗~');
     });
-
-    service.getUserDiagrams(
-      (res) => {
-        this.setData({
-          collections: res.records
-        });
-      },
-      (res) => {
-      },
-      globalData.openid
-    );
   }
 });

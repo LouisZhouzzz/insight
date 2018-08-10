@@ -17,7 +17,6 @@
         </view>
     </view>
 
-
     <view wx:if="{{solution}}" class="pane lower">
         <view class="tag">{{solution.time}}</view>
         <view class="pane-header">解决方案</view>

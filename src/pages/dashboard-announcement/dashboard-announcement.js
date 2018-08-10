@@ -1,91 +1,40 @@
-// pages/announcement/announcement.js
+const service = require('../../service/test');
+
 Page({
-
-    /**
-     * 页面的初始数据
-     */
-    data: {
-
-        content: [
-            {
-                date: "2018.08.01",
-                details: ['修复 小程序使用分包后，云测试提示代码包上限有误的问题',
-                    "修复 素材管理文件列表内容重叠的问题",
-                    "修复 素材管理文件列表内容重叠的问题",
-                    "修复 素材管理文件列表内容重叠的问题"]
+  data: {
+    content: [
+      {
+        date: "2018.08.01",
+        details: ['修复 小程序使用分包后，云测试提示代码包上限有误的问题',
+          "修复 素材管理文件列表内容重叠的问题",
+          "修复 素材管理文件列表内容重叠的问题",
+          "修复 素材管理文件列表内容重叠的问题"]
 
 
-            }, {
-                date: "2018.07.20",
-                details: ['修复 1.0 带来的编译不生效的问题',
+      }, {
+        date: "2018.07.20",
+        details: ['修复 1.0 带来的编译不生效的问题',
+          "修复 界面调试样式覆盖规则计算错误的问题",
+          "修复 分包根目录名字后缀相同时报错的问题"]
 
-                    "修复 界面调试样式覆盖规则计算错误的问题",
-                    "修复 分包根目录名字后缀相同时报错的问题"]
+      }
+    ]
+  },
+  onLoad() {
+    let p = new Promise ((resolve, reject) => {
+      let timeOut = Math.random() * 2;
+      setTimeout(() => {
+        if (timeOut < 1) resolve('200');
+        else reject('404')
+      }, 1000)
+    });
 
-            }
-        ]
+    p.then((res) => {
+      console.log('success:' + res)
+    });
 
-
-    },
-
-
-
-
-
-
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function (options) {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
-
-    }
-})
+    p.catch((res) => {
+      console.log('fail:' +  res)
+    })
+  }
+});

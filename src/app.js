@@ -3,7 +3,7 @@ const service = require('service/test');
 let hotapp = require('utils/hotapp.js');
 
 App({
-  onLaunch: function () {
+  onLaunch () {
     hotapp.init('hotapp491327934');
     hotapp.setDebug(true);
     // 展示本地存储能力
@@ -11,50 +11,40 @@ App({
     logs.unshift(Date.now());
     wx.setStorageSync('logs', logs);
 
-    // 获取设备信息
-    wx.getSystemInfo({
-      success: res => {
-        this.globalData.windowHeight = res.windowHeight;
-      }
-    });
-
+    try {
+      let res = wx.getSystemInfoSync();
+      this.globalData.windowHeight = res.windowHeight;
+    } catch (e) {
+      console.log('获取设备信息失败！')
+    }
     // 登录获取登录态
-    this.getAuthKey();
+    this.setAuthKey();
+
+    Promise.prototype.finally = function (callback) {
+      let P = this.constructor;
+      return this.then(
+        value  => P.resolve(callback()).then(() => value),
+        reason => P.resolve(callback()).then(() => { throw reason })
+      );
+    };
   },
 
-  onError (err) {
-    // 上报错误
-    console.log(err);
-  },
-
-  login() {
-    return new Promise((resolve, reject) => wx.login({
-      success: resolve,
-      fail: reject
-    }))
-  },
-  getLoginState() {
-    return this.login().then(res => new Promise((resolve, reject) => {
-      wx.request({
-        url: service.domain + '/loginstate?code=' + res.code,
-        header: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        method: 'GET',
-        success: resolve,
-        fail: reject
-      });
-    }))
-  },
-  getAuthKey(callback) {
-    this.getLoginState().then(res => {
+  setAuthKey(callback) {
+    service.getLoginState()
+      .then(res => {
         this.globalData.token = res.data.token;
         this.globalData.openid = res.data.openid;
         callback && callback();
-      },
-      res => console.log('登录失败！')
-    )
+      })
+      .catch(res =>
+        console.log('登录失败! ' + res)
+      )
   },
+
+  onError(err) {
+    console.warn('全局错误捕捉：' + err);
+  },
+
   globalData: {
     windowHeight: null,
     token: null,
