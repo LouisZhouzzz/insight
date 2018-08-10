@@ -1,6 +1,6 @@
 <view class="WxComment">
-  <WxComment tipOne="insight "
-             tipTwo="基于微信的产品运营监控平台"
+  <WxComment
+
              submitBtnText="发送"
              articleID="message_board"
              contentLen='1' theme="light"></WxComment>

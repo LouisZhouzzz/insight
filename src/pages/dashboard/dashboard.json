@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "设置",
+  "navigationBarTitleText": "Insight",
   "navigationBarBackgroundColor": "#2C75B3",
   "usingComponents": {
     "label-page": "../../components/label-page/label-page",

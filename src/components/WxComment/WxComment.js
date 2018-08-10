@@ -143,7 +143,7 @@ Component({
           var query = new AV.Query('WxComment');
           query.equalTo('article_id', that.data.articleID);
           // descending:降序/ascending:升序
-          query.ascending('createdAt');
+          query.descending('createdAt');
           // 同时查询包含对象Pointer的详细信息
           query.include('targetUser');
           query.include('targetZan');
@@ -1062,7 +1062,7 @@ Component({
             current_comment['zanNum'] = 0;
             current_comment['zanId'] = zan.id;
             current_comment['subCommentList'] = [];
-            that.data.leancloud_comment_data.push(current_comment);
+  /*这里把push换成unshift 把新评论*/          that.data.leancloud_comment_data./*push*/ unshift(current_comment);
             that.setData({
               leancloud_comment_data: that.data.leancloud_comment_data,
               comment_num: that.data.comment_num + 1,             

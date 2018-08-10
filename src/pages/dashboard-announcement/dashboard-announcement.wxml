@@ -1,0 +1,18 @@
+<!--pages/announcement/announcement.wxml-->
+
+
+
+<block  wx:for="{{content}}" wx:for-item="item" wx:key="content-{{index}}">
+    <view class="font"> {{item.date}} </view>
+
+
+ <block  wx:for="{{item.details}}"   wx:key="details-{{index}}">
+      <view class="font">{{index+1}}. {{item}} </view>
+    </block>
+
+
+
+</block>
+
+
+

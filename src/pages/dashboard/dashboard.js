@@ -15,14 +15,14 @@ Page({
     settings: [
       {
         "title": "官方公告",
-        "url": '../announcement/announcement'
+        "url": '../dashboard-announcement/dashboard-announcement'
       }, {
         "title": "意见反馈",
-        "url": '../feedback/index'
+        "url": '../dashboard-feedback/dashboard-feedback'
 
       }, {
         "title": "留言板",
-        "url": '../message-board/message-board'
+        "url": '../dashboard-message-board/dashboard-message-board'
       }]
   },
   //打开确认框
