@@ -40,11 +40,12 @@ page {
   font-size: 12px;
 }
 .container .user {
-  flex-direction: row;
+ // flex-direction: row;  //左边
+  flex-direction: row-reverse;//放右边
 }
 
 .container .sys{
-  flex-direction: row-reverse;
+  flex-direction: row;   //左边
 }
 .feedbackimg image{
    width: 100%;

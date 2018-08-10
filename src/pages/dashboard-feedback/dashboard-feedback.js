@@ -10,21 +10,32 @@ Page({
     data: {
         flag: true,//加号的控制打开/关闭
         userInfo: [],//用户信息，用于头像显示
-        feedback: [{
+        feedback: [
+            {
+                content: '你可以留下联系方式，文本，图片，进行反馈',
+                content_type: 0,
+                contract_info: '',//弹出框input值
+                myDate: '',
+                role: true,
+                img: '../../img/feedback/hotapp_01_07.png',
+            }
+        /*{
             content: '你可以留下联系方式，文本，图片，进行反馈',
             content_type: 0,
             contract_info: '',//弹出框input值
             myDate: '',
             role: false,
-            img: '../../img/feedback/hotapp_01_03.svg',
-        }, {
-            content: '【系统消息】：您的反馈已收到，稍后给您回复',
+            img: '../../img/feedback/hotapp_01_03.png',
+        },
+
+            {
+            content: '【系统消息】：您的反馈已收到，谢谢',
             content_type: 0,
             contract_info: '',
             myDate: '',
             role: true,
             img: "../../img/feedback/hotapp_01_07.png"
-        }
+        } */
         ],//返回数据
         minutes: '',//分钟间隔
         addinput: '',//清楚input框的值
@@ -121,7 +132,7 @@ Page({
                 role: false,
                 img: that.data.userInfo.avatarUrl,
             }, {
-                content: '【系统消息】：您的反馈已收到！',
+                content: '【系统消息】：您的反馈已收到！谢谢！',
                 content_type: 0,
                 contract_info: '',
                 myDate: '',
@@ -175,7 +186,7 @@ Page({
             role: false,
             img: that.data.userInfo.avatarUrl,
         }, {
-            content: '【系统消息】：您的反馈已收到！',
+            content: '【系统消息】：您的反馈已收到！谢谢！',
             content_type: 0,
             contract_info: that.data.contract_info,
             role: true,
