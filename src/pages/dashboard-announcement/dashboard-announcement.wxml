@@ -1,8 +1,5 @@
 <!--pages/announcement/announcement.wxml-->
-<view class='title'>
-    <text class="font">{{biaoti}}</text>
 
-</view>
 
 
 <block  wx:for="{{content}}" wx:for-item="item" wx:key="content-{{index}}">
