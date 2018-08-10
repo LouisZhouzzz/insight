@@ -25,7 +25,6 @@ Page({
         "url": '../dashboard-message-board/dashboard-message-board'
       }]
   },
-
   //打开确认框
   openConfirmModal() {
     this.setData({
