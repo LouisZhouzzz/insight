@@ -1,5 +1,5 @@
-// const domain = 'https://www.hi5399.xyz';
-const domain = 'https://result.eolinker.com/zdBe81Pa8b841f6b8fe96ba5e8e67a6fac3804a3da7c8b8?uri=';
+const domain = 'https://www.hi5399.xyz';
+// const domain = 'https://result.eolinker.com/zdBe81Pa8b841f6b8fe96ba5e8e67a6fac3804a3da7c8b8?uri=';
 
 /**
  * 获取图表信息

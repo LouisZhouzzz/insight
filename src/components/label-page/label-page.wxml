@@ -1,4 +1,4 @@
-<label-page  xmlns:wx="http://www.w3.org/1999/xhtml">
+<label-page>
     <radio-group class='nav nav-class' bindchange='radioChange'>
         <label wx:for='{{navs}}'
                wx:key="label-nav-{{index}}"

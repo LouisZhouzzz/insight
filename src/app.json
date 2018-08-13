@@ -4,7 +4,7 @@
     "pages/dashboard/dashboard",
     "pages/analysis-exceptioninfo/analysis-exceptioninfo",
     "pages/monitor-appinfo/monitor-appinfo",
-   "pages/analysis-history/analysis-history",
+    "pages/analysis-history/analysis-history",
     "pages/monitor/monitor",
     "pages/dashboard-announcement/dashboard-announcement",
     "pages/dashboard-feedback/dashboard-feedback",
@@ -18,7 +18,6 @@
     "navigationBarTitleText": "慧眼",
     "navigationBarTextStyle": "white"
   },
-
   "tabBar": {
     "color": "#504B43",
     "backgroundColor": "#E9F1F7",

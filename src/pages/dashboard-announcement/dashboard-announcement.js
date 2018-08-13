@@ -2,7 +2,7 @@ const service = require('../../service/test');
 
 Page({
   data: {
-    content: [
+    records: [
       {
         date: "2018.08.01",
         details: ['修复 小程序使用分包后，云测试提示代码包上限有误的问题',
@@ -21,20 +21,5 @@ Page({
     ]
   },
   onLoad() {
-    let p = new Promise ((resolve, reject) => {
-      let timeOut = Math.random() * 2;
-      setTimeout(() => {
-        if (timeOut < 1) resolve('200');
-        else reject('404')
-      }, 1000)
-    });
-
-    p.then((res) => {
-      console.log('success:' + res)
-    });
-
-    p.catch((res) => {
-      console.log('fail:' +  res)
-    })
   }
 });

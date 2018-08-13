@@ -4,7 +4,7 @@ let globalData = getApp().globalData;
 Page({
   data: {
     confirmModalShow: false,
-    labels: ['收藏夹', '设置'],
+    labels: ['收藏夹', '其他功能'],
     authorized: false,
     ifLoading: true,
     userInfo: {
@@ -32,12 +32,14 @@ Page({
 
     service.wxSetting()
       .then(res => {
+        this.setData({
+          ifLoading: false
+        });
         if (!res.authSetting['scope.userInfo']) return;
         service.wxUserInfo().then(res => {
           this.setData({
             userInfo: res.userInfo,
-            authorized: true,
-            ifLoading: false
+            authorized: true
           })
         })
       })
@@ -45,12 +47,26 @@ Page({
         console.log('获取用户配置失败！' + res);
       });
 
+    this.getUserDiagrams();
+
+  },
+
+  onShow() {
+    if (globalData.ifCollectionsChange.dashboard) this.getUserDiagrams();
+  },
+
+  onSettingItemTap () {
+
+  },
+
+  getUserDiagrams() {
     service.getUserDiagrams(globalData.openid)
       .then(
         (res) => {
           this.setData({
             collections: res.data.records
           });
+          globalData.dashboard = false
         })
       .catch(res => {
         console.log('收藏夹信息加载失败！' + res)
@@ -75,6 +91,25 @@ Page({
 
   getUserInfo(e) {
     if (!e.detail.userInfo) return;
+
+    if (e.currentTarget.dataset.url)
+      wx.navigateTo({
+        url: e.currentTarget.dataset.url
+      });
+
+    this.setData({
+      userInfo: e.detail.userInfo,
+      authorized: true,
+    });
+  },
+
+  viewAnnouncements (e) {
+    if (!e.detail.userInfo) return;
+
+    wx.navigateTo({
+      url: '../dashboard-announcement/dashboard-announcement'
+    });
+
     this.setData({
       userInfo: e.detail.userInfo,
       authorized: true,
@@ -103,7 +138,8 @@ Page({
             collections.splice(index, 1);
             this.setData({
               collections: collections
-            })
+            });
+            globalData.ifCollectionsChange.monitor = true;
           })
           .catch(res => {
             console.log('取消收藏失败！ ' + res)

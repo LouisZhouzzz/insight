@@ -1,5 +1,4 @@
 import * as echarts from "../../ec-canvas/echarts";
-import geoJson from "../../ec-canvas/china";
 
 const service = require('../../service/test');
 let globalData = getApp().globalData;
@@ -45,6 +44,7 @@ Page({
     ],
     appId: null,
     appOutline: {
+      app: '',
       title: '',
       bio: ''
     },
@@ -104,7 +104,8 @@ Page({
       .then(res => {
         this.setData({
           [type]: list
-        })
+        });
+        globalData.ifCollectionsChange.dashboard = true;
       })
       .catch(res => {
         console.log('收藏状态变更失败！' + res);
@@ -147,7 +148,7 @@ Page({
       swiperIndex: parseInt(e.detail.value)
     });
   },
-  onLoad(option) {
+  onLoad (option) {
     this.setData({
       appId: option.id
     });
@@ -158,7 +159,7 @@ Page({
           charts: res.data.charts
         });
 
-        wx.setNavigationBarTitle({title: this.data.appOutline.title});
+        wx.setNavigationBarTitle({title: this.data.appOutline.app + '-' + this.data.appOutline.title});
 
         this.ecComponents.push(this.selectComponent('#preview-chart-1'));
         this.ecComponents.push(this.selectComponent('#preview-chart-2'));
@@ -177,6 +178,15 @@ Page({
       .catch((res) => {
         console.log('获取应用详情失败！' + res);
       });
+
+    this.getAppQuotas();
+  },
+
+  onShow () {
+    if (globalData.ifCollectionsChange.monitor) this.getAppQuotas();
+  },
+
+  getAppQuotas () {
     service.getAppQuotas(this.data.appId, globalData.openid)
       .then(
         (res) => {
@@ -192,6 +202,7 @@ Page({
             performance: this.data.performance,
             property: this.data.property
           });
+          globalData.ifCollectionsChange.monitor = false;
           wx.stopPullDownRefresh();
         })
       .catch((res) => {
@@ -200,7 +211,7 @@ Page({
       });
   },
 
-  onReady() {
+  onReady () {
     this.ecComponents = [];
     computed(this, {
       canvasNavs() {
@@ -220,31 +231,5 @@ Page({
   onPullDownRefresh() {
     wx.startPullDownRefresh();
     this.onLoad();
-  },
-
-  setChart(bundle, chart) {
-    let type;
-    switch (bundle.chart.chartType) {
-      case 'bar':
-        type = bar;
-        break;
-      case 'line':
-        type = line;
-        break;
-      case 'pie':
-        type = pie;
-        break;
-      case 'gauge':
-        type = gauge;
-        break;
-      case 'map':
-        type = map;
-        echarts.registerMap('china', geoJson);
-        break;
-    }
-
-    let option = type.getOption(bundle.data, bundle.chart, TL);
-
-    chart.setOption(option);
   }
 });

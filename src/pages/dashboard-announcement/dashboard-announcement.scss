@@ -1,13 +1,36 @@
-/* pages/announcement/announcement.wxss */
+@import "../../app";
 
-page{
-  background: #2C75B3;
+page {
+  background: $themeBackgroundColor;
 }
 
+.list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-.font{
-  color:#ffffff;
-margin-right:10px;
-  margin-left: 10px; }
+.tag {
+  display: inline-block; //因为tag自动适应父元素的宽度
+  text-align: center;
+  border-radius: 20rpx;
+  background-color: darken($themeBackgroundColor, 10%);
+  padding: 0.5em;
+  margin: 1em 0 0.5em 0;
+  word-break:keep-all;
+  font-size: $smallFontSize;
+  color: $themeColor;
+}
 
-
+.card {
+  text-align: justify;
+  width: 90%;
+  padding: 0.5em;
+  background-color: lighten($themeBackgroundColor, 20%);
+  color: darken($themeBackgroundColor, 20%);
+  border-radius: 10rpx;
+  margin-bottom: 10rpx;
+  .item {
+    margin-top: 10rpx;
+  }
+}

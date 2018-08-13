@@ -25,6 +25,7 @@ Page({
     let sideLength = this.data.sideLength - shadowOffset;
     let lineWidth = 12;
     let fontSize = 0;
+    let subFontSize = 14
     let radius = sideLength / 2 - lineWidth;
 
     if (sideLength < 200) fontSize = 50;
@@ -76,7 +77,7 @@ Page({
       ctx.stroke();
 
       // 绘制副标题
-      ctx.font = "16px Arial";
+      ctx.font = subFontSize + "px Arial";
       ctx.fillText('出现 ' + this.data.outline.exceptionNum + ' 个异常', sideLength / 2, sideLength / 2 + fontSize / 4 * 3);
 
       // 画外层圆弧
@@ -223,7 +224,8 @@ Page({
     ]).then(res => {
       this.setData({
         outline: res[0].data.data,
-        exceptionList: res[1].data.records
+        exceptionList: res[1].data.records,
+        ifLoading: false
       });
       setTimeout(
         () => this.showScoreAnim2(this.data.outline.point, 100),

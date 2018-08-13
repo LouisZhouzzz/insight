@@ -47,7 +47,7 @@ scroll-view.container {
 
 
 /***************************************列表项*************************************************/
-.app-item {
+.list-item {
   background-color: $themeColor;
   &:nth-child(n + 1) {
     box-shadow: 0 0 20px 0 darken($pageBackgroundColor, 10%);
@@ -97,6 +97,7 @@ scroll-view.container {
 }
 
 .loading-hinder {
+  box-shadow: 0 0 20px 0 darken($pageBackgroundColor, 10%);
   text-align: center;
   height: $appItemHeight;
   line-height: $appItemHeight;

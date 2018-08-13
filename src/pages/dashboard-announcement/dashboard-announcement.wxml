@@ -1,18 +1,12 @@
-<!--pages/announcement/announcement.wxml-->
-
-
-
-<block  wx:for="{{content}}" wx:for-item="item" wx:key="content-{{index}}">
-    <view class="font"> {{item.date}} </view>
-
-
- <block  wx:for="{{item.details}}"   wx:key="details-{{index}}">
-      <view class="font">{{index+1}}. {{item}} </view>
-    </block>
-
-
-
-</block>
-
-
-
+<view class="container">
+    <view class="list">
+        <block wx:for="{{records}}" wx:key="announcement-{{index}}">
+            <view class="tag">{{item.date}}</view>
+            <view class="card">
+                <view class="item" wx:for="{{item.details}}"  wx:key="announcement-detail-{{index}}">
+                    {{index + 1}} . {{item}}
+                </view>
+            </view>
+        </block>
+    </view>
+</view>

@@ -49,6 +49,10 @@ App({
     windowHeight: null,
     token: null,
     openid: null,
+    ifCollectionsChange: { // 监测收藏列表的变化
+      monitor: true,
+      dashboard: true
+    },
     hotapp: hotapp
   }
 });

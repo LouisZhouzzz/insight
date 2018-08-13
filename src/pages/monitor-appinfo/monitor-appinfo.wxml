@@ -13,8 +13,11 @@
                 <label wx:for='{{canvasNavs}}'
                        wx:key="label-nav-{{index}}"
                        class="item {{item.checked ? 'checked' : ''}}">
-                    <view class="type-radio">{{item.name}}</view>
+                    <view class="type-radio">
+                        {{item.name}}
+                    </view>
                     <radio value='{{index}}' checked="{{item.checked}}" style='display: none'></radio>
+                    <button form-type="submit"></button>
                 </label>
             </radio-group>
 
@@ -73,7 +76,7 @@
         <view class='quota' bindtap='collapse' data-index="{{idx}}">
             <text class='title'>{{item.name}}</text>
             <image class="collapse-btn {{item.items.length <= 0 ? 'transparent' : ''}}" src='../../img/svgs/arrow_right_fill.svg'></image>
-            <view class='quota-items-num'>
+            <view wx:if="{{item.items.length > 0}}" class='quota-items-num'>
                 <text>{{item.items.length}}</text>
             </view>
         </view>

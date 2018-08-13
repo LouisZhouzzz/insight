@@ -1,5 +1,6 @@
 const service = require('../../service/test');
 const computed = require('../../utils/vuelike').computed;
+let globalData = getApp().globalData;
 
 Page({
   data: {
@@ -57,6 +58,16 @@ Page({
       })
       .catch(res => {
         console.log('错误：' + res);
+      });
+  },
+
+  onFormSubmit(e) {
+    service.patchUserFormId(globalData.openid, e.detail.formId)
+      .then(res => {
+        console.log('formid发送成功！');
+      })
+      .catch(res => {
+        console.log('formid发送失败');
       });
   }
 

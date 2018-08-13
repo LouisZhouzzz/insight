@@ -20,7 +20,7 @@
         <view class="body">
             <navigator wx:for="{{exceptionList}}"
                        wx:key='app-{{index}}'
-                       class="app-item"
+                       class="list-item"
                        hover-class="app-item-hover"
                        url="../analysis-exceptioninfo/analysis-exceptioninfo?id={{item.id}}&title={{item.title}}"
                        data-index="{{index}}">
