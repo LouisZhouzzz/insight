@@ -1,170 +1,179 @@
 const domain = 'https://www.hi5399.xyz';
 // const domain = 'https://result.eolinker.com/zdBe81Pa8b841f6b8fe96ba5e8e67a6fac3804a3da7c8b8?uri=';
 
-
-/**
- * 发送临时登录凭证以换取自定义登录态
- * @param success
- * @param fail
- * @param code
- */
-const login = (success, fail, code) => fetch('/loginstate?code=' + code, {}, success, fail);
-
 /**
  * 获取图表信息
- * @param success
- * @param fail
  * @param id
  */
-const getDiagram = (success, fail, id) => fetch('/diagrams/' + id, {}, success, fail);
+const getDiagram = (id) => fetchByPromise('/diagrams/' + id, {}, 'GET');
 
 /**
  * 获取后台概览信息
- * @param success
- * @param fail
  */
-const getSystem = (success, fail) => fetch('/system', {}, success, fail);
+const getSystem = () => fetchByPromise('/system',{}, 'GET');
 
 /**
  * 获取公告信息
- * @param success
- * @param fail
  */
-const getAnnouncements = (success, fail) => fetch('/system/announcements', {}, success, fail);
+const getAnnouncements = () => fetchByPromise('/system/announcements', {}, 'GET');
 
 /**
  * 获取应用列表
- * @param success
- * @param fail
  */
-const getApps = (success, fail) => fetch('/apps', {}, success, fail, 'GET', 'loading...');
+const getApps = () => fetchByPromise('/apps', {}, 'GET');
 
 /**
  * 获取应用概览信息
- * @param success
- * @param fail
  * @param appid
  */
-const getApp = (success, fail, appid) => fetch('/apps/' + appid, {}, success, fail, 'GET', 'loading...');
+const getApp = (appid) => fetchByPromise('/apps/' + appid, {},  'GET');
 
 /**
  * 获取应用全部指标
- * @param success
- * @param fail
  * @param appid
  * @param userid
  */
-const getAppQuotas = (success, fail, appid, userid) => fetch('/apps/'+ appid +'/quotas?openid=' + userid, {}, success, fail, 'GET', 'loading...');
+const getAppQuotas = (appid, userid) => fetchByPromise('/apps/'+ appid +'/quotas?openid=' + userid, {}, 'GET');
 
 /**
- * 获取应用详情
- * @param success
- * @param fail
+ * 获取异常详情
  * @param id
  */
-const getException = (success, fail, id) => fetch('/exceptions/' + id, {}, success, fail);
+const getException = (id) => fetchByPromise('/exceptions/' + id, {}, 'GET');
 
 /**
  * 获取异常信息列表
- * @param success
- * @param fail
- * @param page 指定页码
- * @param size 指定单页信息项数
  */
-const getUnhandledExceptions = (success, fail, page, size) => fetch('/unhandledexceptions?page=' + page + '&size=' + size, {}, success, fail, 'GET', 'loading...');
+const getUnhandledExceptions = () => fetchByPromise('/unhandledexceptions', {}, 'GET');
 
 /**
  * 获取历史异常信息
- * @param success
- * @param fail
  * @param page
- * @param size
  */
-const getHandledExceptions = (success, fail, page, size) => fetch('/handledexceptions?page=' + page + '&size=' + size, {}, success, fail, 'GET', 'loading...');
-
+const getHandledExceptions = (page) => fetchByPromise('/handledexceptions?page=' + page, {}, 'GET');
 
 /**
  * 获取收藏列表
- * @param success
- * @param fail
  * @param id
  */
-const getUserDiagrams = (success, fail, id) => fetch('/users/'+ id +'/diagrams', {}, success, fail);
+const getUserDiagrams = (id) => fetchByPromise('/users/'+ id +'/diagrams', {}, 'GET');
 
 
 /**
  * 变更图表的收藏状态
- * @param success
- * @param fail
  * @param userid
  * @param diagramid
  * @param operflag
  */
-const toggleUserDiagram = (success, fail, userid, diagramid, operflag) =>
-  fetch('/users/'+ userid +'/diagrams/' + diagramid + '?operflag=' + operflag, {}, success, fail, 'PUT');
+const toggleUserDiagram = (userid, diagramid, operflag) => fetchByPromise('/users/'+ userid +'/diagrams/' + diagramid + '?operflag=' + operflag, {},'PUT');
+
+
 
 /**
  * 向后端发送formid
- * @param formid
- * @param success
- * @param fail
- * @param userid
+ * @param userId
+ * @param formId
+ * @returns {Promise<any>}
  */
-const patchUserFormId = (success, fail, userid, formid) => {
-  if (formid === 'the formId is a mock one') return;
-  wx.request({
-    url: domain + '/users/' + userid + "?formid=" + formid,
-    header: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    },
-    method: 'PUT',
-    success: function (res) {
-      if (res.statusCode === 200) success && success(res.data);
-      else fail && fail();
-    },
-    fail: function (res) {
-      fail && fail();
-    }
-  });
+const patchUserFormId = (userId, formId) => {
+  // 虚拟机测试时不发送formid
+  if (formId.indexOf('mock') === -1) return new Promise(resolve => { setTimeout(resolve, 500) });
+  return fetchByPromise('/users/' + userId + "?formid=" + formId, {}, 'PUT')
 };
 
 /**
- * 网络请求封装
+ * 使用 promise 封装原生 request 请求
  * @param url
  * @param data
- * @param success
- * @param fail
  * @param method
- * @param msg 定义loading框里的文本信息，空则不显示加载框
+ * @returns {Promise<any>}
  */
-function fetch(url, data, success, fail, method, msg) {
+function fetchByPromise(url, data, method) {
+
   wx.showNavigationBarLoading();
 
-  wx.request({
-    url: domain + url,
-    data: data || {},
-    header: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    },
-    method: method || 'GET',
-    success: function (res) {
-      if (res.statusCode === 200) success && success(res.data);
-      else fail && fail();
-    },
-    fail: function (res) {
-      fail && fail();
-    },
-    complete: function (res) {
-      wx.hideNavigationBarLoading();
-      // if (msg) wx.hideLoading();
-    }
-  });
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: domain + url,
+      data: data || {},
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      method: method || 'GET',
+      success (res) {
+        if (res.statusCode === 200) resolve && resolve(res);
+        else reject && reject(res);
+      },
+      fail (res) {
+        reject && reject(res);
+      },
+      complete (res) {
+        wx.hideNavigationBarLoading();
+      }
+    });
+  })
 }
 
+
+/************************************* 使用 promise 封装wx.login 等原生请求 ***********************************************/
+
+/**
+ * 获取用户设置
+ * @returns {Promise<any>}
+ */
+function wxSetting () {
+  return new Promise((resolve, reject) => {
+    wx.getSetting({
+      success: resolve,
+      fail: reject
+    });
+  })
+}
+
+/**
+ * 获取用户信息
+ * @returns {Promise<any>}
+ */
+function wxUserInfo () {
+  return new Promise((resolve, reject) => {
+    wx.getUserInfo({
+      success: resolve,
+      fail: reject
+    })
+  })
+}
+
+/*
+  调用接口wx.login() 获取临时登录凭证（code）
+ */
+function wxLogin () {
+  return new Promise ((resolve, reject) => {
+    wx.login({
+      success: resolve,
+      reject: reject
+    })
+  })
+}
+
+/*
+  将临时登录凭证发送到后台获取自定义登录态
+ */
+function getLoginState () {
+  return wxLogin().then((res) => {
+    return fetchByPromise(
+      '/loginstate?code=' + res.code,
+      {}
+    )
+  })
+}
+
+
 module.exports = {
+  wxSetting,
+  wxUserInfo,
   domain,
+  getLoginState,
   getException,
-  login,
   getDiagram,
   getSystem,
   getApps,
@@ -174,5 +183,6 @@ module.exports = {
   getUnhandledExceptions,
   getUserDiagrams,
   patchUserFormId,
-  toggleUserDiagram
+  toggleUserDiagram,
+  getAnnouncements
 };

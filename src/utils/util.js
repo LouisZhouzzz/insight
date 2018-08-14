@@ -16,9 +16,20 @@ let formatNumber = function formatNumber(n) {
   return n[1] ? n : '0' + n;
 };
 
-
+/**
+ * 整合 wx.showToast 与 wx.hideToast
+ * @param config
+ * @param duration
+ */
+function showToast (config, duration) {
+  wx.showToast(config);
+  setTimeout(function () {
+    wx.hideToast();
+  }, duration || 1000);
+}
 
 
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  showToast: showToast
 };

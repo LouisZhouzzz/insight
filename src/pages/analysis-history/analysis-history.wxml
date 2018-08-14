@@ -1,5 +1,5 @@
 <form report-submit="true" bindsubmit="onFormSubmit">
-    <view class="container">
+    <status-page status="{{status}}" bindrenewevent="getHandledExceptions">
         <block wx:for="{{records}}" wx:key="record-{{index}}">
             <view class="tag">{{item.date}}</view>
             <view class="modal">
@@ -8,11 +8,12 @@
                            wx:key="history-record-item-{{index}}"
                            hover-class="modal-item-hover"
                            url="../analysis-exceptioninfo/analysis-exceptioninfo?id={{item.id}}&title={{item.title}}">
-                    <text>{{item.time}}</text>
-                    <text>{{item.title}}</text>
-                    <text>({{item.app}})</text>
-
-                    <button form-type="submit"></button>
+                    <label>
+                        <text>{{item.time}}</text>
+                        <text>{{item.title}}</text>
+                        <text>({{item.app}})</text>
+                        <button form-type="submit"></button>
+                    </label>
                 </navigator>
             </view>
         </block>
@@ -20,5 +21,5 @@
             <text wx:if="{{ifLoading}}">Loading...</text>
             <text wx:else class="{{ifMore ? 'hidden' : ''}}">No more items.</text>
         </view>
-    </view>
+    </status-page>
 </form>

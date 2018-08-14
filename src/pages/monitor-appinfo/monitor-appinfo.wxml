@@ -4,17 +4,17 @@
     <form report-submit="true" bindsubmit="onFormSubmit" style="width: 100%">
         <!--头部信息概览模块 start-->
         <view class='header'>
-            <!--<view class='bio'>-->
-                <!--<text>{{appOutline.bio}}</text>-->
-            <!--</view>-->
             <!--概览图表 start-->
 
             <radio-group class='canvas-nav' bindchange='canvasChange'>
                 <label wx:for='{{canvasNavs}}'
                        wx:key="label-nav-{{index}}"
                        class="item {{item.checked ? 'checked' : ''}}">
-                    <view class="type-radio">{{item.name}}</view>
+                    <view class="type-radio">
+                        {{item.name}}
+                    </view>
                     <radio value='{{index}}' checked="{{item.checked}}" style='display: none'></radio>
+                    <button form-type="submit"></button>
                 </label>
             </radio-group>
 
@@ -33,33 +33,43 @@
         </radio-group>
         <!--指标类型选项 end-->
 
-        <!--下拉时贴顶的指标类型选项 start-->
-        <!--<radio-group class="types-group stuck {{ifTypeSelectedShow ? '': 'hidden'}}}" bindchange='radioChange'>-->
-        <!--<label wx:for='{{types}}' wx:key='type-stuck-{{index}}' class="type-item {{item.checked ? 'checked' : ''}}">-->
-        <!--<view class="type-radio ">{{item.name}}</view>-->
-        <!--<radio value='{{index}}' checked="{{item.checked}}" style='display: none'></radio>-->
-        <!--<button form-type="submit"></button>-->
-        <!--</label>-->
-        <!--</radio-group>-->
-        <!--下拉时贴顶的指标类型选项 end-->
-
         <!--二级列表 start-->
-        <view class="{{swiperIndex === 0 ? '' : 'hidden'}}">
-            <template is="list" data="{{...batch}}"></template>
-        </view>
-        <view class="{{swiperIndex === 1 ? '' : 'hidden'}}">
-            <template is="list" data="{{...online}}"></template>
-        </view>
-        <view class="{{swiperIndex === 2 ? '' : 'hidden'}}">
+        <view class="page {{swiperIndex === 2 ? '' : 'hidden'}}" >
             <template is="list" data="{{...service}}"></template>
         </view>
-        <view class="{{swiperIndex === 3 ? '' : 'hidden'}}">
+        <view class="page {{swiperIndex === 1 ? '' : 'hidden'}}">
+            <template is="list" data="{{...online}}"></template>
+        </view>
+        <view class="page {{swiperIndex === 0 ? '' : 'hidden'}}" >
+            <template is="list" data="{{...batch}}"></template>
+        </view>
+        <view class="page {{swiperIndex === 3 ? '' : 'hidden'}}">
             <template is="list" data="{{...performance}}"></template>
         </view>
-        <view class="{{swiperIndex === 4 ? '' : 'hidden'}}">
+        <view class="page {{swiperIndex === 4 ? '' : 'hidden'}}">
             <template is="list" data="{{...property}}"></template>
         </view>
+
+        <!--<label-page labels="{{labels}}">-->
+            <!--<view slot="page-1">-->
+                <!--<template is="list" data="{{...service}}"></template>-->
+            <!--</view>-->
+            <!--<view slot="page-2">-->
+                <!--<template is="list" data="{{...online}}"></template>-->
+            <!--</view>-->
+            <!--<view slot="page-3">-->
+                <!--<template is="list" data="{{...batch}}"></template>-->
+            <!--</view>-->
+            <!--<view slot="page-4">-->
+                <!--<template is="list" data="{{...performance}}"></template>-->
+            <!--</view>-->
+            <!--<view slot="page-5">-->
+                <!--<template is="list" data="{{...property}}"></template>-->
+            <!--</view>-->
+        <!--</label-page>-->
         <!--二级列表 end-->
+
+
     </form>
 </view>
 
@@ -73,7 +83,7 @@
         <view class='quota' bindtap='collapse' data-index="{{idx}}">
             <text class='title'>{{item.name}}</text>
             <image class="collapse-btn {{item.items.length <= 0 ? 'transparent' : ''}}" src='../../img/svgs/arrow_right_fill.svg'></image>
-            <view class='quota-items-num'>
+            <view wx:if="{{item.items.length > 0}}" class='quota-items-num'>
                 <text>{{item.items.length}}</text>
             </view>
         </view>
@@ -88,7 +98,6 @@
                            wx:key='quota-item-{{index}}'
                            url="../monitor-appinfo-diagram/monitor-appinfo-diagram?id={{item.id}}">
                     <text>- {{item.name}}</text>
-                    <image class="enter " src='../../img/svgs/arrow_right.svg'></image>
                     <image src='../../img/svgs/star_fill.svg'
                            class="collect {{item.ifCollected ? '' : 'hidden'}}"
                            catchtap='collect'
@@ -101,6 +110,8 @@
                            data-id="{{item.id}}"
                            data-index="{{index}}"
                            data-outer="{{idx}}"></image>
+
+                    <image class="enter " src='../../img/svgs/arrow_right.svg'></image>
                 </navigator>
                 <button form-type="submit"></button>
             </label>

@@ -1,15 +1,18 @@
 @import "../../app.scss";
 
-$appItemHeight: 100rpx;
+$listItemHeight: 100rpx;
 $itemTagHeight: 50rpx;
-$itemTagFontSize: 12px;
 $itemTabBackgroundColor: #8EA8C3;
 $exceptionNumHinderRadius: 30rpx;
 
-.container {
-  background-color: $pageBackgroundColor;
-  align-items: stretch;
+/*******************************************图表************************************/
+canvas {
+  width: 700rpx;
+  height: 280px;
+  display: block;
+  margin: 0 auto;
 }
+
 
 /*******************************************头部概览信息************************************/
 .header {
@@ -26,11 +29,21 @@ $exceptionNumHinderRadius: 30rpx;
   .view-history {
     position: absolute;
     right: 1em;
-    bottom: 1em;
-    font-size: 14px;
+    bottom: 15rpx;
+    font-size: $smallFontSize;
+  }
+  .placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #F4E04D;
+    image {
+      width: 150rpx;
+      height: 150rpx;
+    }
   }
 }
-
 
 /*******************************************label-page-nav************************************/
 .nav {
@@ -46,49 +59,83 @@ scroll-view.container {
   }
 }
 
-
-/* 列表一级子项 */
-.app-item-container {
-  background-color: $themeColor;
-  //box-shadow: 0 0 15px 0 darken($pageBackgroundColor, 10%);
-  border-bottom: 1px solid  darken($pageBackgroundColor, 5%);
-  max-height: $appItemHeight;
-  transition: 500ms linear 0ms;
-  overflow: hidden;
-  &.open {
-    max-height: $appItemHeight * 10;
-    image {
-      transform: rotate(90deg);
+/*******************************************主体列表模块************************************/
+.body {
+  width: 100%;
+  .head {
+    color: dimgrey;
+    font-size: $smallFontSize;
+    padding:  0 80rpx 0 30rpx;
+    height: 70rpx;
+    line-height: 70rpx;
+    background-color: $darkenWhite;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    text:nth-child(2) {
+      float: right;
+    }
+  }
+  .placeholder {
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .empty {
+      margin: 0 auto;
+      height: 150rpx;
+      width: 150rpx;
+    }
+    text {
+      font-size: $smallFontSize;
+      color: #dbdbdb;
     }
   }
 }
 
-.app-item-hover {
-  background-color: darken($themeColor, 10%);
-}
 
-.app-item {
-  display: flex;
-  height: $appItemHeight;
-  padding-left: 1em;
-  align-items: center;
-  & > text {
-    display: inline-block;
-    line-height: $appItemHeight;
-    flex-grow: 1;
-    overflow: hidden;
+
+/***************************************列表项*************************************************/
+.list-item {
+  background-color: $darkenWhite;
+  &:nth-child(n + 2) {
+    //box-shadow: 0 0 20px 0 darken($pageBackgroundColor, 10%);
   }
+  //border-bottom: 1px solid darken($pageBackgroundColor, 5%);
+  height: $listItemHeight;
+  line-height: $listItemHeight;
+  transition: 500ms linear 0ms;
+  overflow: hidden;
+  &.app-item-hover {
+    background-color: white;
+  }
+
   image {
-    height: $appItemHeight / 2;
-    width: $appItemHeight / 2;
-    margin: 0 0.5em;
+    float: right;
+    height: $itemTagHeight;
+    width: $itemTagHeight;
+    margin: ($listItemHeight - $itemTagHeight)/2 10rpx 0;
+  }
+  .tag {
+    float: right;
+    height: $itemTagHeight;
+    margin: ($listItemHeight - $itemTagHeight)/2 10rpx 0;
+  }
+  .dot {
+    float: left;
+    display: inline-block;
+    width: 15rpx;
+    height: 15rpx;
+    margin: ($listItemHeight - 15rpx)/2 0.5rem 0 30rpx;
+    background-color: tomato;
+    box-shadow: 0 0 5px tomato;
+    border-radius: 100%;
   }
 }
 
 .tag {
+  line-height: 0;
   max-width: 6em;
   overflow: hidden;
-  height: $itemTagHeight;
   vertical-align: middle;
   padding: 0 0.5em;
   text-align: center;
@@ -97,32 +144,21 @@ scroll-view.container {
   color: $darkenWhite;
   background-color: $itemTabBackgroundColor;
   //box-shadow: h-shadow v-shadow blur spread color inset;
-  box-shadow:2px 2px 5px rgba(0, 0, 0, 0.2) inset;
-  border:1px solid rgba(0, 0, 0, 0.03);
-  box-sizing:border-box;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2) inset;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  box-sizing: border-box;
   text {
     line-height: $itemTagHeight;
     height: $itemTagHeight;
-    font-size: $itemTagFontSize;
-  }
-}
-
-/* 列表二级子项 */
-.exception-item {
-  height: $itemTagHeight;
-  text-indent: 2em;
-  background-color: $pageBackgroundColor;
-  border-top: 1px solid darken($pageBackgroundColor, 10%);
-  text {
-    height: $itemTagHeight;
-    line-height: $itemTagHeight;
+    font-size: $smallFontSize;
   }
 }
 
 .loading-hinder {
+  box-shadow: 0 0 20px 0 darken($pageBackgroundColor, 10%);
   text-align: center;
-  height: $appItemHeight;
-  line-height: $appItemHeight;
-  font-size: 14px;
+  height: $listItemHeight;
+  line-height: $listItemHeight;
+  font-size: $smallFontSize;
   color: lighten($lightenBlack, 50%);
 }

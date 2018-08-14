@@ -1,32 +1,19 @@
 @import "../../app.scss";
 
-.container {
-  justify-content: flex-start;
-  align-items: center;
-  color: $themeColor;
-  background-color: $themeBackgroundColor;
-  position: relative;
-}
-
-.card-list {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-}
-
 .tag {
   display: inline-block; //因为tag自动适应父元素的宽度
+  color: $themeColor;
   text-align: center;
   border-radius: 20rpx;
   background-color: darken($themeBackgroundColor, 10%);
   padding: 0.5em;
   margin: 1em 0 0.5em 0;
   word-break:keep-all;
+  font-size: $smallFontSize;
 }
 
 .modal {
-  width: 600rpx;
+  width: 90%;
   .item {
     border-radius: 20rpx;
     background-color: lighten($themeBackgroundColor, 20%);
@@ -39,7 +26,6 @@
     }
     text:nth-child(1) {
       width:  4em;
-      text-indent: 1em;
     }
     text:nth-child(2) {
     }
@@ -53,6 +39,6 @@
 .loading-hinder {
   margin: 2em 0;
   text-align: center;
-  font-size: 14px;
+  font-size: $smallFontSize;
   color: $darkenWhite;
 }

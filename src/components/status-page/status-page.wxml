@@ -1,0 +1,13 @@
+<view class="page normal">
+    <slot></slot>
+</view>
+<view class="page loading"  wx:if="{{status==='loading'}}">
+    <image src="../../img/svgs/spinner_negative.svg"></image>
+</view>
+<view class="page loading-more"  wx:elif="{{status==='loading-more'}}">
+    <image src="../../img/svgs/spinner_negative.svg"></image>
+</view>
+<view class="page error" wx:elif="{{status==='error'}}" bindtap="renew">
+    <image src="../../img/svgs/connect_fail_negative.svg"></image>
+    <text>网络异常</text>
+</view>

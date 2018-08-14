@@ -7,6 +7,7 @@ $appCardHeight: 375 rpx;
   display: flex;
   align-content: flex-start;
   flex-wrap: wrap;
+  color: $themeColor;
 }
 
 .app {
@@ -14,6 +15,7 @@ $appCardHeight: 375 rpx;
   width: 50vw;
   height: 33.3vh;
   position: relative;
+  text-align: center;
   .mask,
   image {
     height: 100%;
@@ -32,14 +34,25 @@ $appCardHeight: 375 rpx;
     margin-left: -150rpx;
     width: 300rpx;
     height: 100rpx;
-    font-size: 18px;
-    text-align: center;
+    //font-size: $bigFontSize;
     z-index: 1002;
-    color: $themeColor;
   }
+
+  .subtitle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -20rpx;
+    margin-left: -150rpx;
+    width: 300rpx;
+    height: 100rpx;
+    z-index: 1002;
+  }
+
+
   .mask {
     background-color: $themeBackgroundColor;
-    opacity: 0.3;
+    opacity: 0.4;
     transition-duration: 200ms;
     z-index: 1001;
   }

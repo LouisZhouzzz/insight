@@ -15,7 +15,7 @@
     "backgroundTextStyle": "light",
     "backgroundColor": "#2C75B3",
     "navigationBarBackgroundColor": "#2C75B3",
-    "navigationBarTitleText": "insight",
+    "navigationBarTitleText": "慧眼",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {

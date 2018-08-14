@@ -1,9 +1,12 @@
-<view class="container">
-
+<status-page class="container" status="{{status}}" bindrenewevent="getException">
     <view class="pane upper">
-        <view class="tag">{{description.time}}</view>
+        <!--<view class="tag">{{description.time}}</view>-->
         <view class="pane-header">异常详情</view>
         <view class="pane-content">
+            <view class="segment">
+                <view class="key">时间</view>
+                <view class="value">{{description.time}}</view>
+            </view>
             <view class="segment">
                 <view class="key">来源</view>
                 <view class="value">{{app.name}}</view>
@@ -17,11 +20,16 @@
         </view>
     </view>
 
-
     <view wx:if="{{solution}}" class="pane lower">
-        <view class="tag">{{solution.time}}</view>
+        <!--<view class="tag">{{solution.time}}</view>-->
         <view class="pane-header">解决方案</view>
         <view class="pane-content">
+            <view class="segment">
+                <view class="key">时间</view>
+                <view class="value">
+                    {{solution.time}}
+                </view>
+            </view>
             <view class="segment">
                 <view class="key">方案</view>
                 <view class="value">
@@ -30,6 +38,8 @@
             </view>
         </view>
     </view>
-</view>
 
-<view class="container"></view>
+    <view wx:else class="hint">
+        暂无解决方案
+    </view>
+</status-page>

@@ -2,7 +2,7 @@
 
 $listItemHeight: 100rpx;
 $pageBackgroundColor: #F7F7F7;
-$listIconSize: 50rpx;
+$listIconSize: 40rpx;
 $quotaHeight: 100rpx;
 $quotaItemHeight: 80rpx;
 
@@ -11,7 +11,6 @@ canvas {
   height: 280px;
   display: block;
   margin: 0 auto;
-
 }
 
 .header {
@@ -148,7 +147,8 @@ canvas {
 }
 
 .quota-container {
-  box-shadow: 0 0 30px 0 darken($pageBackgroundColor, 10%);
+  border-bottom: 1px solid darken($pageBackgroundColor, 5%);
+  //box-shadow: 0 0 30px 0 darken($pageBackgroundColor, 10%);
   max-height: $quotaHeight;
   transition: 300ms linear 0ms;
   overflow: hidden;
@@ -177,15 +177,17 @@ canvas {
     transition: 150ms linear 0ms;
   }
   .quota-items-num {
+    font-size: $smallFontSize;
     float: right;
     height: $listIconSize;
     width: $listIconSize;
     margin: ($quotaHeight - $listIconSize) / 2  $listIconSize / 4;
+    border: 3rpx solid $themeBackgroundColor;
     text-align: center;
     border-radius: 100%;
-    background-color: lighten($themeBackgroundColor, 10%);
+    //background-color: lighten($themeBackgroundColor, 10%);
     text {
-      color: $themeColor;
+      color: $themeBackgroundColor;
       line-height: $listIconSize;
       height: $listIconSize;
     }
@@ -197,8 +199,11 @@ canvas {
   height: $quotaItemHeight;
   padding-left: 1.5em;
   background-color: $pageBackgroundColor;
-  border-top: 1px solid darken($pageBackgroundColor, 10%);
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
   text {
+    flex-grow: 1;
     height: $quotaItemHeight;
     line-height: $quotaItemHeight;
   }
@@ -207,10 +212,17 @@ canvas {
     height: $listIconSize;
     width: $listIconSize;
     padding: ($quotaItemHeight - $listIconSize) / 2 $listIconSize / 4;
-    float: right;
   }
 }
 
 .hidden {
   display: none;
+}
+
+/*************************************标签页************************************/
+//swiper {
+//  max-height: 100vh;
+//}
+.page {
+  min-height: 95vh;
 }

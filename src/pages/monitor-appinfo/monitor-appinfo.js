@@ -1,8 +1,8 @@
 import * as echarts from "../../ec-canvas/echarts";
-import geoJson from "../../ec-canvas/china";
 
 const service = require('../../service/test');
 let globalData = getApp().globalData;
+let showToast = require('../../utils/util').showToast;
 
 const diagram = {
   line: require('../../components/diagram/outline-line.js'),
@@ -16,6 +16,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    labels: ['业务', '联机', '批量', '性能', '资源'],
     canvasLabels: ['一年异常发生', '指标类型分布'],
     canvasValues: ['line', 'pie'],
     canvasIndex: 0,
@@ -45,6 +46,7 @@ Page({
     ],
     appId: null,
     appOutline: {
+      app: '',
       title: '',
       bio: ''
     },
@@ -74,7 +76,7 @@ Page({
       data: []
     }
   },
-  collapse: function (e) {
+  collapse(e) {
     let type = this.data.types[this.data.swiperIndex].value;
     let list = this.data[type];
     let row = list.data[e.currentTarget.dataset.index];
@@ -84,37 +86,42 @@ Page({
     })
   },
 
-  onFormSubmit: function (e) {
-    service.patchUserFormId(
-      (res) => {
-        console.log(res.msg);
-      },
-      (res) => {
-      },
-      globalData.openid,
-      e.detail.formId
-    );
+  onFormSubmit(e) {
+    service.patchUserFormId(globalData.openid, e.detail.formId)
+      .then(res => {
+        console.log('formid发送成功！');
+      })
+      .catch(res => {
+        console.log('formid发送失败');
+      });
   },
-  collect: function (e) {
+
+  collect(e) {
     let outerIndex = e.currentTarget.dataset.outer;
     let innerIndex = e.currentTarget.dataset.index;
     let type = this.data.types[this.data.swiperIndex].value;
     let list = this.data[type];
-    list.data[outerIndex].items[innerIndex].ifCollected = !list.data[outerIndex].items[innerIndex].ifCollected;
-    service.toggleUserDiagram(
-      (res) => {
+    let ifCollected = !list.data[outerIndex].items[innerIndex].ifCollected;
+
+    list.data[outerIndex].items[innerIndex].ifCollected = ifCollected;
+    service.toggleUserDiagram(globalData.openid, e.currentTarget.dataset.id, list.data[outerIndex].items[innerIndex].ifCollected)
+      .then(res => {
         this.setData({
           [type]: list
         });
-      },
-      (res) => {
-      },
-      globalData.openid,
-      e.currentTarget.dataset.id,
-      list.data[outerIndex].items[innerIndex].ifCollected
-    )
+        globalData.ifCollectionsChange.dashboard = true;
+        showToast({
+          title: (ifCollected ? '' : '取消') + '收藏成功',
+        }, 1000)
+      })
+      .catch(res => {
+        console.log('收藏状态变更失败！' + res);
+        showToast({
+          title: (ifCollected ? '' : '取消') + '收藏失败',
+        }, 1000)
+      });
   },
-  outerscroll: function (e) {
+  outerscroll(e) {
     if (this.data.ifTypeSelectedShow === (e.detail.scrollTop > 400)) return;
     this.setData({
       ifTypeSelectedShow: e.detail.scrollTop > 400
@@ -129,7 +136,6 @@ Page({
     let type = index === 0 ? 'line' : 'pie';
 
     this.ecComponents[index].init((canvas, width, height) => {
-
       // 获取组件的 canvas、width、height 后的回调函数
       // 在这里初始化图表
       const chart = echarts.init(canvas, null, {
@@ -142,7 +148,7 @@ Page({
       return chart;
     });
   },
-  radioChange: function (e) {
+  radioChange(e) {
     let types = this.data.types;
     types[this.data.swiperIndex].checked = false;
     types[e.detail.value].checked = true;
@@ -151,18 +157,18 @@ Page({
       swiperIndex: parseInt(e.detail.value)
     });
   },
-  onLoad: function (option) {
+  onLoad (option) {
     this.setData({
       appId: option.id
     });
-    service.getApp(
-      (res) => {
+    service.getApp(this.data.appId)
+      .then((res) => {
         this.setData({
-          appOutline: res.data,
-          charts: res.charts
+          appOutline: res.data.data,
+          charts: res.data.charts
         });
 
-        wx.setNavigationBarTitle({title: this.data.appOutline.title});
+        wx.setNavigationBarTitle({title: this.data.appOutline.app + '-' + this.data.appOutline.title});
 
         this.ecComponents.push(this.selectComponent('#preview-chart-1'));
         this.ecComponents.push(this.selectComponent('#preview-chart-2'));
@@ -174,39 +180,47 @@ Page({
             height: height
           });
 
-          chart.setOption(diagram.line.getOption(res.charts.line));
+          chart.setOption(diagram.line.getOption(res.data.charts.line));
           return chart;
         });
-      },
-      (res) => {
-      },
-      this.data.appId
-    );
-    service.getAppQuotas(
-      (res) => {
-        this.data.batch.data = res.piliang;
-        this.data.online.data = res.lianji;
-        this.data.service.data = res.yewu;
-        this.data.performance.data = res.xingneng;
-        this.data.property.data = res.ziyuan;
-        this.setData({
-          batch: this.data.batch,
-          online: this.data.online,
-          service: this.data.service,
-          performance: this.data.performance,
-          property: this.data.property
-        });
-        wx.stopPullDownRefresh();
-      },
-      (res) => {
-        wx.stopPullDownRefresh();
-      },
-      this.data.appId,
-      globalData.openid
-    )
+      })
+      .catch((res) => {
+        console.log('获取应用详情失败！' + res);
+      });
+
+    this.getAppQuotas();
   },
 
-  onReady: function () {
+  onShow () {
+    if (globalData.ifCollectionsChange.monitor) this.getAppQuotas();
+  },
+
+  getAppQuotas () {
+    service.getAppQuotas(this.data.appId, globalData.openid)
+      .then(
+        (res) => {
+          this.data.batch.data = res.data.piliang;
+          this.data.online.data = res.data.lianji;
+          this.data.service.data = res.data.yewu;
+          this.data.performance.data = res.data.xingneng;
+          this.data.property.data = res.data.ziyuan;
+          this.setData({
+            batch: this.data.batch,
+            online: this.data.online,
+            service: this.data.service,
+            performance: this.data.performance,
+            property: this.data.property
+          });
+          globalData.ifCollectionsChange.monitor = false;
+          wx.stopPullDownRefresh();
+        })
+      .catch((res) => {
+        wx.stopPullDownRefresh();
+        console.log('获取应用指标失败！' + res);
+      });
+  },
+
+  onReady () {
     this.ecComponents = [];
     computed(this, {
       canvasNavs() {
@@ -223,34 +237,8 @@ Page({
     });
   },
 
-  onPullDownRefresh: function () {
+  onPullDownRefresh() {
     wx.startPullDownRefresh();
     this.onLoad();
-  },
-
-  setChart(bundle, chart) {
-    let type;
-    switch (bundle.chart.chartType) {
-      case 'bar':
-        type = bar;
-        break;
-      case 'line':
-        type = line;
-        break;
-      case 'pie':
-        type = pie;
-        break;
-      case 'gauge':
-        type = gauge;
-        break;
-      case 'map':
-        type = map;
-        echarts.registerMap('china', geoJson);
-        break;
-    }
-
-    let option = type.getOption(bundle.data, bundle.chart, TL);
-
-    chart.setOption(option);
   }
 });

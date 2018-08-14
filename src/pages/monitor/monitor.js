@@ -1,28 +1,30 @@
 const service = require('../../service/test');
+const globalData = getApp().globalData;
 
 Page({
   onLoad(options) {
-    wx.setNavigationBarTitle({title: 'insight'});
-    service.getApps(
-      (res) => {
-        this.setData({
-          apps: res.records
-        });
-      },
-      (res) => {
-      }
-    );
+    wx.setNavigationBarTitle({title: '慧眼'});
+    service.getApps()
+      .then(
+        (res) => {
+          this.setData({
+            apps: res.data.records
+          });
+        })
+      .catch(
+        (res) => {
+          console.log('加载应用列表失败！' + res);
+        }
+      );
   },
 
-  onFormSubmit: function (e) {
-    service.patchUserFormId(
-      (res) => {
-        console.log(res.msg);
-      },
-      (res) => {
-      },
-      'user id',
-      e.detail.formId
-    );
-  },
+  onFormSubmit(e) {
+    service.patchUserFormId(globalData.openid, e.detail.formId)
+      .then(res => {
+        console.log('formid发送成功！');
+      })
+      .catch(res => {
+        console.log('formid发送失败');
+      });
+  }
 });

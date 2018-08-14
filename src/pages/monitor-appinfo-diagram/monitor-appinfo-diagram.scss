@@ -1,13 +1,12 @@
 @import '../../app';
 
-.container {
-  background-color: $themeBackgroundColor;
-  overflow: hidden;
-  justify-content: space-around;
+#mychart-dom-bar,
+.txt-container,
+#sta-bar {
+  width: 90vw;
 }
 
 #mychart-dom-bar {
-  width: 90vw;
   canvas {
     height: 50vh;
     width: 90vw;
@@ -16,17 +15,17 @@
 
 .txt-container {
   color: $themeColor;
+  box-sizing: border-box;
   background-color: lighten($themeBackgroundColor, 10%);
-  width: 90vw;
   padding: 0.5em 1em;
   border-radius: 10rpx;
   line-height: 1.5em;
   text-align: justify;
-  font-size: 14px;
+  font-size: $smallFontSize;
 }
 
 #sta-bar {
-  width: 90vw;
+  margin-top: 1em;
   canvas {
     width: 90vw;
     margin: 0 auto;
