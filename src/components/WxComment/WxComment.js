@@ -402,10 +402,16 @@ Component({
       that.data.is_sub_comment = true;
       that.data.sub_comment_p_comment_id = parent_comment_id;
       that.data.sub_comment_p_index = p_index;
-      // 使页面滚动到底部
+     /* // 使页面滚动到底部
       wx.pageScrollTo({
         scrollTop: 10000
-      })
+      })*/
+
+        wx.pageScrollTo({     //改为滚动到顶部
+            scrollTop: 0
+        })
+
+
     },
     _isAdmin: function() {
       var that = this;

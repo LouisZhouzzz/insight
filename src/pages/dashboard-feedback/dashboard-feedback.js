@@ -10,6 +10,7 @@ Page({
     data: {
         flag: true,//加号的控制打开/关闭
         userInfo: [],//用户信息，用于头像显示
+
         feedback: [
             {
                 content: '你可以留下联系方式，文本，图片，进行反馈',
@@ -18,6 +19,7 @@ Page({
                 myDate: '',
                 role: true,
                 img: '../../img/feedback/hotapp_01_07.png',
+
             }
         /*{
             content: '你可以留下联系方式，文本，图片，进行反馈',
@@ -37,6 +39,7 @@ Page({
             img: "../../img/feedback/hotapp_01_07.png"
         } */
         ],//返回数据
+
         minutes: '',//分钟间隔
         addinput: '',//清楚input框的值
         sendflag: false,//发送按钮控制
@@ -145,8 +148,9 @@ Page({
                 addinput: [],
                 sendflag: false,
                 minutes: minutes,
-                feedback: newfeedback
-            })
+                feedback: newfeedback,
+
+    })
             //上传文字到服务器
 
             app.globalData.hotapp.feedback(e.detail.value, 0, that.data.contract_info, function (res) {
