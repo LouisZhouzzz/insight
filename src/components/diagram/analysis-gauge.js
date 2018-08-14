@@ -24,8 +24,8 @@ module.exports = {
             lineStyle: {
               width: 4,
               color: [[0.25, 'rgba(166,177,225,0.85)'], [0.5, 'rgba(239,189,235,0.85)'], [0.75, 'rgba(243,248,242,0.85)'], [1, 'rgba(175,238,239,0.85)']],
-              shadowBlur: 10,
-              shadowColor: 'rgba(255,255,255,0.7)'
+              shadowBlur: 5,
+              shadowColor: 'rgba(255,255,255,0.3)'
             }
           },
           axisTick: {               // 坐标轴小标记
@@ -43,18 +43,12 @@ module.exports = {
           axisLabel: {
             borderRadius: 2,
             color: 'rgba(255,255,255,0.5)',
-            //padding: 3,
-            textShadowBlur: 2,
-            textShadowOffsetX: 1,
-            textShadowOffsetY: 1,
             textShadowColor: '#222'
           },
           detail: {
             formatter: '{value}',
             fontWeight: 'bolder',
             fontSize: 44,
-            shadowBlur: 5,
-            shadowColor: 'rgba(255,255,255,0.7)',
             offsetCenter: [0, '40%']
           },
           data: [93]
