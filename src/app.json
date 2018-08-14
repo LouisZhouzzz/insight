@@ -1,14 +1,14 @@
 {
   "pages": [
     "pages/analysis/analysis",
+    "pages/dashboard-feedback/dashboard-feedback",
+    "pages/dashboard-message-board/dashboard-message-board",
     "pages/dashboard/dashboard",
     "pages/analysis-exceptioninfo/analysis-exceptioninfo",
     "pages/monitor-appinfo/monitor-appinfo",
-   "pages/analysis-history/analysis-history",
+    "pages/analysis-history/analysis-history",
     "pages/monitor/monitor",
     "pages/dashboard-announcement/dashboard-announcement",
-    "pages/dashboard-feedback/dashboard-feedback",
-    "pages/dashboard-message-board/dashboard-message-board",
     "pages/monitor-appinfo-diagram/monitor-appinfo-diagram"
   ],
   "window": {
@@ -18,7 +18,6 @@
     "navigationBarTitleText": "insight",
     "navigationBarTextStyle": "white"
   },
-
   "tabBar": {
     "color": "#504B43",
     "backgroundColor": "#E9F1F7",

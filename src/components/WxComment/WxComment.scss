@@ -211,7 +211,8 @@ image {
   height: 300rpx;
   box-sizing: border-box;
   position: relative;
-  border: 1px solid #dadada;
+  /*border: 1px solid #dadada;
+  border-style: solid solid none solid;*/
   margin: 20rpx auto 20rpx auto;
   overflow: hidden;
 }
@@ -223,8 +224,8 @@ image {
   overflow: hidden;
   width: 700rpx;
   height: 220rpx;
-  border: 1px #dadada;
-  border-style: none none dashed none;
+  border: 1px solid #dadada;
+
 }
 
 .comment_submit_display {
