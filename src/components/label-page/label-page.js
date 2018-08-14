@@ -33,6 +33,11 @@ Component({
       this.setData({
         checkedIndex: parseInt(e.detail.value)
       });
+    },
+    swiperChange (e) {
+      this.setData({
+        checkedIndex: parseInt(e.detail.current)
+      });
     }
   }
 });

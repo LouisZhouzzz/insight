@@ -2,24 +2,28 @@ const service = require('../../service/test');
 
 Page({
   data: {
-    records: [
-      {
-        date: "2018.08.01",
-        details: ['修复 小程序使用分包后，云测试提示代码包上限有误的问题',
-          "修复 素材管理文件列表内容重叠的问题",
-          "修复 素材管理文件列表内容重叠的问题",
-          "修复 素材管理文件列表内容重叠的问题"]
-
-
-      }, {
-        date: "2018.07.20",
-        details: ['修复 1.0 带来的编译不生效的问题',
-          "修复 界面调试样式覆盖规则计算错误的问题",
-          "修复 分包根目录名字后缀相同时报错的问题"]
-
-      }
-    ]
+    records: [],
+    status: 'loading'
   },
   onLoad() {
+    this.getAnnouncements();
+  },
+  getAnnouncements () {
+    this.setData({
+      status: 'loading'
+    });
+    service.getAnnouncements()
+      .then((res) => {
+        this.setData({
+          records: res.data.data,
+          status: 'normal'
+        });
+      })
+      .catch((res) => {
+        console.warn(res);
+        this.setData({
+          status: 'error'
+        });
+      })
   }
 });

@@ -1,20 +1,8 @@
 @import "../../app.scss";
 
-.container {
-  justify-content: flex-start;
-  align-items: center;
-  color: $themeColor;
-  background-color: $themeBackgroundColor;
-  position: relative;
-}
-
-.background {
-  @include full-page;
-  background-color: $themeBackgroundColor;
-}
-
 .tag {
   display: inline-block; //因为tag自动适应父元素的宽度
+  color: $themeColor;
   text-align: center;
   border-radius: 20rpx;
   background-color: darken($themeBackgroundColor, 10%);
@@ -27,7 +15,6 @@
 .modal {
   width: 90%;
   .item {
-    width: 100%;
     border-radius: 20rpx;
     background-color: lighten($themeBackgroundColor, 20%);
     color: darken($themeBackgroundColor, 10%);

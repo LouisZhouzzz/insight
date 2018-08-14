@@ -4,27 +4,34 @@ let globalData = getApp().globalData;
 
 Page({
   data: {
+    status: 'loading',
     records: [],
     page: 0,
-    ifLoading: true,
     size: 10
   },
   onLoad() {
     wx.setNavigationBarTitle({title: '历史异常记录'});
+    this.getHandledExceptions();
+  },
+
+  getHandledExceptions () {
     this.setData({
-      ifLoading: true
+      status: 'loading'
     });
 
     service.getHandledExceptions(this.data.page)
       .then(res => {
         this.setData({
           records: res.data.records,
-          ifLoading: false,
+          status: 'normal',
           page: 1
         });
       })
       .catch(res => {
-        console.log('错误：' + res);
+        console.warn('错误：' + res);
+        this.setData({
+          status: 'error'
+        });
       });
   },
 
@@ -38,9 +45,10 @@ Page({
   },
 
   loadMoreRecords () {
-    if (this.data.ifLoading) return;
+    if (this.data.status === 'loading-more' || this.data.status === 'loading') return;
+
     this.setData({
-      ifLoading: true
+      status: 'loading-more'
     });
 
     service.getHandledExceptions(this.data.page)
@@ -53,11 +61,14 @@ Page({
         this.setData({
           records: this.data.records,
           page: this.data.page + 1,
-          ifLoading: false
+          status: 'normal'
         });
       })
       .catch(res => {
         console.log('错误：' + res);
+        this.setData({
+          status: 'error'
+        });
       });
   },
 

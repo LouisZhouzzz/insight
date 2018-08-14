@@ -1,5 +1,6 @@
 const service = require('../../service/test');
 let globalData = getApp().globalData;
+let showToast = require('../../utils/util').showToast;
 
 Page({
   data: {
@@ -11,25 +12,12 @@ Page({
       gender: '男',
       avatarUrl: '../../img/svgs/avatar.svg',
       nickName: '用户'
-    },
-    settings: [
-      {
-        "title": "官方公告",
-        "url": '../dashboard-announcement/dashboard-announcement'
-      }, {
-        "title": "意见反馈",
-        "url": '../dashboard-feedback/dashboard-feedback'
-
-      }, {
-        "title": "留言板",
-        "url": '../dashboard-message-board/dashboard-message-board'
-      }]
+    }
   },
 
   onLoad() {
     wx.setNavigationBarTitle({title: '慧眼'});
     // 查看是否授权
-
     service.wxSetting()
       .then(res => {
         this.setData({
@@ -53,10 +41,6 @@ Page({
 
   onShow() {
     if (globalData.ifCollectionsChange.dashboard) this.getUserDiagrams();
-  },
-
-  onSettingItemTap () {
-
   },
 
   getUserDiagrams() {
@@ -140,9 +124,18 @@ Page({
               collections: collections
             });
             globalData.ifCollectionsChange.monitor = true;
+
+            showToast({
+              title: '取消收藏成功',
+              icon: 'success'
+            })
           })
           .catch(res => {
-            console.log('取消收藏失败！ ' + res)
+            console.log('取消收藏失败！ ' + res);
+            showToast({
+              title: '取消收藏失败',
+              icon: 'success'
+            })
           })
       }
     ).catch(res => {

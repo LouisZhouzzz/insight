@@ -10,20 +10,21 @@ Page({
     ec: {
       lazyLoad: true
     },
-    graExpText: ''
+    graExpText: '',
+    status: 'loading'
   },
-  onReady() {
+  onReady () {
     this.ecComponent = this.selectComponent('#mychart-dom-bar');
     this.staBarComponent = this.selectComponent('#sta-bar');
+    this.getDiagram();
+  },
+
+  getDiagram () {
     service.getDiagram(this.data.id)
       .then(
         (res) => {
           // 设置标题
           wx.setNavigationBarTitle({title: res.data.chart.titleText});
-          // 设置介绍文本
-          this.setData({
-            graExpText: res.data.chart.graExpText
-          });
           // 加载图表
           this.ecComponent.init(chartInit(res.data));
 
@@ -39,15 +40,24 @@ Page({
             chart.setOption(option);
 
             return chart;
-          })
+          });
+
+          // 设置介绍文本
+          this.setData({
+            status: 'normal',
+            graExpText: res.data.chart.graExpText
+          });
         })
       .catch((res) => {
-          console.warn('获取图表信息失败！' + res)
+          console.warn('获取图表信息失败！' + res);
+          this.setData({
+            status: 'error'
+          });
         }
       );
   },
 
-  onLoad(data) {
+  onLoad (data) {
     this.setData({
       id: data.id
     });

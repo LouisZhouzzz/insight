@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "历史异常记录",
-  "enablePullDownRefresh": true
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "status-page": "../../components/status-page/status-page"
+  }
 }

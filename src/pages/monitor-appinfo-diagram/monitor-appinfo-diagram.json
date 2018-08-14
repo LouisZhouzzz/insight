@@ -2,6 +2,7 @@
   "navigationBarTitleText": "图表",
   "tabBar": {},
   "usingComponents": {
-    "ec-canvas": "../../ec-canvas/ec-canvas"
+    "ec-canvas": "../../ec-canvas/ec-canvas",
+    "status-page": "../../components/status-page/status-page"
   }
 }

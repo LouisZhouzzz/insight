@@ -9,19 +9,6 @@ $avatarSize: 150rpx;
   right: 0;
 }
 
-//图片按比列响应式缩放并自动裁剪： https://blog.csdn.net/oulihong123/article/details/54601030
-.zoomImage{
-  width:100%;
-  height:0;
-  padding-bottom: 40vh;
-  overflow:hidden;
-  background-position: center center;
-  background-repeat: no-repeat;
-  -webkit-background-size:cover;
-  -moz-background-size:cover;
-  background-size:cover;
-}
-
 .header {
   position: relative;
   background-color: rgba(44, 117, 179, 1);
@@ -53,7 +40,7 @@ $avatarSize: 150rpx;
   height: 100rpx;
   padding-right: 0;
   padding-left: 1em;
-  background-color: white;
+  background-color: white !important;
   text-align: left;
   font-size: $defaultFontSize;
 
@@ -78,6 +65,34 @@ $avatarSize: 150rpx;
   }
 }
 
+/*******************************标签页*************************************/
+swiper {
+  height: 55vh;
+}
+
+.page {
+  height: 100%;
+  scroll-view {
+    height: 100%;
+  }
+  button {
+    border: none;
+  }
+}
+
+.placeholder {
+  @include flex-center;
+  height: 100%;
+  image {
+    width: 150rpx;
+    height: 150rpx;
+  }
+  text {
+    font-size: $smallFontSize;
+    color: #CDCDCD;
+  }
+}
+
 /***********************************弹出框*************************************/
 confirm-modal {
   @include full-page
@@ -87,4 +102,6 @@ confirm-modal {
 /*******************************************label-page-nav************************************/
 .nav {
   background-color: lighten($themeBackgroundColor, 10%);
+  height: 5vh;
+  line-height: 5vh;
 }

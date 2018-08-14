@@ -8,7 +8,9 @@
         </label>
     </radio-group>
 
-    <block wx:for="{{navs}}" wx:key="page-slot-{{index}}">
-        <slot wx:if="{{index === checkedIndex}}" name="page-{{index + 1}}"></slot>
-    </block>
+    <swiper bindchange="swiperChange" current="{{checkedIndex}}" circular>
+        <swiper-item wx:for="{{navs}}" wx:key="page-slot-{{index}}">
+            <slot name="page-{{index + 1}}"></slot>
+        </swiper-item>
+    </swiper>
 </label-page>

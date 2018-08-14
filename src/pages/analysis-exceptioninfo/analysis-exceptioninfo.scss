@@ -3,14 +3,6 @@
 .container {
   background-color: $themeBackgroundColor;
   color: $themeColor;
-  &:nth-child(1) {
-    position: relative;
-    padding-bottom: 1em;
-    z-index: 1001;
-  }
-  &:nth-child(2) {
-    z-index: -1;
-  }
 }
 
 .tag {
@@ -23,8 +15,18 @@
   margin: 0 auto 1em auto;
 }
 
+.hint {
+  font-size: $smallFontSize;
+  color: $darkenWhite;
+  text-align: center;
+}
+
+.hint,
 .pane {
-  margin-top: 1em;
+  margin: 30rpx auto 0 auto;
+}
+
+.pane {
   width: 90%;
   overflow: hidden;
   border-radius: 10rpx;
@@ -43,14 +45,20 @@
       margin-top: 1em;
       line-height: 1.5em;
       .key {
+        display: inline-block;
         float: left;
+        width: 25%;
+        box-sizing: border-box;
+        border-right: 1px solid $themeColor;
       }
       .value {
-        border-left: 1px solid $themeColor;
-        padding-left: 1em;
+        text-indent: 0;
+        padding-left: 0;
         float: right;
         width: 70%;
         max-height: 10rem;
+        text-align: left;
+        display: inline-block;
       }
     }
   }

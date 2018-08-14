@@ -1,6 +1,5 @@
 <form report-submit="true" bindsubmit="onFormSubmit">
-    <view class="background"></view>
-    <view class="container">
+    <status-page status="{{status}}" bindrenewevent="getHandledExceptions">
         <block wx:for="{{records}}" wx:key="record-{{index}}">
             <view class="tag">{{item.date}}</view>
             <view class="modal">
@@ -22,6 +21,5 @@
             <text wx:if="{{ifLoading}}">Loading...</text>
             <text wx:else class="{{ifMore ? 'hidden' : ''}}">No more items.</text>
         </view>
-    </view>
+    </status-page>
 </form>
-

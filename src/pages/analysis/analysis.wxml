@@ -1,44 +1,75 @@
+<wxs module="textFr" src="../../filter/text-fr.wxs"></wxs>
 <form report-submit="true" bindsubmit="onFormSubmit">
     <view class="container" xmlns:wx="http://java.sun.com/JSP/Page">
         <!--头部概览模块 start-->
         <view class='header'>
             <!--分数圆形画布 以及 上面的分数 start-->
-            <canvas class="cir" style=' width:{{sideLength}}px; height:{{sideLength}}px;'
-                    canvas-id="canvasArc"></canvas>
+            <!--<block wx:if="{{!ifFailed}}">-->
+                <!--<canvas class="cir" style=' width:{{sideLength}}px; height:{{sideLength}}px;'-->
+                        <!--canvas-id="canvasArc"></canvas>-->
+            <!--</block>-->
+            <!--<block wx:else>-->
+                <!--<view class="placeholder" style="height:{{sideLength}}px;">-->
+                    <!--<image src="../../img/svgs/analysis_connect_fail.svg"></image>-->
+                    <!--<text>网络异常</text>-->
+                <!--</view>-->
+            <!--</block>-->
             <!--分数圆形画布 以及 上面的分数 end-->
+
+            <!--仪表盘 start-->
+            <ec-canvas id="analysis-header-gauge" canvas-id="analysis-header-gauge" ec="{{ ec }}"></ec-canvas>
+            <!--仪表盘 end-->
+
             <navigator class='view-history' url="../analysis-history/analysis-history" hover-class="navigator-hover">
                 <label>
                     查看历史异常 >>
                     <button form-type="submit"></button>
                 </label>
             </navigator>
-            <!--历史异常导航 end-->
         </view>
         <!--头部概览模块 end-->
 
         <!--异常信息模块 start-->
         <view class="body">
-            <navigator wx:for="{{exceptionList}}"
-                       wx:key='app-{{index}}'
-                       class="list-item"
-                       hover-class="app-item-hover"
-                       url="../analysis-exceptioninfo/analysis-exceptioninfo?id={{item.id}}&title={{item.title}}"
-                       data-index="{{index}}">
-                <label>
-                    <!--<view class='app-item'>-->
-                    <text class='title'>{{item.title}}</text>
-                    <image class='enter' src='../../img/svgs/arrow_right.svg'></image>
-                    <view class='tag'>
-                        <text>{{item.app}}</text>
-                    </view>
-                    <!--</view>-->
-                    <button form-type="submit"></button>
-                </label>
-            </navigator>
-            <view class="loading-hinder">
-                <text wx:if="{{ifLoading}}">Loading...</text>
-                <text wx:else class="{{ifMore ? 'hidden' : ''}}">No more items.</text>
+            <view class="head">
+                <text>异常</text>
+                <text>应用来源</text>
             </view>
+
+            <block wx:if="{{exceptionList.length > 0}}">
+                <navigator wx:for="{{exceptionList}}"
+                           wx:key='app-{{index}}'
+                           class="list-item"
+                           hover-class="app-item-hover"
+                           url="../analysis-exceptioninfo/analysis-exceptioninfo?id={{item.id}}&title={{item.title}}"
+                           data-index="{{index}}">
+                    <label>
+                        <view class="dot"></view>
+                        <text class='title'>{{textFr.omitLongStr(item.title, 8)}}</text>
+                        <!--<text class="title">{{textFr.bar(item.title, 9)}}</text>-->
+                        <image class='enter' src='../../img/svgs/arrow_right.svg'></image>
+                        <view class='tag'>
+                            <text>{{item.app}}</text>
+                        </view>
+                        <button form-type="submit"></button>
+                    </label>
+                </navigator>
+            </block>
+            <block wx:elif="{{!ifLoading}}">
+                <view class="placeholder">
+                    <image class="empty" src="../../img/svgs/analysis_noexceptions.svg"></image>
+                    <text>No exceptions found.</text>
+                </view>
+            </block>
+            <block wx:else>
+                <view class="placeholder">
+                    <image class="empty" src="../../img/svgs/spinner.svg"></image>
+                </view>
+            </block>
+            <!--<view class="loading-hinder">-->
+            <!--<text wx:if="{{ifLoading}}">Loading...</text>-->
+            <!--<text wx:else class="{{ifMore ? 'hidden' : ''}}">No more items.</text>-->
+            <!--</view>-->
         </view>
         <!--异常信息模块 end-->
     </view>

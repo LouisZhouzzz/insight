@@ -1,0 +1,47 @@
+@mixin flex-center {
+  display: -webkit-flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+@mixin full-page {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.page {
+  &.loading-more,
+  &.loading,
+  &.error {
+    @include full-page;
+    @include flex-center;
+    image {
+      width: 200rpx;
+      height: 200rpx;
+      margin-top: -100rpx;
+    }
+  }
+  &.normal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &.loading,
+  &.error,
+  &.normal {
+    background-color: #2C75B3;
+  }
+}

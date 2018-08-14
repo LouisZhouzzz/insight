@@ -1,5 +1,5 @@
 const service = require('service/test');
-
+let showToast = require('utils/util').showToast;
 let hotapp = require('utils/hotapp.js');
 
 App({
@@ -42,7 +42,10 @@ App({
   },
 
   onError(err) {
-    console.warn('全局错误捕捉：' + err);
+    showToast({
+      title: err,
+      icon: 'none'
+    }, 1000);
   },
 
   globalData: {

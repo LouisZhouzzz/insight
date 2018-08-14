@@ -16,33 +16,41 @@
     </view>
 
     <label-page nav-class="nav" labels="{{labels}}">
-        <view slot="page-1">
+        <view class="page" slot="page-1">
             <!--图表收藏模块 start-->
-            <navigator wx:for="{{collections}}"
-                       wx:key='collection-{{index}}'
-                       class="list-item"
-                       hover-class="list-item-hover"
-                       url="../monitor-appinfo-diagram/monitor-appinfo-diagram?id={{item.id}}"
-                       data-index="{{index}}">
-                <label>
-                    <text class='title'>{{item.name}}</text>
-                    <image class='enter' src='../../img/svgs/arrow_right.svg'></image>
-                    <image catchtap="delCollection"
-                           src="../../img/svgs/delete.svg"
-                           data-id="{{item.id}}"
-                           data-index="{{index}}"></image>
-                    <button form-type="submit"></button>
-                </label>
-            </navigator>
+            <scroll-view  wx:if="{{collections.length}}" scroll-y>
+                <navigator wx:for="{{collections}}"
+                           wx:key='collection-{{index}}'
+                           class="list-item"
+                           hover-class="list-item-hover"
+                           url="../monitor-appinfo-diagram/monitor-appinfo-diagram?id={{item.id}}"
+                           data-index="{{index}}">
+                    <label>
+                        <text class='title'>{{item.name}}</text>
+                        <image class='enter' src='../../img/svgs/arrow_right.svg'></image>
+                        <image catchtap="delCollection"
+                               src="../../img/svgs/delete.svg"
+                               data-id="{{item.id}}"
+                               data-index="{{index}}"></image>
+                        <button form-type="submit"></button>
+                    </label>
+                </navigator>
+            </scroll-view>
+            <block wx:else>
+                <view class="placeholder">
+                    <image src="../../img/svgs/dashboard_collections_empty.svg"></image>
+                    <text>收藏列表为空</text>
+                </view>
+            </block>
             <!--图表收藏模块 end-->
         </view>
-        <view slot="page-2">
+        <view class="page" slot="page-2">
             <navigator
                     class="list-item"
                     hover-class="list-item-hover"
                     url="../dashboard-announcement/dashboard-announcement">
                 <label>
-                    <text class="title">版本更新</text>
+                    <text class="title">公告信息</text>
 
                     <image class="enter" src="../../img/svgs/arrow_right.svg"></image>
 
@@ -53,7 +61,8 @@
                     hover-class="list-item-hover"
                     bindgetuserinfo='getUserInfo'
                     open-type='getUserInfo'
-                    data-url="../dashboard-message-board/dashboard-message-board">
+                    data-url="../dashboard-message-board/dashboard-message-board"
+                    plain>
                 <label>
                     <text class="title">留言板</text>
 
@@ -66,7 +75,8 @@
                     hover-class="list-item-hover"
                     bindgetuserinfo='getUserInfo'
                     open-type='getUserInfo'
-                    data-url="../dashboard-feedback/dashboard-feedback">
+                    data-url="../dashboard-feedback/dashboard-feedback"
+                    plain>
                 <label>
                     <text class="title">意见反馈</text>
 

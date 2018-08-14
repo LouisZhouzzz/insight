@@ -2,6 +2,7 @@ import * as echarts from "../../ec-canvas/echarts";
 
 const service = require('../../service/test');
 let globalData = getApp().globalData;
+let showToast = require('../../utils/util').showToast;
 
 const diagram = {
   line: require('../../components/diagram/outline-line.js'),
@@ -15,6 +16,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    labels: ['业务', '联机', '批量', '性能', '资源'],
     canvasLabels: ['一年异常发生', '指标类型分布'],
     canvasValues: ['line', 'pie'],
     canvasIndex: 0,
@@ -99,16 +101,24 @@ Page({
     let innerIndex = e.currentTarget.dataset.index;
     let type = this.data.types[this.data.swiperIndex].value;
     let list = this.data[type];
-    list.data[outerIndex].items[innerIndex].ifCollected = !list.data[outerIndex].items[innerIndex].ifCollected;
+    let ifCollected = !list.data[outerIndex].items[innerIndex].ifCollected;
+
+    list.data[outerIndex].items[innerIndex].ifCollected = ifCollected;
     service.toggleUserDiagram(globalData.openid, e.currentTarget.dataset.id, list.data[outerIndex].items[innerIndex].ifCollected)
       .then(res => {
         this.setData({
           [type]: list
         });
         globalData.ifCollectionsChange.dashboard = true;
+        showToast({
+          title: (ifCollected ? '' : '取消') + '收藏成功',
+        }, 1000)
       })
       .catch(res => {
         console.log('收藏状态变更失败！' + res);
+        showToast({
+          title: (ifCollected ? '' : '取消') + '收藏失败',
+        }, 1000)
       });
   },
   outerscroll(e) {
@@ -126,7 +136,6 @@ Page({
     let type = index === 0 ? 'line' : 'pie';
 
     this.ecComponents[index].init((canvas, width, height) => {
-
       // 获取组件的 canvas、width、height 后的回调函数
       // 在这里初始化图表
       const chart = echarts.init(canvas, null, {

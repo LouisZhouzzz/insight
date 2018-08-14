@@ -7,6 +7,14 @@ $smallFontSize: 12px;
 $bigFontSize: 18px;
 $pageBackgroundColor: #E9F1F7;
 
+@mixin flex-center {
+  display: -webkit-flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 @mixin full-page {
   position: absolute;
   top: 0;
@@ -42,6 +50,20 @@ page {
   color: transparent;
 }
 
+//图片按比列响应式缩放并自动裁剪： https://blog.csdn.net/oulihong123/article/details/54601030
+.zoomImage{
+  width:100%;
+  height:0;
+  padding-bottom: 40vh;
+  overflow:hidden;
+  background-position: center center;
+  background-repeat: no-repeat;
+  -webkit-background-size:cover;
+  -moz-background-size:cover;
+  background-size:cover;
+}
+
+
 .container {
   position: absolute;
   top: 0;
@@ -64,3 +86,18 @@ page {
 .transparent {
   opacity: 0;
 }
+
+.mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/*************************************status-page***********************************/
+status-page {
+  background-color: $themeBackgroundColor;
+  @include full-page;
+}
+
