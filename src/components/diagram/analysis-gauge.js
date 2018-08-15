@@ -72,7 +72,12 @@ module.exports = {
 
                         length:'25%'
                     },
-                    detail:{show:false}
+                    detail: {
+                        formatter: '分',
+                        fontSize: 14,
+                        offsetCenter: ['27%', '50%'],
+                        color:'rgba(255,255,255,0.7)'
+                    }
 
                 }
 
