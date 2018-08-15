@@ -183,6 +183,13 @@ Page({
         app.globalData.hotapp.uploadFeedbackImage(res => {
             //添加到反馈数组
             var newfeedback = that.data.feedback;
+
+           if(!res) {console.log(res);return;}
+
+
+
+
+
         newfeedback.push({
             content: res,
             content_type: 1,
@@ -206,7 +213,9 @@ Page({
         app.globalData.hotapp.feedback(res, 1, that.data.contract_info, function (res) {
             console.log(res)
         })
+
     })
+
 },
 footaddtell: function () {
     //打开弹出框

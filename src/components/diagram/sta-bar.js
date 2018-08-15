@@ -7,15 +7,15 @@ function getOption(localData) {
 
   return {
     grid: {
-      left: '0',
-      right: '0',
-      bottom: '0',
-      top: '0%',
+      left: 0,
+      right: 0,
+      bottom: 0,
+      top: 0,
       containLabel: true
     },
     xAxis: {
       type: 'value',
-      max: 100,
+      max: 115,
       show: false
     },
     yAxis: {
@@ -41,7 +41,7 @@ function getOption(localData) {
           return (sta.charts[key] - sta.range.min) / (sta.range.max - sta.range.min) * 100
         }),
         stack: 'chart',
-        z: 3,
+        //z: 3,
         label: {
           normal: {
             position: 'right',

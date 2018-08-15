@@ -56,6 +56,7 @@ page {
 
 
 
+
 .feedbackimg image{
    width: 100%;
    height: 300rpx;
@@ -123,8 +124,10 @@ page {
   width: 100%;
   height: 60rpx;
   padding: 10rpx 4rpx;
+
   border: 1px solid #ccc;
-  border-radius: 10rpx;
+  /* border-radius: 10rpx;*/
+  border-style:none none solid none;
 }
 
 
