@@ -26,7 +26,7 @@ function getOption(localData, para, TL) {
     series: [{
 
       top: '0%',
-      left: '3%',
+      left: '0%',
       right: '0%',
 
       type: para.chartType,

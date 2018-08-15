@@ -383,6 +383,7 @@ Page({
       service.getSystem(),
       service.getUnhandledExceptions()
     ]).then(res => {
+      wx.stopPullDownRefresh();
       this.setData({
         outline: res[0].data.data,
         exceptionList: res[1].data.records,
@@ -407,7 +408,11 @@ Page({
         300
       )
     }).catch(res => {
-      console.log('error: ' + res)
+      wx.stopPullDownRefresh();
+      console.log('error: ' + res);
+      this.setData({
+        ifLoading: false
+      });
     });
   },
 
