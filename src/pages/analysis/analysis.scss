@@ -1,4 +1,5 @@
-@import "../../app.scss";
+@import "../../app";
+@import "../../common";
 
 $listItemHeight: 100rpx;
 $itemTagHeight: 50rpx;
@@ -23,6 +24,13 @@ canvas {
   padding-bottom: 2em;
   box-sizing: border-box;
   width: 100%;
+  .custom-navigation {
+    height: 2em;
+    line-height: 2em;
+    font-size: $bigFontSize;
+    margin-top: 1em;
+    padding-left: 1em ;
+  }
   .cir {
     margin: 0 auto;
   }
@@ -125,10 +133,20 @@ scroll-view.container {
     display: inline-block;
     width: 15rpx;
     height: 15rpx;
-    margin: ($listItemHeight - 15rpx)/2 0.5rem 0 30rpx;
+    margin: ($listItemHeight - 15rpx)/2 1rem 0 30rpx;
     background-color: tomato;
     box-shadow: 0 0 5px tomato;
     border-radius: 100%;
+  }
+  .title {
+    display: inline-block;
+    max-width: 12em;
+    /* 超出的文本内容隐藏 */
+    overflow: hidden;
+    /* 超出显示省略号 */
+    text-overflow: ellipsis;
+    /* 强制不换行 */
+    white-space: nowrap;
   }
 }
 

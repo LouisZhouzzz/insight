@@ -3,7 +3,7 @@ let showToast = require('utils/util').showToast;
 let hotapp = require('utils/hotapp.js');
 
 App({
-  onLaunch () {
+  onLaunch() {
     hotapp.init('hotapp491327934');
     hotapp.setDebug(true);
     // 展示本地存储能力
@@ -14,6 +14,7 @@ App({
     try {
       let res = wx.getSystemInfoSync();
       this.globalData.windowHeight = res.windowHeight;
+      this.globalData.statusBarHeight = res.statusBarHeight;
     } catch (e) {
       console.log('获取设备信息失败！')
     }
@@ -23,8 +24,10 @@ App({
     Promise.prototype.finally = function (callback) {
       let P = this.constructor;
       return this.then(
-        value  => P.resolve(callback()).then(() => value),
-        reason => P.resolve(callback()).then(() => { throw reason })
+        value => P.resolve(callback()).then(() => value),
+        reason => P.resolve(callback()).then(() => {
+          throw reason
+        })
       );
     };
   },
@@ -36,8 +39,13 @@ App({
         this.globalData.openid = res.data.openid;
         callback && callback();
       })
-      .catch(res =>
-        console.log('登录失败! ' + res)
+      .catch(res => {
+          console.warn('登录失败! ' + res);
+          showToast({
+            title: '登录失败！',
+            icon: 'none'
+          }, 1000);
+        }
       )
   },
 
@@ -49,6 +57,7 @@ App({
   },
 
   globalData: {
+    statusBarHeight: null,
     windowHeight: null,
     token: null,
     openid: null,

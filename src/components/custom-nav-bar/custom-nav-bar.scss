@@ -1,0 +1,35 @@
+@import "../../common";
+
+:host {//使用 :host 选择组件所在的节点
+  display: block;
+  height:  $navigationHeight + $statusHeight;
+}
+
+.nav-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  line-height: $navigationHeight;
+  padding-top: $statusHeight;
+  background-color: $themeBackgroundColor;
+  color: $themeColor;
+  font-size: $bigFontSize;
+  z-index: 1001;
+}
+
+
+.nav {
+  font-size: 0;
+  display: inline-block;
+  vertical-align: middle;
+  .img {
+    vertical-align: middle;
+    height: 80rpx;
+    width: 80rpx;
+  }
+}
+
+.title {
+  vertical-align: middle;
+}

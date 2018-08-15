@@ -10,7 +10,6 @@ Page({
     size: 10
   },
   onLoad() {
-    wx.setNavigationBarTitle({title: '历史异常记录'});
     this.getHandledExceptions();
   },
 

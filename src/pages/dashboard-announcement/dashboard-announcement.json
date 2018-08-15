@@ -2,7 +2,7 @@
   "navigationBarTitleText": "公告信息",
   "navigationBarBackgroundColor": "#2C75B3",
   "usingComponents": {
-    "status-page": "../../components/status-page/status-page"
+    "status-page": "../../components/status-page/status-page",
+    "custom-nav-bar": "../../components/custom-nav-bar/custom-nav-bar"
   }
-
 }

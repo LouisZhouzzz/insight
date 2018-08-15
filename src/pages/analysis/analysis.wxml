@@ -1,8 +1,10 @@
 <wxs module="textFr" src="../../filter/text-fr.wxs"></wxs>
+
 <form report-submit="true" bindsubmit="onFormSubmit">
-    <view class="container" xmlns:wx="http://java.sun.com/JSP/Page">
+    <view class="container">
         <!--头部概览模块 start-->
         <view class='header'>
+            <view class="custom-navigation">慧眼</view>
             <!--分数圆形画布 以及 上面的分数 start-->
             <!--<block wx:if="{{!ifFailed}}">-->
                 <!--<canvas class="cir" style=' width:{{sideLength}}px; height:{{sideLength}}px;'-->
@@ -45,7 +47,8 @@
                            data-index="{{index}}">
                     <label>
                         <view class="dot"></view>
-                        <text class='title'>{{textFr.omitLongStr(item.title, 8)}}</text>
+                        <!--<text class='title'>{{textFr.omitLongStr(item.title, 8)}}</text>-->
+                        <text class='title'>{{item.title}}</text>
                         <!--<text class="title">{{textFr.bar(item.title, 9)}}</text>-->
                         <image class='enter' src='../../img/svgs/arrow_right.svg'></image>
                         <view class='tag'>

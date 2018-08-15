@@ -1,4 +1,5 @@
 <form report-submit="true" bindsubmit="onFormSubmit">
+    <custom-nav-bar>历史异常</custom-nav-bar>
     <status-page status="{{status}}" bindrenewevent="getHandledExceptions">
         <block wx:for="{{records}}" wx:key="record-{{index}}">
             <view class="tag">{{item.date}}</view>

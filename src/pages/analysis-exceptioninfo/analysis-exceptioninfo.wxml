@@ -1,4 +1,5 @@
-<status-page class="container" status="{{status}}" bindrenewevent="getException">
+<custom-nav-bar>{{title}}</custom-nav-bar>
+<status-page status="{{status}}" bindrenewevent="getException">
     <view class="pane upper">
         <!--<view class="tag">{{description.time}}</view>-->
         <view class="pane-header">异常详情</view>

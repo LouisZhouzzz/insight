@@ -3,6 +3,7 @@
   "tabBar": {},
   "usingComponents": {
     "ec-canvas": "../../ec-canvas/ec-canvas",
-    "status-page": "../../components/status-page/status-page"
+    "status-page": "../../components/status-page/status-page",
+    "custom-nav-bar": "../../components/custom-nav-bar/custom-nav-bar"
   }
 }

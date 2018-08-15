@@ -12,6 +12,7 @@
     "pages/monitor-appinfo-diagram/monitor-appinfo-diagram"
   ],
   "window": {
+    "navigationStyle": "custom",
     "backgroundTextStyle": "light",
     "backgroundColor": "#2C75B3",
     "navigationBarBackgroundColor": "#2C75B3",

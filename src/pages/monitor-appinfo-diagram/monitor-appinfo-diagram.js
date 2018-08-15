@@ -11,7 +11,8 @@ Page({
       lazyLoad: true
     },
     graExpText: '',
-    status: 'loading'
+    status: 'loading',
+    title: ''
   },
   onReady () {
     this.ecComponent = this.selectComponent('#mychart-dom-bar');
@@ -23,8 +24,9 @@ Page({
     service.getDiagram(this.data.id)
       .then(
         (res) => {
-          // 设置标题
-          wx.setNavigationBarTitle({title: res.data.chart.titleText});
+          this.setData({
+            title: res.data.chart.titleText
+          });
           // 加载图表
           this.ecComponent.init(chartInit(res.data));
 

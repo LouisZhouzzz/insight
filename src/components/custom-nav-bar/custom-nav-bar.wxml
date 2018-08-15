@@ -1,0 +1,6 @@
+<div class="nav-container">
+    <navigator class="nav" open-type="navigateBack">
+        <image class="img" src="../../img/svgs/arrow-left.svg"></image>
+    </navigator>
+    <span class="title"> <slot></slot> </span>
+</div>

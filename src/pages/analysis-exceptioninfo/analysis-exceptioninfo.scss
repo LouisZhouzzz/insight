@@ -1,9 +1,5 @@
 @import "../../app";
-
-.container {
-  background-color: $themeBackgroundColor;
-  color: $themeColor;
-}
+@import "../../common";
 
 .tag {
   background-color: darken($themeBackgroundColor, 10%);
@@ -27,6 +23,7 @@
 }
 
 .pane {
+  color: $themeColor;
   width: 90%;
   overflow: hidden;
   border-radius: 10rpx;
@@ -49,7 +46,7 @@
         float: left;
         width: 25%;
         box-sizing: border-box;
-        border-right: 1px solid $themeColor;
+        border-right: 1px solid $darkenWhite;
       }
       .value {
         text-indent: 0;

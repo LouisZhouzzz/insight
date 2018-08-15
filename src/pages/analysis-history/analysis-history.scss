@@ -1,4 +1,5 @@
-@import "../../app.scss";
+@import "../../app";
+@import "../../common";
 
 .tag {
   display: inline-block; //因为tag自动适应父元素的宽度

@@ -34,5 +34,8 @@
     "gulp-uglify": "^3.0.0",
     "gulplog": "^1.0.0",
     "run-sequence": "^2.2.1"
+  },
+  "dependencies": {
+    "redux": "^4.0.0"
   }
 }

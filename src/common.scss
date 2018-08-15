@@ -1,0 +1,26 @@
+$themeBackgroundColor:#2C75B3; //主题背景色
+$themeColor: #FFFFFF; //主题文字色
+$darkenWhite: snow;
+$lightenBlack: #25231F;
+$defaultFontSize: 16px;
+$smallFontSize: 12px;
+$bigFontSize: 18px;
+$pageBackgroundColor: #E9F1F7;
+$navigationHeight: 40px;
+$statusHeight: 25px;
+
+@mixin flex-center {
+  display: -webkit-flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+@mixin full-page {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}

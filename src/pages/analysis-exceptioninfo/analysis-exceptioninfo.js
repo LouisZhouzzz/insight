@@ -2,6 +2,7 @@ const service = require('../../service/test');
 
 Page({
   data: {
+    title: '',
     id: null,
     app: null,
     description: null,
@@ -12,7 +13,10 @@ Page({
     this.setData({
       id: option.id
     });
-    wx.setNavigationBarTitle({ title: option.title });
+    // wx.setNavigationBarTitle({ title: option.title });
+    this.setData({
+      title: option.title
+    });
     this.getException();
   },
   getException() {

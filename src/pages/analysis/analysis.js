@@ -164,10 +164,10 @@ let globalData = getApp().globalData;
 
 Page({
   data: {
-    sideLength: 200,
-    ec: {
+    ec: { // ec-canvas 参数
       lazyLoad: true
     },
+    sideLength: 200,
     outline: { //概览面板数据
       appNum: '', //异常应用数
       exceptionNum: '', //异常总数
@@ -371,10 +371,7 @@ Page({
     wx.setNavigationBarTitle({title: '慧眼'});
 
     this.setData({
-      ifLoading: true
-    });
-
-    this.setData({
+      ifLoading: true,
       sideLength: 0.4 * globalData.windowHeight
     });
 
@@ -389,24 +386,18 @@ Page({
         exceptionList: res[1].data.records,
         ifLoading: false
       });
-      setTimeout(
-        () => {
-          // this.showScoreAnim2(this.data.outline.point, 100),
-          this.ecComponent.init((canvas, width, height) => {
-            // 获取组件的 canvas、width、height 后的回调函数
-            // 在这里初始化图表
-            const chart = echarts.init(canvas, null, {
-              width: width,
-              height: height
-            });
+      this.ecComponent.init((canvas, width, height) => {
+        // 获取组件的 canvas、width、height 后的回调函数
+        // 在这里初始化图表
+        const chart = echarts.init(canvas, null, {
+          width: width,
+          height: height
+        });
 
-            chart.setOption(gaugeStyle.getOption(this.data.outline.point, 100));
+        chart.setOption(gaugeStyle.getOption(this.data.outline.point, 100));
 
-            return chart;
-          });
-        },
-        300
-      )
+        return chart;
+      });
     }).catch(res => {
       wx.stopPullDownRefresh();
       console.log('error: ' + res);
@@ -420,17 +411,13 @@ Page({
     this.ecComponent = this.selectComponent('#analysis-header-gauge');
   },
 
-  textFilter (str) {
-    return str.substring(0, 4);
-  },
-
   onFormSubmit(e) {
     service.patchUserFormId(globalData.openid, e.detail.formId)
       .then(res => {
         console.log('formid发送成功！');
       })
       .catch(res => {
-        console.log('formid发送失败');
+        console.warn('formid发送失败');
       });
   },
 

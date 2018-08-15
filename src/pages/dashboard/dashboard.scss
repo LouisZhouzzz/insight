@@ -1,4 +1,5 @@
 @import "../../app";
+@import "../../common";
 
 $avatarSize: 150rpx;
 
@@ -13,10 +14,9 @@ $avatarSize: 150rpx;
   position: relative;
   background-color: rgba(44, 117, 179, 1);
   color: $themeColor;
-  height: 40vh;
-  text-align: center;
+  height: 50vh;
+  @include flex-center;
   image {
-    margin-top: 7vh;
     margin-bottom: 20rpx;
     width: $avatarSize;
     height: $avatarSize;

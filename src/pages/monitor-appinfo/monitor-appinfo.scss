@@ -1,4 +1,5 @@
-@import "../../app.scss";
+@import "../../app";
+@import "../../common";
 
 $listItemHeight: 100rpx;
 $pageBackgroundColor: #F7F7F7;
@@ -19,6 +20,7 @@ canvas {
   overflow: hidden;
   transition-duration: 300ms;
   transition-timing-function: linear;
+  padding-top: 10rpx;
   .bio {
     text-align: center;
     height: 100rpx;
@@ -224,5 +226,5 @@ canvas {
 //  max-height: 100vh;
 //}
 .page {
-  min-height: 95vh;
+  min-height: 85vh;
 }

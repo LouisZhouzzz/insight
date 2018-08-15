@@ -1,3 +1,4 @@
+<custom-nav-bar>公告信息</custom-nav-bar>
 <status-page status="{{status}}" bindrenewevent="getAnnouncements">
     <view class="list">
         <block wx:for="{{records}}" wx:key="announcement-{{idx}}" wx:for-item="cardItem" wx:for-index="idx">
