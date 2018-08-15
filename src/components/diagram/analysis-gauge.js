@@ -51,7 +51,7 @@ module.exports = {
                         fontSize: 44,
                         offsetCenter: [0, '40%']
                     },
-                    data: [93]
+                    data: data
                 },
                 {
                     type:'gauge',
