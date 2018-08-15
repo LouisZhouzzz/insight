@@ -12,7 +12,7 @@ function getOption(localData) {
             left: "10%",
             right: "10%",
             top: "10%",
-            bottom: "30%",
+            bottom: "20%",
         },
 
         xAxis: {
@@ -20,12 +20,12 @@ function getOption(localData) {
             type: 'category',
             data: xData,
             nameTextStyle: {
-                color: '#FFB8AB'
+                color: 'rgba(255,255,255,0.9)'
             },
             axisLine: {
                 lineStyle: {
-                    width: 3,
-                    color: '#FFB8AB',
+                    width: 2,
+                    color: 'rgba(255,255,255,0.7)',
                     type: 'solid',
                 }
             }
@@ -34,20 +34,20 @@ function getOption(localData) {
             name: '异常数',
             type: 'value',
             nameTextStyle: {
-                color: '#FFB8AB'
+                color: 'rgba(255,255,255,0.9)'
             },
             axisLine: {
                 lineStyle: {
-                    width: 3,
-                    color: '#FFB8AB',
+                    width: 2,
+                    color: 'rgba(255,255,255,0.7)',
                     type: 'solid',
                 }
             },
             splitLine: {
                 lineStyle: {
                     width: 1,
-                    color: '#FFB8AB',
-                    type: 'solid',
+                    color: 'rgba(255,255,255,0.5)',
+                    type: 'dotted',
                 }
             }
         },
@@ -55,20 +55,21 @@ function getOption(localData) {
         series: [{
             data: localData,
             type: 'line',
-            symbol: 'circle',
-            symbolSize: 10,
+            symbol: 'diamond',
+            symbolSize:10,
             lineStyle: {
                 normal: {
-                    color: '#FFB8AB',
-                    width: 5,
+                    color: '#EFBDEB',
+                    width:3 ,
                     type: 'solid'
                 }
             },
             itemStyle: {
                 normal: {
-                    color: '#F9FBB2'
+                    color: '#F3F8F2'
                 }
             }
+
         }]
     };
 
