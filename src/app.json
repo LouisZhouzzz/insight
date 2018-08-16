@@ -1,6 +1,5 @@
 {
   "pages": [
-
     "pages/analysis/analysis",
     "pages/dashboard-feedback/dashboard-feedback",
     "pages/dashboard-message-board/dashboard-message-board",
@@ -21,10 +20,6 @@
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
-    "color": "#504B43",
-    "backgroundColor": "#E9F1F7",
-    "selectedColor": "#2C75B3",
-    "borderStyle": "white",
     "list": [
       {
         "selectedIconPath": "img/tabBar/nav_analysis_selected.png",

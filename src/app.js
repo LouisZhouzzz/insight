@@ -4,6 +4,7 @@ let hotapp = require('utils/hotapp.js');
 
 App({
   onLaunch() {
+    // wx.hideTabBar();
     hotapp.init('hotapp491327934');
     hotapp.setDebug(true);
     // 展示本地存储能力
@@ -57,6 +58,7 @@ App({
   },
 
   globalData: {
+    userInfo: null,
     statusBarHeight: null,
     windowHeight: null,
     token: null,

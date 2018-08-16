@@ -3,6 +3,6 @@
   "usingComponents": {
     "label-page": "../../components/label-page/label-page",
     "ec-canvas": "../../ec-canvas/ec-canvas",
-    "confirm-modal": "../../components/confirm-modal/confirm-modal"
+    "custom-nav-bar": "../../components/custom-nav-bar/custom-nav-bar"
   }
 }

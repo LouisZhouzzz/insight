@@ -1,25 +1,18 @@
-/* pages/feedback/index.wxss */
-page {
-  height: 100%;
-  width: 100%;
-}
-.container {
-  height: 100%;
-  width: 100%;
-  flex-direction: column;
-}
+$footerHeight: 100rpx;
+
 /*聊天盒子*/
 .scrollwechat {
   flex: 1;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-   height: 100%;
+   //height: 100%;
+  .scrollview{
+    height: 100%;
+    margin-bottom: $footerHeight + 20rpx;
+  }
 }
-.scrollview{
- height: 100%;
 
-}
 .scrollwechat li {
   width: 100%;
   display: flex;
@@ -39,12 +32,10 @@ page {
   color: #fff;
   font-size: 12px;
 }
-.container .user {
- // flex-direction: row;  //左边
+.user {
   flex-direction: row-reverse;//放右边
 }
-
-.container .sys{
+ .sys{
   flex-direction: row;   //左边
 }
 
@@ -54,12 +45,9 @@ page {
 
 }
 
-
-
-
 .feedbackimg image{
-   width: 100%;
-   height: 300rpx;
+  width: 300rpx;
+  height: 300rpx;
 }
 
 .headimg {
@@ -77,30 +65,38 @@ page {
    justify-content: center;
 
 }
-.textview {
-  width:100%;
-  border-radius: 10rpx;
-  background: #d5eaf8;
-  padding: 20rpx;
-}
-.triangle image{
 
+
+.triangle image{
   width: 20rpx;
   height: 80rpx;
-
-
 }
+
+.textview,
 .textview2 {
-   width:100%;
-  background: #fff;
   border-radius: 10rpx;
-  padding: 20rpx;
+  padding:0.5em;
+  line-height:1.5em;
+  box-sizing:border-box;
+  word-break: break-word;
 }
+
+.textview {
+  background: #d5eaf8;
+}
+
+.textview2 {
+  background: #fff;
+}
+
 .link{
   height: 15rpx;
 }
 .footer {
-  width: 96%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
   height: 100rpx;
   padding: 1%;
   display: flex;
@@ -109,26 +105,30 @@ page {
   align-items: center;
   flex-wrap: nowrap;
   background: #ffffff;
-
+  .footinput {
+    flex: 1;
+    height: $footerHeight;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .input {
+      width: 100%;
+      height: 60rpx;
+      padding: 10rpx 4rpx;
+      border: 1px solid #ccc;
+      /* border-radius: 10rpx;*/
+      border-style:none none solid none;
+    }
+  }
+  &:before {
+    content: " ";
+    position: relative;
+    display: block;
+    height: $footerHeight;
+  }
 }
 
-.footinput {
-  flex: 1;
-  height: 100rpx;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-.input {
-  width: 100%;
-  height: 60rpx;
-  padding: 10rpx 4rpx;
-
-  border: 1px solid #ccc;
-  /* border-radius: 10rpx;*/
-  border-style:none none solid none;
-}
 
 
 

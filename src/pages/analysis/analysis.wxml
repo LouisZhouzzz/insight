@@ -1,7 +1,6 @@
 <wxs module="textFr" src="../../filter/text-fr.wxs"></wxs>
-
 <form report-submit="true" bindsubmit="onFormSubmit">
-    <view class="container">
+    <view>
         <!--头部概览模块 start-->
         <view class='header'>
             <view class="custom-navigation">慧眼</view>
@@ -69,11 +68,8 @@
                     <image class="empty" src="../../img/svgs/spinner.svg"></image>
                 </view>
             </block>
-            <!--<view class="loading-hinder">-->
-            <!--<text wx:if="{{ifLoading}}">Loading...</text>-->
-            <!--<text wx:else class="{{ifMore ? 'hidden' : ''}}">No more items.</text>-->
-            <!--</view>-->
         </view>
         <!--异常信息模块 end-->
+
     </view>
 </form>

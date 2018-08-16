@@ -1,7 +1,8 @@
-<view class="WxComment">
-  <WxComment
+<custom-nav-bar>留言板</custom-nav-bar>
 
-             submitBtnText="发送"
-             articleID="message_board"
-             contentLen='1' theme="light"></WxComment>
+<view class="WxComment">
+    <WxComment
+            submitBtnText="发送"
+            articleID="message_board"
+            contentLen='1' theme="light"></WxComment>
 </view>

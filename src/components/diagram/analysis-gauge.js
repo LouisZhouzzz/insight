@@ -14,7 +14,7 @@ module.exports = {
                     endAngle: -40,
                     splitNumber: 100,
                     center: ['50%', '50%'],
-                    radius: '90%',
+                    radius: '100%',
                     axisLine: {
                         lineStyle: {
                             width: 0,
@@ -61,7 +61,7 @@ module.exports = {
                     endAngle: -40,
                     splitNumber:(100-data),
                     center: ['50%', '50%'],
-                    radius: '90%',
+                    radius: '100%',
                     axisLabel:{show:false},
                     axisLine:{lineStyle:{width:0}},
                     axisTick:{show:false},

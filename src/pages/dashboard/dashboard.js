@@ -16,7 +16,6 @@ Page({
   },
 
   onLoad() {
-    wx.setNavigationBarTitle({title: '慧眼'});
     // 查看是否授权
     service.wxSetting()
       .then(res => {
@@ -28,15 +27,29 @@ Page({
           this.setData({
             userInfo: res.userInfo,
             authorized: true
-          })
+          });
+          globalData.userInfo = res.userInfo;
         })
       })
       .catch(res => {
         console.log('获取用户配置失败！' + res);
       });
-
     this.getUserDiagrams();
+  },
 
+  getUserInfo(e) {
+    if (!e.detail.userInfo) return;
+
+    if (e.currentTarget.dataset.url)
+      wx.navigateTo({
+        url: e.currentTarget.dataset.url
+      });
+
+    this.setData({
+      userInfo: e.detail.userInfo,
+      authorized: true,
+    });
+    globalData.userInfo = e.detail.userInfo;
   },
 
   onShow() {
@@ -71,20 +84,6 @@ Page({
         });
       }
     })
-  },
-
-  getUserInfo(e) {
-    if (!e.detail.userInfo) return;
-
-    if (e.currentTarget.dataset.url)
-      wx.navigateTo({
-        url: e.currentTarget.dataset.url
-      });
-
-    this.setData({
-      userInfo: e.detail.userInfo,
-      authorized: true,
-    });
   },
 
   viewAnnouncements (e) {

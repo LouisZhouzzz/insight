@@ -1,0 +1,22 @@
+@import "../../common";
+
+:host {//使用 :host 选择组件所在的节点
+  display: block;
+  height:  $tabBarHeight;
+}
+
+.footer {
+  height: $tabBarHeight;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  background-color: $pageBackgroundColor;
+  .tab-item {
+    line-height: $tabBarHeight;
+    flex-grow: 1;
+    text-align: center;
+  }
+}

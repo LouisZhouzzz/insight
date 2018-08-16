@@ -8,36 +8,33 @@ $exceptionNumHinderRadius: 30rpx;
 
 /*******************************************图表************************************/
 canvas {
-  width: 700rpx;
-  height: 280px;
+  width: 500rpx;
+  height: 500rpx;
   display: block;
   margin: 0 auto;
 }
-
 
 /*******************************************头部概览信息************************************/
 .header {
   background: $themeBackgroundColor;
   color: $themeColor;
   position: relative;
-  overflow: visible;
-  padding-bottom: 2em;
+  overflow: hidden;
   box-sizing: border-box;
   width: 100%;
   .custom-navigation {
-    height: 2em;
-    line-height: 2em;
+    line-height: $navigationHeight;
     font-size: $bigFontSize;
-    margin-top: 1em;
+    margin-top: $statusHeight;
     padding-left: 1em ;
   }
   .cir {
     margin: 0 auto;
   }
   .view-history {
-    position: absolute;
-    right: 1em;
-    bottom: 15rpx;
+    float: right;
+    margin-right: 1em;
+    margin-bottom: 1em;
     font-size: $smallFontSize;
   }
   .placeholder {

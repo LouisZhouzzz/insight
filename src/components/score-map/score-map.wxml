@@ -1,1 +1,0 @@
-<canvas class="cir" style=' width:{{sideLength}}px; height:{{sideLength}}px;' canvas-id="canvasArc"></canvas>

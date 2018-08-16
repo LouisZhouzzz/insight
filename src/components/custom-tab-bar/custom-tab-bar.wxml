@@ -1,0 +1,11 @@
+<view class="footer">
+    <navigator class="tab-item" url="../../pages/analysis/analysis" open-type="navigateTo">
+        分析
+    </navigator>
+    <navigator class="tab-item" url="../../pages/monitor/monitor" open-type="navigateTo">
+        监控
+    </navigator>
+    <navigator class="tab-item" url="../../pages/dashboard/dashboard" open-type="navigateTo">
+        我的
+    </navigator>
+</view>

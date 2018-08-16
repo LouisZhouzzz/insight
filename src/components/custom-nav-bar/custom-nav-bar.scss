@@ -2,7 +2,7 @@
 
 :host {//使用 :host 选择组件所在的节点
   display: block;
-  height:  $navigationHeight + $statusHeight;
+  margin-bottom: $navigationHeight + $statusHeight;
 }
 
 .nav-container {
