@@ -21,15 +21,15 @@
     }
     echarts.registerTheme('deepblue', {
         "color": [
-            "#EFBDEB",
             "#A6B1E1",
-            "#F3F8F2",
+            "#EFBDEB",
             "#AFEEEF",
+            "#EEF4D4",
             "#FFC0CB",
             "#9370DB",
             "#ACFCD9",
             "#F7D1CD",
-            "#EEF4D4",
+            "#F3F8F2",
             "#DC6ACF",
             "#8884FF",
             "#99EDCC",
