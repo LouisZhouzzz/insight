@@ -1,7 +1,7 @@
 @import "../../app";
 @import "../../common";
 
-$avatarSize: 150rpx;
+$avatarSize: 120rpx;
 
 .background {
   position: absolute;
@@ -14,7 +14,7 @@ $avatarSize: 150rpx;
   position: relative;
   background-color: rgba(44, 117, 179, 1);
   color: $themeColor;
-  height: 50vh;
+  height: 40vh;
   @include flex-center;
   image {
     margin-bottom: 20rpx;
@@ -104,4 +104,5 @@ confirm-modal {
   background-color: lighten($themeBackgroundColor, 10%);
   height: 5vh;
   line-height: 5vh;
+  font-size: $smallFontSize;
 }

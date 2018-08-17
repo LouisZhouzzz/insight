@@ -7,13 +7,13 @@ $pageBackgroundColor: #E9F1F7;
   text-align: center;
   .item {
     color: white;
-    transition: 300ms linear;
-    padding: 0.5em 1em;
     flex-grow: 1;
     &.checked {
-      flex-grow: 0;
       color: black;
       background-color: $pageBackgroundColor;
+    }
+    .type-radio {
+      padding: 0.5em 0;
     }
   }
 }

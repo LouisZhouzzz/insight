@@ -7,13 +7,14 @@ Page({
     status: 'loading',
     records: [],
     page: 0,
-    size: 10
+    size: 5,
+    ifMore: true
   },
   onLoad() {
     this.getHandledExceptions();
   },
 
-  getHandledExceptions () {
+  getHandledExceptions() {
     this.setData({
       status: 'loading'
     });
@@ -23,7 +24,7 @@ Page({
         this.setData({
           records: res.data.records,
           status: 'normal',
-          page: 1
+          page: 0
         });
       })
       .catch(res => {
@@ -34,18 +35,13 @@ Page({
       });
   },
 
-  onPullDownRefresh () {
-    wx.startPullDownRefresh();
-    this.onLoad();
-  },
-
-  onReachBottom () {
+  onReachBottom() {
+    if (this.data.status === 'loading') return;
     this.loadMoreRecords();
   },
 
-  loadMoreRecords () {
-    if (this.data.status === 'loading-more' || this.data.status === 'loading') return;
-
+  loadMoreRecords() {
+    if (this.data.status === 'loading-more' || this.data.status === 'loading' || !this.data.ifMore) return;
     this.setData({
       status: 'loading-more'
     });
@@ -53,6 +49,13 @@ Page({
     service.getHandledExceptions(this.data.page)
       .then(res => {
         let newRecords = res.data.records;
+
+        // 新记录条目数少于size，判断无更多记录可加载
+        if (newRecords.length < this.data.size)
+          this.setData({
+            ifMore: false
+          });
+
         for (let i in newRecords) {
           if (!newRecords.hasOwnProperty(i)) continue;
           this.data.records.push(newRecords[i]);
@@ -71,7 +74,7 @@ Page({
       });
   },
 
-  onFormSubmit(e) {
+  onFormSubmit (e) {
     service.patchUserFormId(globalData.openid, e.detail.formId)
       .then(res => {
         console.log('formid发送成功！');

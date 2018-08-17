@@ -13,7 +13,6 @@ Page({
     this.setData({
       id: option.id
     });
-    // wx.setNavigationBarTitle({ title: option.title });
     this.setData({
       title: option.title
     });

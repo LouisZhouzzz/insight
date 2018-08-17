@@ -5,7 +5,7 @@
         <view class="pane-header">异常详情</view>
         <view class="pane-content">
             <view class="segment">
-                <view class="key">时间</view>
+                <view class="key">发生时间</view>
                 <view class="value">{{description.time}}</view>
             </view>
             <view class="segment">
@@ -26,7 +26,7 @@
         <view class="pane-header">解决方案</view>
         <view class="pane-content">
             <view class="segment">
-                <view class="key">时间</view>
+                <view class="key">解决时间</view>
                 <view class="value">
                     {{solution.time}}
                 </view>
@@ -41,6 +41,6 @@
     </view>
 
     <view wx:else class="hint">
-        暂无解决方案
+        待分析解决
     </view>
 </status-page>

@@ -12,9 +12,6 @@ const diagram = {
 const computed = require('../../utils/vuelike').computed;
 
 Page({
-  /**
-   * 页面的初始数据
-   */
   data: {
     labels: ['业务', '联机', '批量', '性能', '资源'],
     canvasLabels: ['一年异常发生', '指标类型分布'],

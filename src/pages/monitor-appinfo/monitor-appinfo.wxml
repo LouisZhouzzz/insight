@@ -1,5 +1,5 @@
 <form report-submit="true" bindsubmit="onFormSubmit" style="width: 100%">
-    <custom-nav-bar>历史异常</custom-nav-bar>
+    <custom-nav-bar>{{appOutline.app}} {{appOutline.title}}</custom-nav-bar>
     <!--头部信息概览模块 start-->
     <view class='header'>
         <!--概览图表 start-->

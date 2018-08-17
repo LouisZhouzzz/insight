@@ -33,7 +33,7 @@
         <!--异常信息模块 start-->
         <view class="body">
             <view class="head">
-                <text>异常</text>
+                <text>异常：共{{outline.exceptionNum}} 项</text>
                 <text>应用来源</text>
             </view>
 

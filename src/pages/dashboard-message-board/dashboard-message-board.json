@@ -3,9 +3,8 @@
   "navigationBarBackgroundColor": "#2C75B3",
 
   "usingComponents": {
-    "WxComment": "../../components/WxComment/WxComment",
+    "WxComment": "../../components/wx-comment/wx-comment",
     "custom-nav-bar": "../../components/custom-nav-bar/custom-nav-bar"
-
   }
 }
 

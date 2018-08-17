@@ -186,7 +186,7 @@ Page({
     let sideLength = this.data.sideLength - shadowOffset;
     let lineWidth = 12;
     let fontSize = 0;
-    let subFontSize = 14
+    let subFontSize = 14;
     let radius = sideLength / 2 - lineWidth;
 
     if (sideLength < 200) fontSize = 50;
@@ -411,6 +411,11 @@ Page({
     this.ecComponent = this.selectComponent('#analysis-header-gauge');
   },
 
+  onPullDownRefresh() {
+    if (this.data.ifLoading) return;
+    this.onLoad();
+  },
+
   onFormSubmit(e) {
     service.patchUserFormId(globalData.openid, e.detail.formId)
       .then(res => {
@@ -424,11 +429,6 @@ Page({
   onHide() {
     // 生命周期函数--监听页面隐藏
     wx.hideNavigationBarLoading();
-  },
-
-  onPullDownRefresh() {
-    wx.startPullDownRefresh();
-    if (this.data.ifLoading) return;
-    this.onLoad();
   }
+
 });

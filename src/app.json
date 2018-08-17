@@ -20,6 +20,7 @@
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
+    "selectedColor": "#2C75B3",
     "list": [
       {
         "selectedIconPath": "img/tabBar/nav_analysis_selected.png",

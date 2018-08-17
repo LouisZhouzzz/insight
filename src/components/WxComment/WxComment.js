@@ -6,10 +6,10 @@
 const AV = require('../../libs/leancloud/av-weapp-min.js');
 var Common = require('../../libs/scripts/common.js');
 // LeanCloud 应用的 ID 和 Key
-AV.init({
-  appId: 'sAJe8mPXIO3AxQswbPOwi6kb-gzGzoHsz',
-  appKey: 'Lq58KthhQMzBo8KY1rlpHRdv',
-});
+// AV.init({
+//   appId: 'sAJe8mPXIO3AxQswbPOwi6kb-gzGzoHsz',
+//   appKey: 'Lq58KthhQMzBo8KY1rlpHRdv',
+// });
 
 Component({
   properties: {
@@ -496,7 +496,7 @@ Component({
       commentcount_query.equalTo('article_id', that.data.articleID);
       commentcount_query.find().then(function (results) {
         //console.log(results.length)
-        if (results.length == 1) {
+        if (results.length === 1) {
           var todo = AV.Object.createWithoutData('WxCommentCount', results[0].id);
           todo.set('count', that.data.all_comment_num);
           todo.set('article_url', that.data.articleURL)
@@ -527,7 +527,7 @@ Component({
       });
     },
     commentLongTap: function (e) {
-      var that = this;
+      let that = this;
       wx.showModal({
         title: '提示',
         content: '确定删除该评论吗？',
@@ -536,7 +536,7 @@ Component({
             //console.log('用户点击确定')
             // 长按删除评论
             AV.User.loginWithWeapp().then(user => {
-              if (user.id == e.currentTarget.dataset.user_id || that.data.is_admin) {
+              if (user.id === e.currentTarget.dataset.user_id || that.data.is_admin) {
                 // 如果该评论下有子评论
                 // 1.可以删除父评论和所有子评论？2.还是只能所以子评论删除完毕后才可以删除？
                 // Done 1
@@ -924,7 +924,7 @@ Component({
       var current_time = Common.getTime();
       const user = AV.User.current();
       //console.log(that.data.login_user_info);
-      wxsubcomment.set('p_id', that.data.sub_comment_p_comment_id)
+      wxsubcomment.set('p_id', that.data.sub_comment_p_comment_id);
       wxsubcomment.set('username', that.data.login_user_info.username);
       wxsubcomment.set('article_id', that.data.article_id);
       wxsubcomment.set('article_title', that.data.articleTitle);
