@@ -33,6 +33,7 @@ function getOption(localData, para, TL){
       show: true,
       position: 'bottom',
       type: 'category',
+      name: para.xname,
       nameLocation: 'end',
       nameTextStyle: {
         fontStyle: 'normal',

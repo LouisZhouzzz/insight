@@ -13,7 +13,7 @@ module.exports ={
 ],
     pieRadius: [
     "0%",
-    "68%"
+    "55%"
 ],
     gauCenter: [
     "50%",

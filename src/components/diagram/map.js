@@ -12,7 +12,7 @@ function getOption(localData, para, TL) {
       precision:getMapExt(localData).precision,
       left: 'left',
       //orient:'horizontal',
-      bottom: '0%',
+      bottom: '3%',
       itemHeight:60,
       itemWidth:10,
       //text: ['高', '低'], // 文本，默认为数值文本
@@ -25,7 +25,7 @@ function getOption(localData, para, TL) {
 
     series: [{
 
-      top: '0%',
+      top: '2%',
       left: '0%',
       right: '0%',
 
@@ -50,7 +50,7 @@ function getOption(localData, para, TL) {
       itemStyle: {
         normal: {
             borderColor:'rgba(255,255,255,0.6)',
-            borderWidth:2
+            borderWidth:1.5
         },
         emphasis: {
           areaColor:'yellow'

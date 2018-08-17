@@ -102,7 +102,10 @@ function getSeries(data, chartType) {
         let item = {
             name: data[i].name,
             type: chartType,
-            //seriesLayoutBy: 'row',
+            //smooth:true,
+            lineStyle:{
+                type:'solid'
+            },
             data: data.value
         };
         series.push(item);
