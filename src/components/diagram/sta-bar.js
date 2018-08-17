@@ -15,12 +15,14 @@ function getOption(localData) {
     },
     xAxis: {
       type: 'value',
-      max: 115,
+      max: 112,
       show: false
     },
     yAxis: {
       type: 'category',
       data: staKeys,
+      inverse:true,
+      max:5,
       axisLine: {
         show: false,
         lineStyle: {
@@ -36,7 +38,7 @@ function getOption(localData) {
     },
     series: [
       {
-        barMaxWidth: 20,
+        barMaxWidth: 18,
         type: 'bar',
         data: Object.keys(sta.charts).map(function (key) {
           return (sta.charts[key] - sta.range.min) / (sta.range.max - sta.range.min) * 100
@@ -67,7 +69,7 @@ function getOption(localData) {
           }
         },
       }, {
-        barMaxWidth: 20,
+        barMaxWidth: 18,
         type: 'bar',
         silent: true,
         stack: 'chart',
