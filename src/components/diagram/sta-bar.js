@@ -9,7 +9,7 @@ function getOption(localData) {
     grid: {
       left: 0,
       right: 0,
-      bottom: 0,
+      bottom: 'auto',
       top: 0,
       containLabel: true
     },
@@ -28,6 +28,7 @@ function getOption(localData) {
         }
       },
       axisTick: {
+        show:false,
         lineStyle: {
           color: '#fff'
         }
