@@ -1,0 +1,45 @@
+@import "../../common";
+
+.hidden {
+  display: none;
+}
+
+.container {
+  align-items: center;
+  justify-content: center;
+}
+
+image {
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.footer {
+  height: $tabBarHeight;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  background-color: $pageBackgroundColor;
+  .tab-item {
+    flex-grow: 1;
+    text-align: center;
+    font-size: $smallFontSize;
+    @include flex-center;
+    color: $lightenBlack;
+    image {
+      width: 60rpx;
+      height: 60rpx;
+    }
+    &.active {
+      color: $themeBackgroundColor;
+    }
+  }
+  &:before {
+    content: " ";
+    display: block;
+    height: $tabBarHeight;
+  }
+}

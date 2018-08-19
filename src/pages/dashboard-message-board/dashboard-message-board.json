@@ -1,10 +1,9 @@
 {
   "navigationBarTitleText": "留言板",
   "navigationBarBackgroundColor": "#2C75B3",
-
   "usingComponents": {
     "WxComment": "../../components/wx-comment/wx-comment",
-    "custom-nav-bar": "../../components/custom-nav-bar/custom-nav-bar"
+    "custom-nav-bar": "../../components/custom-nav-bar/custom-nav-bar",
+    "status-page": "../../components/status-page/status-page"
   }
 }
-

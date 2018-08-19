@@ -19,7 +19,6 @@ Page({
         myDate: '',
         role: true,
         img: '../../img/feedback/hotapp_01_07.png',
-
       }
     ],//返回数据
 
@@ -29,41 +28,19 @@ Page({
     networkType: '',//判断当前网络类型
     addtell: {
       addtellHidden: true,//弹出框显示/隐藏
-
     },
   },
 
-  onLoad: function (options) {
-
+  onLoad (options) {
     // 页面监控
     //app.globalData.hotapp.count(this)
     // 页面初始化 options为页面跳转所带来的参数
-  },
-  onReady: function () {
-    // 页面渲染完成
-  },
-  onShow: function () {
-    // 页面显示
-    //将全局的方法赋值
-    var that = this;
-    var hotapp = app.globalData.hotapp;
-    //调用登录接口
-    wx.login({
-      success: function (res) {
-        wx.getUserInfo({
-          success: function (res) {
-            that.setData({
-              userInfo: res.userInfo
-            })
-
-            typeof cb == "function" && cb(res.userInfo)
-          }
-        })
-      }
-    })
+    this.setData({
+      userInfo: app.globalData.userInfo
+    });
   },
 
-  bindfocus: function (e) {
+  bindfocus (e) {
     wx.getNetworkType({
       success: (res) => {
         if (res.networkType === 'fail') {
@@ -80,42 +57,35 @@ Page({
         })
       }
     });
-
     //当sendflag有值的时候，设置发送按钮显示
     this.setData({
       sendflag: true
     })
   },
 
-  bindblur: function (e) {
-    var that = this;
+  bindblur (e) {
     this.setData({
       sendflag: false
-    })
+    });
     //提交输入框的数据
-    if (e.detail.value != '' && this.data.networkType != 'fail') {
+    if (e.detail.value !== '' && this.data.networkType !== 'fail') {
 
       //获取当前时间
-      var myDate = new Date();
-      var hours = myDate.getHours();       //获取当前小时数(0-23)
-      var minutes = myDate.getMinutes();     //获取当前分钟数(0-59)
+      let myDate = new Date();
+      let hours = myDate.getHours();       //获取当前小时数(0-23)
+      let minutes = myDate.getMinutes();     //获取当前分钟数(0-59)
       //如果两次时间
-      if (minutes == this.data.minutes) {
-        var mydata = ''
-      } else {
-        var mydata = hours + ':' + minutes
-      }
-
+      let mydata = minutes === this.data.minutes ? '' : hours + ':' + minutes;
 
       //消息数组，系统默认
-      var newfeedback = this.data.feedback;
+      let newfeedback = this.data.feedback;
       newfeedback.push({
         content: e.detail.value,
         content_type: 0,
-        contract_info: that.data.contract_info,
+        contract_info: this.data.contract_info,
         myDate: mydata,
         role: false,
-        img: that.data.userInfo.avatarUrl,
+        img: this.data.userInfo.avatarUrl,
       }, {
         content: '【系统消息】：您的反馈已收到！谢谢！',
         content_type: 0,
@@ -123,7 +93,7 @@ Page({
         myDate: '',
         role: true,
         img: "../../img/feedback/hotapp_01_07.png"
-      })
+      });
 
       //修改feedback,设置addaddinput为[]值为空
       this.setData({
@@ -132,10 +102,10 @@ Page({
         minutes: minutes,
         feedback: newfeedback,
 
-      })
+      });
       //上传文字到服务器
 
-      app.globalData.hotapp.feedback(e.detail.value, 0, that.data.contract_info, function (res) {
+      app.globalData.hotapp.feedback(e.detail.value, 0, this.data.contract_info, function (res) {
 
         wx.showToast({
           title: '已成功反馈',
@@ -147,24 +117,23 @@ Page({
 
 
   },
-  bindtapimg: function () {
+  bindtapimg () {
     //打开添加图片框
     this.setData({
       flag: false
     })
   },
-  closeimg: function () {
+  closeimg () {
     //闭合添加图片框
     this.setData({
       flag: true
     })
   },
-  footaddimg: function () {
-    var that = this;
+  footaddimg () {
     //使用hotapp接口获取图片路径
     app.globalData.hotapp.uploadFeedbackImage(res => {
       //添加到反馈数组
-      var newfeedback = that.data.feedback;
+      let newfeedback = this.data.feedback;
 
       if (!res) {
         console.log(res);
@@ -176,81 +145,26 @@ Page({
         content_type: 1,
         contract_info: '',
         role: false,
-        img: that.data.userInfo.avatarUrl,
+        img: this.data.userInfo.avatarUrl,
       }, {
         content: '【系统消息】：您的反馈已收到！谢谢！',
         content_type: 0,
-        contract_info: that.data.contract_info,
+        contract_info: this.data.contract_info,
         role: true,
         img: "../../img/feedback/hotapp_01_07.png"
       });
       //修改feedback
-      that.setData({
+      this.setData({
         flag: true,
         feedback: newfeedback
       });
       //添加图片到服务器
 
-      app.globalData.hotapp.feedback(res, 1, that.data.contract_info, function (res) {
+      app.globalData.hotapp.feedback(res, 1, this.data.contract_info, function (res) {
         console.log(res)
       })
 
     })
 
-  },
-  footaddtell: function () {
-    //打开弹出框
-    this.setData({
-      addtell: {
-        addtellHidden: false,
-        contract_info: ''
-      }
-    })
-  },
-  modalconfirm: function () {
-    //弹出框确认操作
-    this.setData({
-      flag: true,
-      addtell: {
-        addtellHidden: true,
-      }
-    })
-  },
-  modalcancel: function () {
-    //弹出框取消操作
-    this.setData({
-      addtell: {
-        addtellHidden: true,
-      }
-    })
-  },
-  saveusertell: function (e) {
-    //保存input框的值
-    this.setData({
-      contract_info: e.detail.value,
-      addtell: {
-        addtellHidden: false,
-
-      }
-    })
-
-
-  },
-  footaddmore: function () {
-    wx.showModal({
-      title: 'insight',
-      content: '基于微信的产品运营监控平台',
-      success: function (res) {
-        if (res.confirm) {
-          console.log('基于微信的产品运营监控平台提供支持')
-        }
-      }
-    })
-  },
-  onHide: function () {
-    // 页面隐藏
-  },
-  onUnload: function () {
-    // 页面关闭
   }
 });

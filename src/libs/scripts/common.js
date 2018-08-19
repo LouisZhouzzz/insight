@@ -1,5 +1,17 @@
 const AV = require('../leancloud/av-weapp-min.js');
 
+// INSIGHT
+AV.init({
+  appId: 'sAJe8mPXIO3AxQswbPOwi6kb-gzGzoHsz',
+  appKey: 'Lq58KthhQMzBo8KY1rlpHRdv',
+});
+
+// TEST
+// AV.init({
+//   appId: 'hSOy8m8HxrsVncxmPxzelTGD-gzGzoHsz',
+//   appKey: 'gnu2rpHvgDF80MylwaRy96cr'
+// });
+
 const timeAgoWithTimeStr = (dateString) => {
   // ios: 2018/06/02 11:11:11
   // android: 2018-06-02 11:11:11 & 2018/06/02 11:11:11
@@ -109,20 +121,26 @@ function queryWxComment() {
 
 /**
  * 查询所有二级评论
- * @param index
- * @param p_id
+ * @param pId
+ * @param pIndex
  * @returns {Promise<any>}
  */
-function querySubComment(index, p_id) {
+function querySubComment(pId, pIndex) {
   return new Promise(function (resolve, reject) {
     let sub_query = new AV.Query('WxSubComment');
     sub_query.ascending('createdAt');
     sub_query.include('targetUser');
     sub_query.include('targetZan');
-    sub_query.equalTo('p_id', p_id);
-    sub_query.find().then(function (sub_comments) {
-      resolve([index, p_id, sub_comments]);
-    })
+    sub_query.equalTo('p_id', pId);
+    sub_query.find()
+      .then(subComments => {
+        resolve({
+          pIndex,
+          pId,
+          subComments
+        });
+      })
+      .catch(reject)
   });
 }
 
@@ -131,11 +149,10 @@ function querySubComment(index, p_id) {
  * 新建一级评论并保存到后台中
  * @param username
  * @param content
- * @param userId
  * @param time
  * @returns {Promise<any>}
  */
-function writeComment(username, content, userId, time) {
+function writeComment(username, content, time) {
   return new Promise((resolve, reject) => {
     let WxComment = AV.Object.extend('WxComment');
     let wxcomment = new WxComment();
@@ -145,7 +162,7 @@ function writeComment(username, content, userId, time) {
     wxcomment.set('time', time);
     wxcomment.set('at', '');
     wxcomment.set('subCommentList', []);
-    let targetUser = AV.Object.createWithoutData('_User', userId);
+    let targetUser = AV.Object.createWithoutData('_User', AV.User.current().id);
     wxcomment.set('targetUser', targetUser);
 
     wxcomment.save()
@@ -161,11 +178,10 @@ function writeComment(username, content, userId, time) {
  * @param pId 父评论 id
  * @param username
  * @param content
- * @param userId
  * @param time
  * @returns {Promise<any>}
  */
-function writeSubComment(pId, username, content, userId, time) {
+function writeSubComment(pId, username, content, time) {
   return new Promise((resolve, reject) => {
     let WxSubComment = AV.Object.extend('WxSubComment');
     let wxsubcomment = new WxSubComment();
@@ -175,16 +191,73 @@ function writeSubComment(pId, username, content, userId, time) {
     wxsubcomment.set('content', content);
     wxsubcomment.set('time', time);
     wxsubcomment.set('at', '');
-    let targetUser = AV.Object.createWithoutData('_User', userId);
+    let targetUser = AV.Object.createWithoutData('_User', AV.User.current().id);
     wxsubcomment.set('targetUser', targetUser);
-
     wxsubcomment.save()
-      .then(resolve)
+      .then(wxsubcomment => {
+        //将子评论加入到父评论索引数组中
+        let op_str = "update WxComment set subCommentList=op('AddUnique', {'objects':[pointer('WxSubComment','" + wxsubcomment.id + "')]}) where objectId='" + pId + "'"
+        AV.Query.doCloudQuery(op_str)
+          .then(res => {
+            resolve(wxsubcomment);
+          })
+          .catch(reject);
+      })
       .catch(reject)
   })
 }
 
+/**
+ * 删除一级评论
+ * @param commentId
+ * @param zanId
+ * @returns {Promise<any>}
+ */
+function deleteComment(commentId, zanId) {
+  return new Promise((resolve, reject) => {
+    let wxcomment = new AV.Object.createWithoutData('WxComment', commentId);
 
+    // 删除评论对应的点赞对象
+    let zantodo = new AV.Object.createWithoutData('Zan', zanId);
+
+    AV.Object.destroyAll([wxcomment, zantodo])
+      .then(resolve)
+      .catch(reject);
+  });
+}
+
+/**
+ * 删除二级评论
+ * @param commentId
+ * @param zanId
+ * @param pId
+ * @returns {Promise<any>}
+ */
+function deleteSubComment(commentId, zanId, pId) {
+  return new Promise((resolve, reject) => {
+
+    let wxsubcomment = new AV.Object.createWithoutData('WxSubComment', commentId);
+
+    // 删除评论对应的点赞对象
+    let subzan = new AV.Object.createWithoutData('SubZan', zanId);
+
+    AV.Object.destroyAll([wxsubcomment, subzan])
+      .then(res => {
+        let op_str = "update WxComment set subCommentList=op('Remove', {'objects':[pointer('WxSubComment','"
+          + commentId + "')]}) where objectId='" + pId + "'";
+        AV.Query.doCloudQuery(op_str)
+          .then (resolve)
+          .catch(reject);
+      })
+      .catch(reject);
+  });
+}
+
+/**
+ * 创建赞
+ * @param wxcomment
+ * @returns {Promise<any>}
+ */
 function writeZan(wxcomment) {
   return new Promise((resolve, reject) => {
     let Zan = AV.Object.extend('Zan');
@@ -271,5 +344,7 @@ module.exports = {
   writeZan,
   writeSubZan,
   updateZan,
-  queryZan
+  queryZan,
+  deleteComment,
+  deleteSubComments: deleteSubComment
 };

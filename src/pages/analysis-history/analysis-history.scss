@@ -1,6 +1,12 @@
 @import "../../app";
 @import "../../common";
 
+.record-list {
+  @include flex-center;
+  justify-content: flex-start;
+  background-color: $themeBackgroundColor;
+}
+
 .tag {
   display: inline-block; //因为tag自动适应父元素的宽度
   color: $themeColor;

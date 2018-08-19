@@ -25,3 +25,7 @@ $tabBarHeight: 100rpx;
   left: 0;
   bottom: 0;
 }
+
+.hidden { //小程序里没有wx;show这样的控制指令，自己写个hidden代替
+  display: none !important;
+}

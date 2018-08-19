@@ -20,7 +20,7 @@ App({
       console.log('获取设备信息失败！')
     }
     // 登录获取登录态
-    this.setAuthKey();
+    this.getAuthKey();
 
     Promise.prototype.finally = function (callback) {
       let P = this.constructor;
@@ -33,7 +33,7 @@ App({
     };
   },
 
-  setAuthKey(callback) {
+  getAuthKey(callback) {
     service.getLoginState()
       .then(res => {
         this.globalData.token = res.data.token;

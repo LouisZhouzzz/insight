@@ -8,6 +8,10 @@ let chart = null;
 
 Component({
   properties: {
+    show: {
+      type: Boolean,
+      value: true
+    },
     canvasId: {
       type: String,
       value: 'ec-canvas'
@@ -54,7 +58,7 @@ Component({
         return canvas;
       });
 
-      var query = wx.createSelectorQuery().in(this);
+      let query = wx.createSelectorQuery().in(this);
       query.select('.ec-canvas').boundingClientRect(res => {
         if (typeof callback === 'function') {
           this.chart = callback(canvas, res.width, res.height);

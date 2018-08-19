@@ -1,0 +1,20 @@
+<form bindsubmit="onFormSubmit" report-submit="true">
+    <view class="app-list {{show ? '' : 'hidden'}}">
+        <navigator class="app"
+                   wx:for='{{apps}}'
+                   wx:key='monitor-app-{{index}}'
+                   url="../monitor-appinfo/monitor-appinfo?id={{item.id}}">
+            <label >
+                <div class="title">
+                    {{item.title}}
+                    <view></view>
+                    ({{item.app}})
+                </div>
+                <!--<div class="subtitle"></div>-->
+                <div class="mask"></div>
+                <image src="{{item.url}}"></image>
+                <button form-type="submit"></button>
+            </label>
+        </navigator>
+    </view>
+</form>

@@ -1,0 +1,107 @@
+@import "../../common";
+
+$avatarSize: 120rpx;
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.header {
+  position: relative;
+  background-color: rgba(44, 117, 179, 1);
+  color: $themeColor;
+  height: 40vh;
+  @include flex-center;
+  image {
+    margin-bottom: 20rpx;
+    width: $avatarSize;
+    height: $avatarSize;
+    border-radius: 100%;
+  }
+  .authorized-btn {
+    color: $themeColor;
+    border: 1px solid $themeColor;
+    display: inline-block;
+    padding: 0 1em;
+    font-size: $smallFontSize;
+  }
+}
+
+.list {
+  width: 100%;
+}
+
+.list-item {
+  border-radius: 0;
+  height: 100rpx;
+  padding-right: 0;
+  padding-left: 1em;
+  background-color: white !important;
+  text-align: left;
+  font-size: $defaultFontSize;
+
+  &:nth-child(n + 2) { // 从第二项开始
+    box-shadow: 0 0 30px 0 #e0e0e0;
+  }
+  max-height: 100rpx;
+  transition: 500ms linear 0ms;
+  overflow: hidden;
+  image {
+    float: right;
+    height: 50rpx;
+    width: 50rpx;
+    margin: 25rpx 10rpx 0;
+  }
+  .title  {
+    height: 100rpx;
+    line-height: 100rpx;
+  }
+  &.list-item-hover {
+    background-color: #ccc;
+  }
+}
+
+/*******************************标签页*************************************/
+swiper {
+  height: 55vh;
+}
+
+.page {
+  height: 100%;
+  scroll-view {
+    height: 100%;
+  }
+  button {
+    border: none;
+  }
+}
+
+.placeholder {
+  @include flex-center;
+  height: 100%;
+  image {
+    width: 150rpx;
+    height: 150rpx;
+  }
+  text {
+    font-size: $smallFontSize;
+    color: #CDCDCD;
+  }
+}
+
+/***********************************弹出框*************************************/
+confirm-modal {
+  @include full-page
+}
+
+
+/*******************************************label-page-nav************************************/
+.nav {
+  background-color: lighten($themeBackgroundColor, 10%);
+  height: 5vh;
+  line-height: 5vh;
+  font-size: $smallFontSize;
+}

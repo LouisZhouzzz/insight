@@ -1,74 +1,55 @@
 <form report-submit="true" bindsubmit="onFormSubmit" style="width: 100%">
     <custom-nav-bar>{{appOutline.app}} {{appOutline.title}}</custom-nav-bar>
-    <!--头部信息概览模块 start-->
-    <view class='header'>
-        <!--概览图表 start-->
-        <radio-group class='canvas-nav' bindchange='canvasChange'>
-            <label wx:for='{{canvasNavs}}'
-                   wx:key="label-nav-{{index}}"
-                   class="item {{item.checked ? 'checked' : ''}}">
-                <view class="type-radio">
-                    {{item.name}}
-                </view>
+    <status-page status="{{status}}" bindrenewevent="onLoad">
+        <!--头部信息概览模块 start-->
+        <view class='header'>
+            <!--概览图表 start-->
+            <radio-group class='canvas-nav' bindchange='canvasChange'>
+                <label wx:for='{{canvasNavs}}'
+                       wx:key="label-nav-{{index}}"
+                       class="item {{item.checked ? 'checked' : ''}}">
+                    <view class="type-radio">
+                        {{item.name}}
+                    </view>
+                    <radio value='{{index}}' checked="{{item.checked}}" style='display: none'></radio>
+                    <button form-type="submit"></button>
+                </label>
+            </radio-group>
+
+            <ec-canvas class="{{canvasIndex === 0 ? '' : 'hidden'}}" id="preview-chart-1" canvas-id="preview-chart-1"
+                       ec="{{ ec }}"></ec-canvas>
+            <ec-canvas class="{{canvasIndex === 1 ? '' : 'hidden'}}" id="preview-chart-2" canvas-id="preview-chart-2"
+                       ec="{{ ec }}"></ec-canvas>
+            <!--概览图表 end-->
+        </view>
+        <!--头部信息概览模块 end-->
+
+        <!--指标类型选项 start-->
+        <radio-group class='types-group' bindchange='radioChange'>
+            <label wx:for='{{types}}' wx:key='type-{{index}}' class="type-item {{item.checked ? 'checked' : ''}}">
+                <view class="type-radio">{{item.name}}</view>
                 <radio value='{{index}}' checked="{{item.checked}}" style='display: none'></radio>
-                <button form-type="submit"></button>
             </label>
         </radio-group>
+        <!--指标类型选项 end-->
 
-        <ec-canvas class="{{canvasIndex === 0 ? '' : 'hidden'}}" id="preview-chart-1" canvas-id="preview-chart-1"
-                   ec="{{ ec }}"></ec-canvas>
-        <ec-canvas class="{{canvasIndex === 1 ? '' : 'hidden'}}" id="preview-chart-2" canvas-id="preview-chart-2"
-                   ec="{{ ec }}"></ec-canvas>
-        <!--概览图表 end-->
-    </view>
-    <!--头部信息概览模块 end-->
-
-    <!--指标类型选项 start-->
-    <radio-group class='types-group' bindchange='radioChange'>
-        <label wx:for='{{types}}' wx:key='type-{{index}}' class="type-item {{item.checked ? 'checked' : ''}}">
-            <view class="type-radio">{{item.name}}</view>
-            <radio value='{{index}}' checked="{{item.checked}}" style='display: none'></radio>
-        </label>
-    </radio-group>
-    <!--指标类型选项 end-->
-
-    <!--二级列表 start-->
-    <view class="page {{swiperIndex === 2 ? '' : 'hidden'}}">
-        <template is="list" data="{{...service}}"></template>
-    </view>
-    <view class="page {{swiperIndex === 1 ? '' : 'hidden'}}">
-        <template is="list" data="{{...online}}"></template>
-    </view>
-    <view class="page {{swiperIndex === 0 ? '' : 'hidden'}}">
-        <template is="list" data="{{...batch}}"></template>
-    </view>
-    <view class="page {{swiperIndex === 3 ? '' : 'hidden'}}">
-        <template is="list" data="{{...performance}}"></template>
-    </view>
-    <view class="page {{swiperIndex === 4 ? '' : 'hidden'}}">
-        <template is="list" data="{{...property}}"></template>
-    </view>
-
-    <!--<label-page labels="{{labels}}">-->
-    <!--<view slot="page-1">-->
-    <!--<template is="list" data="{{...service}}"></template>-->
-    <!--</view>-->
-    <!--<view slot="page-2">-->
-    <!--<template is="list" data="{{...online}}"></template>-->
-    <!--</view>-->
-    <!--<view slot="page-3">-->
-    <!--<template is="list" data="{{...batch}}"></template>-->
-    <!--</view>-->
-    <!--<view slot="page-4">-->
-    <!--<template is="list" data="{{...performance}}"></template>-->
-    <!--</view>-->
-    <!--<view slot="page-5">-->
-    <!--<template is="list" data="{{...property}}"></template>-->
-    <!--</view>-->
-    <!--</label-page>-->
-    <!--二级列表 end-->
-
-
+        <!--二级列表 start-->
+        <view class="page {{swiperIndex === 2 ? '' : 'hidden'}}">
+            <template is="list" data="{{...service}}"></template>
+        </view>
+        <view class="page {{swiperIndex === 1 ? '' : 'hidden'}}">
+            <template is="list" data="{{...online}}"></template>
+        </view>
+        <view class="page {{swiperIndex === 0 ? '' : 'hidden'}}">
+            <template is="list" data="{{...batch}}"></template>
+        </view>
+        <view class="page {{swiperIndex === 3 ? '' : 'hidden'}}">
+            <template is="list" data="{{...performance}}"></template>
+        </view>
+        <view class="page {{swiperIndex === 4 ? '' : 'hidden'}}">
+            <template is="list" data="{{...property}}"></template>
+        </view>
+    </status-page>
 </form>
 
 <!--二级列表模板-->

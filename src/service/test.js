@@ -143,9 +143,28 @@ function wxUserInfo () {
   })
 }
 
-/*
-  调用接口wx.login() 获取临时登录凭证（code）
+/**
+ * 在用户授权过的情况下通过设置直接获取用户个人信息
+ * @returns {Promise<any>}
  */
+function getUserInfoBySetting () {
+  return new Promise((resolve, reject) => {
+    wxSetting()
+      .then(res => {
+        // 若未授权
+        if (!res.authSetting['scope.userInfo']) resolve({userInfo: false});
+        // 若已授权
+        wxUserInfo()
+          .then(resolve)
+          .catch(reject);
+      })
+      .catch(reject)
+  })
+}
+
+/*
+调用接口wx.login() 获取临时登录凭证（code）
+*/
 function wxLogin () {
   return new Promise ((resolve, reject) => {
     wx.login({
@@ -184,5 +203,6 @@ module.exports = {
   getUserDiagrams,
   patchUserFormId,
   toggleUserDiagram,
-  getAnnouncements
+  getAnnouncements,
+  getUserInfoBySetting
 };

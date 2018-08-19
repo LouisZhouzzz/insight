@@ -1,8 +1,10 @@
 <custom-nav-bar>{{title}}</custom-nav-bar>
 <status-page status="{{status}}" bindrenewevent="getDiagram">
-    <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
-    <view wx:if="{{graExpText}}" class="txt-container">
-        <text>{{graExpText}}</text>
+    <view class="container">
+        <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
+        <view wx:if="{{graExpText}}" class="txt-container">
+            <text>{{graExpText}}</text>
+        </view>
+        <ec-canvas id="sta-bar" canvas-id="sta-bar" ec="{{ ec }}"></ec-canvas>
     </view>
-    <ec-canvas id="sta-bar" canvas-id="sta-bar" ec="{{ ec }}"></ec-canvas>
 </status-page>

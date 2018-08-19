@@ -13,6 +13,7 @@ const computed = require('../../utils/vuelike').computed;
 
 Page({
   data: {
+    status: 'loading',
     labels: ['业务', '联机', '批量', '性能', '资源'],
     canvasLabels: ['一年异常发生', '指标类型分布'],
     canvasValues: ['line', 'pie'],
@@ -20,7 +21,6 @@ Page({
     ec: {
       lazyLoad: true
     },
-    ifTypeSelectedShow: false, // 是否显示固定类型选择栏
     swiperIndex: 0,
     types: [
       {
@@ -118,12 +118,6 @@ Page({
         }, 1000)
       });
   },
-  outerscroll(e) {
-    if (this.data.ifTypeSelectedShow === (e.detail.scrollTop > 400)) return;
-    this.setData({
-      ifTypeSelectedShow: e.detail.scrollTop > 400
-    });
-  },
   canvasChange(e) {
     let index = parseInt(e.detail.value);
     this.setData({
@@ -154,45 +148,78 @@ Page({
       swiperIndex: parseInt(e.detail.value)
     });
   },
-  onLoad (option) {
+  onLoad(option) {
     this.setData({
-      appId: option.id
+      appId: option.id,
+      status: 'loading'
     });
-    service.getApp(this.data.appId)
-      .then((res) => {
+
+    Promise.all([service.getApp(this.data.appId), service.getAppQuotas(this.data.appId, globalData.openid)])
+      .then(res => {
+        this.data.batch.data = res[1].data.piliang;
+        this.data.online.data = res[1].data.lianji;
+        this.data.service.data = res[1].data.yewu;
+        this.data.performance.data = res[1].data.xingneng;
+        this.data.property.data = res[1].data.ziyuan;
+
         this.setData({
-          appOutline: res.data.data,
-          charts: res.data.charts
+          appOutline: res[0].data.data,
+          charts: res[0].data.charts,
+          batch: this.data.batch,
+          online: this.data.online,
+          service: this.data.service,
+          performance: this.data.performance,
+          property: this.data.property,
+          status: 'normal'
         });
-
-        wx.setNavigationBarTitle({title: this.data.appOutline.app + '-' + this.data.appOutline.title});
-
-        this.ecComponents.push(this.selectComponent('#preview-chart-1'));
-        this.ecComponents.push(this.selectComponent('#preview-chart-2'));
-
-        this.ecComponents[0].init((canvas, width, height) => {
-
-          const chart = echarts.init(canvas, null, {
-            width: width,
-            height: height
-          });
-
-          chart.setOption(diagram.line.getOption(res.data.charts.line));
-          return chart;
-        });
+        globalData.ifCollectionsChange.monitor = false;
+        this.initCharts(res[0].data.charts.line);
       })
-      .catch((res) => {
-        console.log('获取应用详情失败！' + res);
+      .catch(err => {
+        this.setData({
+          status: 'error'
+        });
       });
 
-    this.getAppQuotas();
+    // service.getApp(this.data.appId)
+    //   .then((res) => {
+    //     this.setData({
+    //       appOutline: res.data.data,
+    //       charts: res.data.charts,
+    //       status: 'normal'
+    //     });
+    //   })
+    //   .catch((res) => {
+    //     console.log('获取应用详情失败！' + res);
+    //     this.setData({
+    //       status: 'error'
+    //     });
+    //   });
+    //
+
   },
 
-  onShow () {
+  onShow() {
     if (globalData.ifCollectionsChange.monitor) this.getAppQuotas();
   },
 
-  getAppQuotas () {
+  initCharts(data) {
+    this.ecComponents.push(this.selectComponent('#preview-chart-1'));
+    this.ecComponents.push(this.selectComponent('#preview-chart-2'));
+
+    this.ecComponents[0].init((canvas, width, height) => {
+
+      const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height
+      });
+
+      chart.setOption(diagram.line.getOption(data));
+      return chart;
+    });
+  },
+
+  getAppQuotas() {
     service.getAppQuotas(this.data.appId, globalData.openid)
       .then(
         (res) => {
@@ -217,7 +244,7 @@ Page({
       });
   },
 
-  onReady () {
+  onReady() {
     this.ecComponents = [];
     computed(this, {
       canvasNavs() {

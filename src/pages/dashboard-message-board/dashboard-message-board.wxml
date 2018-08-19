@@ -1,8 +1,10 @@
 <custom-nav-bar>留言板</custom-nav-bar>
 
-<view class="WxComment">
+<status-page status="{{status}}" bindrenewevent="loadComments">
     <WxComment
+            id="wx-comment"
             submitBtnText="发送"
             articleID="message_board"
-            contentLen='1' theme="light"></WxComment>
-</view>
+            contentLen='3' theme="light"></WxComment>
+</status-page>
+

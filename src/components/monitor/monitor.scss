@@ -1,0 +1,68 @@
+@import "../../common";
+
+$appCardWidth: 375rpx;
+$appCardHeight: 375rpx;
+
+.app-list {
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  color: $themeColor;
+}
+
+.app {
+  background-color: $themeBackgroundColor;
+  width: $appCardHeight;
+  height: $appCardHeight;
+  position: relative;
+  text-align: center;
+  .mask,
+  image {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+  .title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -50rpx;
+    margin-left: -150rpx;
+    width: 300rpx;
+    height: 100rpx;
+    //font-size: $bigFontSize;
+    z-index: 1002;
+  }
+
+  .subtitle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -20rpx;
+    margin-left: -150rpx;
+    width: 300rpx;
+    height: 100rpx;
+    z-index: 1002;
+  }
+
+
+  .mask {
+    background-color: $themeBackgroundColor;
+    opacity: 0.4;
+    transition-duration: 200ms;
+    z-index: 1001;
+  }
+  image {
+    z-index: 1000;
+  }
+}
+
+.app-hover {
+  .mask {
+    opacity: 1;
+  }
+}

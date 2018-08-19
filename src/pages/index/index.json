@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "analysis": "../../components/analysis/analysis",
+    "monitor": "../../components/monitor/monitor",
+    "dashboard": "../../components/dashboard/dashboard"
+  }
+}

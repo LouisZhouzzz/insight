@@ -102,43 +102,6 @@ canvas {
   padding: 10rpx 0;
 }
 
-
-/* 图表列表  */
-.list-item {
-  border-bottom: 1px solid lightgrey;
-  font-size: 14px;
-  height: $listItemHeight;
-  text {
-    line-height: $listItemHeight;
-    height: $listItemHeight;
-  }
-
-  .icon,
-  .collect,
-  .enter {
-    height: $listIconSize;
-    width: $listIconSize;
-    padding: ($listItemHeight - $listIconSize) / 2;
-  }
-
-  .icon {
-    float: left;
-  }
-
-  .collect {
-    float: right;
-    margin-right: 80rpx;
-  }
-
-  .enter {
-    float: right;
-    image {
-      height: $listIconSize;
-      width: $listIconSize;
-    }
-  }
-}
-
 /* 列表一级子项 */
 .quota-group {
   display: unset;
@@ -149,7 +112,7 @@ canvas {
 }
 
 .quota-container {
-  border-bottom: 1px solid darken($pageBackgroundColor, 5%);
+  //border-bottom: 1px solid darken($pageBackgroundColor, 5%);
   //box-shadow: 0 0 30px 0 darken($pageBackgroundColor, 10%);
   max-height: $quotaHeight;
   transition: 300ms linear 0ms;

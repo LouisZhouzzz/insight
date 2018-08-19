@@ -1,3 +1,4 @@
+@import "../../common";
 $footerHeight: 100rpx;
 
 /*聊天盒子*/
@@ -37,12 +38,6 @@ $footerHeight: 100rpx;
 }
  .sys{
   flex-direction: row;   //左边
-}
-
-#to-0{
- //margin-top:10px ;
-  padding-top:10px ;
-
 }
 
 .feedbackimg image{
@@ -92,12 +87,44 @@ $footerHeight: 100rpx;
 .link{
   height: 15rpx;
 }
+
+.input-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  padding: 20rpx;
+  line-height: 60rpx;
+  height: 60rpx;
+  input {
+    flex-grow: 1;
+    height: 100%;
+    border: none;
+    border-bottom: 1px solid grey;
+    box-sizing: border-box;
+  }
+  button {
+    line-height: unset;
+    font-size: $defaultFontSize;
+    color: $themeColor;
+    background-color: $themeBackgroundColor;
+  }
+  image {
+    height: 60rpx;
+    width: 60rpx;
+    padding-left: 20rpx;
+  }
+}
+
 .footer {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 100rpx;
+  height: 80rpx;
   padding: 1%;
   display: flex;
   flex-direction: row;
@@ -115,8 +142,6 @@ $footerHeight: 100rpx;
       width: 100%;
       height: 60rpx;
       padding: 10rpx 4rpx;
-      border: 1px solid #ccc;
-      /* border-radius: 10rpx;*/
       border-style:none none solid none;
     }
   }
@@ -127,9 +152,6 @@ $footerHeight: 100rpx;
     height: $footerHeight;
   }
 }
-
-
-
 
 
 .foodsend {

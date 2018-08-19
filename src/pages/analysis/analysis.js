@@ -425,10 +425,8 @@ Page({
         console.warn('formid发送失败');
       });
   },
-
   onHide() {
     // 生命周期函数--监听页面隐藏
     wx.hideNavigationBarLoading();
   }
-
 });

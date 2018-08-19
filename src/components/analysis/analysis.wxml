@@ -1,0 +1,67 @@
+<wxs module="textFr" src="../../filter/text-fr.wxs"></wxs>
+<form report-submit="true" bindsubmit="onFormSubmit">
+    <view class="{{show ? '' : 'hidden'}}">
+        <!--头部概览模块 start-->
+        <view class='header'>
+            <view class="custom-navigation">慧眼</view>
+            <!--仪表盘 start-->
+            <analysis-gauge wx:if="{{show && outline.point}}" point="{{outline.point}}"></analysis-gauge>
+            <div class="shot" wx:else >
+                <image src="../../img/svgs/spinner_negative.svg"></image>
+            </div>
+            <!--<image wx:if="{{shotPath}}" class="shot" src="{{shotPath}}"></image>-->
+            <!--<ec-canvas wx:else id="analysis-header-gauge" canvas-id="analysis-header-gauge" ec="{{ ec }}" ></ec-canvas>-->
+            <!--仪表盘 end-->
+
+            <navigator class='view-history' url="../analysis-history/analysis-history" hover-class="navigator-hover">
+                <label>
+                    查看历史异常 >>
+                    <button form-type="submit"></button>
+                </label>
+            </navigator>
+        </view>
+        <!--头部概览模块 end-->
+
+        <!--异常信息模块 start-->
+        <view class="body">
+            <view class="head">
+                <text>异常：共{{outline.exceptionNum}} 项</text>
+                <text>应用来源</text>
+            </view>
+
+            <block wx:if="{{exceptionList.length > 0}}">
+                <navigator wx:for="{{exceptionList}}"
+                           wx:key='app-{{index}}'
+                           class="list-item"
+                           hover-class="app-item-hover"
+                           url="../analysis-exceptioninfo/analysis-exceptioninfo?id={{item.id}}&title={{item.title}}"
+                           data-index="{{index}}">
+                    <label>
+                        <view class="dot"></view>
+                        <!--<text class='title'>{{textFr.omitLongStr(item.title, 8)}}</text>-->
+                        <text class='title'>{{item.title}}</text>
+                        <!--<text class="title">{{textFr.bar(item.title, 9)}}</text>-->
+                        <image class='enter' src='../../img/svgs/arrow_right.svg'></image>
+                        <view class='tag'>
+                            <text>{{item.app}}</text>
+                        </view>
+                        <button form-type="submit"></button>
+                    </label>
+                </navigator>
+            </block>
+            <block wx:elif="{{!ifLoading}}">
+                <view class="placeholder">
+                    <image class="empty" src="../../img/svgs/analysis_noexceptions.svg"></image>
+                    <text>No exceptions found.</text>
+                </view>
+            </block>
+            <block wx:else>
+                <!--<view class="placeholder">-->
+                <!--<image src="../../img/svgs/spinner.svg"></image>-->
+                <!--</view>-->
+            </block>
+        </view>
+        <!--异常信息模块 end-->
+
+    </view>
+</form>

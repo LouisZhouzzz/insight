@@ -1,0 +1,95 @@
+<form report-submit="true" bindsubmit="onFormSubmit">
+    <view class="{{show ? '' : 'hidden'}}">
+        <view class="header">
+            <image src="{{userInfo.avatarUrl}}"></image>
+            <view></view>
+            <text wx:if="{{authorized}}">{{userInfo.nickName}}</text>
+            <button
+                    wx:else
+                    class="authorized-btn"
+                    bindgetuserinfo='getUserInfo'
+                    open-type='getUserInfo'
+                    loading='{{ifLoading}}'
+                    plain>授 权
+            </button>
+        </view>
+
+        <label-page nav-class="nav" labels="{{labels}}">
+            <view class="page" slot="page-1">
+                <!--图表收藏模块 start-->
+                <scroll-view  wx:if="{{collections.length}}" scroll-y>
+                    <navigator wx:for="{{collections}}"
+                               wx:key='collection-{{index}}'
+                               class="list-item"
+                               hover-class="list-item-hover"
+                               url="../monitor-appinfo-diagram/monitor-appinfo-diagram?id={{item.id}}"
+                               data-index="{{index}}">
+                        <label>
+                            <text class='title'>{{item.name}}</text>
+                            <image class='enter' src='../../img/svgs/arrow_right.svg'></image>
+                            <image catchtap="delCollection"
+                                   src="../../img/svgs/delete.svg"
+                                   data-id="{{item.id}}"
+                                   data-index="{{index}}"></image>
+                            <button form-type="submit"></button>
+                        </label>
+                    </navigator>
+                </scroll-view>
+                <block wx:else>
+                    <view class="placeholder">
+                        <image src="../../img/svgs/dashboard_collections_empty.svg"></image>
+                        <text>收藏列表为空</text>
+                    </view>
+                </block>
+                <!--图表收藏模块 end-->
+            </view>
+            <view class="page" slot="page-2">
+                <navigator
+                        class="list-item"
+                        hover-class="list-item-hover"
+                        url="../dashboard-announcement/dashboard-announcement">
+                    <label>
+                        <text class="title">公告信息</text>
+
+                        <image class="enter" src="../../img/svgs/arrow_right.svg"></image>
+
+                        <button form-type="submit"></button>
+                    </label>
+                </navigator>
+                <button class="list-item"
+                        hover-class="list-item-hover"
+                        bindgetuserinfo='getUserInfo'
+                        open-type='getUserInfo'
+                        data-url="../dashboard-message-board/dashboard-message-board"
+                        plain>
+                    <label>
+                        <text class="title">留言板</text>
+
+                        <image class="enter" src="../../img/svgs/arrow_right.svg"></image>
+
+                        <button form-type="submit"></button>
+                    </label>
+                </button>
+                <button class="list-item"
+                        hover-class="list-item-hover"
+                        bindgetuserinfo='getUserInfo'
+                        open-type='getUserInfo'
+                        data-url="../dashboard-feedback/dashboard-feedback"
+                        plain>
+                    <label>
+                        <text class="title">意见反馈</text>
+
+                        <image class="enter" src="../../img/svgs/arrow_right.svg"></image>
+
+                        <button form-type="submit"></button>
+                    </label>
+                </button>
+
+            </view>
+        </label-page>
+    </view>
+</form>
+
+<confirm-modal wx:if="{{confirmModalShow}}" bindevent="onConfirmEvent">
+    是否取消该项收藏？
+</confirm-modal>

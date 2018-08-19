@@ -56,10 +56,6 @@ page {
   word-break: break-word; // 解决过长英文单词不不换行的问题
 }
 
-.hidden { //小程序里没有wx;show这样的控制指令，自己写个hidden代替
-  display: none;
-}
-
 .transparent {
   opacity: 0;
 }

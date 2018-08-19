@@ -1,7 +1,5 @@
-.post {
-    float: right;
-    position: fixed;
-    top: 50px;
-    right: 20rpx; 
+@import "../../common";
 
+status-page {
+  background-color: $pageBackgroundColor;
 }

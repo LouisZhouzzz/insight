@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/analysis/analysis",
     "pages/dashboard-feedback/dashboard-feedback",
     "pages/dashboard-message-board/dashboard-message-board",
@@ -35,8 +36,8 @@
         "text": "监控"
       },
       {
-        "selectedIconPath": "img/tabBar/dashboard_selected.png",
-        "iconPath": "img/tabBar/dashboard.png",
+        "selectedIconPath": "img/tabBar/nav_dashboard_selected.png",
+        "iconPath": "img/tabBar/nav_dashboard.png",
         "pagePath": "pages/dashboard/dashboard",
         "text": "我的"
       }

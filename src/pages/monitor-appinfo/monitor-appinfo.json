@@ -8,6 +8,7 @@
   "usingComponents": {
     "ec-canvas": "../../ec-canvas/ec-canvas",
     "label-page": "../../components/label-page/label-page",
-    "custom-nav-bar": "../../components/custom-nav-bar/custom-nav-bar"
+    "custom-nav-bar": "../../components/custom-nav-bar/custom-nav-bar",
+    "status-page": "../../components/status-page/status-page"
   }
 }

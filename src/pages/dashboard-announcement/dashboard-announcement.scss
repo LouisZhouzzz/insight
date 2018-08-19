@@ -1,14 +1,11 @@
 @import "../../app";
 @import "../../common";
 
-page {
-  background: $themeBackgroundColor;
-}
-
 .list {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: $themeBackgroundColor;
 }
 
 .tag {

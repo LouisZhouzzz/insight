@@ -1,18 +1,4 @@
-@mixin flex-center {
-  display: -webkit-flex;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-@mixin full-page {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-}
+@import "../../common";
 
 .container {
   position: absolute;
@@ -29,19 +15,14 @@
     @include full-page;
     @include flex-center;
     image {
-      width: 200rpx;
-      height: 200rpx;
+      width: 100rpx;
+      height: 100rpx;
       margin-top: -100rpx;
     }
   }
-  &.normal {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
   &.loading,
-  &.error,
-  &.normal {
+  &.error {
     background-color: #2C75B3;
+    color: $themeColor;
   }
 }
