@@ -7,6 +7,7 @@ let globalData = getApp().globalData;
 
 Component({
   properties: {
+    shotPath: null,
     max: {
       type: Number,
       value: 100
@@ -15,7 +16,6 @@ Component({
       type: Number,
       value: 0,
       observable: function (newVal) {
-        debugger;
         this.showChart(newVal);
       }
     }
@@ -50,17 +50,34 @@ Component({
 
         return chart;
       });
-      setTimeout(() => {
-        this.ecComponent.canvasToTempFilePath({
-          canvasId: 'analysis-header-gauge',
-          success: (res) => {
-            console.log(res.tempFilePath);
-            this.setData({
-              shotPath: res.tempFilePath
-            });
-          }
-        })
-      }, 2000)
+
+      this.ecComponent.canvasToTempFilePath({
+        canvasId: 'analysis-header-gauge',
+        success: (res) => {
+          console.log(res.tempFilePath);
+          this.setData({
+            shotPath: res.tempFilePath
+          });
+        },
+        fail: (err) => {
+          wx.showToast({
+            title: err,
+            duration: 2000
+          })
+        }
+      });
+
+      // setTimeout(() => {
+      //   this.ecComponent.canvasToTempFilePath({
+      //     canvasId: 'analysis-header-gauge',
+      //     success: (res) => {
+      //       console.log(res.tempFilePath);
+      //       this.setData({
+      //         shotPath: res.tempFilePath
+      //       });
+      //     }
+      //   })
+      // }, 2000)
     },
   }
 });

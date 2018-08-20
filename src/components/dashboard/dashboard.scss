@@ -67,6 +67,8 @@ $avatarSize: 120rpx;
 /*******************************标签页*************************************/
 swiper {
   height: 55vh;
+  padding-bottom: $tabBarHeight;
+  box-sizing: border-box;
 }
 
 .page {

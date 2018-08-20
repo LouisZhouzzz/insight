@@ -10,7 +10,6 @@
                     <view></view>
                     ({{item.app}})
                 </div>
-                <!--<div class="subtitle"></div>-->
                 <div class="mask"></div>
                 <image src="{{item.url}}"></image>
                 <button form-type="submit"></button>

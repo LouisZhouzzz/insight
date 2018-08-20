@@ -82,6 +82,7 @@ gulp.task('build', callback => {
 });
 
 gulp.task('watch', ['build'], () => {
+  gulp.watch('./src/ec-canvas/*.js', ['extras']);
   gulp.watch('src/**/*.js', ['js']);
   gulp.watch('src/**/*.wxml', ['wxml']);
   gulp.watch('src/**/*.scss', ['scss']);

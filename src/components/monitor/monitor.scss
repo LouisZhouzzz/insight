@@ -8,6 +8,8 @@ $appCardHeight: 375rpx;
   align-content: flex-start;
   flex-wrap: wrap;
   color: $themeColor;
+  padding-bottom: $tabBarHeight;
+  box-sizing: border-box;
 }
 
 .app {

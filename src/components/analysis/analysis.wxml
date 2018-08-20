@@ -6,7 +6,8 @@
             <view class="custom-navigation">慧眼</view>
             <!--仪表盘 start-->
             <analysis-gauge wx:if="{{show && outline.point}}" point="{{outline.point}}"></analysis-gauge>
-            <div class="shot" wx:else >
+
+            <div class="loading" wx:else>
                 <image src="../../img/svgs/spinner_negative.svg"></image>
             </div>
             <!--<image wx:if="{{shotPath}}" class="shot" src="{{shotPath}}"></image>-->

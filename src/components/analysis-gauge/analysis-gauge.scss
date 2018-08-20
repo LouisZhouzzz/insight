@@ -1,1 +1,9 @@
 @import "../../common";
+
+canvas,
+.shot {
+  width: 500rpx;
+  height: 500rpx;
+  display: block;
+  margin: 0 auto;
+}

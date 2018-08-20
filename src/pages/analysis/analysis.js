@@ -398,6 +398,7 @@ Page({
 
         return chart;
       });
+
     }).catch(res => {
       wx.stopPullDownRefresh();
       console.log('error: ' + res);

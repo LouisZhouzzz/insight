@@ -13,8 +13,8 @@ image {
   width: 200rpx;
   height: 200rpx;
 }
-
 .footer {
+  z-index: 1010;
   height: $tabBarHeight;
   position: fixed;
   bottom: 0;

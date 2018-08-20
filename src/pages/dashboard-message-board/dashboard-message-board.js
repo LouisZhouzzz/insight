@@ -1,5 +1,3 @@
-const Utils = require('../../utils/util');
-
 Page({
   data: {
     status: 'loading'

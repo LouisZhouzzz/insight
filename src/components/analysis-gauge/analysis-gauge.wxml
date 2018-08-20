@@ -1,1 +1,2 @@
-<ec-canvas id="analysis-header-gauge" canvas-id="analysis-header-gauge" ec="{{ ec }}" ></ec-canvas>
+<ec-canvas wx:if="{{!shotPath}}" id="analysis-header-gauge" canvas-id="analysis-header-gauge" ec="{{ ec }}" ></ec-canvas>
+<image class="shot" wx:else src="{{shotPath}}"></image>

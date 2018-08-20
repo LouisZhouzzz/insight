@@ -1,6 +1,6 @@
 <wxs module="textFr" src="../../filter/text-fr.wxs"></wxs>
 <form report-submit="true" bindsubmit="onFormSubmit">
-    <view>
+    <view class="main">
         <!--头部概览模块 start-->
         <view class='header'>
             <view class="custom-navigation">慧眼</view>
