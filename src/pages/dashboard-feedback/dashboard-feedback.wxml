@@ -45,7 +45,7 @@
 <view class="input-container">
     <input cursor-spacing="20" bindfocus="bindfocus" bindblur='bindblur' value="{{addinput}}" type="text" />
     <button wx:if="{{sendflag}}">发送</button>
-    <image wx:else src="../../img/feedback/hotapp_img.png"></image>
+    <image catchtap="footaddimg" wx:else src="../../img/feedback/hotapp_img.png"></image>
 </view>
 
 <!--<view class="footer">-->

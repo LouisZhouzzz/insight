@@ -117,6 +117,7 @@ Page({
 
 
   },
+
   bindtapimg () {
     //打开添加图片框
     this.setData({
