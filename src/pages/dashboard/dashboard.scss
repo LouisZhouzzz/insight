@@ -40,7 +40,7 @@ $avatarSize: 120rpx;
   height: 100rpx;
   padding-right: 0;
   padding-left: 1em;
-  background-color: white !important;
+  background-color: white;
   text-align: left;
   font-size: $defaultFontSize;
 
@@ -60,9 +60,10 @@ $avatarSize: 120rpx;
     height: 100rpx;
     line-height: 100rpx;
   }
-  &.list-item-hover {
-    background-color: #ccc;
-  }
+}
+
+.list-item-hover {
+  background-color: #ccc !important;
 }
 
 /*******************************标签页*************************************/

@@ -8,7 +8,8 @@ $exceptionNumHinderRadius: 30rpx;
 /*******************************************图表************************************/
 //
 
-.loading {
+.loading,
+.error {
   @include flex-center;
   margin: 0 auto;
   width: 500rpx;
@@ -17,10 +18,12 @@ $exceptionNumHinderRadius: 30rpx;
     width: 100rpx;
     height: 100rpx;
   }
+  color: $themeColor;
 }
 
-main {
+.main {
   padding-bottom: $tabBarHeight;
+  box-sizing: border-box;
 }
 
 /*******************************************头部概览信息************************************/

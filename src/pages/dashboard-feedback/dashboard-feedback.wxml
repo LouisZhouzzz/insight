@@ -1,9 +1,4 @@
-<!--pages/feedback/index.wxml-->
-
 <custom-nav-bar>意见反馈</custom-nav-bar>
-
-<import src="/template/addtell.wxml"></import>
-<template is="addtell" data="{{...addtell}}"></template>
 <!--反馈内容-->
 <ul class="scrollwechat" bindtap="closeimg">
     <scroll-view class="scrollview" scroll-y="true" scroll-into-view="to-{{feedback.length-1}}">
@@ -47,24 +42,3 @@
     <button wx:if="{{sendflag}}">发送</button>
     <image catchtap="footaddimg" wx:else src="../../img/feedback/hotapp_img.png"></image>
 </view>
-
-<!--<view class="footer">-->
-    <!--<view class="footinput">-->
-        <!--<view class="input">-->
-            <!--<input cursor-spacing="20" bindfocus="bindfocus" bindblur='bindblur' value="{{addinput}}" type="text" />-->
-        <!--</view>-->
-    <!--</view>-->
-    <!--<view wx:if="{{sendflag}}" class="foodsend">-->
-        <!--<view class="send">发送</view>-->
-    <!--</view>-->
-    <!--&lt;!&ndash; <view wx:else class="footadd" bindtap="bindtapimg">-->
-       <!--<view class="addbroder">-->
-           <!--<image src="../../img/feedback/hotapp_add.png"/>-->
-       <!--</view>-->
-     <!--</view>           把加号弹出图片选择框   去掉了&ndash;&gt;-->
-    <!--<view wx:else class="footadd" bindtap="footaddimg">-->
-        <!--<view class="addbroder">-->
-            <!--<image class="image" src="../../img/feedback/hotapp_img.png"/>-->
-        <!--</view>-->
-    <!--</view>-->
-<!--</view>-->

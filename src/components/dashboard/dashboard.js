@@ -1,6 +1,6 @@
 const service = require('../../service/test');
-let globalData = getApp().globalData;
-let showToast = require('../../utils/util').showToast;
+// let globalData = getApp().globalData;
+const App = getApp();
 
 Component({
   properties: {
@@ -28,31 +28,59 @@ Component({
   },
 
   attached() {
-    // 查看是否授权，若已授权直接获取授权信息
-    service.getUserInfoBySetting()
-      .then(res => {
-        this.setData({
-          ifLoading: false
-        });
-        if (!res.userInfo) return;
-        this.setData({
-          userInfo: res.userInfo,
-          authorized: true
-        });
-        globalData.userInfo = res.userInfo;
-      })
-      .catch(res => {
-        console.log('获取用户配置失败！' + res);
-      });
   },
 
   methods: {
-    onShow () {
-      this.getUserDiagrams();
+    onLoad() {
+      // 查看是否授权，若已授权直接获取授权信息
+      this.getUserInfoBySetting();
     },
-    onHide () {
+    onShow() {
+      if (App.globalData.openid) {
+        this.getUserDiagrams();
+      } else {
+        service.getLoginState()
+          .then(res => {
+            App.globalData.openid = res.data.openid;
+            this.getUserDiagrams();
+            this.getUserInfoBySetting();
+          })
+          .catch(res => {
+              wx.showToast({
+                title: '登录失败，无法获取收藏夹。',
+                icon: 'none'
+              });
+            }
+          )
+      }
 
     },
+    onHide() {
+
+    },
+
+    getUserInfoBySetting() {
+      service.getUserInfoBySetting()
+        .then(res => {
+          this.setData({
+            ifLoading: false
+          });
+          if (!res.userInfo) return;
+          this.setData({
+            userInfo: res.userInfo,
+            authorized: true
+          });
+          App.globalData.userInfo = res.userInfo;
+        })
+        .catch(res => {
+          wx.showToast({
+            title: '收藏夹信息加载失败！',
+            icon: 'none',
+            duration: 2000
+          });
+        });
+    },
+
     getUserInfo(e) {
       if (!e.detail.userInfo) return;
 
@@ -65,19 +93,24 @@ Component({
         userInfo: e.detail.userInfo,
         authorized: true,
       });
-      globalData.userInfo = e.detail.userInfo;
+      App.globalData.userInfo = e.detail.userInfo;
     },
+
     getUserDiagrams() {
-      service.getUserDiagrams(globalData.openid)
+      service.getUserDiagrams(App.globalData.openid)
         .then(
           (res) => {
             this.setData({
               collections: res.data.records
             });
-            globalData.dashboard = false
+            App.globalData.dashboard = false
           })
         .catch(res => {
-          console.log('收藏夹信息加载失败！' + res)
+          wx.showToast({
+            title: '收藏夹信息加载失败！',
+            icon: 'none',
+            duration: 2000
+          });
         })
     },
     //打开确认框
@@ -110,7 +143,7 @@ Component({
     },
 
     onFormSubmit(e) {
-      service.patchUserFormId(globalData.openid, e.detail.formId)
+      service.patchUserFormId(App.globalData.openid, e.detail.formId)
         .then(res => {
           console.log('formid发送成功！');
         })
@@ -123,40 +156,31 @@ Component({
     delCollection(e) {
       let diagramId = e.currentTarget.dataset.id;
       let index = e.currentTarget.dataset.index;
-      this.openConfirmModal().then(
-        (res) => {
-          service.toggleUserDiagram(globalData.openid, diagramId, false)
-            .then(res => {
-              let collections = this.data.collections;
-              collections.splice(index, 1);
-              this.setData({
-                collections: collections
-              });
-              globalData.ifCollectionsChange.monitor = true;
+      this.openConfirmModal()
+        .then((res) => {
+            service.toggleUserDiagram(App.globalData.openid, diagramId, false)
+              .then(res => {
+                let collections = this.data.collections;
+                collections.splice(index, 1);
+                this.setData({
+                  collections: collections
+                });
+                App.globalData.ifCollectionsChange.monitor = true;
 
-              showToast({
-                title: '取消收藏成功',
-                icon: 'success'
+                wx.showToast({
+                  title: '取消收藏成功',
+                });
               })
-            })
-            .catch(res => {
-              console.log('取消收藏失败！ ' + res);
-              showToast({
-                title: '取消收藏失败',
-                icon: 'success'
+              .catch(res => {
+                wx.showToast({
+                  title: '取消收藏失败',
+                  icon: 'none'
+                })
               })
-            })
-        }
-      ).catch(res => {
+          }
+        ).catch(res => {
         console.log('取消了呗~');
       });
     }
   }
-
-  //TODO
-  // onShow() {
-  //   if (globalData.ifCollectionsChange.dashboard) this.getUserDiagrams();
-  // },
-
-
 });

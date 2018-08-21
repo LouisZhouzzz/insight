@@ -14,27 +14,41 @@ Component({
       }
     }
   },
+  data: {
+    status: 'loading'
+  },
   attached(options) {
-    wx.setNavigationBarTitle({title: '慧眼'});
-    service.getApps()
-      .then(
-        (res) => {
-          this.setData({
-            apps: res.data.records
-          });
-        })
-      .catch(
-        (res) => {
-          console.log('加载应用列表失败！' + res);
-        }
-      );
   },
   methods: {
+    onLoad () {
+      this.getApps();
+    },
     onShow () {
 
     },
     onHide () {
 
+    },
+    getApps () {
+      this.setData({
+        status: 'loading'
+      });
+      service.getApps()
+        .then(
+          (res) => {
+            this.setData({
+              apps: res.data.records,
+              status: 'normal'
+            });
+          })
+        .catch(
+          (res) => {
+            this.setData({
+              status: 'error'
+            });
+            console.log('加载应用列表失败！' + res);
+          }
+        );
     },
     onFormSubmit(e) {
       service.patchUserFormId(globalData.openid, e.detail.formId)

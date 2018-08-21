@@ -1,5 +1,3 @@
-import * as echarts from "../../ec-canvas/echarts";
-
 const service = require('../../service/test');
 
 let globalData = getApp().globalData;
@@ -18,10 +16,10 @@ Component({
     }
   },
   data: {
+    status: 'loading',
     shotPath: null,
     sideLength: 200,
     outline: { //概览面板数据
-      appNum: '', //异常应用数
       exceptionNum: '', //异常总数
       point: false //系统总体评分
     },
@@ -33,36 +31,44 @@ Component({
   },
 
   attached () {
-    this.setData({
-      ifLoading: true,
-      sideLength: 0.4 * globalData.windowHeight
-    });
-
-    // 向服务器请求系统概览信息与未处理的异常信息
-    Promise.all([
-      service.getSystem(),
-      service.getUnhandledExceptions()
-    ]).then(res => {
-      wx.stopPullDownRefresh();
-      this.setData({
-        outline: res[0].data.data,
-        exceptionList: res[1].data.records,
-        ifLoading: false
-      });
-    }).catch(res => {
-      wx.stopPullDownRefresh();
-      console.log('error: ' + res);
-      this.setData({
-        ifLoading: false
-      });
-    });
   },
   methods: {
+    onLoad () {
+      this.loadData();
+    },
     onShow () {
       // this.showChart();
     },
     onHide () {
 
+    },
+    loadData () {
+      this.setData({
+        ifLoading: true,
+        sideLength: 0.4 * globalData.windowHeight,
+        status: 'loading'
+      });
+
+      // 向服务器请求系统概览信息与未处理的异常信息
+      Promise.all([
+        service.getSystem(),
+        service.getUnhandledExceptions()
+      ]).then(res => {
+        wx.stopPullDownRefresh();
+        this.setData({
+          outline: res[0].data.data,
+          exceptionList: res[1].data.records,
+          ifLoading: false,
+          status: 'normal'
+        });
+      }).catch(res => {
+        wx.stopPullDownRefresh();
+        console.log('error: ' + res);
+        this.setData({
+          ifLoading: false,
+          status: 'error'
+        });
+      });
     },
     onFormSubmit(e) {
       service.patchUserFormId(globalData.openid, e.detail.formId)

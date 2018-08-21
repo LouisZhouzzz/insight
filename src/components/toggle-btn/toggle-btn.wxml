@@ -1,0 +1,7 @@
+<view catchtap="onToggle"  wx:if="{{on}}" class="on">
+    <slot name="on"></slot>
+</view>
+
+<view catchtap="onToggle" wx:else class="off">
+    <slot name="off"></slot>
+</view>

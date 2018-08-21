@@ -105,17 +105,21 @@ $footerHeight: 100rpx;
     border: none;
     border-bottom: 1px solid grey;
     box-sizing: border-box;
+    margin-left: 20rpx;
   }
   button {
     line-height: unset;
     font-size: $defaultFontSize;
     color: $themeColor;
     background-color: $themeBackgroundColor;
+    width: 120rpx;
+    margin-left: 20rpx;
+    padding: 10rpx;
   }
   image {
+    margin: 0 40rpx;
     height: 60rpx;
     width: 60rpx;
-    padding-left: 20rpx;
   }
 }
 

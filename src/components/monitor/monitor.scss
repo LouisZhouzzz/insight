@@ -3,6 +3,10 @@
 $appCardWidth: 375rpx;
 $appCardHeight: 375rpx;
 
+status-page {
+  top: 0;
+}
+
 .app-list {
   display: flex;
   align-content: flex-start;

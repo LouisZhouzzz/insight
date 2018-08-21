@@ -13,7 +13,9 @@ const computed = require('../../utils/vuelike').computed;
 
 Page({
   data: {
+    // 状态管理
     status: 'loading',
+    ifCollecting: false,
     labels: ['业务', '联机', '批量', '性能', '资源'],
     canvasLabels: ['一年异常发生', '指标类型分布'],
     canvasValues: ['line', 'pie'],
@@ -94,6 +96,10 @@ Page({
   },
 
   collect(e) {
+    if (this.data.ifCollecting) return;
+    this.setData({
+      ifCollecting: true
+    });
     let outerIndex = e.currentTarget.dataset.outer;
     let innerIndex = e.currentTarget.dataset.index;
     let type = this.data.types[this.data.swiperIndex].value;
@@ -104,7 +110,8 @@ Page({
     service.toggleUserDiagram(globalData.openid, e.currentTarget.dataset.id, list.data[outerIndex].items[innerIndex].ifCollected)
       .then(res => {
         this.setData({
-          [type]: list
+          [type]: list,
+          ifCollecting: false
         });
         globalData.ifCollectionsChange.dashboard = true;
         showToast({
@@ -112,12 +119,16 @@ Page({
         }, 1000)
       })
       .catch(res => {
+        this.setData({
+          ifCollecting: false
+        });
         console.log('收藏状态变更失败！' + res);
         showToast({
           title: (ifCollected ? '' : '取消') + '收藏失败',
         }, 1000)
       });
   },
+
   canvasChange(e) {
     let index = parseInt(e.detail.value);
     this.setData({
@@ -148,6 +159,7 @@ Page({
       swiperIndex: parseInt(e.detail.value)
     });
   },
+
   onLoad(option) {
     this.setData({
       appId: option.id,

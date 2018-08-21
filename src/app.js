@@ -41,20 +41,18 @@ App({
         callback && callback();
       })
       .catch(res => {
-          console.warn('登录失败! ' + res);
-          showToast({
-            title: '登录失败！',
-            icon: 'none'
-          }, 1000);
+
+        wx.showToast({
+          title: '登录失败！',
+          icon: 'none'});
         }
       )
   },
 
   onError(err) {
-    showToast({
+    wx.showToast({
       title: err,
-      icon: 'none'
-    }, 1000);
+      icon: 'none'});
   },
 
   globalData: {

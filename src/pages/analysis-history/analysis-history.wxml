@@ -20,7 +20,7 @@
                 </view>
             </block>
             <view class="loading-hinder">
-                <text wx:if="{{ifLoading}}">Loading...</text>
+                <image class="anim" wx:if="{{status === 'loading-more'}}" src="../../img/svgs/spinner_negative.svg"></image>
                 <text wx:else class="{{ifMore ? 'hidden' : ''}}">No more items.</text>
             </view>
         </view>

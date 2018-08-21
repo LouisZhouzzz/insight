@@ -1,9 +1,6 @@
 import * as echarts from "../../ec-canvas/echarts";
 
 const gaugeStyle = require('../../components/diagram/analysis-gauge');
-const service = require('../../service/test');
-
-let globalData = getApp().globalData;
 
 Component({
   properties: {
@@ -14,10 +11,7 @@ Component({
     },
     point: {
       type: Number,
-      value: 0,
-      observable: function (newVal) {
-        this.showChart(newVal);
-      }
+      value: 0
     }
   },
   data: {
@@ -66,18 +60,6 @@ Component({
           })
         }
       });
-
-      // setTimeout(() => {
-      //   this.ecComponent.canvasToTempFilePath({
-      //     canvasId: 'analysis-header-gauge',
-      //     success: (res) => {
-      //       console.log(res.tempFilePath);
-      //       this.setData({
-      //         shotPath: res.tempFilePath
-      //       });
-      //     }
-      //   })
-      // }, 2000)
     },
   }
 });

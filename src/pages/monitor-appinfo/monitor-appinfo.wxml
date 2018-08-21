@@ -78,6 +78,7 @@
                            wx:key='quota-item-{{index}}'
                            url="../monitor-appinfo-diagram/monitor-appinfo-diagram?id={{item.id}}">
                     <text>- {{item.name}}</text>
+
                     <image src='../../img/svgs/star_fill.svg'
                            class="collect {{item.ifCollected ? '' : 'hidden'}}"
                            catchtap='collect'
@@ -90,7 +91,6 @@
                            data-id="{{item.id}}"
                            data-index="{{index}}"
                            data-outer="{{idx}}"></image>
-
                     <image class="enter " src='../../img/svgs/arrow_right.svg'></image>
                 </navigator>
                 <button form-type="submit"></button>

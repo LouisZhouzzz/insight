@@ -4,8 +4,7 @@
             <image src="{{userInfo.avatarUrl}}"></image>
             <view></view>
             <text wx:if="{{authorized}}">{{userInfo.nickName}}</text>
-            <button
-                    wx:else
+            <button wx:else
                     class="authorized-btn"
                     bindgetuserinfo='getUserInfo'
                     open-type='getUserInfo'
@@ -61,6 +60,7 @@
                         bindgetuserinfo='getUserInfo'
                         open-type='getUserInfo'
                         data-url="../dashboard-message-board/dashboard-message-board"
+                        hover-stay-time="1000"
                         plain>
                     <label>
                         <text class="title">留言板</text>
@@ -74,6 +74,7 @@
                         hover-class="list-item-hover"
                         bindgetuserinfo='getUserInfo'
                         open-type='getUserInfo'
+                        hover-stay-time="1000"
                         data-url="../dashboard-feedback/dashboard-feedback"
                         plain>
                     <label>

@@ -3,6 +3,7 @@
   "usingComponents": {
     "ec-canvas": "../../ec-canvas/ec-canvas",
     "custom-nav-bar": "../custom-nav-bar/custom-nav-bar",
-    "analysis-gauge": "../analysis-gauge/analysis-gauge"
+    "analysis-gauge": "../analysis-gauge/analysis-gauge",
+    "status-page": "../status-page/status-page"
   }
 }

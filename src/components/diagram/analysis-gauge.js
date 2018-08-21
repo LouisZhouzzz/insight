@@ -2,7 +2,7 @@ module.exports = {
     getOption: function (score, max) {
         if (score < 0) throw Error('分数不能为负数！');
         if (score > max) throw Error('分数不能超过最大值！');
-        let data=[93];
+        let data=[score];
         return {
             backgroundColor: '#2c75b3',
             series: [
