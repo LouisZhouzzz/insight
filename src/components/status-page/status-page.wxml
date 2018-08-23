@@ -11,9 +11,11 @@
     <text>网络异常</text>
 </view>
 
-<block wx:else>
-    <slot></slot>
-</block>
+<slot></slot>
+
+<!--<block wx:else>-->
+   <!---->
+<!--</block>-->
 
 
 <!--<view class="page loading-more"  wx:if="{{status==='loading-more'}}">-->

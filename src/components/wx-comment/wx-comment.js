@@ -43,11 +43,13 @@ Component({
     leancloud_comment_zan_data: [],
     is_admin: false,
     comment_nickname_len: 12,
-    subcomment_nickname_len: 10
+    subcomment_nickname_len: 10,
+    ifSubmitting: false
   },
   methods: {
     // 提交事件
     bindFormSubmit(e) {
+      if (this.data.ifSubmitting) return;
       // 判断内容是否满足要求
       if (e.detail.value.comment_text.length < this.data.contentLen) {
         wx.showToast({
@@ -134,6 +136,10 @@ Component({
             return;
           }
 
+          wx.showLoading({
+            title: '删除中...',
+            mask: true
+          });
           Common.deleteComment(e.currentTarget.dataset.comment_id, e.currentTarget.dataset.zan_id)
             .then((res) => {
               // 同步本地显示
@@ -157,8 +163,11 @@ Component({
                 icon: 'success',
                 duration: 2000
               });
+              wx.hideLoading();
             })
-            .catch(console.error);
+            .catch(err => {
+              wx.hideLoading()
+            });
         }
       })
     },
@@ -267,6 +276,9 @@ Component({
     },
 
     _writeSubCommentInLeanCloud() {
+      this.setData({
+        ifSubmitting: true
+      });
       let current_time = Common.getTime();
       Common.writeSubComment(this.data.sub_comment_p_comment_id, this.data.login_user_info.username, this.data.comment_data, current_time)
         .then(wxsubcomment => {
@@ -294,7 +306,8 @@ Component({
               this.setData({
                 leancloud_comment_data: this.data.leancloud_comment_data,
                 comment_data: '',
-                comment_textarea_value: ''
+                comment_textarea_value: '',
+                ifSubmitting: false
               });
 
               this.data.all_comment_num = this.data.all_comment_num + 1;
@@ -305,18 +318,27 @@ Component({
             })
             .catch(error => {
               // 异常处理
+              this.setData({
+                ifSubmitting: false
+              });
               console.log('赞初始化失败！');
               console.log(error)
             })
         })
         .catch(error => {
           // 异常处理
+          this.setData({
+            ifSubmitting: false
+          });
           console.log('子留言初始化失败');
           console.log(error)
         });
     },
     // 写 comment 到云端
     _writeCommentInLeanCloud() {
+      this.setData({
+        ifSubmitting: true
+      });
       const currentTime = Common.getTime();
 
       Common.writeComment(this.data.login_user_info.username, this.data.comment_data, currentTime)
@@ -342,7 +364,8 @@ Component({
                 leancloud_comment_data: this.data.leancloud_comment_data,
                 comment_num: this.data.comment_num + 1,
                 comment_data: '',
-                comment_textarea_value: ''
+                comment_textarea_value: '',
+                ifSubmitting: false
               });
               // 更新留言计数
               this.data.all_comment_num = this.data.all_comment_num + 1;
@@ -352,6 +375,9 @@ Component({
               })
             })
             .catch(error => {
+              this.setData({
+                ifSubmitting: false
+              });
               wx.showToast({
                 title: '留言失败: ' + error,
                 icon: 'none',
@@ -360,6 +386,9 @@ Component({
             });
         })
         .catch(error => {
+          this.setData({
+            ifSubmitting: false
+          });
           // 异常处理
           wx.showToast({
             title: '留言失败！' + error,

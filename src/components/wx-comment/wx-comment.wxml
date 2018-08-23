@@ -97,7 +97,7 @@
                value="{{comment_textarea_value}}"
                name="comment_text" adjust-position="{{false}}"
                type="text" maxlength='{{textMaxLength}}' focus='{{textarea_focus}}'/>
-        <button form-type="submit">发送</button>
+        <button form-type="submit" loading="{{ifSubmitting}}">发送</button>
     </view>
 
 </form>

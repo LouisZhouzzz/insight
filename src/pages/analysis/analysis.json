@@ -1,8 +1,0 @@
-{
-  "enablePullDownRefresh": true,
-  "usingComponents": {
-    "label-page": "../../components/label-page/label-page",
-    "ec-canvas": "../../ec-canvas/ec-canvas",
-    "custom-nav-bar": "../../components/custom-nav-bar/custom-nav-bar"
-  }
-}

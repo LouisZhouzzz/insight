@@ -46,16 +46,17 @@
         float: left;
         width: 25%;
         box-sizing: border-box;
-        border-right: 1px solid $darkenWhite;
+        //border-right: 1px solid $darkenWhite;
       }
       .value {
-        text-indent: 0;
-        padding-left: 0;
+        text-indent: 0rpx;
+        padding-left: 0rpx;
         float: right;
         width: 70%;
         max-height: 10rem;
         text-align: left;
-        display: inline-block;
+        //display: inline-block;
+        display: flex;
       }
     }
   }

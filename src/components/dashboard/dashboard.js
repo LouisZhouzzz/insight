@@ -53,7 +53,6 @@ Component({
             }
           )
       }
-
     },
     onHide() {
 
@@ -156,8 +155,13 @@ Component({
     delCollection(e) {
       let diagramId = e.currentTarget.dataset.id;
       let index = e.currentTarget.dataset.index;
+
       this.openConfirmModal()
         .then((res) => {
+            wx.showLoading({
+              title: '删除中...',
+              mask: true
+            });
             service.toggleUserDiagram(App.globalData.openid, diagramId, false)
               .then(res => {
                 let collections = this.data.collections;
@@ -167,11 +171,14 @@ Component({
                 });
                 App.globalData.ifCollectionsChange.monitor = true;
 
+                wx.hideLoading();
                 wx.showToast({
                   title: '取消收藏成功',
                 });
+
               })
               .catch(res => {
+                wx.hideLoading();
                 wx.showToast({
                   title: '取消收藏失败',
                   icon: 'none'

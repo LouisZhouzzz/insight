@@ -42,7 +42,7 @@
                 </block>
                 <!--图表收藏模块 end-->
             </view>
-            <view class="page" slot="page-2">
+            <view class="page function" slot="page-2">
                 <navigator
                         class="list-item"
                         hover-class="list-item-hover"

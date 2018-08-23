@@ -5,7 +5,6 @@
   @include flex-center;
   justify-content: flex-start;
   background-color: $themeBackgroundColor;
-  padding: 0 30rpx;
 }
 
 .tag {
@@ -21,7 +20,8 @@
 }
 
 .modal {
-  width: 100%;
+  width: 700rpx;
+  margin: 0 auto;
   .item {
     border-radius: 20rpx;
     background-color: lighten($themeBackgroundColor, 20%);
@@ -31,11 +31,20 @@
     transition: 200ms linear;
     text {
       display: inline-block;
+      vertical-align: middle;
     }
     text:nth-child(1) {
-      width: 4em;
+      width: 20%;
     }
     text:nth-child(2) {
+      width: 70%;
+      padding-right: 5%;
+      box-sizing: border-box;
+      @include omit(70%);
+    }
+    text:nth-child(3) {
+      width: 10%;
+      text-align: right;
     }
     &.modal-item-hover {
       color: $themeColor;

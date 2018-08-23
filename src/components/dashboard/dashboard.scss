@@ -43,9 +43,6 @@ $avatarSize: 120rpx;
   text-align: left;
   font-size: $defaultFontSize;
 
-  &:nth-child(n + 2) { // 从第二项开始
-    box-shadow: 0 0 30px 0 #e0e0e0;
-  }
   max-height: 100rpx;
   transition: 500ms linear 0ms;
   overflow: hidden;
@@ -62,6 +59,10 @@ $avatarSize: 120rpx;
   &.list-item-hover {
     background-color: #ccc !important;
   }
+}
+
+.function > .list-item:nth-child(n + 2) {
+  box-shadow: 0 0 30px 0 #e0e0e0;
 }
 
 /*******************************标签页*************************************/

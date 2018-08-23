@@ -45,21 +45,22 @@ Component({
         return chart;
       });
 
-      this.ecComponent.canvasToTempFilePath({
-        canvasId: 'analysis-header-gauge',
-        success: (res) => {
-          console.log(res.tempFilePath);
-          this.setData({
-            shotPath: res.tempFilePath
-          });
-        },
-        fail: (err) => {
-          wx.showToast({
-            title: err,
-            duration: 2000
-          })
-        }
-      });
+      // 替换为静态快照
+      // this.ecComponent.canvasToTempFilePath({
+      //   canvasId: 'analysis-header-gauge',
+      //   success: (res) => {
+      //     console.log(res.tempFilePath);
+      //     this.setData({
+      //       shotPath: res.tempFilePath
+      //     });
+      //   },
+      //   fail: (err) => {
+      //     wx.showToast({
+      //       title: err,
+      //       duration: 2000
+      //     })
+      //   }
+      // });
     },
   }
 });

@@ -1,7 +1,0 @@
-{
-  "navigationBarBackgroundColor": "#2C75B3",
-  "usingComponents": {
-    "label-page": "../../components/label-page/label-page",
-    "confirm-modal": "../../components/confirm-modal/confirm-modal"
-  }
-}

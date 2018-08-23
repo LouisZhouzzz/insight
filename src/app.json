@@ -1,14 +1,11 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/analysis/analysis",
     "pages/dashboard-feedback/dashboard-feedback",
     "pages/dashboard-message-board/dashboard-message-board",
-    "pages/dashboard/dashboard",
     "pages/analysis-exceptioninfo/analysis-exceptioninfo",
     "pages/monitor-appinfo/monitor-appinfo",
     "pages/analysis-history/analysis-history",
-    "pages/monitor/monitor",
     "pages/dashboard-announcement/dashboard-announcement",
     "pages/monitor-appinfo-diagram/monitor-appinfo-diagram"
   ],
@@ -19,29 +16,6 @@
     "navigationBarBackgroundColor": "#2C75B3",
     "navigationBarTitleText": "慧眼",
     "navigationBarTextStyle": "white"
-  },
-  "tabBar": {
-    "selectedColor": "#2C75B3",
-    "list": [
-      {
-        "selectedIconPath": "img/tabBar/nav_analysis_selected.png",
-        "iconPath": "img/tabBar/nav_analysis.png",
-        "pagePath": "pages/analysis/analysis",
-        "text": "分析"
-      },
-      {
-        "selectedIconPath": "img/tabBar/nav_monitor_selected.png",
-        "iconPath": "img/tabBar/nav_monitor.png",
-        "pagePath": "pages/monitor/monitor",
-        "text": "监控"
-      },
-      {
-        "selectedIconPath": "img/tabBar/nav_dashboard_selected.png",
-        "iconPath": "img/tabBar/nav_dashboard.png",
-        "pagePath": "pages/dashboard/dashboard",
-        "text": "我的"
-      }
-    ]
   }
 }
 

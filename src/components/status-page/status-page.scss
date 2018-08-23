@@ -9,7 +9,7 @@
 }
 
 .page {
-  &.loading-more,
+  z-index: 1010;
   &.loading,
   &.error {
     @include full-page;

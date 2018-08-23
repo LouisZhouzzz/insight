@@ -12,8 +12,8 @@
                                url="../analysis-exceptioninfo/analysis-exceptioninfo?id={{item.id}}&title={{item.title}}">
                         <label>
                             <text>{{item.time}}</text>
-                            <text>{{item.title}}</text>
-                            <text>({{item.app}})</text>
+                            <text>{{item.title}}({{item.app}})</text>
+                            <text class="enter"> >> </text>
                             <button form-type="submit"></button>
                         </label>
                     </navigator>

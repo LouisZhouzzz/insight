@@ -5,19 +5,22 @@
         <view class="pane-header">异常详情</view>
         <view class="pane-content">
             <view class="segment">
-                <view class="key">发生时间</view>
+                <view class="key">发生时间：</view>
                 <view class="value">{{description.time}}</view>
             </view>
             <view class="segment">
-                <view class="key">来源</view>
+                <view class="key">来源：</view>
                 <view class="value">{{app.name}}</view>
             </view>
-            <view class="segment">
-                <view class="key">详情</view>
-                <view class="value">
-                    {{description.content}}
-                </view>
-            </view>
+            <!--<view class="segment">-->
+                <!--<view class="key">详情</view>-->
+                <!--<view class="value">-->
+                    <!--{{description.content}}-->
+                <!--</view>-->
+            <!--</view>-->
+
+            <view class="segment" >{{description.content}}</view>
+
         </view>
     </view>
 
@@ -26,21 +29,25 @@
         <view class="pane-header">解决方案</view>
         <view class="pane-content">
             <view class="segment">
-                <view class="key">解决时间</view>
+                <view class="key">解决时间：</view>
                 <view class="value">
                     {{solution.time}}
                 </view>
             </view>
-            <view class="segment">
-                <view class="key">方案</view>
-                <view class="value">
-                    {{solution.content}}
-                </view>
-            </view>
+            <!--<view class="segment">-->
+                <!--<view class="key">方案</view>-->
+                <!--<view class="value">-->
+                    <!--{{solution.content}}-->
+                <!--</view>-->
+            <!--</view>-->
+
+            <view class="segment">{{solution.content}}</view>
+
         </view>
     </view>
 
     <view wx:else class="hint">
         待分析解决
     </view>
+
 </status-page>

@@ -6,7 +6,6 @@
   flex-direction: column;
   align-items: center;
   background: $themeBackgroundColor;
-  padding: 0 30rpx;
 }
 
 .tag {
@@ -22,12 +21,14 @@
 }
 
 .card {
+  width: 700rpx;
+  box-sizing: border-box;
   text-align: justify;
   padding: 0.5em;
   background-color: lighten($themeBackgroundColor, 20%);
   color: darken($themeBackgroundColor, 20%);
   border-radius: 10rpx;
-  margin: 20rpx auto;
+  margin: 0 auto;
   .item {
     margin-top: 10rpx;
   }
