@@ -83,13 +83,4 @@ Page({
         console.log('formid发送失败');
       });
   }
-
-  // TODO
-  // onReady: function () { // 监听页面初次渲染完成
-  //   computed(this, {
-  //     ifMore: function () { // 判断是否存在更多数据
-  //       return this.data.page * this.data.size === this.data.records.length
-  //     }
-  //   })
-  // },
 });

@@ -1,4 +1,6 @@
 const watch = require('../../utils/vuelike').watch;
+const service = require('../../service/test');
+let globalData = getApp().globalData;
 
 Page({
   data: {
@@ -47,5 +49,14 @@ Page({
     this.setData({
       tabIndex: parseInt(e.currentTarget.dataset.index)
     });
+  },
+  onFormSubmit (e) {
+    service.patchUserFormId(globalData.openid, e.detail.formId)
+      .then(res => {
+        console.log('formid发送成功！');
+      })
+      .catch(res => {
+        console.log('formid发送失败');
+      });
   }
 });
