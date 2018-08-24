@@ -2,6 +2,7 @@
     <status-page status="{{status}}" class="{{show ? '' : 'hidden'}}" bindrenewevent="getApps">
         <view class="app-list">
             <navigator class="app"
+                       hover-class="app-hover"
                        wx:for='{{apps}}'
                        wx:key='monitor-app-{{index}}'
                        url="../monitor-appinfo/monitor-appinfo?id={{item.id}}">
