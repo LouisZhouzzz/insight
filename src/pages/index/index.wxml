@@ -5,24 +5,26 @@
 <dashboard id="dashboard" class="page-3" show="{{tabIndex === 2}}"></dashboard>
 
 <form report-submit="true" bindsubmit="onFormSubmit">
-<view class="footer">
-    <label class="tab-item {{tabIndex === 0 ? 'active' : ''}}" data-index="0" bindtap="switchTab">
+    <view class="footer">
+        <label class="tab-item {{tabIndex === 0 ? 'active' : ''}}" data-index="0" bindtap="switchTab">
 
+            <button form-type="submit"></button>
             <image wx:if="{{tabIndex === 0}}" src="../../img/tabBar/nav_analysis_selected.png"></image>
             <image wx:else src="../../img/tabBar/nav_analysis.png"></image>
             分析
-            <button form-type="submit"></button>
 
-    </label>
-    <view class="tab-item {{tabIndex === 1 ? 'active' : ''}}" data-index="1" bindtap="switchTab">
-        <image wx:if="{{tabIndex === 1}}" src="../../img/tabBar/nav_monitor_selected.png"></image>
-        <image wx:else src="../../img/tabBar/nav_monitor.png"></image>
-        监控
+        </label>
+        <label class="tab-item {{tabIndex === 1 ? 'active' : ''}}" data-index="1" bindtap="switchTab">
+            <button form-type="submit"></button>
+            <image wx:if="{{tabIndex === 1}}" src="../../img/tabBar/nav_monitor_selected.png"></image>
+            <image wx:else src="../../img/tabBar/nav_monitor.png"></image>
+            监控
+        </label>
+        <label class="tab-item {{tabIndex === 2 ? 'active' : ''}}" data-index="2" bindtap="switchTab">
+            <button form-type="submit"></button>
+            <image wx:if="{{tabIndex === 2}}" src="../../img/tabBar/nav_dashboard_selected.png"></image>
+            <image wx:else src="../../img/tabBar/nav_dashboard.png"></image>
+            我的
+        </label>
     </view>
-    <view class="tab-item {{tabIndex === 2 ? 'active' : ''}}" data-index="2" bindtap="switchTab">
-        <image wx:if="{{tabIndex === 2}}" src="../../img/tabBar/nav_dashboard_selected.png"></image>
-        <image wx:else src="../../img/tabBar/nav_dashboard.png"></image>
-        我的
-    </view>
-</view>
 </form>

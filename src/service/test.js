@@ -76,7 +76,6 @@ const toggleUserDiagram = (userid, diagramid, operflag) => fetchByPromise('/user
  * @returns {Promise<any>}
  */
 const patchUserFormId = (userId, formId) => {
-  debugger
   // 虚拟机测试时不发送formid
   if (formId.indexOf('mock') !== -1 || userId.indexOf('user') !== -1)
     return new Promise(resolve => { setTimeout(resolve, 500) });
