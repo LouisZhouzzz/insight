@@ -80,9 +80,9 @@ const patchUserFormId = (userId, formId) => {
   if (formId.indexOf('mock') !== -1 || userId.indexOf('user') !== -1)
     return new Promise(resolve => { setTimeout(resolve, 500) });
 
-  wx.showToast({
-    title: 'form id: ' + formId,
-  });
+  // wx.showToast({
+  //   title: 'form id: ' + formId,
+  // });
   return fetchByPromise('/users/' + userId + "?formid=" + formId, {}, 'PUT')
 };
 

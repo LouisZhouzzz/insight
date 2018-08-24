@@ -16,7 +16,7 @@ Page({
       dashboard: false
     }
   },
-  onLoad () {
+  onLoad() {
     watch(this, {
       tabIndex: (val) => {
         if (!this.tabPage[val].firstLoaded) {
@@ -26,7 +26,7 @@ Page({
       }
     })
   },
-  onReady () {
+  onReady() {
     this.tabPage = [];
     this.tabPage.push({
       firstLoaded: false,
@@ -45,12 +45,12 @@ Page({
       tabIndex: 0
     });
   },
-  switchTab (e) {
+  switchTab(e) {
     this.setData({
       tabIndex: parseInt(e.currentTarget.dataset.index)
     });
   },
-  onFormSubmit (e) {
+  onFormSubmit(e) {
     service.patchUserFormId(globalData.openid, e.detail.formId)
       .then(res => {
         console.log('formid发送成功！');
